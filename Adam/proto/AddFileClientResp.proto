@@ -1,0 +1,9 @@
+option java_package="com.lxd.protobuf.msg.resp";
+option java_outer_classname="AddFileClientResp";
+
+message AddFileClientResp_ {
+	required int32 id = 1;
+	required int32 total_block = 2;
+	required int32 current_block = 3;
+	repeated bytes datas = 4;
+}

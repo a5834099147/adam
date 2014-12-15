@@ -1,0 +1,7 @@
+package req;
+option java_package="com.lxd.protobuf.msg.req";
+option java_outer_classname="AddFileServerReq";
+
+message AddFileServerReq_ {
+	required int32 id = 1;
+}

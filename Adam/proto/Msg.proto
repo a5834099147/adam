@@ -1,0 +1,18 @@
+package msg;
+option java_package="com.lxd.protobuf.msg";
+option java_outer_classname="Msg";
+
+import "ReqMsg.proto";
+import "RespMsg.proto";
+
+message Msg_ {
+	enum Type {
+		REQ = 0;
+		RESP = 1;
+	}
+	
+	required string md5 = 1;
+	required Type type = 2;
+	optional req.ReqMsg_ reqMsg = 3;
+	optional resp.RespMsg_ respMsg = 4;
+}

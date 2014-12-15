@@ -1,0 +1,12 @@
+option java_package="com.lxd.protobuf.msg.resp";
+option java_outer_classname="AddFileServerResp";
+
+message AddFileServerResp_ {
+	enum Result {
+		OK = 0;
+		ERROR = 1;
+	}
+	
+	required Result result = 1;
+	optional string error_msg = 2;
+}

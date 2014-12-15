@@ -1,0 +1,19 @@
+package req;
+option java_package="com.lxd.protobuf.msg.req";
+option java_outer_classname="ReqMsg";
+
+import "AddFileClientReq.proto";
+import "AddFileServerReq.proto";
+
+message ReqMsg_ {
+	enum Type {
+		AddFileClient = 0;
+		AddFileServer = 1;
+	}
+	
+	repeated Type tpye = 1;
+	repeated string file = 2;
+	
+	optional AddFileClientReq_ addFileClient = 3;
+	optional AddFileServerReq_ addFileServer = 4;	
+}

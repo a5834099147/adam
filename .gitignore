@@ -1,0 +1,4 @@
+.metadata/
+Adam/.settings/
+*.project
+*.classpath
