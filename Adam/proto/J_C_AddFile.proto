@@ -1,0 +1,12 @@
+package msg.job.console;
+option java_package="com.lxd.protobuf.msg.job.console";
+option java_outer_classname="AddFile";
+
+message AddFile_{ 
+	///< 数据总块数
+	required int32 total_lump = 1;
+	///< 当前书库块编号
+	required int32 current_lump = 2;
+	///< 当前数据块信息
+	required bytes datas = 3;
+}

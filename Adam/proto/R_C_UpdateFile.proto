@@ -1,0 +1,8 @@
+package msg.request.console;
+option java_package="com.lxd.protobuf.msg.request.console";
+option java_outer_classname="UpdateFile";
+
+message UpdateFile_{ 
+	///< 文件路径
+	required string path = 1;
+}

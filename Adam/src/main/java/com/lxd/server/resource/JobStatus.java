@@ -1,0 +1,192 @@
+/*
+ * Copyright (C) 2014 a5834099147(lxd) <a5834099147@126.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+package com.lxd.server.resource;
+
+import java.util.Hashtable;
+import java.util.LinkedList;
+import java.util.List;
+
+
+/**
+ * 任务状态检测
+ * @author: a5834099147
+ * @mailto: a5834099147@126.com
+ * @date: 2014年12月18日
+ * @blog : http://a5834099147.github.io/
+ * @review 
+ */
+public class JobStatus {
+    private Hashtable< Integer, Status> status = new Hashtable<>();
+    
+    ///< 增加任务
+    public void addJob(int jobId) {
+        status.put(jobId, null);
+    }
+    
+    ///< 检测是否完成
+    public boolean checkFinished(int jobId) {
+        return status.get(jobId).isFinished();
+    }
+    
+    ///< 判断块是否需要进行
+    public boolean checkToDo(int jobId, int total, int current) {
+        ///< 判断任务是否开始过
+        if (status.get(jobId) == null) {
+            status.get(jobId).setTotal(total);
+        }
+        
+        return  !status.get(jobId).getState(current);        
+    }
+    
+    ///< 设置当前块正在进行
+    public void setDoing(int jobId, int current) {
+        status.get(jobId).setDoingState(current);
+    }
+    
+    ///< 设置当前块完成
+    public void setDone(int jobId, int current) {
+        status.get(jobId).setDoneState(current);
+    }
+    
+    ///< 设置当前块失败
+    public void setError(int jobId, int current) {
+        status.get(jobId).setErrorState(current);
+    }
+    
+    ///< 获取未完成的块好
+    public List<Integer> getUnfinished(int jobId) {
+        return status.get(jobId).getUnfinished();
+    }
+    
+    ///< 获取已完成的块号
+    public List<Integer> getDone(int jobId) {
+        return status.get(jobId).getDone();
+    }
+    
+    ///< 获取没有开始的块号
+    public List<Integer> getNotStart(int jobId) {
+        return status.get(jobId).getNotStart();
+    }
+    
+    ///< 获取正在进行中的任务
+    public List<Integer> getDoing(int jobId) {
+        return status.get(jobId).getDoing();
+    }
+    
+    ///< 获取当前完成数量
+    public int getCurrentFinished(int jobId) {
+        return status.get(jobId).getCurrent();
+    }
+    
+    ///< 状态内部类
+    private class Status {
+        ///< 任务总数
+        private int total;
+        ///< 任务状态数组
+        private byte[] states;
+        ///< 任务当前数量
+        private int current;       
+        
+        ///< 设置块数时, 初始化状态数组
+        public void setTotal(int total) {
+            this.total = total;
+            states = new byte[total];
+        }
+        
+        ///< 得到当前块号的任务是否正在进行或完成
+        public boolean getState(int num) {
+            if (states[num] != 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        
+        ///< 设置当前块号的任务为进行态
+        public void setDoingState(int num) {
+            states[num] = -1;
+        }
+        
+        ///< 设置当前块号的任务为完成态
+        public void setDoneState(int num) {
+            states[num] = 1;
+            ///< 当前数量完成数量 + 1
+            current += 1;
+        }
+        
+        ///< 设置当前块号的任务失败
+        public void setErrorState(int num) {
+            states[num] = -2;
+        }
+        
+        ///< 获取未完成任务的列表
+        public List<Integer> getUnfinished() {
+            List<Integer> res = new LinkedList<>();
+            for (int i = 0; i < total; ++i) {
+                if (states[i] != 1) {
+                    res.add(i);
+                }
+            }
+            return res;
+        }
+        
+        ///< 获取已经完成的任务
+        public List<Integer> getDone() {
+            List<Integer> res = new LinkedList<>();
+            for (int i = 0; i < total; ++i) {
+                if (states[i] == 1) {
+                    res.add(i);
+                }
+            }
+            return res;
+        }
+        
+        ///< 获取没开始做的任务
+        public List<Integer> getNotStart() {
+            List<Integer> res = new LinkedList<>();
+            for (int i = 0; i < total; ++i) {
+                if (states[i] == 0) {
+                    res.add(i);
+                }
+            }
+            return res;
+        }
+        
+        ///< 获取正在进行中的任务
+        public List<Integer> getDoing() {
+            List<Integer> res = new LinkedList<>();
+            for (int i = 0; i < total; ++i) {
+                if (states[i] == -1) {
+                    res.add(i);
+                }
+            }
+            return res;
+        }  
+        
+        ///< 获取当前完成数量
+        public int getCurrent() {
+            return current;
+        }
+        
+        ///< 获取是否完成
+       public boolean isFinished() {
+           return current == total;
+       }
+       
+    }
+}

@@ -1,0 +1,18 @@
+package msg.job.server;
+option java_package="com.lxd.protobuf.msg.job.server";
+option java_outer_classname="UpdateFile";
+
+message UpdateFile_{ 
+	///<块信息
+	repeated Information Informations =1;
+}
+
+
+message Information { 
+	///< 块MD5编码
+	required string md5 = 1;
+	///< 块Adler32编码
+	required int32 adler32 = 2;
+	///< 块编号
+	required int32 info_id = 3;
+}

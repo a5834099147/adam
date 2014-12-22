@@ -1,0 +1,13 @@
+package msg.job;
+option java_package="com.lxd.protobuf.msg.job";
+option java_outer_classname="Job";
+
+import "J_Console.proto";
+import "J_Server.proto";
+
+message Job_{ 
+	///< 控制台
+	optional msg.job.console.Console_ console = 1;
+	///< 服务器
+	optional msg.job.server.Server_ server = 2;
+}

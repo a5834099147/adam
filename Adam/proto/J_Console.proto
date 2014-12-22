@@ -1,0 +1,13 @@
+package msg.job.console;
+option java_package="com.lxd.protobuf.msg.job.console";
+option java_outer_classname="Console";
+
+import "J_C_AddFile.proto";
+import "J_C_UpdateFile.proto";
+
+message Console_{ 
+	///< 新增文件
+	optional AddFile_ addFile = 1;
+	///< 修改文件
+	optional UpdateFile_ updateFile = 2;
+}

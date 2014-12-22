@@ -2,17 +2,17 @@ package msg;
 option java_package="com.lxd.protobuf.msg";
 option java_outer_classname="Msg";
 
-import "ReqMsg.proto";
-import "RespMsg.proto";
+import "Result.proto";
+import "Job.proto";
+import "Request.proto";
 
-message Msg_ {
-	enum Type {
-		REQ = 0;
-		RESP = 1;
-	}
-	
-	required string md5 = 1;
-	required Type type = 2;
-	optional req.ReqMsg_ reqMsg = 3;
-	optional resp.RespMsg_ respMsg = 4;
+message Msg_{ 
+	///< 任务ID, 在其为-1时, 说明需要分配ID
+	required int64 job_id = 1;
+	///< 请求
+	optional msg.request.Request_ request = 2;
+	///< 任务
+	optional msg.job.Job_ job = 3;
+	///< 结果
+	optional msg.result.Result_ result = 4;
 }

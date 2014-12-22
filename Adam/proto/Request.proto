@@ -1,0 +1,13 @@
+package msg.request;
+option java_package="com.lxd.protobuf.msg.request";
+option java_outer_classname="Request";
+
+import "R_Console.proto";
+import "R_User.proto";
+
+message Request_{ 
+	///< 控制台
+	optional msg.request.console.Console_ console = 1;
+	///< 用户
+	optional msg.request.user.User_ user = 2;
+}

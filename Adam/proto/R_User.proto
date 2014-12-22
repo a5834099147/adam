@@ -1,0 +1,13 @@
+package msg.request.user;
+option java_package="com.lxd.protobuf.msg.request.user";
+option java_outer_classname="User";
+
+import "R_U_Lading.proto";
+import "R_U_Register.proto";
+
+message User_{ 
+	///< 登陆
+	optional Landing_ landing = 1;
+	///< 注册
+	optional Register_ register = 2;
+}

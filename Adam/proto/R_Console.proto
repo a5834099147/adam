@@ -1,0 +1,18 @@
+package msg.request.console;
+option java_package="com.lxd.protobuf.msg.request.console";
+option java_outer_classname="Console";
+
+import "R_C_AddFile.proto";
+import "R_C_UpdateFile.proto";
+import "R_C_DeleteFile.proto";
+
+message Console_{ 
+	///< 新增文件
+	optional AddFile_ addFile = 1;
+	///< 修改文件
+	optional UpdateFile_ updateFile = 2;
+	///< 删除文件
+	optional DeleteFile_ deleteFile = 3;
+	///< 用户编号
+	required string user_name = 4;
+}

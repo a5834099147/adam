@@ -1,0 +1,13 @@
+package msg.job.server;
+option java_package="com.lxd.protobuf.msg.job.server";
+option java_outer_classname="Server";
+
+import "J_S_AddFile.proto";
+import "J_S_UpdateFile.proto";
+
+message Server_{ 
+	///< 新增文件
+	optional AddFile_ addFile = 1;
+	///< 修改文件
+	optional UpdateFile_ updateFile = 2;
+}

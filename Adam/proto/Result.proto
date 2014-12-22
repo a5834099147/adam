@@ -1,0 +1,10 @@
+package msg.result;
+option java_package="com.lxd.protobuf.msg.result";
+option java_outer_classname="Result";
+
+message Result_{ 
+	///< 成功
+	required bool success = 1;
+	///< 错误信息
+	optional string error_message = 2;
+}

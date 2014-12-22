@@ -1,0 +1,10 @@
+package msg.request.user;
+option java_package="com.lxd.protobuf.msg.request.user";
+option java_outer_classname="Landing";
+
+message Landing_{ 
+	///< 用户名
+	required string user_name = 1;
+	///< 用户密码
+	required string user_pwd = 2;
+}

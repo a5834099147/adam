@@ -1,8 +1,0 @@
-package req;
-option java_package="com.lxd.protobuf.msg.req";
-option java_outer_classname="AddFileClientReq";
-
-message AddFileClientReq_ {
-	required string md5 = 1;
-	required int32 length = 2;
-}

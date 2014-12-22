@@ -1,0 +1,12 @@
+package msg.request.console;
+option java_package="com.lxd.protobuf.msg.request.console";
+option java_outer_classname="AddFile";
+
+message AddFile_{ 
+	///< 文件MD5编码
+	required string md5 = 1;
+	///< 文件长度
+	required int64 length = 2;
+	///< 文件路径
+	required string path = 3;
+}

@@ -1,0 +1,19 @@
+package msg.job.console;
+option java_package="com.lxd.protobuf.msg.job.console";
+option java_outer_classname="UpdateFile";
+
+message UpdateFile_{ 
+	///< 数据总块数
+	required int32 total_lump = 1;
+	///< 当前书库块编号
+	required int32 current_lump = 2;
+	///< 补丁信息
+	repeated Patch patch = 3;
+}
+
+message Patch{
+	///< 数据信息
+	optional bytes datas = 1;
+	///< 块号
+	optional int64 info_id = 2;
+}

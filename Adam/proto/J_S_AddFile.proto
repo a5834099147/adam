@@ -1,0 +1,6 @@
+package msg.job.server;
+option java_package="com.lxd.protobuf.msg.job.server";
+option java_outer_classname="AddFile";
+
+message AddFile_{ 
+}

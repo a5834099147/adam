@@ -11,58 +11,101 @@ public final class Msg {
   public interface Msg_OrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // required string md5 = 1;
+    // required int64 job_id = 1;
     /**
-     * <code>required string md5 = 1;</code>
+     * <code>required int64 job_id = 1;</code>
+     *
+     * <pre>
+     *&#47;&lt; 任务ID, 在其为-1时, 说明需要分配ID
+     * </pre>
      */
-    boolean hasMd5();
+    boolean hasJobId();
     /**
-     * <code>required string md5 = 1;</code>
+     * <code>required int64 job_id = 1;</code>
+     *
+     * <pre>
+     *&#47;&lt; 任务ID, 在其为-1时, 说明需要分配ID
+     * </pre>
      */
-    java.lang.String getMd5();
-    /**
-     * <code>required string md5 = 1;</code>
-     */
-    com.google.protobuf.ByteString
-        getMd5Bytes();
+    long getJobId();
 
-    // required .msg.Msg_.Type type = 2;
+    // optional .msg.request.Request_ request = 2;
     /**
-     * <code>required .msg.Msg_.Type type = 2;</code>
+     * <code>optional .msg.request.Request_ request = 2;</code>
+     *
+     * <pre>
+     *&#47;&lt; 请求
+     * </pre>
      */
-    boolean hasType();
+    boolean hasRequest();
     /**
-     * <code>required .msg.Msg_.Type type = 2;</code>
+     * <code>optional .msg.request.Request_ request = 2;</code>
+     *
+     * <pre>
+     *&#47;&lt; 请求
+     * </pre>
      */
-    com.lxd.protobuf.msg.Msg.Msg_.Type getType();
+    com.lxd.protobuf.msg.request.Request.Request_ getRequest();
+    /**
+     * <code>optional .msg.request.Request_ request = 2;</code>
+     *
+     * <pre>
+     *&#47;&lt; 请求
+     * </pre>
+     */
+    com.lxd.protobuf.msg.request.Request.Request_OrBuilder getRequestOrBuilder();
 
-    // optional .req.ReqMsg_ reqMsg = 3;
+    // optional .msg.job.Job_ job = 3;
     /**
-     * <code>optional .req.ReqMsg_ reqMsg = 3;</code>
+     * <code>optional .msg.job.Job_ job = 3;</code>
+     *
+     * <pre>
+     *&#47;&lt; 任务
+     * </pre>
      */
-    boolean hasReqMsg();
+    boolean hasJob();
     /**
-     * <code>optional .req.ReqMsg_ reqMsg = 3;</code>
+     * <code>optional .msg.job.Job_ job = 3;</code>
+     *
+     * <pre>
+     *&#47;&lt; 任务
+     * </pre>
      */
-    com.lxd.protobuf.msg.req.ReqMsg.ReqMsg_ getReqMsg();
+    com.lxd.protobuf.msg.job.Job.Job_ getJob();
     /**
-     * <code>optional .req.ReqMsg_ reqMsg = 3;</code>
+     * <code>optional .msg.job.Job_ job = 3;</code>
+     *
+     * <pre>
+     *&#47;&lt; 任务
+     * </pre>
      */
-    com.lxd.protobuf.msg.req.ReqMsg.ReqMsg_OrBuilder getReqMsgOrBuilder();
+    com.lxd.protobuf.msg.job.Job.Job_OrBuilder getJobOrBuilder();
 
-    // optional .resp.RespMsg_ respMsg = 4;
+    // optional .msg.result.Result_ result = 4;
     /**
-     * <code>optional .resp.RespMsg_ respMsg = 4;</code>
+     * <code>optional .msg.result.Result_ result = 4;</code>
+     *
+     * <pre>
+     *&#47;&lt; 结果
+     * </pre>
      */
-    boolean hasRespMsg();
+    boolean hasResult();
     /**
-     * <code>optional .resp.RespMsg_ respMsg = 4;</code>
+     * <code>optional .msg.result.Result_ result = 4;</code>
+     *
+     * <pre>
+     *&#47;&lt; 结果
+     * </pre>
      */
-    com.lxd.protobuf.msg.resp.RespMsg.RespMsg_ getRespMsg();
+    com.lxd.protobuf.msg.result.Result.Result_ getResult();
     /**
-     * <code>optional .resp.RespMsg_ respMsg = 4;</code>
+     * <code>optional .msg.result.Result_ result = 4;</code>
+     *
+     * <pre>
+     *&#47;&lt; 结果
+     * </pre>
      */
-    com.lxd.protobuf.msg.resp.RespMsg.RespMsg_OrBuilder getRespMsgOrBuilder();
+    com.lxd.protobuf.msg.result.Result.Result_OrBuilder getResultOrBuilder();
   }
   /**
    * Protobuf type {@code msg.Msg_}
@@ -97,8 +140,7 @@ public final class Msg {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       initFields();
-      @SuppressWarnings("unused")
-    int mutable_bitField0_ = 0;
+      int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -116,44 +158,46 @@ public final class Msg {
               }
               break;
             }
-            case 10: {
+            case 8: {
               bitField0_ |= 0x00000001;
-              md5_ = input.readBytes();
+              jobId_ = input.readInt64();
               break;
             }
-            case 16: {
-              int rawValue = input.readEnum();
-              com.lxd.protobuf.msg.Msg.Msg_.Type value = com.lxd.protobuf.msg.Msg.Msg_.Type.valueOf(rawValue);
-              if (value == null) {
-                unknownFields.mergeVarintField(2, rawValue);
-              } else {
-                bitField0_ |= 0x00000002;
-                type_ = value;
+            case 18: {
+              com.lxd.protobuf.msg.request.Request.Request_.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = request_.toBuilder();
               }
+              request_ = input.readMessage(com.lxd.protobuf.msg.request.Request.Request_.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(request_);
+                request_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000002;
               break;
             }
             case 26: {
-              com.lxd.protobuf.msg.req.ReqMsg.ReqMsg_.Builder subBuilder = null;
+              com.lxd.protobuf.msg.job.Job.Job_.Builder subBuilder = null;
               if (((bitField0_ & 0x00000004) == 0x00000004)) {
-                subBuilder = reqMsg_.toBuilder();
+                subBuilder = job_.toBuilder();
               }
-              reqMsg_ = input.readMessage(com.lxd.protobuf.msg.req.ReqMsg.ReqMsg_.PARSER, extensionRegistry);
+              job_ = input.readMessage(com.lxd.protobuf.msg.job.Job.Job_.PARSER, extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom(reqMsg_);
-                reqMsg_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom(job_);
+                job_ = subBuilder.buildPartial();
               }
               bitField0_ |= 0x00000004;
               break;
             }
             case 34: {
-              com.lxd.protobuf.msg.resp.RespMsg.RespMsg_.Builder subBuilder = null;
+              com.lxd.protobuf.msg.result.Result.Result_.Builder subBuilder = null;
               if (((bitField0_ & 0x00000008) == 0x00000008)) {
-                subBuilder = respMsg_.toBuilder();
+                subBuilder = result_.toBuilder();
               }
-              respMsg_ = input.readMessage(com.lxd.protobuf.msg.resp.RespMsg.RespMsg_.PARSER, extensionRegistry);
+              result_ = input.readMessage(com.lxd.protobuf.msg.result.Result.Result_.PARSER, extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom(respMsg_);
-                respMsg_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom(result_);
+                result_ = subBuilder.buildPartial();
               }
               bitField0_ |= 0x00000008;
               break;
@@ -197,219 +241,162 @@ public final class Msg {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code msg.Msg_.Type}
-     */
-    public enum Type
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>REQ = 0;</code>
-       */
-      REQ(0, 0),
-      /**
-       * <code>RESP = 1;</code>
-       */
-      RESP(1, 1),
-      ;
-
-      /**
-       * <code>REQ = 0;</code>
-       */
-      public static final int REQ_VALUE = 0;
-      /**
-       * <code>RESP = 1;</code>
-       */
-      public static final int RESP_VALUE = 1;
-
-
-      public final int getNumber() { return value; }
-
-      public static Type valueOf(int value) {
-        switch (value) {
-          case 0: return REQ;
-          case 1: return RESP;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<Type>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<Type>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<Type>() {
-              public Type findValueByNumber(int number) {
-                return Type.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lxd.protobuf.msg.Msg.Msg_.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final Type[] VALUES = values();
-
-      public static Type valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private Type(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:msg.Msg_.Type)
-    }
-
     private int bitField0_;
-    // required string md5 = 1;
-    public static final int MD5_FIELD_NUMBER = 1;
-    private java.lang.Object md5_;
+    // required int64 job_id = 1;
+    public static final int JOB_ID_FIELD_NUMBER = 1;
+    private long jobId_;
     /**
-     * <code>required string md5 = 1;</code>
+     * <code>required int64 job_id = 1;</code>
+     *
+     * <pre>
+     *&#47;&lt; 任务ID, 在其为-1时, 说明需要分配ID
+     * </pre>
      */
-    public boolean hasMd5() {
+    public boolean hasJobId() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required string md5 = 1;</code>
+     * <code>required int64 job_id = 1;</code>
+     *
+     * <pre>
+     *&#47;&lt; 任务ID, 在其为-1时, 说明需要分配ID
+     * </pre>
      */
-    public java.lang.String getMd5() {
-      java.lang.Object ref = md5_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          md5_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>required string md5 = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getMd5Bytes() {
-      java.lang.Object ref = md5_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        md5_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public long getJobId() {
+      return jobId_;
     }
 
-    // required .msg.Msg_.Type type = 2;
-    public static final int TYPE_FIELD_NUMBER = 2;
-    private com.lxd.protobuf.msg.Msg.Msg_.Type type_;
+    // optional .msg.request.Request_ request = 2;
+    public static final int REQUEST_FIELD_NUMBER = 2;
+    private com.lxd.protobuf.msg.request.Request.Request_ request_;
     /**
-     * <code>required .msg.Msg_.Type type = 2;</code>
+     * <code>optional .msg.request.Request_ request = 2;</code>
+     *
+     * <pre>
+     *&#47;&lt; 请求
+     * </pre>
      */
-    public boolean hasType() {
+    public boolean hasRequest() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>required .msg.Msg_.Type type = 2;</code>
+     * <code>optional .msg.request.Request_ request = 2;</code>
+     *
+     * <pre>
+     *&#47;&lt; 请求
+     * </pre>
      */
-    public com.lxd.protobuf.msg.Msg.Msg_.Type getType() {
-      return type_;
+    public com.lxd.protobuf.msg.request.Request.Request_ getRequest() {
+      return request_;
+    }
+    /**
+     * <code>optional .msg.request.Request_ request = 2;</code>
+     *
+     * <pre>
+     *&#47;&lt; 请求
+     * </pre>
+     */
+    public com.lxd.protobuf.msg.request.Request.Request_OrBuilder getRequestOrBuilder() {
+      return request_;
     }
 
-    // optional .req.ReqMsg_ reqMsg = 3;
-    public static final int REQMSG_FIELD_NUMBER = 3;
-    private com.lxd.protobuf.msg.req.ReqMsg.ReqMsg_ reqMsg_;
+    // optional .msg.job.Job_ job = 3;
+    public static final int JOB_FIELD_NUMBER = 3;
+    private com.lxd.protobuf.msg.job.Job.Job_ job_;
     /**
-     * <code>optional .req.ReqMsg_ reqMsg = 3;</code>
+     * <code>optional .msg.job.Job_ job = 3;</code>
+     *
+     * <pre>
+     *&#47;&lt; 任务
+     * </pre>
      */
-    public boolean hasReqMsg() {
+    public boolean hasJob() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional .req.ReqMsg_ reqMsg = 3;</code>
+     * <code>optional .msg.job.Job_ job = 3;</code>
+     *
+     * <pre>
+     *&#47;&lt; 任务
+     * </pre>
      */
-    public com.lxd.protobuf.msg.req.ReqMsg.ReqMsg_ getReqMsg() {
-      return reqMsg_;
+    public com.lxd.protobuf.msg.job.Job.Job_ getJob() {
+      return job_;
     }
     /**
-     * <code>optional .req.ReqMsg_ reqMsg = 3;</code>
+     * <code>optional .msg.job.Job_ job = 3;</code>
+     *
+     * <pre>
+     *&#47;&lt; 任务
+     * </pre>
      */
-    public com.lxd.protobuf.msg.req.ReqMsg.ReqMsg_OrBuilder getReqMsgOrBuilder() {
-      return reqMsg_;
+    public com.lxd.protobuf.msg.job.Job.Job_OrBuilder getJobOrBuilder() {
+      return job_;
     }
 
-    // optional .resp.RespMsg_ respMsg = 4;
-    public static final int RESPMSG_FIELD_NUMBER = 4;
-    private com.lxd.protobuf.msg.resp.RespMsg.RespMsg_ respMsg_;
+    // optional .msg.result.Result_ result = 4;
+    public static final int RESULT_FIELD_NUMBER = 4;
+    private com.lxd.protobuf.msg.result.Result.Result_ result_;
     /**
-     * <code>optional .resp.RespMsg_ respMsg = 4;</code>
+     * <code>optional .msg.result.Result_ result = 4;</code>
+     *
+     * <pre>
+     *&#47;&lt; 结果
+     * </pre>
      */
-    public boolean hasRespMsg() {
+    public boolean hasResult() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>optional .resp.RespMsg_ respMsg = 4;</code>
+     * <code>optional .msg.result.Result_ result = 4;</code>
+     *
+     * <pre>
+     *&#47;&lt; 结果
+     * </pre>
      */
-    public com.lxd.protobuf.msg.resp.RespMsg.RespMsg_ getRespMsg() {
-      return respMsg_;
+    public com.lxd.protobuf.msg.result.Result.Result_ getResult() {
+      return result_;
     }
     /**
-     * <code>optional .resp.RespMsg_ respMsg = 4;</code>
+     * <code>optional .msg.result.Result_ result = 4;</code>
+     *
+     * <pre>
+     *&#47;&lt; 结果
+     * </pre>
      */
-    public com.lxd.protobuf.msg.resp.RespMsg.RespMsg_OrBuilder getRespMsgOrBuilder() {
-      return respMsg_;
+    public com.lxd.protobuf.msg.result.Result.Result_OrBuilder getResultOrBuilder() {
+      return result_;
     }
 
     private void initFields() {
-      md5_ = "";
-      type_ = com.lxd.protobuf.msg.Msg.Msg_.Type.REQ;
-      reqMsg_ = com.lxd.protobuf.msg.req.ReqMsg.ReqMsg_.getDefaultInstance();
-      respMsg_ = com.lxd.protobuf.msg.resp.RespMsg.RespMsg_.getDefaultInstance();
+      jobId_ = 0L;
+      request_ = com.lxd.protobuf.msg.request.Request.Request_.getDefaultInstance();
+      job_ = com.lxd.protobuf.msg.job.Job.Job_.getDefaultInstance();
+      result_ = com.lxd.protobuf.msg.result.Result.Result_.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
 
-      if (!hasMd5()) {
+      if (!hasJobId()) {
         memoizedIsInitialized = 0;
         return false;
       }
-      if (!hasType()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (hasReqMsg()) {
-        if (!getReqMsg().isInitialized()) {
+      if (hasRequest()) {
+        if (!getRequest().isInitialized()) {
           memoizedIsInitialized = 0;
           return false;
         }
       }
-      if (hasRespMsg()) {
-        if (!getRespMsg().isInitialized()) {
+      if (hasJob()) {
+        if (!getJob().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasResult()) {
+        if (!getResult().isInitialized()) {
           memoizedIsInitialized = 0;
           return false;
         }
@@ -422,16 +409,16 @@ public final class Msg {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, getMd5Bytes());
+        output.writeInt64(1, jobId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeEnum(2, type_.getNumber());
+        output.writeMessage(2, request_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeMessage(3, reqMsg_);
+        output.writeMessage(3, job_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeMessage(4, respMsg_);
+        output.writeMessage(4, result_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -444,19 +431,19 @@ public final class Msg {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, getMd5Bytes());
+          .computeInt64Size(1, jobId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(2, type_.getNumber());
+          .computeMessageSize(2, request_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, reqMsg_);
+          .computeMessageSize(3, job_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, respMsg_);
+          .computeMessageSize(4, result_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -566,8 +553,9 @@ public final class Msg {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getReqMsgFieldBuilder();
-          getRespMsgFieldBuilder();
+          getRequestFieldBuilder();
+          getJobFieldBuilder();
+          getResultFieldBuilder();
         }
       }
       private static Builder create() {
@@ -576,20 +564,24 @@ public final class Msg {
 
       public Builder clear() {
         super.clear();
-        md5_ = "";
+        jobId_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000001);
-        type_ = com.lxd.protobuf.msg.Msg.Msg_.Type.REQ;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        if (reqMsgBuilder_ == null) {
-          reqMsg_ = com.lxd.protobuf.msg.req.ReqMsg.ReqMsg_.getDefaultInstance();
+        if (requestBuilder_ == null) {
+          request_ = com.lxd.protobuf.msg.request.Request.Request_.getDefaultInstance();
         } else {
-          reqMsgBuilder_.clear();
+          requestBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        if (jobBuilder_ == null) {
+          job_ = com.lxd.protobuf.msg.job.Job.Job_.getDefaultInstance();
+        } else {
+          jobBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000004);
-        if (respMsgBuilder_ == null) {
-          respMsg_ = com.lxd.protobuf.msg.resp.RespMsg.RespMsg_.getDefaultInstance();
+        if (resultBuilder_ == null) {
+          result_ = com.lxd.protobuf.msg.result.Result.Result_.getDefaultInstance();
         } else {
-          respMsgBuilder_.clear();
+          resultBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000008);
         return this;
@@ -623,26 +615,30 @@ public final class Msg {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.md5_ = md5_;
+        result.jobId_ = jobId_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.type_ = type_;
+        if (requestBuilder_ == null) {
+          result.request_ = request_;
+        } else {
+          result.request_ = requestBuilder_.build();
+        }
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        if (reqMsgBuilder_ == null) {
-          result.reqMsg_ = reqMsg_;
+        if (jobBuilder_ == null) {
+          result.job_ = job_;
         } else {
-          result.reqMsg_ = reqMsgBuilder_.build();
+          result.job_ = jobBuilder_.build();
         }
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        if (respMsgBuilder_ == null) {
-          result.respMsg_ = respMsg_;
+        if (resultBuilder_ == null) {
+          result.result_ = result_;
         } else {
-          result.respMsg_ = respMsgBuilder_.build();
+          result.result_ = resultBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -660,41 +656,41 @@ public final class Msg {
 
       public Builder mergeFrom(com.lxd.protobuf.msg.Msg.Msg_ other) {
         if (other == com.lxd.protobuf.msg.Msg.Msg_.getDefaultInstance()) return this;
-        if (other.hasMd5()) {
-          bitField0_ |= 0x00000001;
-          md5_ = other.md5_;
-          onChanged();
+        if (other.hasJobId()) {
+          setJobId(other.getJobId());
         }
-        if (other.hasType()) {
-          setType(other.getType());
+        if (other.hasRequest()) {
+          mergeRequest(other.getRequest());
         }
-        if (other.hasReqMsg()) {
-          mergeReqMsg(other.getReqMsg());
+        if (other.hasJob()) {
+          mergeJob(other.getJob());
         }
-        if (other.hasRespMsg()) {
-          mergeRespMsg(other.getRespMsg());
+        if (other.hasResult()) {
+          mergeResult(other.getResult());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
       public final boolean isInitialized() {
-        if (!hasMd5()) {
+        if (!hasJobId()) {
           
           return false;
         }
-        if (!hasType()) {
-          
-          return false;
-        }
-        if (hasReqMsg()) {
-          if (!getReqMsg().isInitialized()) {
+        if (hasRequest()) {
+          if (!getRequest().isInitialized()) {
             
             return false;
           }
         }
-        if (hasRespMsg()) {
-          if (!getRespMsg().isInitialized()) {
+        if (hasJob()) {
+          if (!getJob().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasResult()) {
+          if (!getResult().isInitialized()) {
             
             return false;
           }
@@ -721,348 +717,512 @@ public final class Msg {
       }
       private int bitField0_;
 
-      // required string md5 = 1;
-      private java.lang.Object md5_ = "";
+      // required int64 job_id = 1;
+      private long jobId_ ;
       /**
-       * <code>required string md5 = 1;</code>
+       * <code>required int64 job_id = 1;</code>
+       *
+       * <pre>
+       *&#47;&lt; 任务ID, 在其为-1时, 说明需要分配ID
+       * </pre>
        */
-      public boolean hasMd5() {
+      public boolean hasJobId() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>required string md5 = 1;</code>
+       * <code>required int64 job_id = 1;</code>
+       *
+       * <pre>
+       *&#47;&lt; 任务ID, 在其为-1时, 说明需要分配ID
+       * </pre>
        */
-      public java.lang.String getMd5() {
-        java.lang.Object ref = md5_;
-        if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          md5_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public long getJobId() {
+        return jobId_;
       }
       /**
-       * <code>required string md5 = 1;</code>
+       * <code>required int64 job_id = 1;</code>
+       *
+       * <pre>
+       *&#47;&lt; 任务ID, 在其为-1时, 说明需要分配ID
+       * </pre>
        */
-      public com.google.protobuf.ByteString
-          getMd5Bytes() {
-        java.lang.Object ref = md5_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          md5_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>required string md5 = 1;</code>
-       */
-      public Builder setMd5(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        md5_ = value;
+      public Builder setJobId(long value) {
+        bitField0_ |= 0x00000001;
+        jobId_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required string md5 = 1;</code>
+       * <code>required int64 job_id = 1;</code>
+       *
+       * <pre>
+       *&#47;&lt; 任务ID, 在其为-1时, 说明需要分配ID
+       * </pre>
        */
-      public Builder clearMd5() {
+      public Builder clearJobId() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        md5_ = getDefaultInstance().getMd5();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required string md5 = 1;</code>
-       */
-      public Builder setMd5Bytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        md5_ = value;
+        jobId_ = 0L;
         onChanged();
         return this;
       }
 
-      // required .msg.Msg_.Type type = 2;
-      private com.lxd.protobuf.msg.Msg.Msg_.Type type_ = com.lxd.protobuf.msg.Msg.Msg_.Type.REQ;
+      // optional .msg.request.Request_ request = 2;
+      private com.lxd.protobuf.msg.request.Request.Request_ request_ = com.lxd.protobuf.msg.request.Request.Request_.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lxd.protobuf.msg.request.Request.Request_, com.lxd.protobuf.msg.request.Request.Request_.Builder, com.lxd.protobuf.msg.request.Request.Request_OrBuilder> requestBuilder_;
       /**
-       * <code>required .msg.Msg_.Type type = 2;</code>
+       * <code>optional .msg.request.Request_ request = 2;</code>
+       *
+       * <pre>
+       *&#47;&lt; 请求
+       * </pre>
        */
-      public boolean hasType() {
+      public boolean hasRequest() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>required .msg.Msg_.Type type = 2;</code>
+       * <code>optional .msg.request.Request_ request = 2;</code>
+       *
+       * <pre>
+       *&#47;&lt; 请求
+       * </pre>
        */
-      public com.lxd.protobuf.msg.Msg.Msg_.Type getType() {
-        return type_;
-      }
-      /**
-       * <code>required .msg.Msg_.Type type = 2;</code>
-       */
-      public Builder setType(com.lxd.protobuf.msg.Msg.Msg_.Type value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        bitField0_ |= 0x00000002;
-        type_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required .msg.Msg_.Type type = 2;</code>
-       */
-      public Builder clearType() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        type_ = com.lxd.protobuf.msg.Msg.Msg_.Type.REQ;
-        onChanged();
-        return this;
-      }
-
-      // optional .req.ReqMsg_ reqMsg = 3;
-      private com.lxd.protobuf.msg.req.ReqMsg.ReqMsg_ reqMsg_ = com.lxd.protobuf.msg.req.ReqMsg.ReqMsg_.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lxd.protobuf.msg.req.ReqMsg.ReqMsg_, com.lxd.protobuf.msg.req.ReqMsg.ReqMsg_.Builder, com.lxd.protobuf.msg.req.ReqMsg.ReqMsg_OrBuilder> reqMsgBuilder_;
-      /**
-       * <code>optional .req.ReqMsg_ reqMsg = 3;</code>
-       */
-      public boolean hasReqMsg() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>optional .req.ReqMsg_ reqMsg = 3;</code>
-       */
-      public com.lxd.protobuf.msg.req.ReqMsg.ReqMsg_ getReqMsg() {
-        if (reqMsgBuilder_ == null) {
-          return reqMsg_;
+      public com.lxd.protobuf.msg.request.Request.Request_ getRequest() {
+        if (requestBuilder_ == null) {
+          return request_;
         } else {
-          return reqMsgBuilder_.getMessage();
+          return requestBuilder_.getMessage();
         }
       }
       /**
-       * <code>optional .req.ReqMsg_ reqMsg = 3;</code>
+       * <code>optional .msg.request.Request_ request = 2;</code>
+       *
+       * <pre>
+       *&#47;&lt; 请求
+       * </pre>
        */
-      public Builder setReqMsg(com.lxd.protobuf.msg.req.ReqMsg.ReqMsg_ value) {
-        if (reqMsgBuilder_ == null) {
+      public Builder setRequest(com.lxd.protobuf.msg.request.Request.Request_ value) {
+        if (requestBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          reqMsg_ = value;
+          request_ = value;
           onChanged();
         } else {
-          reqMsgBuilder_.setMessage(value);
+          requestBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000002;
         return this;
       }
       /**
-       * <code>optional .req.ReqMsg_ reqMsg = 3;</code>
+       * <code>optional .msg.request.Request_ request = 2;</code>
+       *
+       * <pre>
+       *&#47;&lt; 请求
+       * </pre>
        */
-      public Builder setReqMsg(
-          com.lxd.protobuf.msg.req.ReqMsg.ReqMsg_.Builder builderForValue) {
-        if (reqMsgBuilder_ == null) {
-          reqMsg_ = builderForValue.build();
+      public Builder setRequest(
+          com.lxd.protobuf.msg.request.Request.Request_.Builder builderForValue) {
+        if (requestBuilder_ == null) {
+          request_ = builderForValue.build();
           onChanged();
         } else {
-          reqMsgBuilder_.setMessage(builderForValue.build());
+          requestBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000002;
         return this;
       }
       /**
-       * <code>optional .req.ReqMsg_ reqMsg = 3;</code>
+       * <code>optional .msg.request.Request_ request = 2;</code>
+       *
+       * <pre>
+       *&#47;&lt; 请求
+       * </pre>
        */
-      public Builder mergeReqMsg(com.lxd.protobuf.msg.req.ReqMsg.ReqMsg_ value) {
-        if (reqMsgBuilder_ == null) {
-          if (((bitField0_ & 0x00000004) == 0x00000004) &&
-              reqMsg_ != com.lxd.protobuf.msg.req.ReqMsg.ReqMsg_.getDefaultInstance()) {
-            reqMsg_ =
-              com.lxd.protobuf.msg.req.ReqMsg.ReqMsg_.newBuilder(reqMsg_).mergeFrom(value).buildPartial();
+      public Builder mergeRequest(com.lxd.protobuf.msg.request.Request.Request_ value) {
+        if (requestBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+              request_ != com.lxd.protobuf.msg.request.Request.Request_.getDefaultInstance()) {
+            request_ =
+              com.lxd.protobuf.msg.request.Request.Request_.newBuilder(request_).mergeFrom(value).buildPartial();
           } else {
-            reqMsg_ = value;
+            request_ = value;
           }
           onChanged();
         } else {
-          reqMsgBuilder_.mergeFrom(value);
+          requestBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .msg.request.Request_ request = 2;</code>
+       *
+       * <pre>
+       *&#47;&lt; 请求
+       * </pre>
+       */
+      public Builder clearRequest() {
+        if (requestBuilder_ == null) {
+          request_ = com.lxd.protobuf.msg.request.Request.Request_.getDefaultInstance();
+          onChanged();
+        } else {
+          requestBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      /**
+       * <code>optional .msg.request.Request_ request = 2;</code>
+       *
+       * <pre>
+       *&#47;&lt; 请求
+       * </pre>
+       */
+      public com.lxd.protobuf.msg.request.Request.Request_.Builder getRequestBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getRequestFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .msg.request.Request_ request = 2;</code>
+       *
+       * <pre>
+       *&#47;&lt; 请求
+       * </pre>
+       */
+      public com.lxd.protobuf.msg.request.Request.Request_OrBuilder getRequestOrBuilder() {
+        if (requestBuilder_ != null) {
+          return requestBuilder_.getMessageOrBuilder();
+        } else {
+          return request_;
+        }
+      }
+      /**
+       * <code>optional .msg.request.Request_ request = 2;</code>
+       *
+       * <pre>
+       *&#47;&lt; 请求
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lxd.protobuf.msg.request.Request.Request_, com.lxd.protobuf.msg.request.Request.Request_.Builder, com.lxd.protobuf.msg.request.Request.Request_OrBuilder> 
+          getRequestFieldBuilder() {
+        if (requestBuilder_ == null) {
+          requestBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lxd.protobuf.msg.request.Request.Request_, com.lxd.protobuf.msg.request.Request.Request_.Builder, com.lxd.protobuf.msg.request.Request.Request_OrBuilder>(
+                  request_,
+                  getParentForChildren(),
+                  isClean());
+          request_ = null;
+        }
+        return requestBuilder_;
+      }
+
+      // optional .msg.job.Job_ job = 3;
+      private com.lxd.protobuf.msg.job.Job.Job_ job_ = com.lxd.protobuf.msg.job.Job.Job_.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lxd.protobuf.msg.job.Job.Job_, com.lxd.protobuf.msg.job.Job.Job_.Builder, com.lxd.protobuf.msg.job.Job.Job_OrBuilder> jobBuilder_;
+      /**
+       * <code>optional .msg.job.Job_ job = 3;</code>
+       *
+       * <pre>
+       *&#47;&lt; 任务
+       * </pre>
+       */
+      public boolean hasJob() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional .msg.job.Job_ job = 3;</code>
+       *
+       * <pre>
+       *&#47;&lt; 任务
+       * </pre>
+       */
+      public com.lxd.protobuf.msg.job.Job.Job_ getJob() {
+        if (jobBuilder_ == null) {
+          return job_;
+        } else {
+          return jobBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .msg.job.Job_ job = 3;</code>
+       *
+       * <pre>
+       *&#47;&lt; 任务
+       * </pre>
+       */
+      public Builder setJob(com.lxd.protobuf.msg.job.Job.Job_ value) {
+        if (jobBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          job_ = value;
+          onChanged();
+        } else {
+          jobBuilder_.setMessage(value);
         }
         bitField0_ |= 0x00000004;
         return this;
       }
       /**
-       * <code>optional .req.ReqMsg_ reqMsg = 3;</code>
+       * <code>optional .msg.job.Job_ job = 3;</code>
+       *
+       * <pre>
+       *&#47;&lt; 任务
+       * </pre>
        */
-      public Builder clearReqMsg() {
-        if (reqMsgBuilder_ == null) {
-          reqMsg_ = com.lxd.protobuf.msg.req.ReqMsg.ReqMsg_.getDefaultInstance();
+      public Builder setJob(
+          com.lxd.protobuf.msg.job.Job.Job_.Builder builderForValue) {
+        if (jobBuilder_ == null) {
+          job_ = builderForValue.build();
           onChanged();
         } else {
-          reqMsgBuilder_.clear();
+          jobBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>optional .msg.job.Job_ job = 3;</code>
+       *
+       * <pre>
+       *&#47;&lt; 任务
+       * </pre>
+       */
+      public Builder mergeJob(com.lxd.protobuf.msg.job.Job.Job_ value) {
+        if (jobBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004) &&
+              job_ != com.lxd.protobuf.msg.job.Job.Job_.getDefaultInstance()) {
+            job_ =
+              com.lxd.protobuf.msg.job.Job.Job_.newBuilder(job_).mergeFrom(value).buildPartial();
+          } else {
+            job_ = value;
+          }
+          onChanged();
+        } else {
+          jobBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>optional .msg.job.Job_ job = 3;</code>
+       *
+       * <pre>
+       *&#47;&lt; 任务
+       * </pre>
+       */
+      public Builder clearJob() {
+        if (jobBuilder_ == null) {
+          job_ = com.lxd.protobuf.msg.job.Job.Job_.getDefaultInstance();
+          onChanged();
+        } else {
+          jobBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
       /**
-       * <code>optional .req.ReqMsg_ reqMsg = 3;</code>
+       * <code>optional .msg.job.Job_ job = 3;</code>
+       *
+       * <pre>
+       *&#47;&lt; 任务
+       * </pre>
        */
-      public com.lxd.protobuf.msg.req.ReqMsg.ReqMsg_.Builder getReqMsgBuilder() {
+      public com.lxd.protobuf.msg.job.Job.Job_.Builder getJobBuilder() {
         bitField0_ |= 0x00000004;
         onChanged();
-        return getReqMsgFieldBuilder().getBuilder();
+        return getJobFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .req.ReqMsg_ reqMsg = 3;</code>
+       * <code>optional .msg.job.Job_ job = 3;</code>
+       *
+       * <pre>
+       *&#47;&lt; 任务
+       * </pre>
        */
-      public com.lxd.protobuf.msg.req.ReqMsg.ReqMsg_OrBuilder getReqMsgOrBuilder() {
-        if (reqMsgBuilder_ != null) {
-          return reqMsgBuilder_.getMessageOrBuilder();
+      public com.lxd.protobuf.msg.job.Job.Job_OrBuilder getJobOrBuilder() {
+        if (jobBuilder_ != null) {
+          return jobBuilder_.getMessageOrBuilder();
         } else {
-          return reqMsg_;
+          return job_;
         }
       }
       /**
-       * <code>optional .req.ReqMsg_ reqMsg = 3;</code>
+       * <code>optional .msg.job.Job_ job = 3;</code>
+       *
+       * <pre>
+       *&#47;&lt; 任务
+       * </pre>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.lxd.protobuf.msg.req.ReqMsg.ReqMsg_, com.lxd.protobuf.msg.req.ReqMsg.ReqMsg_.Builder, com.lxd.protobuf.msg.req.ReqMsg.ReqMsg_OrBuilder> 
-          getReqMsgFieldBuilder() {
-        if (reqMsgBuilder_ == null) {
-          reqMsgBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lxd.protobuf.msg.req.ReqMsg.ReqMsg_, com.lxd.protobuf.msg.req.ReqMsg.ReqMsg_.Builder, com.lxd.protobuf.msg.req.ReqMsg.ReqMsg_OrBuilder>(
-                  reqMsg_,
+          com.lxd.protobuf.msg.job.Job.Job_, com.lxd.protobuf.msg.job.Job.Job_.Builder, com.lxd.protobuf.msg.job.Job.Job_OrBuilder> 
+          getJobFieldBuilder() {
+        if (jobBuilder_ == null) {
+          jobBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lxd.protobuf.msg.job.Job.Job_, com.lxd.protobuf.msg.job.Job.Job_.Builder, com.lxd.protobuf.msg.job.Job.Job_OrBuilder>(
+                  job_,
                   getParentForChildren(),
                   isClean());
-          reqMsg_ = null;
+          job_ = null;
         }
-        return reqMsgBuilder_;
+        return jobBuilder_;
       }
 
-      // optional .resp.RespMsg_ respMsg = 4;
-      private com.lxd.protobuf.msg.resp.RespMsg.RespMsg_ respMsg_ = com.lxd.protobuf.msg.resp.RespMsg.RespMsg_.getDefaultInstance();
+      // optional .msg.result.Result_ result = 4;
+      private com.lxd.protobuf.msg.result.Result.Result_ result_ = com.lxd.protobuf.msg.result.Result.Result_.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          com.lxd.protobuf.msg.resp.RespMsg.RespMsg_, com.lxd.protobuf.msg.resp.RespMsg.RespMsg_.Builder, com.lxd.protobuf.msg.resp.RespMsg.RespMsg_OrBuilder> respMsgBuilder_;
+          com.lxd.protobuf.msg.result.Result.Result_, com.lxd.protobuf.msg.result.Result.Result_.Builder, com.lxd.protobuf.msg.result.Result.Result_OrBuilder> resultBuilder_;
       /**
-       * <code>optional .resp.RespMsg_ respMsg = 4;</code>
+       * <code>optional .msg.result.Result_ result = 4;</code>
+       *
+       * <pre>
+       *&#47;&lt; 结果
+       * </pre>
        */
-      public boolean hasRespMsg() {
+      public boolean hasResult() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>optional .resp.RespMsg_ respMsg = 4;</code>
+       * <code>optional .msg.result.Result_ result = 4;</code>
+       *
+       * <pre>
+       *&#47;&lt; 结果
+       * </pre>
        */
-      public com.lxd.protobuf.msg.resp.RespMsg.RespMsg_ getRespMsg() {
-        if (respMsgBuilder_ == null) {
-          return respMsg_;
+      public com.lxd.protobuf.msg.result.Result.Result_ getResult() {
+        if (resultBuilder_ == null) {
+          return result_;
         } else {
-          return respMsgBuilder_.getMessage();
+          return resultBuilder_.getMessage();
         }
       }
       /**
-       * <code>optional .resp.RespMsg_ respMsg = 4;</code>
+       * <code>optional .msg.result.Result_ result = 4;</code>
+       *
+       * <pre>
+       *&#47;&lt; 结果
+       * </pre>
        */
-      public Builder setRespMsg(com.lxd.protobuf.msg.resp.RespMsg.RespMsg_ value) {
-        if (respMsgBuilder_ == null) {
+      public Builder setResult(com.lxd.protobuf.msg.result.Result.Result_ value) {
+        if (resultBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          respMsg_ = value;
+          result_ = value;
           onChanged();
         } else {
-          respMsgBuilder_.setMessage(value);
+          resultBuilder_.setMessage(value);
         }
         bitField0_ |= 0x00000008;
         return this;
       }
       /**
-       * <code>optional .resp.RespMsg_ respMsg = 4;</code>
+       * <code>optional .msg.result.Result_ result = 4;</code>
+       *
+       * <pre>
+       *&#47;&lt; 结果
+       * </pre>
        */
-      public Builder setRespMsg(
-          com.lxd.protobuf.msg.resp.RespMsg.RespMsg_.Builder builderForValue) {
-        if (respMsgBuilder_ == null) {
-          respMsg_ = builderForValue.build();
+      public Builder setResult(
+          com.lxd.protobuf.msg.result.Result.Result_.Builder builderForValue) {
+        if (resultBuilder_ == null) {
+          result_ = builderForValue.build();
           onChanged();
         } else {
-          respMsgBuilder_.setMessage(builderForValue.build());
+          resultBuilder_.setMessage(builderForValue.build());
         }
         bitField0_ |= 0x00000008;
         return this;
       }
       /**
-       * <code>optional .resp.RespMsg_ respMsg = 4;</code>
+       * <code>optional .msg.result.Result_ result = 4;</code>
+       *
+       * <pre>
+       *&#47;&lt; 结果
+       * </pre>
        */
-      public Builder mergeRespMsg(com.lxd.protobuf.msg.resp.RespMsg.RespMsg_ value) {
-        if (respMsgBuilder_ == null) {
+      public Builder mergeResult(com.lxd.protobuf.msg.result.Result.Result_ value) {
+        if (resultBuilder_ == null) {
           if (((bitField0_ & 0x00000008) == 0x00000008) &&
-              respMsg_ != com.lxd.protobuf.msg.resp.RespMsg.RespMsg_.getDefaultInstance()) {
-            respMsg_ =
-              com.lxd.protobuf.msg.resp.RespMsg.RespMsg_.newBuilder(respMsg_).mergeFrom(value).buildPartial();
+              result_ != com.lxd.protobuf.msg.result.Result.Result_.getDefaultInstance()) {
+            result_ =
+              com.lxd.protobuf.msg.result.Result.Result_.newBuilder(result_).mergeFrom(value).buildPartial();
           } else {
-            respMsg_ = value;
+            result_ = value;
           }
           onChanged();
         } else {
-          respMsgBuilder_.mergeFrom(value);
+          resultBuilder_.mergeFrom(value);
         }
         bitField0_ |= 0x00000008;
         return this;
       }
       /**
-       * <code>optional .resp.RespMsg_ respMsg = 4;</code>
+       * <code>optional .msg.result.Result_ result = 4;</code>
+       *
+       * <pre>
+       *&#47;&lt; 结果
+       * </pre>
        */
-      public Builder clearRespMsg() {
-        if (respMsgBuilder_ == null) {
-          respMsg_ = com.lxd.protobuf.msg.resp.RespMsg.RespMsg_.getDefaultInstance();
+      public Builder clearResult() {
+        if (resultBuilder_ == null) {
+          result_ = com.lxd.protobuf.msg.result.Result.Result_.getDefaultInstance();
           onChanged();
         } else {
-          respMsgBuilder_.clear();
+          resultBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
       /**
-       * <code>optional .resp.RespMsg_ respMsg = 4;</code>
+       * <code>optional .msg.result.Result_ result = 4;</code>
+       *
+       * <pre>
+       *&#47;&lt; 结果
+       * </pre>
        */
-      public com.lxd.protobuf.msg.resp.RespMsg.RespMsg_.Builder getRespMsgBuilder() {
+      public com.lxd.protobuf.msg.result.Result.Result_.Builder getResultBuilder() {
         bitField0_ |= 0x00000008;
         onChanged();
-        return getRespMsgFieldBuilder().getBuilder();
+        return getResultFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .resp.RespMsg_ respMsg = 4;</code>
+       * <code>optional .msg.result.Result_ result = 4;</code>
+       *
+       * <pre>
+       *&#47;&lt; 结果
+       * </pre>
        */
-      public com.lxd.protobuf.msg.resp.RespMsg.RespMsg_OrBuilder getRespMsgOrBuilder() {
-        if (respMsgBuilder_ != null) {
-          return respMsgBuilder_.getMessageOrBuilder();
+      public com.lxd.protobuf.msg.result.Result.Result_OrBuilder getResultOrBuilder() {
+        if (resultBuilder_ != null) {
+          return resultBuilder_.getMessageOrBuilder();
         } else {
-          return respMsg_;
+          return result_;
         }
       }
       /**
-       * <code>optional .resp.RespMsg_ respMsg = 4;</code>
+       * <code>optional .msg.result.Result_ result = 4;</code>
+       *
+       * <pre>
+       *&#47;&lt; 结果
+       * </pre>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.lxd.protobuf.msg.resp.RespMsg.RespMsg_, com.lxd.protobuf.msg.resp.RespMsg.RespMsg_.Builder, com.lxd.protobuf.msg.resp.RespMsg.RespMsg_OrBuilder> 
-          getRespMsgFieldBuilder() {
-        if (respMsgBuilder_ == null) {
-          respMsgBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lxd.protobuf.msg.resp.RespMsg.RespMsg_, com.lxd.protobuf.msg.resp.RespMsg.RespMsg_.Builder, com.lxd.protobuf.msg.resp.RespMsg.RespMsg_OrBuilder>(
-                  respMsg_,
+          com.lxd.protobuf.msg.result.Result.Result_, com.lxd.protobuf.msg.result.Result.Result_.Builder, com.lxd.protobuf.msg.result.Result.Result_OrBuilder> 
+          getResultFieldBuilder() {
+        if (resultBuilder_ == null) {
+          resultBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lxd.protobuf.msg.result.Result.Result_, com.lxd.protobuf.msg.result.Result.Result_.Builder, com.lxd.protobuf.msg.result.Result.Result_OrBuilder>(
+                  result_,
                   getParentForChildren(),
                   isClean());
-          respMsg_ = null;
+          result_ = null;
         }
-        return respMsgBuilder_;
+        return resultBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:msg.Msg_)
@@ -1090,12 +1250,12 @@ public final class Msg {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\tMsg.proto\022\003msg\032\014ReqMsg.proto\032\rRespMsg." +
-      "proto\"\213\001\n\004Msg_\022\013\n\003md5\030\001 \002(\t\022\034\n\004type\030\002 \002(" +
-      "\0162\016.msg.Msg_.Type\022\034\n\006reqMsg\030\003 \001(\0132\014.req." +
-      "ReqMsg_\022\037\n\007respMsg\030\004 \001(\0132\016.resp.RespMsg_" +
-      "\"\031\n\004Type\022\007\n\003REQ\020\000\022\010\n\004RESP\020\001B\033\n\024com.lxd.p" +
-      "rotobuf.msgB\003Msg"
+      "\n\tMsg.proto\022\003msg\032\014Result.proto\032\tJob.prot" +
+      "o\032\rRequest.proto\"\177\n\004Msg_\022\016\n\006job_id\030\001 \002(\003" +
+      "\022&\n\007request\030\002 \001(\0132\025.msg.request.Request_" +
+      "\022\032\n\003job\030\003 \001(\0132\r.msg.job.Job_\022#\n\006result\030\004" +
+      " \001(\0132\023.msg.result.Result_B\033\n\024com.lxd.pro" +
+      "tobuf.msgB\003Msg"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -1107,15 +1267,16 @@ public final class Msg {
           internal_static_msg_Msg__fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_msg_Msg__descriptor,
-              new java.lang.String[] { "Md5", "Type", "ReqMsg", "RespMsg", });
+              new java.lang.String[] { "JobId", "Request", "Job", "Result", });
           return null;
         }
       };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-          com.lxd.protobuf.msg.req.ReqMsg.getDescriptor(),
-          com.lxd.protobuf.msg.resp.RespMsg.getDescriptor(),
+          com.lxd.protobuf.msg.result.Result.getDescriptor(),
+          com.lxd.protobuf.msg.job.Job.getDescriptor(),
+          com.lxd.protobuf.msg.request.Request.getDescriptor(),
         }, assigner);
   }
 
