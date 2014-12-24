@@ -20,6 +20,7 @@ package com.lxd.server.task;
 import com.lxd.protobuf.msg.Msg.Msg_;
 import com.lxd.server.resource.DataPackage;
 import com.lxd.server.resource.Resource;
+import com.lxd.task.Task;
 
 import io.netty.channel.Channel;
 
@@ -32,7 +33,7 @@ import io.netty.channel.Channel;
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public abstract class Task {    
+public abstract class ServerTask implements Task {    
     ///< 任务的发送通道
     private Channel channel; 
     ///< 任务完成后发送的消息
@@ -53,8 +54,9 @@ public abstract class Task {
     }  
     
     ///< 任务的具体流程
+    @Override
     final public void execute() {
-        taskExecute();
+        msg = taskExecute();
         ///< 将消息放入到输出队列中
         Resource.getSingleton().getMsgQueue().submitMsgOutQueue(new DataPackage(msg, channel));
     }

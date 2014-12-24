@@ -5,4 +5,8 @@ option java_outer_classname="UpdateFile";
 message UpdateFile_{ 
 	///< 文件路径
 	required string path = 1;
+	///< 新文件md5
+	required string md5 = 2;
+	///< 新文件长度
+	required int64 length = 3;
 }

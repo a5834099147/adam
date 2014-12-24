@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.lxd.server.task.Task;
+import com.lxd.server.task.ServerTask;
 
 
 /**
@@ -39,15 +39,15 @@ public class TaskQueue {
     ///< 日志
     private static final Logger log = LogManager.getLogger(TaskQueue.class);
     ///< 任务队列
-    private static BlockingQueue<Task> taskQueue = new LinkedBlockingDeque<>(1000);
+    private static BlockingQueue<ServerTask> taskQueue = new LinkedBlockingDeque<>(1000);
     
     /*
      * 将任务放入到队列中
      */
-    public void submitTaskQueue(Task task) {
+    public void submitTaskQueue(ServerTask serverTask) {
         try {
             ///< 将任务放入到队列中, 如果队列已满, 则等待5秒钟, 如果放入成功返回true, 否则返回 false
-            boolean ret = taskQueue.offer(task, 5, TimeUnit.SECONDS);
+            boolean ret = taskQueue.offer(serverTask, 5, TimeUnit.SECONDS);
             if (ret) {
                 log.info("向 taskQueue 中投递任务成功");
             } else {
@@ -61,7 +61,7 @@ public class TaskQueue {
         }
     }
     
-    public Task takeTaskQueue() {
+    public ServerTask takeTaskQueue() {
         try {
             log.debug("从 taskQueue 任务队列中获取任务, 当前存在 " + taskQueue.size() + "个任务");
             ///< 将任务从队列中取出, 如果队列中没有任务, 则在此阻塞

@@ -18,6 +18,11 @@
 package com.lxd.server.task.request.console;
 
 import com.lxd.protobuf.msg.Msg.Msg_;
+import com.lxd.protobuf.msg.job.Job.Job_;
+import com.lxd.protobuf.msg.job.server.AddFile.AddFile_;
+import com.lxd.protobuf.msg.job.server.Server.Server_;
+import com.lxd.server.resource.Resource;
+import com.lxd.server.resource.property.ConsoleAddFile;
 
 
 /**
@@ -50,8 +55,27 @@ public class AddFileTask extends ConsoleTask {
 
     @Override
     public Msg_ taskExecute() {
-        // TODO Auto-generated method stub
-        return null;
+        ///< 数据库查询是否有该文件 以下路径为没有的情况
+        //TODO 数据库查询是否有该文件
+        
+        ///< 将文件信息录入到任务组中
+        Resource.getSingleton().getJobStatus().addJob(getJobId(), new ConsoleAddFile(md5, length, path));
+        
+        ///< 创建返回消息
+        Msg_.Builder msg = Msg_.newBuilder();
+        ///< 设置任务编号
+        msg.setJobId(getJobId());
+        ///< 创建任务消息
+        Job_.Builder job = Job_.newBuilder();
+        ///< 创建服务器任务消息
+        Server_.Builder server = Server_.newBuilder();
+        ///< 创建增加文件服务器任务消息
+        AddFile_.Builder addFile = AddFile_.newBuilder(); 
+        server.setAddFile(addFile);        
+        job.setServer(server);
+        msg.setJob(job);
+        
+        ///< 返回消息
+        return msg.build();        
     }
-
 }

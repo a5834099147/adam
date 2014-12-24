@@ -15,33 +15,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.server.task.job;
-
-import com.lxd.protobuf.msg.Msg.Msg_;
-import com.lxd.protobuf.msg.result.Result.Result_;
-import com.lxd.server.task.ServerTask;
+package com.lxd.threadpool;
 
 
 /**
- * 描述功能
+ * 工人的抽象类
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2014年12月20日
+ * @date: 2014年12月22日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public abstract class JobTask extends ServerTask {
-
+public abstract class Worker extends Thread {
+    ///< 运行
     @Override
-    public Msg_ taskExecute() {        
-        Result_ result_ = jobExecute();
-        
-        Msg_.Builder msg = Msg_.newBuilder();
-        msg.setResult(result_);
-        msg.setJobId(getJobId());
-        return msg.build();
-    }
+    public abstract void run();
     
-    ///< JobTask 的具体流程
-    public abstract Result_ jobExecute();
+    ///< 关闭该线程
+    public abstract void close();
 }

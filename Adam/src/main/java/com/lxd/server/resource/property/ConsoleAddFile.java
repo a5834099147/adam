@@ -15,42 +15,55 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.server.task.request.console;
-
-import com.lxd.protobuf.msg.Msg.Msg_;
-import com.lxd.protobuf.msg.result.Result.Result_;
+package com.lxd.server.resource.property;
 
 
 /**
- * 客户端请求删除文件
+ * 控制台增加文件附加属性
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2014年12月20日
+ * @date: 2014年12月22日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public class DeleteFileTask extends ConsoleTask {
-    ///< 请求文件路径
-    private String path;    
+public class ConsoleAddFile {
+    ///< 文件MD5
+    private String md5;
+    ///< 文件长度
+    private Long length;
+    ///< 文件相对路径
+    private String path;
     
-    public void setPath(String path) {
+    
+    
+    public ConsoleAddFile(String md5, Long length, String path){
+        super();
+        this.md5 = md5;
+        this.length = length;
         this.path = path;
     }
 
-    @Override
-    public Msg_ taskExecute() {
-        // TODO 删除文件实现流程
-        
-        ///< 创建结果消息
-        Result_.Builder result = Result_.newBuilder();
-        result.setSuccess(true);
-        
-        //TODO 数据库存储
-        Msg_.Builder msg = Msg_.newBuilder();
-        msg.setResult(result);
-        
-        ///< 返回消息
-        return msg.build();
+    public String getMd5() {
+        return md5;
+    }
+    
+    public void setMd5(String md5) {
+        this.md5 = md5;
+    }   
+    
+    public Long getLength() {
+        return length;
+    }
+    
+    public void setLength(Long length) {
+        this.length = length;
     }
 
+    public String getPath() {
+        return path;
+    }
+    
+    public void setPath(String path) {
+        this.path = path;
+    }    
 }

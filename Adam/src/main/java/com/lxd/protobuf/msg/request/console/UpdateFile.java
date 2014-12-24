@@ -37,6 +37,51 @@ public final class UpdateFile {
      */
     com.google.protobuf.ByteString
         getPathBytes();
+
+    // required string md5 = 2;
+    /**
+     * <code>required string md5 = 2;</code>
+     *
+     * <pre>
+     *&#47;&lt; 新文件md5
+     * </pre>
+     */
+    boolean hasMd5();
+    /**
+     * <code>required string md5 = 2;</code>
+     *
+     * <pre>
+     *&#47;&lt; 新文件md5
+     * </pre>
+     */
+    java.lang.String getMd5();
+    /**
+     * <code>required string md5 = 2;</code>
+     *
+     * <pre>
+     *&#47;&lt; 新文件md5
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getMd5Bytes();
+
+    // required int64 length = 3;
+    /**
+     * <code>required int64 length = 3;</code>
+     *
+     * <pre>
+     *&#47;&lt; 新文件长度
+     * </pre>
+     */
+    boolean hasLength();
+    /**
+     * <code>required int64 length = 3;</code>
+     *
+     * <pre>
+     *&#47;&lt; 新文件长度
+     * </pre>
+     */
+    long getLength();
   }
   /**
    * Protobuf type {@code msg.request.console.UpdateFile_}
@@ -92,6 +137,16 @@ public final class UpdateFile {
             case 10: {
               bitField0_ |= 0x00000001;
               path_ = input.readBytes();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              md5_ = input.readBytes();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              length_ = input.readInt64();
               break;
             }
           }
@@ -189,8 +244,89 @@ public final class UpdateFile {
       }
     }
 
+    // required string md5 = 2;
+    public static final int MD5_FIELD_NUMBER = 2;
+    private java.lang.Object md5_;
+    /**
+     * <code>required string md5 = 2;</code>
+     *
+     * <pre>
+     *&#47;&lt; 新文件md5
+     * </pre>
+     */
+    public boolean hasMd5() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required string md5 = 2;</code>
+     *
+     * <pre>
+     *&#47;&lt; 新文件md5
+     * </pre>
+     */
+    public java.lang.String getMd5() {
+      java.lang.Object ref = md5_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          md5_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string md5 = 2;</code>
+     *
+     * <pre>
+     *&#47;&lt; 新文件md5
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getMd5Bytes() {
+      java.lang.Object ref = md5_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        md5_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // required int64 length = 3;
+    public static final int LENGTH_FIELD_NUMBER = 3;
+    private long length_;
+    /**
+     * <code>required int64 length = 3;</code>
+     *
+     * <pre>
+     *&#47;&lt; 新文件长度
+     * </pre>
+     */
+    public boolean hasLength() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required int64 length = 3;</code>
+     *
+     * <pre>
+     *&#47;&lt; 新文件长度
+     * </pre>
+     */
+    public long getLength() {
+      return length_;
+    }
+
     private void initFields() {
       path_ = "";
+      md5_ = "";
+      length_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -198,6 +334,14 @@ public final class UpdateFile {
       if (isInitialized != -1) return isInitialized == 1;
 
       if (!hasPath()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasMd5()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasLength()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -211,6 +355,12 @@ public final class UpdateFile {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeBytes(1, getPathBytes());
       }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getMd5Bytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt64(3, length_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -223,6 +373,14 @@ public final class UpdateFile {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(1, getPathBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getMd5Bytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(3, length_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -342,6 +500,10 @@ public final class UpdateFile {
         super.clear();
         path_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
+        md5_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        length_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -374,6 +536,14 @@ public final class UpdateFile {
           to_bitField0_ |= 0x00000001;
         }
         result.path_ = path_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.md5_ = md5_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.length_ = length_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -395,12 +565,28 @@ public final class UpdateFile {
           path_ = other.path_;
           onChanged();
         }
+        if (other.hasMd5()) {
+          bitField0_ |= 0x00000002;
+          md5_ = other.md5_;
+          onChanged();
+        }
+        if (other.hasLength()) {
+          setLength(other.getLength());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
       public final boolean isInitialized() {
         if (!hasPath()) {
+          
+          return false;
+        }
+        if (!hasMd5()) {
+          
+          return false;
+        }
+        if (!hasLength()) {
           
           return false;
         }
@@ -524,6 +710,153 @@ public final class UpdateFile {
         return this;
       }
 
+      // required string md5 = 2;
+      private java.lang.Object md5_ = "";
+      /**
+       * <code>required string md5 = 2;</code>
+       *
+       * <pre>
+       *&#47;&lt; 新文件md5
+       * </pre>
+       */
+      public boolean hasMd5() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required string md5 = 2;</code>
+       *
+       * <pre>
+       *&#47;&lt; 新文件md5
+       * </pre>
+       */
+      public java.lang.String getMd5() {
+        java.lang.Object ref = md5_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          md5_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string md5 = 2;</code>
+       *
+       * <pre>
+       *&#47;&lt; 新文件md5
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getMd5Bytes() {
+        java.lang.Object ref = md5_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          md5_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string md5 = 2;</code>
+       *
+       * <pre>
+       *&#47;&lt; 新文件md5
+       * </pre>
+       */
+      public Builder setMd5(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        md5_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string md5 = 2;</code>
+       *
+       * <pre>
+       *&#47;&lt; 新文件md5
+       * </pre>
+       */
+      public Builder clearMd5() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        md5_ = getDefaultInstance().getMd5();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string md5 = 2;</code>
+       *
+       * <pre>
+       *&#47;&lt; 新文件md5
+       * </pre>
+       */
+      public Builder setMd5Bytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        md5_ = value;
+        onChanged();
+        return this;
+      }
+
+      // required int64 length = 3;
+      private long length_ ;
+      /**
+       * <code>required int64 length = 3;</code>
+       *
+       * <pre>
+       *&#47;&lt; 新文件长度
+       * </pre>
+       */
+      public boolean hasLength() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required int64 length = 3;</code>
+       *
+       * <pre>
+       *&#47;&lt; 新文件长度
+       * </pre>
+       */
+      public long getLength() {
+        return length_;
+      }
+      /**
+       * <code>required int64 length = 3;</code>
+       *
+       * <pre>
+       *&#47;&lt; 新文件长度
+       * </pre>
+       */
+      public Builder setLength(long value) {
+        bitField0_ |= 0x00000004;
+        length_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int64 length = 3;</code>
+       *
+       * <pre>
+       *&#47;&lt; 新文件长度
+       * </pre>
+       */
+      public Builder clearLength() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        length_ = 0L;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:msg.request.console.UpdateFile_)
     }
 
@@ -550,9 +883,9 @@ public final class UpdateFile {
   static {
     java.lang.String[] descriptorData = {
       "\n\024R_C_UpdateFile.proto\022\023msg.request.cons" +
-      "ole\"\033\n\013UpdateFile_\022\014\n\004path\030\001 \002(\tB2\n$com." +
-      "lxd.protobuf.msg.request.consoleB\nUpdate" +
-      "File"
+      "ole\"8\n\013UpdateFile_\022\014\n\004path\030\001 \002(\t\022\013\n\003md5\030" +
+      "\002 \002(\t\022\016\n\006length\030\003 \002(\003B2\n$com.lxd.protobu" +
+      "f.msg.request.consoleB\nUpdateFile"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -564,7 +897,7 @@ public final class UpdateFile {
           internal_static_msg_request_console_UpdateFile__fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_msg_request_console_UpdateFile__descriptor,
-              new java.lang.String[] { "Path", });
+              new java.lang.String[] { "Path", "Md5", "Length", });
           return null;
         }
       };

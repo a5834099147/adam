@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+
+<!-- This mapping demonstrates -->
+
+<hibernate-mapping package="com.lxd.server.entity">
+	<class name="User" table="t_user">
+		<id name="user_name" column="user_name">
+		</id>
+
+		<property name="user_pwd"/>	
+	</class>
+</hibernate-mapping>

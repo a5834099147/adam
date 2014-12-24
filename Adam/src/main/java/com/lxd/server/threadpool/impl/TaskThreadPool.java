@@ -20,8 +20,7 @@ package com.lxd.server.threadpool.impl;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.lxd.server.threadpool.ThreadPoolInterface;
-import com.lxd.server.threadpool.Worker;
+import com.lxd.threadpool.ThreadPoolInterface;
 
 
 /**
@@ -34,16 +33,16 @@ import com.lxd.server.threadpool.Worker;
  */
 public class TaskThreadPool implements ThreadPoolInterface{
     ///< 工作线程
-    private List<Worker> workers = null;
+    private List<ServerWorker> workers = null;
     ///< 工作线程数量(初始化)
     private final int NUM = 20; 
 
     @Override
     public void start() {
-        workers = new LinkedList<Worker>();
+        workers = new LinkedList<>();
         ///< 生成并开启工作线程
         for (int i = 0; i < NUM; ++i) {
-            Worker worker = new Worker();
+            ServerWorker worker = new ServerWorker();
             workers.add(worker);
             worker.start();
         }
@@ -52,8 +51,8 @@ public class TaskThreadPool implements ThreadPoolInterface{
     @Override
     public void stop() {
         ///< 关闭线程池数组中的所有线程
-        for (Worker worker : workers) {
-            worker.clolse();
+        for (ServerWorker worker : workers) {
+            worker.close();
         }
     }
 

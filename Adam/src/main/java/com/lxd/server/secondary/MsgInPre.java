@@ -27,7 +27,7 @@ import com.lxd.protobuf.msg.request.user.User.User_;
 import com.lxd.server.resource.DataPackage;
 import com.lxd.server.resource.Resource;
 import com.lxd.server.task.IdTask;
-import com.lxd.server.task.Task;
+import com.lxd.server.task.ServerTask;
 import com.lxd.server.task.job.JobTask;
 import com.lxd.server.task.job.console.AddFileTask;
 import com.lxd.server.task.job.console.UpdateFileTask;
@@ -55,26 +55,26 @@ public class MsgInPre extends Thread  {
             ///< 线程从入消息队列中拿到一个消息包
             DataPackage data = Resource.getSingleton().getMsgQueue().takeMsgInQueue();
             ///< 生成Task待后期访问
-            Task task = null;
+            ServerTask serverTask = null;
             if (data.getMsg_().getJobId() == -1) {
-                task = new IdTask();
+                serverTask = new IdTask();
             } else {
                 ///< 如果是任务类消息
-                task = assignment(data.getMsg_());
+                serverTask = assignment(data.getMsg_());
             }
             
-            if (task != null) {
-                task.setJobId(data.getMsg_().getJobId());
-                task.setChannel(data.getChannel());
-                Resource.getSingleton().getTaskQueue().submitTaskQueue(task);
+            if (serverTask != null) {
+                serverTask.setJobId(data.getMsg_().getJobId());
+                serverTask.setChannel(data.getChannel());
+                Resource.getSingleton().getTaskQueue().submitTaskQueue(serverTask);
             }
         }
     }
     
     ///< 分析消息
-    private Task assignment(Msg_ msg) {
+    private ServerTask assignment(Msg_ msg) {
         ///< 返回的任务
-        Task result = null;
+        ServerTask result = null;
         
         if (msg.hasRequest()) {
             ///< 如果是请求消息
@@ -93,9 +93,9 @@ public class MsgInPre extends Thread  {
     }
    
     ///< 解析请求
-    private Task parseRequest(Request_ msg) {
+    private ServerTask parseRequest(Request_ msg) {
         ///< 返回的任务
-        Task result = null;
+        ServerTask result = null;
         
         if (msg.hasConsole()) {
             ///< 如果是来自控制台的消息

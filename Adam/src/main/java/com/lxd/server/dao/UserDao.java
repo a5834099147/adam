@@ -15,33 +15,30 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.server.task.job;
+package com.lxd.server.dao;
 
-import com.lxd.protobuf.msg.Msg.Msg_;
-import com.lxd.protobuf.msg.result.Result.Result_;
-import com.lxd.server.task.ServerTask;
+import com.lxd.server.entity.User;
 
 
 /**
- * 描述功能
+ * 用户数据操作接口
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2014年12月20日
+ * @date: 2014年12月23日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public abstract class JobTask extends ServerTask {
-
-    @Override
-    public Msg_ taskExecute() {        
-        Result_ result_ = jobExecute();
-        
-        Msg_.Builder msg = Msg_.newBuilder();
-        msg.setResult(result_);
-        msg.setJobId(getJobId());
-        return msg.build();
-    }
+public interface UserDao {
+    ///< 增加用户
+    void addUser(User user);
     
-    ///< JobTask 的具体流程
-    public abstract Result_ jobExecute();
+    ///< 更新用户
+    void updateUser(User user);
+    
+    ///< 删除用户
+    void deleteUser(User user);
+    
+    ///< 查找用户通过用户名
+    User queryByName(String user_name);
+    
 }

@@ -29,7 +29,7 @@ import com.lxd.utils.Grnerate;
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public class IdTask extends Task {
+public class IdTask extends ServerTask {
 
     @Override
     public Msg_ taskExecute() {

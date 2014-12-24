@@ -15,33 +15,29 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.server.task.job;
+package com.lxd.client.dao;
 
-import com.lxd.protobuf.msg.Msg.Msg_;
-import com.lxd.protobuf.msg.result.Result.Result_;
-import com.lxd.server.task.ServerTask;
+import java.sql.Connection;
+import java.util.List;
+
+import com.lxd.client.entity.Log;
 
 
 /**
- * 描述功能
+ * 控制台日志数据操作接口
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2014年12月20日
+ * @date: 2014年12月23日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public abstract class JobTask extends ServerTask {
-
-    @Override
-    public Msg_ taskExecute() {        
-        Result_ result_ = jobExecute();
-        
-        Msg_.Builder msg = Msg_.newBuilder();
-        msg.setResult(result_);
-        msg.setJobId(getJobId());
-        return msg.build();
-    }
+public interface LogDao {
+    ///< 增加日志
+    void addLog(Log log, Connection connection);
     
-    ///< JobTask 的具体流程
-    public abstract Result_ jobExecute();
+    ///< 查找日志根据Id
+    Log queryById(Long id, Connection connection);
+    
+    ///< 查找日志根据用户名
+    List<Log> queryByName(String user_name, Connection connection);
 }

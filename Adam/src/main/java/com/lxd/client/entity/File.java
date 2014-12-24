@@ -15,27 +15,66 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.server.task.request.console;
-
-import com.lxd.server.task.ServerTask;
+package com.lxd.client.entity;
 
 
 /**
- * 控制台请求任务
+ * 文件表实体
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2014年12月20日
+ * @date: 2014年12月22日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public abstract class ConsoleTask extends ServerTask {
-    private String user_name = null;
+public class File {
+    ///< 文件ID
+    private Long id;
+    ///< 文件所属用户
+    private String user_name;
+    ///< 文件的MD5编号
+    private String md5;
+    ///< 文件的大小
+    private Long length;
+    ///< 文件的相对路径
+    private String path;  
     
+    public Long getId() {
+        return id;
+    }
+    
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getUser_name() {
         return user_name;
     }
     
     public void setUser_name(String user_name) {
         this.user_name = user_name;
-    }   
+    }
+    
+    public String getMd5() {
+        return md5;
+    }
+    
+    public void setMd5(String md5) {
+        this.md5 = md5;
+    }
+    
+    public Long getLength() {
+        return length;
+    }
+    
+    public void setLength(Long length) {
+        this.length = length;
+    }
+    
+    public String getPath() {
+        return path;
+    }
+    
+    public void setPath(String path) {
+        this.path = path;
+    }    
 }

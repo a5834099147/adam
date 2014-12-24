@@ -15,33 +15,32 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.server.task.job;
+package com.lxd.client.dao;
 
-import com.lxd.protobuf.msg.Msg.Msg_;
-import com.lxd.protobuf.msg.result.Result.Result_;
-import com.lxd.server.task.ServerTask;
+import java.sql.Connection;
+import java.util.List;
+
+import com.lxd.client.entity.File;
 
 
 /**
- * 描述功能
+ * 文件数据操作层
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2014年12月20日
+ * @date: 2014年12月23日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public abstract class JobTask extends ServerTask {
-
-    @Override
-    public Msg_ taskExecute() {        
-        Result_ result_ = jobExecute();
-        
-        Msg_.Builder msg = Msg_.newBuilder();
-        msg.setResult(result_);
-        msg.setJobId(getJobId());
-        return msg.build();
-    }
+public interface FileDao {
+    ///< 增加文件信息
+    void addFile(File file, Connection connection);
     
-    ///< JobTask 的具体流程
-    public abstract Result_ jobExecute();
+    ///< 删除文件信息
+    void deleteFile(File file, Connection connection);
+    
+    ///< 查询用户文件信息
+    List<File> queryByUser(String user_name, Connection connection);
+    
+    ///< 更新文件
+    void updateFile(File file, Connection connection);
 }

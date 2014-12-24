@@ -15,33 +15,36 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.server.task.job;
+package com.lxd.server.threadpool.impl;
 
-import com.lxd.protobuf.msg.Msg.Msg_;
-import com.lxd.protobuf.msg.result.Result.Result_;
-import com.lxd.server.task.ServerTask;
+import com.lxd.server.resource.Resource;
+import com.lxd.task.Task;
+import com.lxd.threadpool.Worker;
 
 
 /**
- * 描述功能
+ * 工作线程
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2014年12月20日
+ * @date: 2014年12月18日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public abstract class JobTask extends ServerTask {
+public class ServerWorker extends Worker {
+    private boolean isRun = true;
+    
+    @Override
+    public void run() {
+        while (isRun) {
+            ///< 从线程队列中得到工作任务
+            Task task = Resource.getSingleton().getTaskQueue().takeTaskQueue();
+            ///< 运行任务
+            task.execute();
+        }       
+    }
 
     @Override
-    public Msg_ taskExecute() {        
-        Result_ result_ = jobExecute();
-        
-        Msg_.Builder msg = Msg_.newBuilder();
-        msg.setResult(result_);
-        msg.setJobId(getJobId());
-        return msg.build();
+    public void close() {
+        isRun = false;        
     }
-    
-    ///< JobTask 的具体流程
-    public abstract Result_ jobExecute();
 }

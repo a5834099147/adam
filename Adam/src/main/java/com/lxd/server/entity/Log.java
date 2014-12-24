@@ -15,33 +15,46 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.server.task.job;
-
-import com.lxd.protobuf.msg.Msg.Msg_;
-import com.lxd.protobuf.msg.result.Result.Result_;
-import com.lxd.server.task.ServerTask;
+package com.lxd.server.entity;
 
 
 /**
- * 描述功能
+ * 日志表实体
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2014年12月20日
+ * @date: 2014年12月22日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public abstract class JobTask extends ServerTask {
-
-    @Override
-    public Msg_ taskExecute() {        
-        Result_ result_ = jobExecute();
-        
-        Msg_.Builder msg = Msg_.newBuilder();
-        msg.setResult(result_);
-        msg.setJobId(getJobId());
-        return msg.build();
+public class Log {
+    ///< 日志编号
+    private long id;
+    ///< 日志所属操作用户
+    private String user_name;
+    ///< 本次操作结果
+    private boolean state;
+    
+    public long getId() {
+        return id;
     }
     
-    ///< JobTask 的具体流程
-    public abstract Result_ jobExecute();
+    public void setId(long id) {
+        this.id = id;
+    }
+    
+    public String getUser_name() {
+        return user_name;
+    }
+    
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }
+    
+    public boolean isState() {
+        return state;
+    }
+    
+    public void setState(boolean state) {
+        this.state = state;
+    }   
 }

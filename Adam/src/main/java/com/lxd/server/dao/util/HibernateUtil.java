@@ -15,20 +15,35 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.server.threadpool;
+package com.lxd.server.dao.util;
+
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
 
 
 /**
- * 线程池接口
+ * Hibernate 工具类
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2014年12月18日
+ * @date: 2014年12月23日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public interface ThreadPoolInterface {
-    ///< 开始所以线程
-    void start();
-    ///< 关闭所有线程
-    void stop();
+public class HibernateUtil {
+    
+    private static SessionFactory factory= null;
+    
+    static {
+        ///< 读取 hibernateUtils 配置文件
+        Configuration conf = new Configuration().configure();       
+        ///< 建立 SessionFactory 
+        factory = conf.buildSessionFactory(new StandardServiceRegistryBuilder()
+                                                                    .applySettings(conf.getProperties()).build());
+    }   
+    
+    public static SessionFactory getSessionFactory() {
+        return factory;
+    }
+
 }

@@ -31,22 +31,27 @@ import java.util.List;
  * @review 
  */
 public class JobStatus {
-    private Hashtable< Integer, Status> status = new Hashtable<>();
+    private Hashtable< Long, Status> status = new Hashtable<>();
     
     ///< 增加任务
-    public void addJob(int jobId) {
-        status.put(jobId, null);
+    public void addJob(Long jobId, Object property) {
+        status.put(jobId, new Status().setProperty(property));
+    }
+    
+    ///< 得到任务的附加属性
+    public Object getProperty(Long jobId) {
+        return status.get(jobId).getProperty();
     }
     
     ///< 检测是否完成
-    public boolean checkFinished(int jobId) {
+    public boolean checkFinished(Long jobId) {
         return status.get(jobId).isFinished();
     }
     
     ///< 判断块是否需要进行
-    public boolean checkToDo(int jobId, int total, int current) {
+    public boolean checkToDo(Long jobId, int total, int current) {
         ///< 判断任务是否开始过
-        if (status.get(jobId) == null) {
+        if (status.get(jobId).getTotal() == 0) {
             status.get(jobId).setTotal(total);
         }
         
@@ -54,42 +59,42 @@ public class JobStatus {
     }
     
     ///< 设置当前块正在进行
-    public void setDoing(int jobId, int current) {
+    public void setDoing(Long jobId, int current) {
         status.get(jobId).setDoingState(current);
     }
     
     ///< 设置当前块完成
-    public void setDone(int jobId, int current) {
+    public void setDone(Long jobId, int current) {
         status.get(jobId).setDoneState(current);
     }
     
     ///< 设置当前块失败
-    public void setError(int jobId, int current) {
+    public void setError(Long jobId, int current) {
         status.get(jobId).setErrorState(current);
     }
     
     ///< 获取未完成的块好
-    public List<Integer> getUnfinished(int jobId) {
+    public List<Integer> getUnfinished(Long jobId) {
         return status.get(jobId).getUnfinished();
     }
     
     ///< 获取已完成的块号
-    public List<Integer> getDone(int jobId) {
+    public List<Integer> getDone(Long jobId) {
         return status.get(jobId).getDone();
     }
     
     ///< 获取没有开始的块号
-    public List<Integer> getNotStart(int jobId) {
+    public List<Integer> getNotStart(Long jobId) {
         return status.get(jobId).getNotStart();
     }
     
     ///< 获取正在进行中的任务
-    public List<Integer> getDoing(int jobId) {
+    public List<Integer> getDoing(Long jobId) {
         return status.get(jobId).getDoing();
     }
     
     ///< 获取当前完成数量
-    public int getCurrentFinished(int jobId) {
+    public int getCurrentFinished(Long jobId) {
         return status.get(jobId).getCurrent();
     }
     
@@ -99,15 +104,31 @@ public class JobStatus {
         private int total;
         ///< 任务状态数组
         private byte[] states;
-        ///< 任务当前数量
-        private int current;       
+        ///< 任务当前完成数量
+        private int current;    
+        ///< 任务附加信息
+        private Object property;       
         
+        public Object getProperty() {
+            return property;
+        }
+
+        
+        public Status setProperty(Object property) {
+            this.property = property;
+            return this;
+        }
+
         ///< 设置块数时, 初始化状态数组
         public void setTotal(int total) {
             this.total = total;
             states = new byte[total];
-        }
+        }       
         
+        public int getTotal() {
+            return total;
+        }
+
         ///< 得到当前块号的任务是否正在进行或完成
         public boolean getState(int num) {
             if (states[num] != 0) {

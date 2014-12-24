@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+
+<!-- This mapping demonstrates -->
+
+<hibernate-mapping package="com.lxd.server.entity">
+	<class name="File" table="t_file">
+		<id name = "id">
+			<generator class="native" />
+		</id>
+		
+		<property name="user_name"/>
+		<property name="md5"/>		
+		<property name="length"/>
+		<property name="path"/>
+	</class>
+</hibernate-mapping>

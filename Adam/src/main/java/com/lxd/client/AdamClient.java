@@ -15,34 +15,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.server.threadpool;
-
-import com.lxd.server.resource.Resource;
-import com.lxd.server.task.Task;
+package com.lxd.client;
 
 
 /**
- * 工作线程
+ * CMD客户端入口
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2014年12月18日
+ * @date: 2014年12月22日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public class Worker extends Thread {
-    private boolean isRun = true;
-    
-    public void clolse() {
-        isRun = false;
-    }
-    
-    @Override
-    public void run() {
-        while (isRun) {
-            ///< 从线程队列中得到工作任务
-            Task task = Resource.getSingleton().getTaskQueue().takeTaskQueue();
-            ///< 运行任务
-            task.execute();
-        }       
-    }
+public class AdamClient {
+
 }

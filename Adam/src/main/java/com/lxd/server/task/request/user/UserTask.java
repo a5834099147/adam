@@ -19,7 +19,7 @@ package com.lxd.server.task.request.user;
 
 import com.lxd.protobuf.msg.Msg.Msg_;
 import com.lxd.protobuf.msg.result.Result.Result_;
-import com.lxd.server.task.Task;
+import com.lxd.server.task.ServerTask;
 
 
 /**
@@ -30,7 +30,7 @@ import com.lxd.server.task.Task;
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public abstract class UserTask extends Task {
+public abstract class UserTask extends ServerTask {
 
     @Override
     public Msg_ taskExecute() {
