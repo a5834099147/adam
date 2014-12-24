@@ -15,35 +15,45 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.server.link;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+package com.lxd.client.resource;
 
 import com.lxd.protobuf.msg.Msg.Msg_;
-import com.lxd.resource.DataPackage;
-import com.lxd.resource.Resource;
-
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.SimpleChannelInboundHandler;
 
 
 /**
- * 处理类的设置
+ * 请求包
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2014年12月16日
+ * @date: 2014年12月24日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public class ServerHandler extends SimpleChannelInboundHandler<Msg_> {
-    private static final Logger log = LogManager.getLogger(ServerHandler.class);
-
-    @Override
-    ///< 接收到信息
-    protected void channelRead0(ChannelHandlerContext ctx, Msg_ msg) throws Exception {
-        ///< 将接收的消息放入到收入队列
-       Resource.getSingleton().getMsgQueue().submitMsgInQueue(new DataPackage(msg, ctx.channel())); 
-       log.info("服务器接收到一条消息");
+public class RequestPackage {
+    ///< 消息包裹
+    private Msg_ msg;
+    ///< 请求附带参数
+    private Object object;
+    
+    public Msg_ getMsg() {
+        return msg;
     }
+    
+    public void setMsg(Msg_ msg) {
+        this.msg = msg;
+    }
+    
+    public Object getObject() {
+        return object;
+    }
+    
+    public void setObject(Object object) {
+        this.object = object;
+    }
+
+    public RequestPackage(Msg_ msg, Object object){
+        super();
+        this.msg = msg;
+        this.object = object;
+    }   
+    
 }

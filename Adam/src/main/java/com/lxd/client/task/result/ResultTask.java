@@ -15,35 +15,41 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.server.link;
+package com.lxd.client.task.result;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import com.lxd.protobuf.msg.Msg.Msg_;
-import com.lxd.resource.DataPackage;
-import com.lxd.resource.Resource;
-
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.SimpleChannelInboundHandler;
+import com.lxd.client.task.ClientTask;
 
 
 /**
- * 处理类的设置
+ * 结果处理任务
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2014年12月16日
+ * @date: 2014年12月24日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public class ServerHandler extends SimpleChannelInboundHandler<Msg_> {
-    private static final Logger log = LogManager.getLogger(ServerHandler.class);
+public class ResultTask extends ClientTask {
+    private Boolean success;
+    private String error_msg;
+    
+    public Boolean getSuccess() {
+        return success;
+    }
+    
+    public void setSuccess(Boolean success) {
+        this.success = success;
+    }
+    
+    public String getError_msg() {
+        return error_msg;
+    }
+    
+    public void setError_msg(String error_msg) {
+        this.error_msg = error_msg;
+    }
 
     @Override
-    ///< 接收到信息
-    protected void channelRead0(ChannelHandlerContext ctx, Msg_ msg) throws Exception {
-        ///< 将接收的消息放入到收入队列
-       Resource.getSingleton().getMsgQueue().submitMsgInQueue(new DataPackage(msg, ctx.channel())); 
-       log.info("服务器接收到一条消息");
-    }
+    public void execute() {
+        
+    }    
 }

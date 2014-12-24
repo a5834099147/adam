@@ -15,28 +15,35 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.utils;
+package com.lxd.client.resource.property;
 
 
 /**
- * 生成类属工具
+ * 服务器任务添加新文件附加属性
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2014年12月18日
+ * @date: 2014年12月24日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public class Grnerate {
+public class ServerAddFile {
+    ///<添加文件的绝对路径
+    private String path;
+
     
-    static private Long task_id = 1L;
-    
-    public static Long getTaskId() {
-        synchronized (task_id) {
-            return task_id++;
-        }
+    public String getPath() {
+        return path;
     }
+
     
-    public static String getPath(String md5, Long length) {
-        return Define.REMOTE + md5 + "_" + length;
+    public void setPath(String path) {
+        this.path = path;
     }
+
+
+    public ServerAddFile(String path){
+        super();
+        this.path = path;
+    }   
+    
 }

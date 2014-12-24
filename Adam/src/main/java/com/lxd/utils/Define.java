@@ -15,36 +15,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.server.threadpool.impl;
-
-import com.lxd.server.resource.Resource;
-import com.lxd.task.Task;
-import com.lxd.threadpool.Worker;
+package com.lxd.utils;
 
 
 /**
- * 工作线程
+ * 描述功能
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2014年12月18日
+ * @date: 2014年12月24日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public class ServerWorker extends Worker {
-    private boolean isRun = true;
-    
-    @Override
-    public void run() {
-        while (isRun) {
-            ///< 从线程队列中得到工作任务
-            Task task = Resource.getSingleton().getTaskQueue().takeTaskQueue();
-            ///< 运行任务
-            task.execute();
-        }       
-    }
-
-    @Override
-    public void close() {
-        isRun = false;        
-    }
+public class Define {
+    public static final int BLOCK_SIZE = 1024 * 1024 * 4;
+    public static final String REMOTE = "D:\\remote\\";
 }

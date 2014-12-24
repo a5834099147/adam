@@ -15,35 +15,41 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.server.link;
+package com.lxd.client.task;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.lxd.client.resource.ClientResource;
+import com.lxd.client.resource.RequestPackage;
 import com.lxd.protobuf.msg.Msg.Msg_;
 import com.lxd.resource.DataPackage;
 import com.lxd.resource.Resource;
 
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.SimpleChannelInboundHandler;
-
 
 /**
- * 处理类的设置
+ * 分配ID的Task
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2014年12月16日
+ * @date: 2014年12月24日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public class ServerHandler extends SimpleChannelInboundHandler<Msg_> {
-    private static final Logger log = LogManager.getLogger(ServerHandler.class);
+public class IdTask extends ClientTask {
+    private static final Logger log = LogManager.getLogger(IdTask.class);
 
     @Override
-    ///< 接收到信息
-    protected void channelRead0(ChannelHandlerContext ctx, Msg_ msg) throws Exception {
-        ///< 将接收的消息放入到收入队列
-       Resource.getSingleton().getMsgQueue().submitMsgInQueue(new DataPackage(msg, ctx.channel())); 
-       log.info("服务器接收到一条消息");
+    public void execute() {
+        ///< 得到队列中的请求
+        RequestPackage reqPack = ClientResource.getSingleton().takeRequest();
+        Msg_.Builder msg = Msg_.newBuilder(reqPack.getMsg());
+        ///< 设置新的ID
+        msg.setJobId(getJobId());
+        log.info("分配的ID为 " + msg.getJobId());
+        ///< 设置任务参数
+        Resource.getSingleton().getJobStatus().addJob(getJobId(), reqPack.getObject());
+        ///< 发送新的请求
+        Resource.getSingleton().getMsgQueue().submitMsgOutQueue(new DataPackage(msg.build(), getChannel()));
     }
+
 }

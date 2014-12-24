@@ -15,45 +15,35 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.server.resource;
+package com.lxd.secondary;
 
-import io.netty.channel.Channel;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import com.lxd.protobuf.msg.Msg.Msg_;
+import com.lxd.resource.DataPackage;
+import com.lxd.resource.Resource;
 
 
 /**
- * 数据包装类
+ * 发送消息线程
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2014年12月16日
+ * @date: 2014年12月18日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public class DataPackage {
-    ///< 封装的消息
-    private Msg_ msg_;
-    ///< 发送或发出的通道
-    private Channel channel;
+public class MessageSend extends Thread {
+    private static final Logger log = LogManager.getLogger(MessageSend.class);
     
-    public DataPackage(Msg_ msg, Channel channel) {
-        this.msg_ = msg;
-        this.channel = channel;
+    @Override 
+    public void run() {
+        while (true) {
+            ///< 得到数据包
+            DataPackage dataPackage = Resource.getSingleton().getMsgQueue().takeMsgOutQueue();
+            ///< 发送数据包
+            dataPackage.getChannel().write(dataPackage.getMsg_());
+            dataPackage.getChannel().flush();
+            log.info("发送线程发送一条消息");
+        }
     }
-    
-    public Msg_ getMsg_() {
-        return msg_;
-    }
-    
-    public void setMsg_(Msg_ msg_) {
-        this.msg_ = msg_;
-    }
-    
-    public Channel getChannel() {
-        return channel;
-    }
-    
-    public void setChannel(Channel channel) {
-        this.channel = channel;
-    }    
 }

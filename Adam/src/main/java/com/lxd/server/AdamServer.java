@@ -17,10 +17,13 @@
 
 package com.lxd.server;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.lxd.secondary.MessageSend;
 import com.lxd.server.link.ServerInitalizer;
-import com.lxd.server.secondary.MessageSend;
 import com.lxd.server.secondary.MsgInPre;
-import com.lxd.server.threadpool.impl.TaskThreadPool;
+import com.lxd.threadpool.impl.TaskThreadPool;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.EventLoopGroup;
@@ -45,15 +48,22 @@ public class AdamServer {
         new AdamServer().initServer();
     }
     
+    private static final Logger log = LogManager.getLogger(AdamServer.class);
+    
     public void initServer() {
+        
+      ///<开始线程池        
+        new TaskThreadPool().start();
+        log.info("开启线程成功");
+        ///< 开始消息处理线程      
+        new MsgInPre().start();
+        log.info("开启消息处理线程成功");
+        ///< 开始消息发送线程        
+        new MessageSend().start();
+        log.info("开启发送消息线程成功");
         ///< 开始网络事务
-        if (netStart(PORT)) {
-            ///<开始线程池
-            new TaskThreadPool().start();
-            ///< 开始消息处理线程
-            new MsgInPre().start();
-            ///< 开始消息发送线程
-            new MessageSend().start();
+        if (!netStart(PORT)) {
+            return;
         }        
     }
     

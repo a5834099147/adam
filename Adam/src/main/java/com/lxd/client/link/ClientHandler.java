@@ -15,11 +15,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.server.link;
+package com.lxd.client.link;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
+import com.lxd.client.resource.ClientResource;
 import com.lxd.protobuf.msg.Msg.Msg_;
 import com.lxd.resource.DataPackage;
 import com.lxd.resource.Resource;
@@ -29,21 +27,28 @@ import io.netty.channel.SimpleChannelInboundHandler;
 
 
 /**
- * 处理类的设置
+ * 客户端处理类的设置
  * @author: a5834099147
  * @mailto: a5834099147@126.com
  * @date: 2014年12月16日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public class ServerHandler extends SimpleChannelInboundHandler<Msg_> {
-    private static final Logger log = LogManager.getLogger(ServerHandler.class);
+public class ClientHandler extends SimpleChannelInboundHandler<Msg_> {
 
     @Override
     ///< 接收到信息
     protected void channelRead0(ChannelHandlerContext ctx, Msg_ msg) throws Exception {
         ///< 将接收的消息放入到收入队列
        Resource.getSingleton().getMsgQueue().submitMsgInQueue(new DataPackage(msg, ctx.channel())); 
-       log.info("服务器接收到一条消息");
     }
+
+    @Override
+    ///< 客户端与服务器链接后
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        super.channelActive(ctx);
+        ClientResource.getSingleton().setChannel(ctx.channel());
+    }
+    
+   
 }

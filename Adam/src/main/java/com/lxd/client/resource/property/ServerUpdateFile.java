@@ -15,29 +15,32 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.server.secondary;
-
-import com.lxd.server.resource.DataPackage;
-import com.lxd.server.resource.Resource;
+package com.lxd.client.resource.property;
 
 
 /**
- * 发送消息线程
+ * 服务器任务更新文件附加属性
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2014年12月18日
+ * @date: 2014年12月24日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public class MessageSend extends Thread {
+public class ServerUpdateFile {
+    ///< 添加文件的相对路径
+    private String path;
+
     
-    @Override 
-    public void run() {
-        while (true) {
-            ///< 得到数据包
-            DataPackage dataPackage = Resource.getSingleton().getMsgQueue().takeMsgOutQueue();
-            ///< 发送数据包
-            dataPackage.getChannel().write(dataPackage.getMsg_());
-        }
+    public String getPath() {
+        return path;
     }
+    
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public ServerUpdateFile(String path){
+        super();
+        this.path = path;
+    }        
 }

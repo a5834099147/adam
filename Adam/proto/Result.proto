@@ -3,8 +3,16 @@ option java_package="com.lxd.protobuf.msg.result";
 option java_outer_classname="Result";
 
 message Result_{ 
+	///< 附加信息
+	message Repleish {
+		///< 日志块号
+		required int32 block = 1;
+	}
+
 	///< 成功
 	required bool success = 1;
 	///< 错误信息
 	optional string error_message = 2;
+	///< 附属信息
+	optional Repleish repleish = 3;
 }

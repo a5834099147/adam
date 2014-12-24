@@ -17,26 +17,29 @@
 
 package com.lxd.utils;
 
+import java.io.Closeable;
+import java.io.IOException;
+
 
 /**
- * 生成类属工具
+ * 工具
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2014年12月18日
+ * @date: 2014年12月24日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public class Grnerate {
-    
-    static private Long task_id = 1L;
-    
-    public static Long getTaskId() {
-        synchronized (task_id) {
-            return task_id++;
+public class Utils {
+    // /< 关闭链接
+    static public void closeConnection(Closeable... closes) {
+        for (Closeable close : closes) {
+            try {
+                if (close != null) {
+                    close.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-    }
-    
-    public static String getPath(String md5, Long length) {
-        return Define.REMOTE + md5 + "_" + length;
     }
 }

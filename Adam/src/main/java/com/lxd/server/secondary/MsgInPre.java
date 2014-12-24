@@ -19,13 +19,14 @@ package com.lxd.server.secondary;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import com.lxd.protobuf.msg.Msg.Msg_;
 import com.lxd.protobuf.msg.job.Job.Job_;
 import com.lxd.protobuf.msg.request.Request.Request_;
 import com.lxd.protobuf.msg.request.console.Console.Console_;
 import com.lxd.protobuf.msg.request.user.User.User_;
-import com.lxd.server.resource.DataPackage;
-import com.lxd.server.resource.Resource;
+import com.lxd.resource.DataPackage;
+import com.lxd.resource.Resource;
 import com.lxd.server.task.IdTask;
 import com.lxd.server.task.ServerTask;
 import com.lxd.server.task.job.JobTask;

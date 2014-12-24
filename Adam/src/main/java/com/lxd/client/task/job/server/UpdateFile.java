@@ -15,45 +15,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.server.threadpool.impl;
+package com.lxd.client.task.job.server;
 
-import java.util.LinkedList;
-import java.util.List;
-
-import com.lxd.threadpool.ThreadPoolInterface;
+import com.lxd.client.task.ClientTask;
 
 
 /**
- * 服务器任务线程池
+ * 来自服务器的修改文件任务
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2014年12月18日
+ * @date: 2014年12月24日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public class TaskThreadPool implements ThreadPoolInterface{
-    ///< 工作线程
-    private List<ServerWorker> workers = null;
-    ///< 工作线程数量(初始化)
-    private final int NUM = 20; 
+public class UpdateFile extends ClientTask {
 
     @Override
-    public void start() {
-        workers = new LinkedList<>();
-        ///< 生成并开启工作线程
-        for (int i = 0; i < NUM; ++i) {
-            ServerWorker worker = new ServerWorker();
-            workers.add(worker);
-            worker.start();
-        }
-    }
-
-    @Override
-    public void stop() {
-        ///< 关闭线程池数组中的所有线程
-        for (ServerWorker worker : workers) {
-            worker.close();
-        }
+    public void execute() {
+        // TODO Auto-generated method stub
+        
     }
 
 }

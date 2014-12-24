@@ -21,7 +21,7 @@ import com.lxd.protobuf.msg.Msg.Msg_;
 import com.lxd.protobuf.msg.job.Job.Job_;
 import com.lxd.protobuf.msg.job.server.Server.Server_;
 import com.lxd.protobuf.msg.job.server.UpdateFile.UpdateFile_;
-import com.lxd.server.resource.Resource;
+import com.lxd.resource.Resource;
 import com.lxd.server.resource.property.ConsoleAddFile;
 
 /**

@@ -16,9 +16,19 @@
  */
 
 package com.lxd.server.task.job.console;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import com.lxd.protobuf.msg.result.Result.Result_;
+import com.lxd.protobuf.msg.result.Result.Result_.Repleish;
+import com.lxd.resource.Resource;
+import com.lxd.server.resource.property.ConsoleAddFile;
 import com.lxd.server.task.job.JobTask;
+import com.lxd.utils.Define;
+import com.lxd.utils.Grnerate;
 
 
 /**
@@ -30,6 +40,8 @@ import com.lxd.server.task.job.JobTask;
  * @review 
  */
 public class AddFileTask extends JobTask {
+    
+    private static final Logger log = LogManager.getLogger(AddFileTask.class);
     ///< 总块数
     private int total_lump;
     ///< 当前块数
@@ -51,8 +63,42 @@ public class AddFileTask extends JobTask {
 
     @Override
     public Result_ jobExecute() {
-        // TODO Auto-generated method stub
-        return null;
+        Result_.Builder result = Result_.newBuilder();
+        
+        ///< 判断任务需要做
+        if (Resource.getSingleton().getJobStatus().checkToDo(getJobId(), total_lump, current_lump)) {
+            ///< 设置文件正在进行
+            Resource.getSingleton().getJobStatus().setDoing(getJobId(), current_lump);
+            
+            ///< 得到任务附加属性
+            ConsoleAddFile property = (ConsoleAddFile) Resource.getSingleton().getJobStatus().getProperty(getJobId());
+            String fileString = Grnerate.getPath(property.getMd5(), property.getLength());         
+            
+            ///< 准备写文件
+            try (RandomAccessFile raf = new RandomAccessFile(fileString, "rw")) {
+                raf.seek(current_lump * Define.BLOCK_SIZE);
+                raf.write(datas);              
+                log.info("文件块" + current_lump + "写完, 所属文件" + fileString);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            
+            
+            Resource.getSingleton().getJobStatus().setDone(getJobId(), current_lump);
+            if (Resource.getSingleton().getJobStatus().checkFinished(getJobId())) {
+                ///< 完成
+                result.setSuccess(true);
+            } else {
+                result.setSuccess(true);
+                Repleish.Builder repleish = Repleish.newBuilder();
+                repleish.setBlock(current_lump);
+                result.setRepleish(repleish);
+            }
+        }
+        
+        return result.build();        
     }
 
 }

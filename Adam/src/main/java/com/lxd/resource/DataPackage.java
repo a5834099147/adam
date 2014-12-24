@@ -15,35 +15,45 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.server.link;
+package com.lxd.resource;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import io.netty.channel.Channel;
 
 import com.lxd.protobuf.msg.Msg.Msg_;
-import com.lxd.resource.DataPackage;
-import com.lxd.resource.Resource;
-
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.SimpleChannelInboundHandler;
 
 
 /**
- * 处理类的设置
+ * 数据包装类
  * @author: a5834099147
  * @mailto: a5834099147@126.com
  * @date: 2014年12月16日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public class ServerHandler extends SimpleChannelInboundHandler<Msg_> {
-    private static final Logger log = LogManager.getLogger(ServerHandler.class);
-
-    @Override
-    ///< 接收到信息
-    protected void channelRead0(ChannelHandlerContext ctx, Msg_ msg) throws Exception {
-        ///< 将接收的消息放入到收入队列
-       Resource.getSingleton().getMsgQueue().submitMsgInQueue(new DataPackage(msg, ctx.channel())); 
-       log.info("服务器接收到一条消息");
+public class DataPackage {
+    ///< 封装的消息
+    private Msg_ msg_;
+    ///< 发送或发出的通道
+    private Channel channel;
+    
+    public DataPackage(Msg_ msg, Channel channel) {
+        this.msg_ = msg;
+        this.channel = channel;
     }
+    
+    public Msg_ getMsg_() {
+        return msg_;
+    }
+    
+    public void setMsg_(Msg_ msg_) {
+        this.msg_ = msg_;
+    }
+    
+    public Channel getChannel() {
+        return channel;
+    }
+    
+    public void setChannel(Channel channel) {
+        this.channel = channel;
+    }    
 }

@@ -17,12 +17,22 @@
 
 package com.lxd.server.task.request.console;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.lxd.protobuf.msg.Msg.Msg_;
 import com.lxd.protobuf.msg.job.Job.Job_;
 import com.lxd.protobuf.msg.job.server.AddFile.AddFile_;
 import com.lxd.protobuf.msg.job.server.Server.Server_;
-import com.lxd.server.resource.Resource;
+import com.lxd.resource.Resource;
 import com.lxd.server.resource.property.ConsoleAddFile;
+import com.lxd.utils.Grnerate;
+import com.lxd.utils.Utils;
 
 
 /**
@@ -34,6 +44,8 @@ import com.lxd.server.resource.property.ConsoleAddFile;
  * @review 
  */
 public class AddFileTask extends ConsoleTask {
+    private static final Logger log = LogManager.getLogger(AddFileTask.class);
+    
     ///< 文件MD5值
     private String md5;
     ///< 文件长度
@@ -60,6 +72,23 @@ public class AddFileTask extends ConsoleTask {
         
         ///< 将文件信息录入到任务组中
         Resource.getSingleton().getJobStatus().addJob(getJobId(), new ConsoleAddFile(md5, length, path));
+        
+        try {
+            ///< 得到文件路径
+            String fileString = Grnerate.getPath(md5, length);
+            ///< 创建文件
+            File file = new File(fileString);
+            file.createNewFile();
+            RandomAccessFile raf = new RandomAccessFile(fileString, "rw");
+            log.info("创建文件成功" + fileString);
+            raf.setLength(length);
+            log.info("给文件" + fileString + "分配的大小为 :" + length);
+            Utils.closeConnection(raf);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         
         ///< 创建返回消息
         Msg_.Builder msg = Msg_.newBuilder();
