@@ -27,6 +27,6 @@ package com.lxd.utils;
  * @review 
  */
 public class Define {
-    public static final int BLOCK_SIZE = 1024 * 1024 * 4;
+    public static final Long BLOCK_SIZE = 1024 * 1024 * 4L;
     public static final String REMOTE = "D:\\remote\\";
 }

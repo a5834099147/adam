@@ -33,14 +33,23 @@ public class ConsoleAddFile {
     private Long length;
     ///< 文件相对路径
     private String path;
+    ///< 用户信息
+    private String user_name;   
     
+    public String getUser_name() {
+        return user_name;
+    }
     
-    
-    public ConsoleAddFile(String md5, Long length, String path){
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }  
+
+    public ConsoleAddFile(String md5, Long length, String path, String user_name){
         super();
         this.md5 = md5;
         this.length = length;
         this.path = path;
+        this.user_name = user_name;
     }
 
     public String getMd5() {

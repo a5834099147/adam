@@ -16,16 +16,17 @@
  */
 
 package com.lxd.server.task.job.console;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.RandomAccessFile;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import com.lxd.protobuf.msg.result.Result.Result_;
 import com.lxd.protobuf.msg.result.Result.Result_.Repleish;
 import com.lxd.resource.Resource;
+import com.lxd.server.entity.File;
 import com.lxd.server.resource.property.ConsoleAddFile;
+import com.lxd.server.service.FileServer;
+import com.lxd.server.service.impl.FileServerImpl;
 import com.lxd.server.task.job.JobTask;
 import com.lxd.utils.Define;
 import com.lxd.utils.Grnerate;
@@ -48,6 +49,8 @@ public class AddFileTask extends JobTask {
     private int current_lump;
     ///< 块信息
     private byte[] datas;
+    ///< 文件服务
+    private FileServer fileServer = new FileServerImpl();
     
     public void setTotal_lump(int total_lump) {
         this.total_lump = total_lump;
@@ -72,29 +75,28 @@ public class AddFileTask extends JobTask {
             
             ///< 得到任务附加属性
             ConsoleAddFile property = (ConsoleAddFile) Resource.getSingleton().getJobStatus().getProperty(getJobId());
-            String fileString = Grnerate.getPath(property.getMd5(), property.getLength());         
-            
-            ///< 准备写文件
-            try (RandomAccessFile raf = new RandomAccessFile(fileString, "rw")) {
-                raf.seek(current_lump * Define.BLOCK_SIZE);
-                raf.write(datas);              
-                log.info("文件块" + current_lump + "写完, 所属文件" + fileString);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            
+            String file_path = Grnerate.getPath(property.getMd5(), property.getLength());         
+            fileServer.editFile(file_path, current_lump * Define.BLOCK_SIZE, datas);            
             
             Resource.getSingleton().getJobStatus().setDone(getJobId(), current_lump);
             if (Resource.getSingleton().getJobStatus().checkFinished(getJobId())) {
                 ///< 完成
                 result.setSuccess(true);
+                log.info("任务编号" + getJobId() + " 添加文件任务完成");
+                
+                File file = new File();
+                file.setLength(property.getLength());
+                file.setMd5(property.getMd5());
+                file.setPath(property.getPath());
+                file.setUser_name(property.getUser_name());
+                
+                fileServer.addFile(file);
             } else {
                 result.setSuccess(true);
                 Repleish.Builder repleish = Repleish.newBuilder();
                 repleish.setBlock(current_lump);
                 result.setRepleish(repleish);
+                log.info("任务编号" + getJobId() + " 模块" + current_lump + "添加文件任务完成");
             }
         }
         

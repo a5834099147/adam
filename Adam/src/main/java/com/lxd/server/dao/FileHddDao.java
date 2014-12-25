@@ -17,35 +17,22 @@
 
 package com.lxd.server.dao;
 
-import java.util.List;
-
-import com.lxd.server.entity.File;
-
 
 /**
- * 服务器数据操作接口
+ * 硬盘文件操作
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2014年12月23日
+ * @date: 2014年12月25日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public interface FileDao {
-    ///< 增加文件信息
-    void addFile(File file);
+public interface FileHddDao {
+    ///< 增加大小为 length 长度的文件
+    void addFile(String file_name, Long length);
     
-    ///< 删除文件信息
-    void deleteFile(File file);
+    ///< 向文件总写入数据
+    void editFile(String file_name, Long seek, byte[] datas);
     
-    ///< 查询用户文件信息
-    List<File> queryByUser(String user_name);
-    
-    ///< 查询文件通过用户名和路径
-    File queryByUserAndPath(String user_name, String path);
-    
-    ///< 查询文件通过标识
-    boolean queryByMd5AndLength(String md5, Long length);
-    
-    ///< 更新文件
-    void updateFile(File file);
+    ///< 删除文件
+    void deleteFile(String file_name);
 }

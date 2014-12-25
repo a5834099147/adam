@@ -23,6 +23,7 @@ import com.lxd.protobuf.msg.job.server.Server.Server_;
 import com.lxd.protobuf.msg.job.server.UpdateFile.UpdateFile_;
 import com.lxd.resource.Resource;
 import com.lxd.server.resource.property.ConsoleAddFile;
+import com.lxd.server.resource.property.ConsoleUpdataFile;
 
 /**
  * 客户端请求更新文件
@@ -53,7 +54,7 @@ public class UpdateFileTask extends ConsoleTask {
 
         // /< 将文件信息录入到任务组中
         //TODO 得到原来文件的MD5和Length
-        Resource.getSingleton().getJobStatus().addJob(getJobId(), new ConsoleAddFile(md5, length, path));
+        Resource.getSingleton().getJobStatus().addJob(getJobId(), new ConsoleUpdataFile(md5, length, path));
 
         // /< 创建返回消息
         Msg_.Builder msg = Msg_.newBuilder();

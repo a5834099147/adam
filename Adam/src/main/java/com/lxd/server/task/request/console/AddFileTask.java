@@ -17,11 +17,6 @@
 
 package com.lxd.server.task.request.console;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.RandomAccessFile;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -29,10 +24,13 @@ import com.lxd.protobuf.msg.Msg.Msg_;
 import com.lxd.protobuf.msg.job.Job.Job_;
 import com.lxd.protobuf.msg.job.server.AddFile.AddFile_;
 import com.lxd.protobuf.msg.job.server.Server.Server_;
+import com.lxd.protobuf.msg.result.Result.Result_;
 import com.lxd.resource.Resource;
+import com.lxd.server.entity.File;
 import com.lxd.server.resource.property.ConsoleAddFile;
+import com.lxd.server.service.FileServer;
+import com.lxd.server.service.impl.FileServerImpl;
 import com.lxd.utils.Grnerate;
-import com.lxd.utils.Utils;
 
 
 /**
@@ -45,6 +43,9 @@ import com.lxd.utils.Utils;
  */
 public class AddFileTask extends ConsoleTask {
     private static final Logger log = LogManager.getLogger(AddFileTask.class);
+    
+    ///< 文件业务
+    private FileServer fileServer = new FileServerImpl();
     
     ///< 文件MD5值
     private String md5;
@@ -68,27 +69,32 @@ public class AddFileTask extends ConsoleTask {
     @Override
     public Msg_ taskExecute() {
         ///< 数据库查询是否有该文件 以下路径为没有的情况
-        //TODO 数据库查询是否有该文件
+        if (fileServer.havaFile(md5, length)) {
+            File file = new File();
+            file.setLength(length);
+            file.setMd5(md5);
+            file.setPath(path);
+            file.setUser_name(getUser_name());
+            
+            fileServer.addFile(file);
+            log.info("文件快传信息建立, 正在创建返回信息");
+            
+            ///< 返回结果信息
+            Msg_.Builder msg = Msg_.newBuilder();
+            Result_.Builder result = Result_.newBuilder();
+            result.setSuccess(true);           
+            msg.setResult(result);
+            msg.setJobId(getJobId());
+            return msg.build();
+            
+        }
+        
         
         ///< 将文件信息录入到任务组中
-        Resource.getSingleton().getJobStatus().addJob(getJobId(), new ConsoleAddFile(md5, length, path));
+        Resource.getSingleton().getJobStatus().addJob(getJobId(), new ConsoleAddFile(md5, length, path, getUser_name()));
         
-        try {
-            ///< 得到文件路径
-            String fileString = Grnerate.getPath(md5, length);
-            ///< 创建文件
-            File file = new File(fileString);
-            file.createNewFile();
-            RandomAccessFile raf = new RandomAccessFile(fileString, "rw");
-            log.info("创建文件成功" + fileString);
-            raf.setLength(length);
-            log.info("给文件" + fileString + "分配的大小为 :" + length);
-            Utils.closeConnection(raf);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String file_path = Grnerate.getPath(md5, length);
+        fileServer.addFile(file_path, length);
         
         ///< 创建返回消息
         Msg_.Builder msg = Msg_.newBuilder();

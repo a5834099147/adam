@@ -68,4 +68,22 @@ public class FileDaoImpl implements FileDao {
        HibernateUtil.getSessionFactory().getCurrentSession().update(file);
     }
 
+    @Override
+    public File queryByUserAndPath(String user_name, String path) {
+        String hsql = "from File as file where file.user_name = :user_name and file.path = :path";
+        Query query = HibernateUtil.getSessionFactory().getCurrentSession().createQuery(hsql);
+        query.setString("user_name", user_name);
+        query.setString("path", path);
+        
+        return (File) query.list().get(0);
+    }
+
+    @Override
+    public boolean queryByMd5AndLength(String md5, Long length) {
+        String hsql = "from File as file where file.md5 = :md5 and file.length = :length";
+        Query query = HibernateUtil.getSessionFactory().getCurrentSession().createQuery(hsql);
+        query.setString("md5", md5);
+        query.setLong("length", length);
+        return !query.list().isEmpty();
+    }
 }

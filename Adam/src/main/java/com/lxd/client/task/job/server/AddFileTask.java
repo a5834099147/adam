@@ -63,7 +63,7 @@ public class AddFileTask extends ClientTask {
                 if (i == totle_block) {
                     dates = new byte[(int) (length - totle_block * Define.BLOCK_SIZE)];
                 } else {
-                    dates = new byte[Define.BLOCK_SIZE];
+                    dates = new byte[(int) (Define.BLOCK_SIZE * 1)];
                 }
                 
                 fis.read(dates);

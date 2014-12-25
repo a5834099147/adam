@@ -19,6 +19,9 @@ package com.lxd.server.task.request.console;
 
 import com.lxd.protobuf.msg.Msg.Msg_;
 import com.lxd.protobuf.msg.result.Result.Result_;
+import com.lxd.server.entity.File;
+import com.lxd.server.service.FileServer;
+import com.lxd.server.service.impl.FileServerImpl;
 
 
 /**
@@ -33,13 +36,17 @@ public class DeleteFileTask extends ConsoleTask {
     ///< 请求文件路径
     private String path;    
     
+    ///< 文件服务
+    private FileServer fileServer = new FileServerImpl();
+    
     public void setPath(String path) {
         this.path = path;
     }
 
     @Override
     public Msg_ taskExecute() {
-        // TODO 删除文件实现流程
+        File file = fileServer.searchFile(getUser_name(), path);
+        fileServer.deleteFile(file);
         
         ///< 创建结果消息
         Result_.Builder result = Result_.newBuilder();
@@ -48,6 +55,7 @@ public class DeleteFileTask extends ConsoleTask {
         //TODO 数据库存储
         Msg_.Builder msg = Msg_.newBuilder();
         msg.setResult(result);
+        msg.setJobId(getJobId());
         
         ///< 返回消息
         return msg.build();

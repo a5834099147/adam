@@ -15,37 +15,38 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.server.dao;
-
-import java.util.List;
+package com.lxd.server.service;
 
 import com.lxd.server.entity.File;
 
 
 /**
- * 服务器数据操作接口
+ * 文件业务
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2014年12月23日
+ * @date: 2014年12月25日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public interface FileDao {
-    ///< 增加文件信息
+public interface FileServer {
+    ///< 查询文件是否存在
+    boolean havaFile(String md5, Long length);
+    
+    ///< 用户通过路径查询文件
+    File searchFile(String user_name, String path);
+    
+    ///< 用户添加文件信息
     void addFile(File file);
     
-    ///< 删除文件信息
+    ///< 用户修改文件信息
+    void updateFile(File file);
+    
+    ///< 用户删除文件信息
     void deleteFile(File file);
     
-    ///< 查询用户文件信息
-    List<File> queryByUser(String user_name);
+    ///< 添加文件
+    void addFile(String file_name, Long length);
     
-    ///< 查询文件通过用户名和路径
-    File queryByUserAndPath(String user_name, String path);
-    
-    ///< 查询文件通过标识
-    boolean queryByMd5AndLength(String md5, Long length);
-    
-    ///< 更新文件
-    void updateFile(File file);
+    ///< 写入文件信息
+    void editFile(String file_name, Long seek, byte[] datas);
 }

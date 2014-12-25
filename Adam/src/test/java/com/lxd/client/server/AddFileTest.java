@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.client.server.addFile;
+package com.lxd.client.server;
 
 import org.junit.Test;
 
@@ -30,7 +30,7 @@ import com.lxd.protobuf.msg.request.console.Console.Console_;
 
 
 /**
- * 描述功能
+ * 测试增加文件
  * @author: a5834099147
  * @mailto: a5834099147@126.com
  * @date: 2014年12月24日
@@ -58,13 +58,13 @@ public class AddFileTest {
                 console.setUserName("li_xd");
                 AddFile_.Builder addFile = AddFile_.newBuilder();
                 addFile.setMd5("6485A362D20F80A6021053C72DCF4F9F");
-                addFile.setLength(495514700);
-                addFile.setPath("C:\\Users\\li__\\Desktop\\20141114.zip");
+                addFile.setLength(868344232);
+                addFile.setPath("C:\\Users\\li__\\Desktop\\android-studio-bundle-135.1641136.exe");
                 console.setAddFile(addFile);
                 request.setConsole(console);
                 msg.setRequest(request);
                 msg.setJobId(-1L);
-                ClientResource.getSingleton().submitRequest(new RequestPackage(msg.build(), new ServerAddFile("C:\\Users\\li__\\Desktop\\20141114.zip")));
+                ClientResource.getSingleton().submitRequest(new RequestPackage(msg.build(), new ServerAddFile("C:\\Users\\li__\\Desktop\\android-studio-bundle-135.1641136.exe")));
             }
         }).start();
         
