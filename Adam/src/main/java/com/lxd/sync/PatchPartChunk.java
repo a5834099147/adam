@@ -15,25 +15,28 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.client.task.job.server;
-
-import com.lxd.client.task.ClientTask;
-
+package com.lxd.sync;
 
 /**
- * 来自服务器的修改文件任务
+ * 补丁序列
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2014年12月24日
+ * @date: 2014年12月25日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public class UpdateFile extends ClientTask {
+public class PatchPartChunk extends PatchPart {
+	private long index;
+	
+	public PatchPartChunk(long index){
+		this.index = index;
+	}
 
-    @Override
-    public void execute() {
-        // TODO Auto-generated method stub
-        
-    }
+	public long getIndex() {
+		return index;
+	}
 
+	public void setIndex(long index) {
+		this.index = index;
+	}
 }

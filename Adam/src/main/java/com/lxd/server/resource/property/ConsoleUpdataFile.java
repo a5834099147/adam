@@ -33,13 +33,26 @@ public class ConsoleUpdataFile {
     private Long length;
     ///< 修改文件路径
     private String patch;
+    ///< 用户名
+    private String user_name;    
     
-    public ConsoleUpdataFile(String md5, Long length, String patch){
+    public String getUser_name() {
+        return user_name;
+    }    
+    
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }   
+    
+
+    public ConsoleUpdataFile(String md5, Long length, String patch, String user_name){
         super();
         this.md5 = md5;
         this.length = length;
         this.patch = patch;
+        this.user_name = user_name;
     }
+
 
     public String getMd5() {
         return md5;

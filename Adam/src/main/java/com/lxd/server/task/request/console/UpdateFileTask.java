@@ -17,13 +17,22 @@
 
 package com.lxd.server.task.request.console;
 
+import java.util.List;
+
 import com.lxd.protobuf.msg.Msg.Msg_;
 import com.lxd.protobuf.msg.job.Job.Job_;
 import com.lxd.protobuf.msg.job.server.Server.Server_;
+import com.lxd.protobuf.msg.job.server.UpdateFile.Information;
 import com.lxd.protobuf.msg.job.server.UpdateFile.UpdateFile_;
+import com.lxd.protobuf.msg.result.Result.Result_;
 import com.lxd.resource.Resource;
-import com.lxd.server.resource.property.ConsoleAddFile;
+import com.lxd.server.entity.File;
 import com.lxd.server.resource.property.ConsoleUpdataFile;
+import com.lxd.server.service.FileServer;
+import com.lxd.server.service.impl.FileServerImpl;
+import com.lxd.sync.Chunk;
+import com.lxd.sync.RsyncUtil;
+import com.lxd.utils.Grnerate;
 
 /**
  * 客户端请求更新文件
@@ -45,16 +54,42 @@ public class UpdateFileTask extends ConsoleTask {
 
     public void setPath(String path) {
         this.path = path;
+    }    
+    
+    public void setMd5(String md5) {
+        this.md5 = md5;
     }
+    
+    public void setLength(Long length) {
+        this.length = length;
+    }
+    
+    private FileServer fileServer = new FileServerImpl();
 
     @Override
     public Msg_ taskExecute() {
-        // /< 创建文件信息trunk
-        // TODO 数据库查询是否有该文件
+        ///< 查找到修改前的文件信息
+        File oldFile = fileServer.searchFile(getUser_name(), path);
+        
+        ///< 查找是否存在更新后的文件信息
+        if (fileServer.havaFile(md5, length)) {
+            ///< 更新表信息
+            fileServer.updateFile(oldFile, md5, length);
+            
+            ///< 回复结果消息
+            Msg_.Builder msg = Msg_.newBuilder();
+            msg.setJobId(getJobId());
+            Result_.Builder result = Result_.newBuilder();
+            result.setSuccess(true);
+            msg.setResult(result);
+            
+            //TODO 保存结果到数据库
+            return msg.build();
+        }        
 
         // /< 将文件信息录入到任务组中
         //TODO 得到原来文件的MD5和Length
-        Resource.getSingleton().getJobStatus().addJob(getJobId(), new ConsoleUpdataFile(md5, length, path));
+        Resource.getSingleton().getJobStatus().addJob(getJobId(), new ConsoleUpdataFile(md5, length, path, getUser_name()));
 
         // /< 创建返回消息
         Msg_.Builder msg = Msg_.newBuilder();
@@ -66,6 +101,18 @@ public class UpdateFileTask extends ConsoleTask {
         Server_.Builder server = Server_.newBuilder();
         // /< 创建修改文件服务器任务消息
         UpdateFile_.Builder updateFile = UpdateFile_.newBuilder();
+        ///< 得到文件信息
+        List<Chunk> chunks = RsyncUtil.getFileCheckInfo(Grnerate.getPath(oldFile.getMd5(), oldFile.getLength()));
+        
+        for (Chunk chunk : chunks) {
+          ///< 文件信息存储模块
+            Information.Builder info = Information.newBuilder();
+            info.setAdler32(chunk.getAdler32());
+            info.setMd5(chunk.getMd5());
+            info.setInfoId(chunk.getIndex());
+            info.setLength(chunk.getLength());
+            updateFile.addInformations(info);
+        }
         //TODO 增加文件块信息
         server.setUpdateFile(updateFile);
         job.setServer(server);
@@ -74,5 +121,4 @@ public class UpdateFileTask extends ConsoleTask {
         // /< 返回消息
         return msg.build();
     }
-
 }

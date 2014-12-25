@@ -58,13 +58,13 @@ public class AddFileTest {
                 console.setUserName("li_xd");
                 AddFile_.Builder addFile = AddFile_.newBuilder();
                 addFile.setMd5("6485A362D20F80A6021053C72DCF4F9F");
-                addFile.setLength(868344232);
-                addFile.setPath("C:\\Users\\li__\\Desktop\\android-studio-bundle-135.1641136.exe");
+                addFile.setLength(230678);
+                addFile.setPath("C:\\Users\\li__\\Desktop\\java自带线程池和队列详细讲解.doc");
                 console.setAddFile(addFile);
                 request.setConsole(console);
                 msg.setRequest(request);
                 msg.setJobId(-1L);
-                ClientResource.getSingleton().submitRequest(new RequestPackage(msg.build(), new ServerAddFile("C:\\Users\\li__\\Desktop\\android-studio-bundle-135.1641136.exe")));
+                ClientResource.getSingleton().submitRequest(new RequestPackage(msg.build(), new ServerAddFile("C:\\Users\\li__\\Desktop\\java自带线程池和队列详细讲解.doc")));
             }
         }).start();
         

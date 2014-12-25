@@ -15,4 +15,6 @@ message Information {
 	required int32 adler32 = 2;
 	///< 块编号
 	required int32 info_id = 3;
+	///< 块数据大小
+	required int32 length = 4;
 }

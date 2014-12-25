@@ -15,37 +15,55 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.server.service;
-import com.lxd.server.entity.File;
-
+package com.lxd.sync;
 
 /**
- * 文件业务
+ * 块信息
  * @author: a5834099147
  * @mailto: a5834099147@126.com
  * @date: 2014年12月25日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public interface FileServer {
-    ///< 查询文件是否存在
-    boolean havaFile(String md5, Long length);
+public class Chunk {
+    ///< 块编号
+	private int index;
+	///< 弱校验
+	private int adler32;
+	///< 强校验
+	private String md5;
+	///< 块大小
+	private int length;//长度
     
-    ///< 用户通过路径查询文件
-    File searchFile(String user_name, String path);
+    public int getIndex() {
+        return index;
+    }
     
-    ///< 用户添加文件信息
-    void addFile(File file);
+    public void setIndex(int index) {
+        this.index = index;
+    }
     
-    ///< 用户修改文件信息
-    void updateFile(File file, String md5, Long length);
+    public int getAdler32() {
+        return adler32;
+    }
     
-    ///< 用户删除文件信息
-    void deleteFile(File file);
+    public void setAdler32(int adler32) {
+        this.adler32 = adler32;
+    }
     
-    ///< 添加文件
-    void addFile(String file_name, Long length);
+    public String getMd5() {
+        return md5;
+    }
     
-    ///< 写入文件信息
-    void editFile(String file_name, Long seek, byte[] datas);
+    public void setMd5(String md5) {
+        this.md5 = md5;
+    }
+    
+    public int getLength() {
+        return length;
+    }
+    
+    public void setLength(int length) {
+        this.length = length;
+    }
 }

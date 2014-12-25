@@ -73,20 +73,24 @@ public class FileServerImpl implements FileServer {
     }
 
     @Override
-    public void updateFile(File file) {
+    public void updateFile(File file, String md5, Long length) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.getTransaction().begin();
-        ///< 查找未更新前文件信息
-        File tmp = fileDao.queryByUserAndPath(file.getUser_name(), file.getPath());
+        ///< 查找未更新前文件信息        
+        String old_md5 = file.getMd5();
+        Long old_length = file.getLength();
         ///< 更新文件
+        
+        file.setMd5(md5);
+        file.setLength(length);
         fileDao.updateFile(file);
         ///< 查找是否存在被更新文件相同的文件
-        boolean result = fileDao.queryByMd5AndLength(tmp.getMd5(), tmp.getLength());        
+        boolean result = fileDao.queryByMd5AndLength(old_md5, old_length);        
         session.getTransaction().commit();         
         
         if (!result) {
             ///< 如果不存在则删除原来的文件
-            hddDao.deleteFile(Grnerate.getPath(tmp.getMd5(), tmp.getLength()));
+            hddDao.deleteFile(Grnerate.getPath(old_md5, old_length));
         }
     }
 
@@ -114,6 +118,5 @@ public class FileServerImpl implements FileServer {
     @Override
     public void editFile(String file_name, Long seek, byte[] datas) {
         hddDao.editFile(file_name, seek, datas);        
-    }
-
+    }   
 }

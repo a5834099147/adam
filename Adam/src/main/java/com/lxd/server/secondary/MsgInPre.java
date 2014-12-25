@@ -134,6 +134,8 @@ public class MsgInPre extends Thread  {
             ///< 如果是来自控制台的更新文件的请求消息
             com.lxd.server.task.request.console.UpdateFileTask task = new com.lxd.server.task.request.console.UpdateFileTask();
             task.setPath(msg.getUpdateFile().getPath());
+            task.setMd5(msg.getUpdateFile().getMd5());
+            task.setLength(msg.getUpdateFile().getLength());            
             result = task;
             
         } else {

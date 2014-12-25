@@ -27,6 +27,10 @@ package com.lxd.utils;
  * @review 
  */
 public class Define {
+    ///< 网络数据块大小
     public static final Long BLOCK_SIZE = 1024 * 1024 * 4L;
+    ///< 远端生成文件目录
     public static final String REMOTE = "D:\\remote\\";
+    ///< 校验数据块大小
+    public static final Integer CHUNK_SIZE = 512;
 }

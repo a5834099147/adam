@@ -871,6 +871,24 @@ public final class UpdateFile {
      * </pre>
      */
     int getInfoId();
+
+    // required int32 length = 4;
+    /**
+     * <code>required int32 length = 4;</code>
+     *
+     * <pre>
+     *&#47;&lt; 块数据大小
+     * </pre>
+     */
+    boolean hasLength();
+    /**
+     * <code>required int32 length = 4;</code>
+     *
+     * <pre>
+     *&#47;&lt; 块数据大小
+     * </pre>
+     */
+    int getLength();
   }
   /**
    * Protobuf type {@code msg.job.server.Information}
@@ -936,6 +954,11 @@ public final class UpdateFile {
             case 24: {
               bitField0_ |= 0x00000004;
               infoId_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              length_ = input.readInt32();
               break;
             }
           }
@@ -1081,10 +1104,35 @@ public final class UpdateFile {
       return infoId_;
     }
 
+    // required int32 length = 4;
+    public static final int LENGTH_FIELD_NUMBER = 4;
+    private int length_;
+    /**
+     * <code>required int32 length = 4;</code>
+     *
+     * <pre>
+     *&#47;&lt; 块数据大小
+     * </pre>
+     */
+    public boolean hasLength() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>required int32 length = 4;</code>
+     *
+     * <pre>
+     *&#47;&lt; 块数据大小
+     * </pre>
+     */
+    public int getLength() {
+      return length_;
+    }
+
     private void initFields() {
       md5_ = "";
       adler32_ = 0;
       infoId_ = 0;
+      length_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1103,6 +1151,10 @@ public final class UpdateFile {
         memoizedIsInitialized = 0;
         return false;
       }
+      if (!hasLength()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -1118,6 +1170,9 @@ public final class UpdateFile {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt32(3, infoId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, length_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1139,6 +1194,10 @@ public final class UpdateFile {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(3, infoId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, length_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1262,6 +1321,8 @@ public final class UpdateFile {
         bitField0_ = (bitField0_ & ~0x00000002);
         infoId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
+        length_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -1302,6 +1363,10 @@ public final class UpdateFile {
           to_bitField0_ |= 0x00000004;
         }
         result.infoId_ = infoId_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.length_ = length_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1329,6 +1394,9 @@ public final class UpdateFile {
         if (other.hasInfoId()) {
           setInfoId(other.getInfoId());
         }
+        if (other.hasLength()) {
+          setLength(other.getLength());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -1343,6 +1411,10 @@ public final class UpdateFile {
           return false;
         }
         if (!hasInfoId()) {
+          
+          return false;
+        }
+        if (!hasLength()) {
           
           return false;
         }
@@ -1564,6 +1636,55 @@ public final class UpdateFile {
         return this;
       }
 
+      // required int32 length = 4;
+      private int length_ ;
+      /**
+       * <code>required int32 length = 4;</code>
+       *
+       * <pre>
+       *&#47;&lt; 块数据大小
+       * </pre>
+       */
+      public boolean hasLength() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required int32 length = 4;</code>
+       *
+       * <pre>
+       *&#47;&lt; 块数据大小
+       * </pre>
+       */
+      public int getLength() {
+        return length_;
+      }
+      /**
+       * <code>required int32 length = 4;</code>
+       *
+       * <pre>
+       *&#47;&lt; 块数据大小
+       * </pre>
+       */
+      public Builder setLength(int value) {
+        bitField0_ |= 0x00000008;
+        length_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 length = 4;</code>
+       *
+       * <pre>
+       *&#47;&lt; 块数据大小
+       * </pre>
+       */
+      public Builder clearLength() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        length_ = 0;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:msg.job.server.Information)
     }
 
@@ -1596,10 +1717,10 @@ public final class UpdateFile {
     java.lang.String[] descriptorData = {
       "\n\024J_S_UpdateFile.proto\022\016msg.job.server\"@" +
       "\n\013UpdateFile_\0221\n\014Informations\030\001 \003(\0132\033.ms" +
-      "g.job.server.Information\"<\n\013Information\022" +
+      "g.job.server.Information\"L\n\013Information\022" +
       "\013\n\003md5\030\001 \002(\t\022\017\n\007adler32\030\002 \002(\005\022\017\n\007info_id" +
-      "\030\003 \002(\005B-\n\037com.lxd.protobuf.msg.job.serve" +
-      "rB\nUpdateFile"
+      "\030\003 \002(\005\022\016\n\006length\030\004 \002(\005B-\n\037com.lxd.protob" +
+      "uf.msg.job.serverB\nUpdateFile"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -1617,7 +1738,7 @@ public final class UpdateFile {
           internal_static_msg_job_server_Information_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_msg_job_server_Information_descriptor,
-              new java.lang.String[] { "Md5", "Adler32", "InfoId", });
+              new java.lang.String[] { "Md5", "Adler32", "InfoId", "Length", });
           return null;
         }
       };

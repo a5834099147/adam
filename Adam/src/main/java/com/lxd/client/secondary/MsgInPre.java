@@ -23,6 +23,7 @@ import org.apache.logging.log4j.Logger;
 import com.lxd.client.task.ClientTask;
 import com.lxd.client.task.IdTask;
 import com.lxd.client.task.job.server.AddFileTask;
+import com.lxd.client.task.job.server.UpdateFileTask;
 import com.lxd.protobuf.msg.Msg.Msg_;
 import com.lxd.protobuf.msg.job.Job.Job_;
 import com.lxd.protobuf.msg.job.server.Server.Server_;
@@ -111,7 +112,9 @@ public class MsgInPre extends Thread  {
             result = new AddFileTask();
         } else if (msg.hasUpdateFile()) {
             ///< 如果是修改文件
-            
+            UpdateFileTask task = new UpdateFileTask();
+            task.setInfos(msg.getUpdateFile().getInformationsList());
+            result = task;
         } else {
             ///< 如果无法解析消息
             log.error("无法解析该来自控制台的任务消息 ");

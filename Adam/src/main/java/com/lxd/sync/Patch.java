@@ -15,37 +15,39 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.server.service;
-import com.lxd.server.entity.File;
+package com.lxd.sync;
 
+import java.util.LinkedList;
+import java.util.List;
 
 /**
- * 文件业务
+ * 补丁文件
  * @author: a5834099147
  * @mailto: a5834099147@126.com
  * @date: 2014年12月25日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public interface FileServer {
-    ///< 查询文件是否存在
-    boolean havaFile(String md5, Long length);
-    
-    ///< 用户通过路径查询文件
-    File searchFile(String user_name, String path);
-    
-    ///< 用户添加文件信息
-    void addFile(File file);
-    
-    ///< 用户修改文件信息
-    void updateFile(File file, String md5, Long length);
-    
-    ///< 用户删除文件信息
-    void deleteFile(File file);
-    
-    ///< 添加文件
-    void addFile(String file_name, Long length);
-    
-    ///< 写入文件信息
-    void editFile(String file_name, Long seek, byte[] datas);
+public class Patch {
+	private List<PatchPart> parts = new LinkedList<PatchPart>();
+	
+	public void add(List<Byte> datas){
+		parts.add(new PatchPartData(datas));
+	}	
+	
+	public void add(byte[] datas) {
+	    parts.add(new PatchPartData(datas));
+	}
+	
+	public void add(Chunk chunk){
+		parts.add(new PatchPartChunk(chunk.getIndex()));
+	}
+	
+	public void add(long index) {
+	    parts.add(new PatchPartChunk(index));
+	}
+
+	public List<PatchPart> getParts() {
+		return parts;
+	}
 }

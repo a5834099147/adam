@@ -25,18 +25,18 @@ import com.lxd.client.resource.RequestPackage;
 import com.lxd.protobuf.msg.Msg.Msg_;
 import com.lxd.protobuf.msg.request.Request.Request_;
 import com.lxd.protobuf.msg.request.console.Console.Console_;
-import com.lxd.protobuf.msg.request.console.DeleteFile.DeleteFile_;
+import com.lxd.protobuf.msg.request.console.UpdateFile.UpdateFile_;
+
 
 /**
- * 测试删除文件
- * 
+ * 描述功能
  * @author: a5834099147
  * @mailto: a5834099147@126.com
  * @date: 2014年12月25日
  * @blog : http://a5834099147.github.io/
- * @review
+ * @review 
  */
-public class DeleteFileTest {
+public class UpdateFileTest {
 
     @Test
     public void test() {
@@ -53,13 +53,15 @@ public class DeleteFileTest {
                 Request_.Builder request = Request_.newBuilder();
                 Console_.Builder console = Console_.newBuilder();
                 console.setUserName("li_xd");
-                DeleteFile_.Builder deleteFile = DeleteFile_.newBuilder();
-                deleteFile.setPath("C:\\Users\\li__\\Desktop\\java自带线程池和队列详细讲解.doc");
-                console.setDeleteFile(deleteFile);
+                UpdateFile_.Builder updateFile = UpdateFile_.newBuilder();
+                updateFile.setLength(868344232);
+                updateFile.setMd5("6485A362D20F80A6021053C72DCF4F9T");
+                updateFile.setPath("C:\\Users\\li__\\Desktop\\java自带线程池和队列详细讲解.doc");
+                console.setUpdateFile(updateFile);
                 request.setConsole(console);
                 msg.setRequest(request);
                 msg.setJobId(-1L);
-                ClientResource.getSingleton().submitRequest(new RequestPackage(msg.build(), new String("")));
+                ClientResource.getSingleton().submitRequest(new RequestPackage(msg.build(), new String("C:\\Users\\li__\\Desktop\\java自带线程池和队列详细讲解.doc")));
             }
         }).start();
 
