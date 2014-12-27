@@ -19,8 +19,12 @@ package com.lxd.server.task.job.console;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.lxd.protobuf.msg.job.console.UpdateFile.Patch;
 import com.lxd.protobuf.msg.result.Result.Result_;
+import com.lxd.protobuf.msg.result.Result.Result_.Repleish;
 import com.lxd.resource.Resource;
 import com.lxd.server.entity.File;
 import com.lxd.server.resource.property.ConsoleUpdataFile;
@@ -28,6 +32,7 @@ import com.lxd.server.service.FileServer;
 import com.lxd.server.service.impl.FileServerImpl;
 import com.lxd.server.task.job.JobTask;
 import com.lxd.sync.RsyncUtil;
+import com.lxd.utils.Define;
 import com.lxd.utils.Grnerate;
 
 
@@ -41,15 +46,15 @@ import com.lxd.utils.Grnerate;
  */
 public class UpdateFileTask extends JobTask {
     ///< 总块数
-    @SuppressWarnings("unused")
     private int total_lump;
     ///< 当前块数
-    @SuppressWarnings("unused")
     private int current_lump;
     ///< 块信息
     private List<Patch> patch;    
     ///< 文件服务实体
     private FileServer server = new FileServerImpl();
+    
+    private static final Logger log = LogManager.getLogger(UpdateFileTask.class);
     
     public void setTotal_lump(int total_lump) {
         this.total_lump = total_lump;
@@ -64,7 +69,9 @@ public class UpdateFileTask extends JobTask {
     }
 
     @Override
-    public Result_ jobExecute() {
+    public Result_ jobExecute() {        
+        Result_.Builder result = Result_.newBuilder();
+        
         com.lxd.sync.Patch infos = new com.lxd.sync.Patch();
         ///< 解析传递过来的补丁信息
         for (Patch info : patch) {
@@ -75,20 +82,42 @@ public class UpdateFileTask extends JobTask {
             }
         }
         
-        ///< 得到附加属性
-        ConsoleUpdataFile pro = (ConsoleUpdataFile) Resource.getSingleton().getJobStatus().getProperty(getJobId());
-        ///< 得到旧文件的详细
-        File oldFile = server.searchFile(pro.getUser_name(), pro.getPatch());
-        
-        try {
-            RsyncUtil.applyPatch(infos, Grnerate.getPath(oldFile.getMd5(), oldFile.getLength()), Grnerate.getPath(pro.getMd5(), pro.getLength()));
-            server.updateFile(oldFile, pro.getMd5(), pro.getLength());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        
-        Result_.Builder result = Result_.newBuilder();
-        result.setSuccess(true);
+        if (Resource.getSingleton().getJobStatus().checkToDo(getJobId(), total_lump, current_lump)) {
+            ///< 设置文件正在进行
+            Resource.getSingleton().getJobStatus().setDoing(getJobId(), current_lump);
+            
+            ///< 得到附加属性
+            ConsoleUpdataFile pro = (ConsoleUpdataFile) Resource.getSingleton().getJobStatus().getProperty(getJobId());
+            ///< 得到旧文件的详细
+            File oldFile = server.searchFile(pro.getUser_name(), pro.getPatch());
+            
+            try {
+                byte[] datas = RsyncUtil.applyPatch(infos, Grnerate.getPath(oldFile.getMd5(), oldFile.getLength()));
+                server.editFile(Grnerate.getPath(pro.getMd5(), pro.getLength()), current_lump * Define.BLOCK_SIZE, datas);
+                
+                Resource.getSingleton().getJobStatus().setDone(getJobId(), current_lump);
+                if (Resource.getSingleton().getJobStatus().checkFinished(getJobId())) {
+                    ///< 完成
+                    result.setSuccess(true);
+                    log.info("任务编号" + getJobId() + " 修改文件任务完成");                
+                    server.updateFile(oldFile, pro.getMd5(), pro.getLength());
+                } else {
+                    result.setSuccess(true);
+                    Repleish.Builder repleish = Repleish.newBuilder();
+                    repleish.setBlock(current_lump);
+                    result.setRepleish(repleish);
+                    log.info("任务编号" + getJobId() + " 模块" + current_lump + "修改文件任务完成");
+                }
+            } catch (Exception e) {
+                result.setSuccess(false);
+                Repleish.Builder repleish = Repleish.newBuilder();
+                repleish.setBlock(current_lump);
+                result.setRepleish(repleish);
+                result.setErrorMessage(e.getMessage());
+                e.printStackTrace();
+                
+            }
+        }       
         return result.build();
     }
 

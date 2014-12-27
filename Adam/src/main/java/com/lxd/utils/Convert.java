@@ -38,4 +38,14 @@ public class Convert {
         }
         return datas;
     }  
+    
+    ///< List转换为数组
+    public static byte[] byteListToArray(List<Byte> list) {
+        byte[] datas = new byte[list.size()];
+        int i = 0;
+        for (Byte elem : list) {
+            datas[i++] = elem;
+        }
+        return datas;
+    }
 }

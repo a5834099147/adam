@@ -85,11 +85,13 @@ public class UpdateFileTask extends ConsoleTask {
             
             //TODO 保存结果到数据库
             return msg.build();
-        }        
-
-        // /< 将文件信息录入到任务组中
-        //TODO 得到原来文件的MD5和Length
+        }      
+       
         Resource.getSingleton().getJobStatus().addJob(getJobId(), new ConsoleUpdataFile(md5, length, path, getUser_name()));
+        
+        ///< 创建更新文件
+        String file_path = Grnerate.getPath(md5, length);
+        fileServer.addFile(file_path, length);
 
         // /< 创建返回消息
         Msg_.Builder msg = Msg_.newBuilder();

@@ -29,6 +29,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.lxd.algorithm.Adler32;
 import com.lxd.algorithm.MD5;
+import com.lxd.utils.Convert;
 import com.lxd.utils.Define;
 
 /**
@@ -72,18 +73,7 @@ public class RsyncUtil {
                 // /< 计算校验信息
                 Chunk chunk = getCheckInfo(buffer, read);
                 chunk.setIndex(index++);
-                result.add(chunk);
-//                // 判断chunks中是否存在该弱校验和链表
-//                if (chunkMaps.containsKey(chunk.getAdler32())) {
-//                    // 如果存在，则加入链表中
-//                    chunkMaps.get(chunk.getAdler32()).add(chunk);
-//                } else {
-//                    // 如果不存在，则创建链表加入其中
-//                    List<Chunk> chunks = new ArrayList<Chunk>();
-//                    chunks.add(chunk);
-//                    chunkMaps.put(new Long(chunk.getAdler32()), chunks);
-//                }
-                
+                result.add(chunk);                
                 length -= read;
             }
             raf.close();
@@ -121,8 +111,8 @@ public class RsyncUtil {
      * @param datas
      * @return
      */
-    public static Chunk match(Map<Long, List<Chunk>> chunkMaps, byte[] datas) {
-        Long adler32 = new Long(Adler32.adler32(datas));
+    public static Chunk match(Map<Integer, List<Chunk>> chunkMaps, byte[] datas) {
+        Integer adler32 = new Integer(Adler32.adler32(datas));
         // 先比较弱校验和 再比较强校验和，如果相等则返回这块数据
         if (chunkMaps.containsKey(adler32)) {
             for (Chunk chunk : chunkMaps.get(adler32)) {
@@ -148,6 +138,23 @@ public class RsyncUtil {
         raf.read(buffer);
         return buffer;
     }
+    
+    /**
+     * 读取下一个block
+     * 
+     * @param array 需要读取的数组数组
+     * @param length 数组剩余长度
+     * @param current   当前读过的数组长度
+     * @return
+     */
+    public static byte[] readNextBlock(byte[] array, long length, long current) {
+        int bufferSize = (length < Define.CHUNK_SIZE) ? (int) length : Define.CHUNK_SIZE;
+        byte[] buffer = new byte[bufferSize];
+        for (int i = 0; i < bufferSize; ++i) {
+            buffer[i] = array[(int) (i + current)];
+        }
+        return buffer;
+    }
 
     /**
      * 读取下一个byte
@@ -166,6 +173,26 @@ public class RsyncUtil {
         block[block.length - 1] = next[0];
         return block;
     }
+    
+    /**
+     * 读取下一个byte
+     * 
+     * @param array 需要读取的数组数组
+     * @param length 数组剩余长度
+     * @param current   当前读过的数组长度
+     * @return
+     */
+    public static byte[] readNextByte(byte[] array, long length, long current) {
+        ///< 得到上一个块标志
+        current -= Define.CHUNK_SIZE ;
+        ///< 向后移动一位
+        current += 1;
+        byte[] buffer = new byte[Define.CHUNK_SIZE];
+        for (int i = 0; i < buffer.length; ++i) {
+            buffer[i] = array[(int) (i + current)];
+        }
+        return buffer;
+    }
 
     /**
      * 创建补丁
@@ -174,7 +201,7 @@ public class RsyncUtil {
      * @return
      * @throws Exception
      */
-    public static Patch createPatch(File localFile, Map<Long, List<Chunk>> chunkMaps) throws Exception {
+    public static Patch createPatch(File localFile, Map<Integer, List<Chunk>> chunkMaps) throws Exception {
         log.debug("正在创建Patch");
         // 分块计算文件的弱校验与强校验，并且设置块号
         Patch patch = new Patch();
@@ -227,6 +254,63 @@ public class RsyncUtil {
 
     }
 
+    /**
+     * 创建补丁
+     * 
+     * @param array 需要处理的数据
+     * @return
+     * @throws Exception
+     */
+    public static Patch createPatch(byte[] array, Map<Integer, List<Chunk>> chunkMaps) {
+        log.debug("正在创建Patch");
+        // 分块计算文件的弱校验与强校验，并且设置块号
+        Patch patch = new Patch();
+        long length = array.length;
+        long current = 0;
+        byte[] bytes = {};
+        ///< 块信息
+        Chunk chunk = null;
+        ///< 数组信息
+        List<Byte> diffBytes = new ArrayList<Byte>();
+        
+        boolean nextBlock = true;
+
+        while (length > 0) {
+            if (nextBlock) {
+                bytes = readNextBlock(array, length, current);
+                length -= bytes.length;
+                current += bytes.length;
+            } else {
+                bytes = readNextByte(array, length, current);
+                length--;
+                current++;
+            }            
+            // 判断是否匹配
+            chunk = match(chunkMaps, bytes);
+            if (chunk != null) {
+                // 匹配的chunk之前存在differ data ,先将它加进patch
+                if (diffBytes.size() > 0) {
+                    patch.add(diffBytes);
+                    diffBytes = new ArrayList<Byte>(); // 重新创建一个空的differ bytes
+                }
+                patch.add(chunk);
+                nextBlock = true;
+            } else {
+                // 将最左的byte保存, 不能读block 只能读下一个byte
+                diffBytes.add(bytes[0]);
+                nextBlock = false;
+            }
+        }
+        // 最后一个block没有匹配上 需要把bytes 中的剩余数据加入到diffBytes中，0 已经加入了。
+        if (chunk == null) {
+            for (int i = 1; i < bytes.length; i++) {
+                diffBytes.add(bytes[i]);
+            }
+        }
+        patch.add(diffBytes);
+        return patch;
+    }
+    
     public static void applyPatch(Patch patch, String old_file, String new_fIle) throws Exception {
         log.debug("正在应用Patch");
         RandomAccessFile oldFIle = new RandomAccessFile(old_file, "r");
@@ -252,29 +336,33 @@ public class RsyncUtil {
         newFile.close();        
     }
 
-//    public static Patch createNewFilePatch(File file) {
-//        byte[] buffer = new byte[(int) file.length()];
-//        Patch patch = new Patch();
-//        RandomAccessFile raf = null;
-//        try {
-//            raf = new RandomAccessFile(file, "r");
-//            raf.read(buffer);
-//            List<Byte> list = new ArrayList<Byte>();
-//            for (int i = 0; i < buffer.length; ++i) {
-//                list.add(buffer[i]);
-//            }
-//            patch.add(list);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
-//            if (null != raf) {
-//                try {
-//                    raf.close();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-//        return patch;
-//    }
+    public static byte[] applyPatch(Patch patch, String old_file) throws Exception {
+        log.debug("正在应用Patch块");
+        List<Byte> bytes = new LinkedList<>();
+        RandomAccessFile oldFIle = new RandomAccessFile(old_file, "r");
+        long srcFileLength = oldFIle.length();
+        // 遍历补丁
+        for (PatchPart part : patch.getParts()) {
+            if (part instanceof PatchPartData) {
+                ///< 需要写入数据
+                byte[] tmp = ((PatchPartData) part).getDatas();
+                for (int i = 0; i < tmp.length; ++i) {
+                    bytes.add(tmp[i]);
+                }
+            } else {
+                PatchPartChunk chunkPart = (PatchPartChunk) part;
+                long off = chunkPart.getIndex() * Define.CHUNK_SIZE;
+                long read_length = srcFileLength - off;
+                int length = read_length < Define.CHUNK_SIZE ? (int) read_length : Define.CHUNK_SIZE;
+                byte[] tmp = new byte[length];
+                oldFIle.seek(off);
+                oldFIle.read(tmp);
+                for (int i = 0; i < tmp.length; ++i) {
+                    bytes.add(tmp[i]);
+                }
+            }
+        }
+        oldFIle.close();
+        return Convert.byteListToArray(bytes);
+    }
 }

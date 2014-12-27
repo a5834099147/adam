@@ -54,14 +54,14 @@ public class UpdateFileTest {
                 Console_.Builder console = Console_.newBuilder();
                 console.setUserName("li_xd");
                 UpdateFile_.Builder updateFile = UpdateFile_.newBuilder();
-                updateFile.setLength(868344232);
-                updateFile.setMd5("6485A362D20F80A6021053C72DCF4F9T");
-                updateFile.setPath("C:\\Users\\li__\\Desktop\\java自带线程池和队列详细讲解.doc");
+                updateFile.setLength(147172134);
+                updateFile.setMd5("6485A364D20F80A6021053C72DCF4F9T");
+                updateFile.setPath("C:\\Users\\li__\\Desktop\\纯音乐.-.[贝多芬第五交响曲之《命运》(最佳版本)].专辑.(ape).rar");
                 console.setUpdateFile(updateFile);
                 request.setConsole(console);
                 msg.setRequest(request);
                 msg.setJobId(-1L);
-                ClientResource.getSingleton().submitRequest(new RequestPackage(msg.build(), new String("C:\\Users\\li__\\Desktop\\java自带线程池和队列详细讲解.doc")));
+                ClientResource.getSingleton().submitRequest(new RequestPackage(msg.build(), new String("C:\\Users\\li__\\Desktop\\纯音乐.-.[贝多芬第五交响曲之《命运》(最佳版本)].专辑.(ape).rar")));
             }
         }).start();
 
