@@ -44,9 +44,9 @@ public class AdamClient {
     private static final Logger log  = LogManager.getLogger();
     private static final int    PORT = 8463;
 
-    public static void main(String[] args) {
-        new AdamClient().initServer();
-    }
+//    public static void main(String[] args) {
+//        new AdamClient().initServer();
+//    }
 
     public void initServer() {
 
