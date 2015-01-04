@@ -32,34 +32,34 @@ import com.lxd.client.view.ui.RegPanel;
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public class BamUiSingleton {
+public class UiSingleton {
 	///< 单例变量
-	private static BamUiSingleton singleton = new BamUiSingleton();
+	private static UiSingleton singleton = new UiSingleton();
 	///< 布局
 	private CardLayout layout = null;
 		
 	///<UI界面	
-	//TODO private BamPanel bamPanel = null;
+	//TODO 
 	private LoginPanel loginPanel = null;
 	private RegPanel regPanel = null;
 	
 	private BamFrame bamFrame = null;	
+	///< 用户名
+	private String user = "test";
 	
-	private long id = 0;	
-	
-	public long getId() {
-		return id;
-	}
+    public String getUser() {
+        return user;
+    }
+    
+    public void setUser(String user) {
+        this.user = user;
+    }
 
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public BamFrame getBamFrame() {
+    public BamFrame getBamFrame() {
 		return bamFrame;
 	}
 
-	private BamUiSingleton() {
+	private UiSingleton() {
 	}
 	
 	public void BamInit() {
@@ -82,7 +82,7 @@ public class BamUiSingleton {
 		}		
 	}
 	
-	public static BamUiSingleton getSingleton() {
+	public static UiSingleton getSingleton() {
 		return singleton;
 	}		
 

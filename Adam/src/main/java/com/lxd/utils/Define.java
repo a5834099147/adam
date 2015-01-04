@@ -33,4 +33,6 @@ public class Define {
     public static final String REMOTE = "D:\\remote\\";
     ///< 校验数据块大小
     public static final Integer CHUNK_SIZE = 512;
+    ///< 客户端文件目录
+    public static final String CLIENT="D:\\client";
 }

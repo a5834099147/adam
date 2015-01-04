@@ -20,6 +20,7 @@ package com.lxd.client.monitor;
 import org.junit.Test;
 
 import com.lxd.client.AdamClient;
+import com.lxd.utils.Define;
 
 
 /**
@@ -34,7 +35,7 @@ public class MonitorTest {
 
     @Test
     public void test() {   
-        new MonitorDir("D:\\1");
+        new MonitorDir(Define.CLIENT);
         
         new AdamClient().initServer();
     }

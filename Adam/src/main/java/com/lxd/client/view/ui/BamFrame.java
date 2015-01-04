@@ -20,7 +20,7 @@ package com.lxd.client.view.ui;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
-import com.lxd.client.view.control.BamUiSingleton;
+import com.lxd.client.view.control.UiSingleton;
 
 /**
  * 框架
@@ -35,9 +35,9 @@ public class BamFrame extends JFrame{
 
 	public BamFrame() {
 		this.setTitle("Adam 云盘");
-		getContentPane().setLayout(BamUiSingleton.getSingleton().getLayout());
-		getContentPane().add(BamUiSingleton.getSingleton().getLoginPanel());
-		getContentPane().add(BamUiSingleton.getSingleton().getRegPanel());
+		getContentPane().setLayout(UiSingleton.getSingleton().getLayout());
+		getContentPane().add(UiSingleton.getSingleton().getLoginPanel());
+		getContentPane().add(UiSingleton.getSingleton().getRegPanel());
 		
 		///< 自适应布局大小
 		this.pack();

@@ -47,7 +47,7 @@ import javax.swing.border.LineBorder;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
-import com.lxd.client.view.control.BamUiSingleton;
+import com.lxd.client.view.control.UiSingleton;
 import com.lxd.client.view.handle.LoginHandle;
 import com.lxd.client.view.ui.util.ViewUtil;
 
@@ -348,8 +348,8 @@ public class LoginPanel extends JPanel implements LoginHandle {
 			public void actionPerformed(ActionEvent e) {
 				///< 清空数据
 				setNull();
-				BamUiSingleton.getSingleton().getLayout().show(
-						BamUiSingleton.getSingleton().getBamFrame().getContentPane(), "reg");				
+				UiSingleton.getSingleton().getLayout().show(
+						UiSingleton.getSingleton().getBamFrame().getContentPane(), "reg");				
 			}
 		});
 	}

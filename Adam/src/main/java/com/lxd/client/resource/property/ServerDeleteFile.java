@@ -15,37 +15,34 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.client.view;
-
-import java.awt.EventQueue;
-
-import org.junit.Test;
-
-import com.lxd.client.AdamClient;
-import com.lxd.client.view.control.UiSingleton;
+package com.lxd.client.resource.property;
 
 
 /**
- * 描述功能
+ * 服务器任务删除文件附加属性
  * @author: a5834099147
  * @mailto: a5834099147@126.com
  * @date: 2015年1月4日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public class ViewTest {
+public class ServerDeleteFile {
+    ///<删除文件的绝对路径
+    private String path;
 
-    @Test
-    public void test() {
-        EventQueue.invokeLater(new Runnable() {
-            
-            @Override
-            public void run() {
-                UiSingleton.getSingleton().BamInit();
-            }
-        });
-        
-        new AdamClient().initServer();
+    
+    public String getPath() {
+        return path;
     }
 
+    
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+
+    public ServerDeleteFile(String path){
+        super();
+        this.path = path;
+    }   
 }

@@ -40,7 +40,7 @@ import javax.swing.border.LineBorder;
 
 
 
-import com.lxd.client.view.control.BamUiSingleton;
+import com.lxd.client.view.control.UiSingleton;
 import com.lxd.client.view.handle.RegHandle;
 
 import java.awt.Color;
@@ -237,8 +237,8 @@ public class RegPanel extends JPanel implements RegHandle{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setNull();
-				BamUiSingleton.getSingleton().getLayout().show(
-						BamUiSingleton.getSingleton().getBamFrame().getContentPane(), "login");		
+				UiSingleton.getSingleton().getLayout().show(
+						UiSingleton.getSingleton().getBamFrame().getContentPane(), "login");		
 			}
 		});
 	}

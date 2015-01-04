@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.protobuf.ByteString;
+import com.lxd.client.resource.property.ServerUpdateFile;
 import com.lxd.client.task.ClientTask;
 import com.lxd.protobuf.msg.Msg.Msg_;
 import com.lxd.protobuf.msg.job.Job.Job_;
@@ -91,10 +92,10 @@ public class UpdateFileTask extends ClientTask {
     public void execute() {
         Map<Integer, List<Chunk>> infoMap = getInfoMap();
         // /< 得到附加信息 文件路径
-        String path = (String) Resource.getSingleton().getJobStatus().getProperty(getJobId());
+        ServerUpdateFile update = (ServerUpdateFile) Resource.getSingleton().getJobStatus().getProperty(getJobId());
 
         // /< 得到文件的大小
-        File file = new File(path);
+        File file = new File(update.getPath());
         Long length = file.length();
         byte[] dates = null;
         int totle_block = (int) (length / Define.BLOCK_SIZE);
@@ -153,43 +154,7 @@ public class UpdateFileTask extends ClientTask {
             e.printStackTrace();
         } finally {
             Utils.closeConnection(fis);
-        }
-
-        // try {
-        // Msg_.Builder msg = Msg_.newBuilder();
-        // msg.setJobId(getJobId());
-        // Job_.Builder job = Job_.newBuilder();
-        // Console_.Builder console = Console_.newBuilder();
-        // UpdateFile_.Builder update = UpdateFile_.newBuilder();
-        // update.setTotalLump(1);
-        // update.setCurrentLump(0);
-        // ///< 得到补丁信息
-        // List<PatchPart> parts = RsyncUtil.createPatch(new File(path), infoMap).getParts();
-        // for (PatchPart part : parts) {
-        // Patch.Builder patch = Patch.newBuilder();
-        // ///< 设置补丁信息到传输格式中
-        // if (part instanceof PatchPartChunk) {
-        // ///< 传输编号
-        // PatchPartChunk chunk = (PatchPartChunk) part;
-        // patch.setInfoId(chunk.getIndex());
-        // } else if (part instanceof PatchPartData) {
-        // ///< 传输数据
-        // PatchPartData data = (PatchPartData) part;
-        // patch.setDatas(ByteString.copyFrom(data.getDatas()));
-        // }
-        // update.addPatch(patch);
-        // }
-        //
-        // console.setUpdateFile(update);
-        // job.setConsole(console);
-        // msg.setJob(job);
-        // ///< 放入到输出消息队列中
-        // Resource.getSingleton().getMsgQueue().submitMsgOutQueue(new DataPackage(msg.build(), getChannel()));
-
-        // } catch (Exception e) {
-        // e.printStackTrace();
-        // }
-        // }
+        }      
     }
 
 }

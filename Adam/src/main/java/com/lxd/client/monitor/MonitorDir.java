@@ -32,7 +32,7 @@ import org.apache.commons.io.monitor.FileAlterationObserver;
  * @review 
  */
 public class MonitorDir{
-    
+    ///< 监听文件目录
     private String filePath = null;    
     
     public MonitorDir(String filePath){
@@ -42,12 +42,13 @@ public class MonitorDir{
     
     private void fileWatch() {
         //文件变更器  
-        FileAlterationMonitor  monitor = new FileAlterationMonitor(100); //5s扫描一次  
+        FileAlterationMonitor  monitor = new FileAlterationMonitor(1000); //1s扫描一次  
         //目录观察者  
         FileAlterationObserver observer = new FileAlterationObserver(new File(filePath));
         
         ///< 监听器接口
         observer.addListener(new AdamFileListener());
+        ///< 设置处理接口
         monitor.addObserver(observer);
         try {
             monitor.start();
