@@ -33,7 +33,7 @@ import com.lxd.client.view.control.BamUiSingleton;
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public class View {
+public class ViewTest {
 
     @Test
     public void test() {
