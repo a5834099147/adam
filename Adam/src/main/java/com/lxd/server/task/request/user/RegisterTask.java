@@ -18,6 +18,9 @@
 package com.lxd.server.task.request.user;
 
 import com.lxd.protobuf.msg.result.Result.Result_;
+import com.lxd.server.dao.UserDao;
+import com.lxd.server.dao.impl.UserDaoImpl;
+import com.lxd.server.entity.User;
 
 
 /**
@@ -32,7 +35,9 @@ public class RegisterTask extends UserTask {
     ///< 用户名
     private String user_name;
     ///< 用户密码
-    private String user_pwd;    
+    private String user_pwd;   
+    ///< 用户数据访问层
+    private UserDao userDao = new UserDaoImpl();
     
     public void setUser_name(String user_name) {
         this.user_name = user_name;
@@ -44,8 +49,21 @@ public class RegisterTask extends UserTask {
 
     @Override
     public Result_ userExecute() {
-        // TODO Auto-generated method stub
-        return null;
+        Result_.Builder result = Result_.newBuilder();
+        ///< 查找是否有当前相同名称的用户名
+        User user = userDao.queryByName(user_name);
+        if (user != null) {
+            result.setSuccess(false);
+            result.setErrorMessage("该用户名已经存在");
+        } else {
+            user = new User();
+            user.setUser_name(user_name);
+            user.setUser_pwd(user_pwd);
+            userDao.addUser(user);
+            result.setSuccess(true);
+        }
+        
+        return result.build();
     }
 
 }

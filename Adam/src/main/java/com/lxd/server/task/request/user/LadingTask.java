@@ -18,6 +18,9 @@
 package com.lxd.server.task.request.user;
 
 import com.lxd.protobuf.msg.result.Result.Result_;
+import com.lxd.server.dao.UserDao;
+import com.lxd.server.dao.impl.UserDaoImpl;
+import com.lxd.server.entity.User;
 
 
 /**
@@ -34,6 +37,9 @@ public class LadingTask extends UserTask {
     ///< 用户密码
     private String user_pwd;
     
+    ///< 用户数据操作层
+    private UserDao userDao = new UserDaoImpl();
+    
     
     public void setUser_name(String user_name) {
         this.user_name = user_name;
@@ -45,7 +51,20 @@ public class LadingTask extends UserTask {
 
     @Override
     public Result_ userExecute() {
-        return null;
+        Result_.Builder result = Result_.newBuilder();
+        ///< 查找用户
+        User user = userDao.queryByName(user_name);
+        if (user == null) {
+            result.setSuccess(false);
+            result.setErrorMessage("不存在您输入的用户名称");
+        } else if (!user.getUser_pwd().equals(user_pwd)) {
+            result.setSuccess(false);
+            result.setErrorMessage("您输入的用户名与密码不匹配");
+        } else {
+            result.setSuccess(true);
+        }
+        
+        return result.build();
     }
 
 }

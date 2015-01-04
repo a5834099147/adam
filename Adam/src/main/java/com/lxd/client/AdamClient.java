@@ -51,7 +51,6 @@ public class AdamClient {
     public void initServer() {
 
         // /<开始线程池
-
         new TaskThreadPool().start();
         log.info("开启线程池成功");
         // /< 开始消息处理线程
