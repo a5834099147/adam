@@ -447,8 +447,11 @@ public class RegPanel extends JPanel implements RegHandle{
 	}	
 
 	@Override
-	public void regSuccess(long id) {
-	    //TODO 注册成功逻辑
+	public void regSuccess() {
+	    JOptionPane.showMessageDialog(null,"注册成功" , "信息", JOptionPane.INFORMATION_MESSAGE);  
+	    ///< 跳转到登陆界面
+	    UiSingleton.getSingleton().getLayout().show(
+	                                                UiSingleton.getSingleton().getBamFrame().getContentPane(), "login");    
 	}
 
 	@Override

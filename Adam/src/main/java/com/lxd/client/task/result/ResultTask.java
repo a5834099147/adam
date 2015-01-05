@@ -20,7 +20,11 @@ package com.lxd.client.task.result;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.lxd.client.resource.property.ServerLanding;
+import com.lxd.client.resource.property.ServerRegiest;
 import com.lxd.client.task.ClientTask;
+import com.lxd.handle.HandleResource;
+import com.lxd.resource.Resource;
 
 
 /**
@@ -32,10 +36,23 @@ import com.lxd.client.task.ClientTask;
  * @review 
  */
 public class ResultTask extends ClientTask {
-    private static final Logger log = LogManager.getLogger(ResultTask.class);    
+    private static final Logger log = LogManager.getLogger(ResultTask.class); 
+    ///< 结果
     private Boolean success;
+    ///< 错误消息
     private String error_msg;
+    ///< 结果中的块号
+    private int block;    
     
+    public int getBlock() {
+        return block;
+    }
+
+    
+    public void setBlock(int block) {
+        this.block = block;
+    }
+
     public Boolean getSuccess() {
         return success;
     }
@@ -54,10 +71,43 @@ public class ResultTask extends ClientTask {
 
     @Override
     public void execute() {
-        if (success) {
-            log.info("编号为:" + getJobId() + "的请求或任务成功");
-        } else {
-            log.error("编号为:" + getJobId() + "的请求或任务失败");
-        }
+       Object object = Resource.getSingleton().getJobStatus().getProperty(getJobId());
+       ///< 如果是注册消息
+       if (object instanceof ServerRegiest) {
+           ///< 如果注册成功
+           if (success) {
+               HandleResource.getSingleton().getReg().regSuccess();
+           } else {
+               ///< 如果注册失败
+               HandleResource.getSingleton().getReg().regFail(error_msg);
+           }           
+       } else if (object instanceof ServerLanding) {
+           ///< 登陆的处理逻辑
+           if (success) {
+               ///< 从任务附加信息中获取用户名
+               ServerLanding msg = (ServerLanding) Resource.getSingleton().getJobStatus().getProperty(getJobId());
+               ///< 将用户名传递给登陆成功处理方法
+               HandleResource.getSingleton().getLogin().loginSuccess(msg.getUser_name());
+           } else {
+               HandleResource.getSingleton().getLogin().loginFail(error_msg);
+           }
+       } 
+       
+       if (success) {
+           if (block != -1) {
+               log.info("任务编号:" + getJobId() + " 块号:" + block + "正确完成");
+           } else {
+               Resource.getSingleton().getJobStatus().setDone(getJobId());
+               log.info("任务编号: " + getJobId() + "正确完成");
+           }           
+       } else {
+           if (block != -1) {
+               //TODO 重试块
+               log.error("任务编号:" + getJobId() + " 块号:" + block + "错误, 错误信息:" + error_msg);
+           } else {
+               //TODO 重试任务
+               log.info("任务编号: " + getJobId() + "错误, 错误信息:" + error_msg);
+           }      
+       }
     }    
 }

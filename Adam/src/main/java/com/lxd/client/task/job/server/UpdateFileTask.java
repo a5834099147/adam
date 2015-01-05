@@ -110,7 +110,9 @@ public class UpdateFileTask extends ClientTask {
                 } else {
                     dates = new byte[(int) (Define.BLOCK_SIZE * 1)];
                 }
-
+                ///< 检查进度
+                Resource.getSingleton().getJobStatus().checkToDo(getJobId(), totle_block + 1, i);
+                
                 fis.read(dates);
 
                 Msg_.Builder msg = Msg_.newBuilder();

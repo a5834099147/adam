@@ -26,6 +26,6 @@ package com.lxd.client.view.handle;
  * @review 
  */
 public interface RegHandle {
-	void regSuccess(long id);
+	void regSuccess();
 	void regFail(String msg);
 }

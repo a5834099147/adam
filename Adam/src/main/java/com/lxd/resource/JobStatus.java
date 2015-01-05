@@ -68,6 +68,11 @@ public class JobStatus {
         status.get(jobId).setDoneState(current);
     }
     
+    ///< 设置完成, 删除任务信息
+    public void setDone(Long jobId) {
+        status.remove(jobId);
+    }
+    
     ///< 设置当前块失败
     public void setError(Long jobId, int current) {
         status.get(jobId).setErrorState(current);
@@ -148,7 +153,8 @@ public class JobStatus {
             states[num] = 1;
             ///< 当前数量完成数量 + 1
             current += 1;
-        }
+        }      
+        
         
         ///< 设置当前块号的任务失败
         public void setErrorState(int num) {

@@ -47,9 +47,10 @@ import javax.swing.border.LineBorder;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
+import com.lxd.client.monitor.MonitorDir;
 import com.lxd.client.resource.ClientResource;
 import com.lxd.client.resource.RequestPackage;
-import com.lxd.client.resource.property.ServerRegiest;
+import com.lxd.client.resource.property.ServerLanding;
 import com.lxd.client.view.control.UiSingleton;
 import com.lxd.client.view.handle.LoginHandle;
 import com.lxd.client.view.ui.util.ViewUtil;
@@ -57,6 +58,7 @@ import com.lxd.protobuf.msg.Msg.Msg_;
 import com.lxd.protobuf.msg.request.Request.Request_;
 import com.lxd.protobuf.msg.request.user.Landing.Landing_;
 import com.lxd.protobuf.msg.request.user.User.User_;
+import com.lxd.utils.Define;
 
 /**
  * 登陆界面
@@ -353,7 +355,7 @@ public class LoginPanel extends JPanel implements LoginHandle {
                 request.setUser(user);
                 msg.setRequest(request);
                 msg.setJobId(-1L);
-                ClientResource.getSingleton().submitRequest(new RequestPackage(msg.build(), new ServerRegiest(user_name)));         
+                ClientResource.getSingleton().submitRequest(new RequestPackage(msg.build(), new ServerLanding(user_name)));         
 				setNull();
 			}
 		});
@@ -441,8 +443,12 @@ public class LoginPanel extends JPanel implements LoginHandle {
 	}
 
 	@Override
-	public void loginSuccess() {
-	    //TODO 登陆成功逻辑
+	public void loginSuccess(String user) {
+	    ///< 将用户名注册给界面
+	    UiSingleton.getSingleton().setUser(user);
+	    ///< 开启监听服务
+	    new MonitorDir(Define.CLIENT).start();
+	    //TODO 跳转页面
 	}
 
 	@Override

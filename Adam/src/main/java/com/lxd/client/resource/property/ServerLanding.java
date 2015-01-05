@@ -26,7 +26,7 @@ package com.lxd.client.resource.property;
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public class ServerLanding {
+public class ServerLanding extends Property {
     ///< 保存用户名
     private String user_name = null;
 

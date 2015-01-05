@@ -65,6 +65,8 @@ public class AddFileTask extends ClientTask {
                 } else {
                     dates = new byte[(int) (Define.BLOCK_SIZE * 1)];
                 }
+                ///< 检查进度
+                Resource.getSingleton().getJobStatus().checkToDo(getJobId(), totle_block + 1, i);
                 
                 fis.read(dates);
                 

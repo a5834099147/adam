@@ -31,14 +31,17 @@ import org.apache.commons.io.monitor.FileAlterationObserver;
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public class MonitorDir{
+public class MonitorDir extends Thread{
     ///< 监听文件目录
     private String filePath = null;    
     
     public MonitorDir(String filePath){
         this.filePath = filePath;
-        fileWatch();
     }   
+    
+    public void run() {
+        fileWatch();
+    }
     
     private void fileWatch() {
         //文件变更器  

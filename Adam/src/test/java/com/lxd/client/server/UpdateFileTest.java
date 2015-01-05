@@ -22,6 +22,7 @@ import org.junit.Test;
 import com.lxd.client.AdamClient;
 import com.lxd.client.resource.ClientResource;
 import com.lxd.client.resource.RequestPackage;
+import com.lxd.client.resource.property.ServerUpdateFile;
 import com.lxd.protobuf.msg.Msg.Msg_;
 import com.lxd.protobuf.msg.request.Request.Request_;
 import com.lxd.protobuf.msg.request.console.Console.Console_;
@@ -61,7 +62,7 @@ public class UpdateFileTest {
                 request.setConsole(console);
                 msg.setRequest(request);
                 msg.setJobId(-1L);
-                ClientResource.getSingleton().submitRequest(new RequestPackage(msg.build(), new String("C:\\Users\\li__\\Desktop\\纯音乐.-.[贝多芬第五交响曲之《命运》(最佳版本)].专辑.(ape).rar")));
+                ClientResource.getSingleton().submitRequest(new RequestPackage(msg.build(), new ServerUpdateFile("C:\\Users\\li__\\Desktop\\纯音乐.-.[贝多芬第五交响曲之《命运》(最佳版本)].专辑.(ape).rar")));
             }
         }).start();
 

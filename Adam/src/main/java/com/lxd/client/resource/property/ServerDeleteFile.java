@@ -26,7 +26,7 @@ package com.lxd.client.resource.property;
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public class ServerDeleteFile {
+public class ServerDeleteFile extends Property {
     ///<删除文件的绝对路径
     private String path;
 

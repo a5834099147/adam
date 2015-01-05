@@ -15,47 +15,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.client.resource;
-
-import com.lxd.client.resource.property.Property;
-import com.lxd.protobuf.msg.Msg.Msg_;
+package com.lxd.client.resource.property;
 
 
 /**
- * 请求包
+ * 附属信息基类
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2014年12月24日
+ * @date: 2015年1月5日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public class RequestPackage {
-    ///< 消息包裹
-    private Msg_ msg;
-    ///< 请求附带参数
-    private Property property;
-    
-    public Msg_ getMsg() {
-        return msg;
-    }
-    
-    public void setMsg(Msg_ msg) {
-        this.msg = msg;
-    }
+public abstract class Property {
 
-    
-    public Property getProperty() {
-        return property;
-    }
-
-    
-    public void setProperty(Property property) {
-        this.property = property;
-    }
-
-    public RequestPackage(Msg_ msg, Property property){
-        super();
-        this.msg = msg;
-        this.property = property;
-    }    
 }

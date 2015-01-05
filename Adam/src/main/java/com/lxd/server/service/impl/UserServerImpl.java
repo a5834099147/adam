@@ -71,7 +71,7 @@ public class UserServerImpl implements UserServer {
         if (user != null) {
             log.debug("该用户名已经存在" + user_name );
             session.getTransaction().rollback();
-            throw new RegisterException("改用户名已经存在");
+            throw new RegisterException("该用户名已经存在");
         }      
         user = new User();
         user.setUser_name(user_name);

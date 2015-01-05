@@ -26,6 +26,6 @@ package com.lxd.client.view.handle;
  * @review 
  */
 public interface LoginHandle {
-	void loginSuccess();
+	void loginSuccess(String user);
 	void loginFail(String msg);
 }

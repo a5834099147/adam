@@ -22,6 +22,7 @@ import org.junit.Test;
 import com.lxd.client.AdamClient;
 import com.lxd.client.resource.ClientResource;
 import com.lxd.client.resource.RequestPackage;
+import com.lxd.client.resource.property.ServerDeleteFile;
 import com.lxd.protobuf.msg.Msg.Msg_;
 import com.lxd.protobuf.msg.request.Request.Request_;
 import com.lxd.protobuf.msg.request.console.Console.Console_;
@@ -59,7 +60,7 @@ public class DeleteFileTest {
                 request.setConsole(console);
                 msg.setRequest(request);
                 msg.setJobId(-1L);
-                ClientResource.getSingleton().submitRequest(new RequestPackage(msg.build(), new String("")));
+                ClientResource.getSingleton().submitRequest(new RequestPackage(msg.build(), new ServerDeleteFile("C:\\Users\\li__\\Desktop\\java自带线程池和队列详细讲解.doc")));
             }
         }).start();
 

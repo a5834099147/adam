@@ -26,7 +26,7 @@ package com.lxd.client.resource.property;
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public class ServerUpdateFile {
+public class ServerUpdateFile extends Property {
     ///< 添加文件的相对路径
     private String path;
 
