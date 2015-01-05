@@ -20,7 +20,7 @@ package com.lxd.client.view.control;
 import java.awt.CardLayout;
 import java.awt.EventQueue;
 
-import com.lxd.client.view.ui.BamFrame;
+import com.lxd.client.view.ui.ClientFrame;
 import com.lxd.client.view.ui.LoginPanel;
 import com.lxd.client.view.ui.RegPanel;
 
@@ -43,7 +43,7 @@ public class UiSingleton {
 	private LoginPanel loginPanel = null;
 	private RegPanel regPanel = null;
 	
-	private BamFrame bamFrame = null;	
+	private ClientFrame clientFrame = null;	
 	///< 用户名
 	private String user = "test";
 	
@@ -55,15 +55,15 @@ public class UiSingleton {
         this.user = user;
     }
 
-    public BamFrame getBamFrame() {
-		return bamFrame;
+    public ClientFrame getBamFrame() {
+		return clientFrame;
 	}
 
 	private UiSingleton() {
 	}
 	
 	public void BamInit() {
-		if (bamFrame == null) {
+		if (clientFrame == null) {
 			EventQueue.invokeLater(new Runnable() {				
 				@Override
 				public void run() {
@@ -76,7 +76,7 @@ public class UiSingleton {
 					layout.addLayoutComponent(loginPanel, "login");
 					layout.addLayoutComponent(regPanel, "reg");	
 					
-					bamFrame = new BamFrame();						
+					clientFrame = new ClientFrame();						
 				}
 			});				
 		}		

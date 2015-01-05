@@ -47,9 +47,16 @@ import javax.swing.border.LineBorder;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
+import com.lxd.client.resource.ClientResource;
+import com.lxd.client.resource.RequestPackage;
+import com.lxd.client.resource.property.ServerRegiest;
 import com.lxd.client.view.control.UiSingleton;
 import com.lxd.client.view.handle.LoginHandle;
 import com.lxd.client.view.ui.util.ViewUtil;
+import com.lxd.protobuf.msg.Msg.Msg_;
+import com.lxd.protobuf.msg.request.Request.Request_;
+import com.lxd.protobuf.msg.request.user.Landing.Landing_;
+import com.lxd.protobuf.msg.request.user.User.User_;
 
 /**
  * 登陆界面
@@ -332,11 +339,21 @@ public class LoginPanel extends JPanel implements LoginHandle {
 		button_login.addActionListener(new ActionListener() {			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-//			    ///< 输入的用户名
-//			    String user = text_user.getText();
-//			    ///< 输入的密码			    
-//			    String pwd = new String(text_pwd.getPassword());	
-			    //TODO 点击登陆按钮后逻辑
+			    ///< 输入的用户名
+			    String user_name = text_user.getText();
+			    ///< 输入的密码			    
+			    String user_pwd = new String(text_pwd.getPassword());	
+			    Msg_.Builder msg = Msg_.newBuilder();
+                Request_.Builder request = Request_.newBuilder();
+                User_.Builder user = User_.newBuilder();
+                Landing_.Builder landing = Landing_.newBuilder();
+                landing.setUserName(user_name);
+                landing.setUserPwd(user_pwd);
+                user.setLanding(landing);
+                request.setUser(user);
+                msg.setRequest(request);
+                msg.setJobId(-1L);
+                ClientResource.getSingleton().submitRequest(new RequestPackage(msg.build(), new ServerRegiest(user_name)));         
 				setNull();
 			}
 		});

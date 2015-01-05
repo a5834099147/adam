@@ -30,10 +30,10 @@ import com.lxd.client.view.control.UiSingleton;
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public class BamFrame extends JFrame{
+public class ClientFrame extends JFrame{
 	private static final long serialVersionUID = 267941845725755204L;
 
-	public BamFrame() {
+	public ClientFrame() {
 		this.setTitle("Adam 云盘");
 		getContentPane().setLayout(UiSingleton.getSingleton().getLayout());
 		getContentPane().add(UiSingleton.getSingleton().getLoginPanel());

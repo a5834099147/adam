@@ -18,9 +18,9 @@
 package com.lxd.server.task.request.user;
 
 import com.lxd.protobuf.msg.result.Result.Result_;
-import com.lxd.server.dao.UserDao;
-import com.lxd.server.dao.impl.UserDaoImpl;
-import com.lxd.server.entity.User;
+import com.lxd.server.exception.LandingException;
+import com.lxd.server.service.UserServer;
+import com.lxd.server.service.impl.UserServerImpl;
 
 
 /**
@@ -37,8 +37,8 @@ public class LadingTask extends UserTask {
     ///< 用户密码
     private String user_pwd;
     
-    ///< 用户数据操作层
-    private UserDao userDao = new UserDaoImpl();
+    ///< 用户业务层
+    private static UserServer userServer = new UserServerImpl();
     
     
     public void setUser_name(String user_name) {
@@ -52,17 +52,15 @@ public class LadingTask extends UserTask {
     @Override
     public Result_ userExecute() {
         Result_.Builder result = Result_.newBuilder();
-        ///< 查找用户
-        User user = userDao.queryByName(user_name);
-        if (user == null) {
-            result.setSuccess(false);
-            result.setErrorMessage("不存在您输入的用户名称");
-        } else if (!user.getUser_pwd().equals(user_pwd)) {
-            result.setSuccess(false);
-            result.setErrorMessage("您输入的用户名与密码不匹配");
-        } else {
+        
+        try {
+            userServer.landing(user_name, user_pwd);
             result.setSuccess(true);
-        }
+        } catch (LandingException e) {
+            result.setSuccess(false);
+            result.setErrorMessage(e.getMessage());
+            e.printStackTrace();
+        }       
         
         return result.build();
     }

@@ -18,9 +18,9 @@
 package com.lxd.server.task.request.user;
 
 import com.lxd.protobuf.msg.result.Result.Result_;
-import com.lxd.server.dao.UserDao;
-import com.lxd.server.dao.impl.UserDaoImpl;
-import com.lxd.server.entity.User;
+import com.lxd.server.exception.RegisterException;
+import com.lxd.server.service.UserServer;
+import com.lxd.server.service.impl.UserServerImpl;
 
 
 /**
@@ -36,8 +36,8 @@ public class RegisterTask extends UserTask {
     private String user_name;
     ///< 用户密码
     private String user_pwd;   
-    ///< 用户数据访问层
-    private UserDao userDao = new UserDaoImpl();
+    ///< 用户业务层
+    private static UserServer userServer = new UserServerImpl();
     
     public void setUser_name(String user_name) {
         this.user_name = user_name;
@@ -50,17 +50,13 @@ public class RegisterTask extends UserTask {
     @Override
     public Result_ userExecute() {
         Result_.Builder result = Result_.newBuilder();
-        ///< 查找是否有当前相同名称的用户名
-        User user = userDao.queryByName(user_name);
-        if (user != null) {
-            result.setSuccess(false);
-            result.setErrorMessage("该用户名已经存在");
-        } else {
-            user = new User();
-            user.setUser_name(user_name);
-            user.setUser_pwd(user_pwd);
-            userDao.addUser(user);
+        try {
+            userServer.register(user_name, user_pwd);
             result.setSuccess(true);
+        } catch (RegisterException e) {
+            result.setSuccess(false);
+            result.setErrorMessage(e.getMessage());
+            e.printStackTrace();
         }
         
         return result.build();

@@ -17,6 +17,9 @@
 
 package com.lxd.client.task.result;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.lxd.client.task.ClientTask;
 
 
@@ -29,6 +32,7 @@ import com.lxd.client.task.ClientTask;
  * @review 
  */
 public class ResultTask extends ClientTask {
+    private static final Logger log = LogManager.getLogger(ResultTask.class);    
     private Boolean success;
     private String error_msg;
     
@@ -50,6 +54,10 @@ public class ResultTask extends ClientTask {
 
     @Override
     public void execute() {
-        
+        if (success) {
+            log.info("编号为:" + getJobId() + "的请求或任务成功");
+        } else {
+            log.error("编号为:" + getJobId() + "的请求或任务失败");
+        }
     }    
 }

@@ -40,8 +40,20 @@ import javax.swing.border.LineBorder;
 
 
 
+
+
+
+
+
+import com.lxd.client.resource.ClientResource;
+import com.lxd.client.resource.RequestPackage;
+import com.lxd.client.resource.property.ServerRegiest;
 import com.lxd.client.view.control.UiSingleton;
 import com.lxd.client.view.handle.RegHandle;
+import com.lxd.protobuf.msg.Msg.Msg_;
+import com.lxd.protobuf.msg.request.Request.Request_;
+import com.lxd.protobuf.msg.request.user.Register.Register_;
+import com.lxd.protobuf.msg.request.user.User.User_;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -67,32 +79,44 @@ import java.awt.Component;
  */
 public class RegPanel extends JPanel implements RegHandle{
 	private static final long serialVersionUID = 2599791884854672419L;	
+	///< 用户名输入框
 	private JTextField field_name;
+	///< 密码输入框
 	private JPasswordField pwd;
+	///< 重复密码输入框
 	private JPasswordField pwd_again;
 	
+	///< 注册按钮
 	private JButton reg_button;
+	///< 返回按钮
 	private JButton bak_button;
 	
-
+	///< 密码检查标签
 	private JLabel pwd_again_check;
 	
+	///< 用户名检查标志
 	private boolean name_bool = false;
+	///< 密码检查标志
 	private boolean pwd_bool = false;
 	
 
 	public RegPanel() {
-		init();		
+	    ///< 初始化
+		init();
+		///< 添加监听器
 		setListener();
 	}
 	
+	/*
+	 *  初始化
+	 */
 	private void init() {
 		JPanel panel = new JPanel() {			
 			private static final long serialVersionUID = -3861574625311864082L;
 			
 			@Override
 			protected void paintComponent(final Graphics g) {
-				
+			    ///< 绘制背景透明渐变
 				Graphics2D g2d = (Graphics2D)g;
 				GradientPaint gPaint = new GradientPaint(0, 0, new Color(1.0f, 1.0f, 1.0f, 0.0f), 0, getHeight(), new Color(0.0f, 0.0f, 0.0f, 1.0f));						
 							
@@ -247,10 +271,19 @@ public class RegPanel extends JPanel implements RegHandle{
 		reg_button.addActionListener(new ActionListener() {			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-//                String name = field_name.getText();			
-//                String pwd_string = new String(pwd.getPassword());
-                //TODO 注册逻辑
-                
+                String name = field_name.getText();			
+                String pwd_string = new String(pwd.getPassword());
+			    Msg_.Builder msg = Msg_.newBuilder();
+		        Request_.Builder request = Request_.newBuilder();
+		        User_.Builder user = User_.newBuilder();
+		        Register_.Builder register = Register_.newBuilder();
+		        register.setUserName(name);
+		        register.setUserPwd(pwd_string);
+		        user.setRegister(register);
+		        request.setUser(user);
+		        msg.setRequest(request);
+		        msg.setJobId(-1L);
+		        ClientResource.getSingleton().submitRequest(new RequestPackage(msg.build(), new ServerRegiest(name)));                
 				setNull();
 			}
 		});
