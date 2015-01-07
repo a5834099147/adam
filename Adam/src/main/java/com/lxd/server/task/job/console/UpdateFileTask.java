@@ -27,6 +27,7 @@ import com.lxd.protobuf.msg.result.Result.Result_;
 import com.lxd.protobuf.msg.result.Result.Result_.Repleish;
 import com.lxd.resource.Resource;
 import com.lxd.server.entity.File;
+import com.lxd.server.resource.ServerResource;
 import com.lxd.server.resource.property.ConsoleUpdataFile;
 import com.lxd.server.service.FileServer;
 import com.lxd.server.service.impl.FileServerImpl;
@@ -101,6 +102,7 @@ public class UpdateFileTask extends JobTask {
                     result.setSuccess(true);
                     log.info("任务编号" + getJobId() + " 修改文件任务完成");                
                     server.updateFile(oldFile, pro.getMd5(), pro.getLength());
+                    ServerResource.getSingleton().submitFile(new java.io.File(Grnerate.getPath(pro.getMd5(), pro.getLength())));
                 } else {
                     result.setSuccess(true);
                     Repleish.Builder repleish = Repleish.newBuilder();

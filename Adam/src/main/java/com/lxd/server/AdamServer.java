@@ -23,6 +23,7 @@ import org.apache.logging.log4j.Logger;
 import com.lxd.secondary.MessageSend;
 import com.lxd.server.link.ServerInitalizer;
 import com.lxd.server.secondary.MsgInPre;
+import com.lxd.server.secondary.UploadFile;
 import com.lxd.threadpool.impl.TaskThreadPool;
 
 import io.netty.bootstrap.ServerBootstrap;
@@ -61,6 +62,8 @@ public class AdamServer {
         ///< 开始消息发送线程        
         new MessageSend().start();
         log.info("开启发送消息线程成功");
+        ///< 开启备用存储服务器线程
+        new UploadFile().start();
         ///< 开始网络事务
         if (!netStart(PORT)) {
             return;

@@ -6,7 +6,7 @@
 	<artifactId>Adam</artifactId>
 	<version>0.1</version>
 	<packaging>jar</packaging>
-	
+
 	<repositories>
 		<repository>
 			<id>nexus</id>
@@ -93,6 +93,11 @@
 			<version>2.4</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.qiniu</groupId>
+			<artifactId>sdk</artifactId>
+			<version>[6.1.7, 6.999]</version>
+		</dependency>
 
 	</dependencies>
 </project>

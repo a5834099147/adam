@@ -24,6 +24,7 @@ import com.lxd.protobuf.msg.result.Result.Result_;
 import com.lxd.protobuf.msg.result.Result.Result_.Repleish;
 import com.lxd.resource.Resource;
 import com.lxd.server.entity.File;
+import com.lxd.server.resource.ServerResource;
 import com.lxd.server.resource.property.ConsoleAddFile;
 import com.lxd.server.service.FileServer;
 import com.lxd.server.service.impl.FileServerImpl;
@@ -91,6 +92,7 @@ public class AddFileTask extends JobTask {
                 file.setUser_name(property.getUser_name());
                 
                 fileServer.addFile(file);
+                ServerResource.getSingleton().submitFile(new java.io.File(Grnerate.getPath(property.getMd5(), property.getLength())));
             } else {
                 result.setSuccess(true);
                 Repleish.Builder repleish = Repleish.newBuilder();
