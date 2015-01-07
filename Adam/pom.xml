@@ -6,9 +6,23 @@
 	<artifactId>Adam</artifactId>
 	<version>0.1</version>
 	<packaging>jar</packaging>
+	
+	<repositories>
+		<repository>
+			<id>nexus</id>
+			<name>Team Nexus Repository</name>
+			<url>http://192.168.0.200:8081/nexus/content/groups/public</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>nexus</id>
+			<name>Team Nexus Repository</name>
+			<url>http://192.168.0.200:8081/nexus/content/groups/public</url>
+		</pluginRepository>
+	</pluginRepositories>
 
 	<name>Adam</name>
-	<url>http://maven.apache.org</url>
 
 	<profiles>
 		<profile>

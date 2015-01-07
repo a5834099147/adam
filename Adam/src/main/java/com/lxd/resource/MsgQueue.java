@@ -38,9 +38,9 @@ public class MsgQueue {
     ///< 日志
     private static final Logger log = LogManager.getLogger(MsgQueue.class);
     ///< 数据流入队列(从外界到本系统)
-    private static BlockingQueue<DataPackage> msgInQueue = new LinkedBlockingDeque<>(1000);
+    private static BlockingQueue<DataPackage> msgInQueue = new LinkedBlockingDeque<>();
     ///< 数据流出队列(从本系统发往外界)
-    private static BlockingQueue<DataPackage> msgOutQueue = new LinkedBlockingDeque<>(1000);
+    private static BlockingQueue<DataPackage> msgOutQueue = new LinkedBlockingDeque<>();
     
     /*
      * 将数据加入到流入队列中

@@ -15,45 +15,42 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.threadpool.impl;
+package com.lxd.server.resource;
 
-import java.util.LinkedList;
-import java.util.List;
-
-import com.lxd.threadpool.ThreadPoolInterface;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 
 /**
- * 服务器任务线程池
+ * 服务器资源文件
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2014年12月18日
+ * @date: 2015年1月7日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public class TaskThreadPool implements ThreadPoolInterface{
-    ///< 工作线程
-    private List<TaskWorker> workers = null;
-    ///< 工作线程数量(初始化)
-    private final int NUM = 4; 
-
-    @Override
-    public void start() {
-        workers = new LinkedList<>();
-        ///< 生成并开启工作线程
-        for (int i = 0; i < NUM; ++i) {
-            TaskWorker worker = new TaskWorker();
-            workers.add(worker);
-            worker.start();
+public class ServerResource {
+    ///< 线程安全的 HashSet
+    private Set<String> pathSet = Collections.synchronizedSet(new HashSet<String>());
+    
+    ///< 检查目录
+    public boolean checkPath(String path) {
+        ///< 如果包含了该目录
+        if (pathSet.contains(path)) {
+            return false;
+        } else {
+            pathSet.add(path);
+            return true;
         }
     }
 
-    @Override
-    public void stop() {
-        ///< 关闭线程池数组中的所有线程
-        for (TaskWorker worker : workers) {
-            worker.close();
-        }
+    private ServerResource(){
     }
 
+    private static ServerResource singleton = new ServerResource();
+
+    public static ServerResource getSingleton() {
+        return singleton;
+    }
 }

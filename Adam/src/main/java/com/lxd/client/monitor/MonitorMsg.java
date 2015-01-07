@@ -15,45 +15,54 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.threadpool.impl;
+package com.lxd.client.monitor;
 
-import java.util.LinkedList;
-import java.util.List;
-
-import com.lxd.threadpool.ThreadPoolInterface;
+import java.io.File;
 
 
 /**
- * 服务器任务线程池
+ * 文件监听消息
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2014年12月18日
+ * @date: 2015年1月6日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public class TaskThreadPool implements ThreadPoolInterface{
-    ///< 工作线程
-    private List<TaskWorker> workers = null;
-    ///< 工作线程数量(初始化)
-    private final int NUM = 4; 
-
-    @Override
-    public void start() {
-        workers = new LinkedList<>();
-        ///< 生成并开启工作线程
-        for (int i = 0; i < NUM; ++i) {
-            TaskWorker worker = new TaskWorker();
-            workers.add(worker);
-            worker.start();
-        }
+public class MonitorMsg {
+    ///< 操作类型
+    public enum Type {
+        ADD, 
+        DELETE,
+        UPDATE
+    };
+    
+    ///< 文件全路径
+    private File file;
+    ///< 操作类型
+    private Type type;
+    
+    ///< 任务开启时间(默认为0, 表示当前时间)
+    private Long start = 0L;   
+    
+    public Long getStart() {
+        return start;
     }
-
-    @Override
-    public void stop() {
-        ///< 关闭线程池数组中的所有线程
-        for (TaskWorker worker : workers) {
-            worker.close();
-        }
+    
+    public void setStart(Long start) {
+        this.start = start;
     }
-
+    
+    public MonitorMsg(File file, Type type){
+        super();
+        this.file = file;
+        this.type = type;
+    }
+    
+    public File getFile() {
+        return file;
+    }
+    
+    public Type getType() {
+        return type;
+    }   
 }

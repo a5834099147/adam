@@ -33,8 +33,8 @@ public class RequestPackage {
     ///< 消息包裹
     private Msg_ msg;
     ///< 请求附带参数
-    private Property property;
-    
+    private Property property;   
+
     public Msg_ getMsg() {
         return msg;
     }

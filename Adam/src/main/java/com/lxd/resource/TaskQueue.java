@@ -39,7 +39,7 @@ public class TaskQueue {
     ///< 日志
     private static final Logger log = LogManager.getLogger(TaskQueue.class);
     ///< 任务队列
-    private static BlockingQueue<Task> taskQueue = new LinkedBlockingDeque<>(1000);
+    private static BlockingQueue<Task> taskQueue = new LinkedBlockingDeque<>();
     
     /*
      * 将任务放入到队列中

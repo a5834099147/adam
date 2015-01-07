@@ -15,45 +15,31 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.threadpool.impl;
+package com.lxd.client.view.ui;
 
-import java.util.LinkedList;
-import java.util.List;
-
-import com.lxd.threadpool.ThreadPoolInterface;
+import javax.swing.JPanel;
 
 
 /**
- * 服务器任务线程池
+ * 描述功能
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2014年12月18日
+ * @date: 2015年1月5日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public class TaskThreadPool implements ThreadPoolInterface{
-    ///< 工作线程
-    private List<TaskWorker> workers = null;
-    ///< 工作线程数量(初始化)
-    private final int NUM = 4; 
+public class FilePanel extends JPanel {
 
-    @Override
-    public void start() {
-        workers = new LinkedList<>();
-        ///< 生成并开启工作线程
-        for (int i = 0; i < NUM; ++i) {
-            TaskWorker worker = new TaskWorker();
-            workers.add(worker);
-            worker.start();
-        }
-    }
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
 
-    @Override
-    public void stop() {
-        ///< 关闭线程池数组中的所有线程
-        for (TaskWorker worker : workers) {
-            worker.close();
-        }
+    /**
+     * Create the panel.
+     */
+    public FilePanel(){
+
     }
 
 }

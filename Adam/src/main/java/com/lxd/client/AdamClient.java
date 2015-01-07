@@ -17,11 +17,14 @@
 
 package com.lxd.client;
 
+import java.awt.EventQueue;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.lxd.client.link.ClientInitalizer;
 import com.lxd.client.secondary.MsgInPre;
+import com.lxd.client.view.control.UiSingleton;
 import com.lxd.secondary.MessageSend;
 import com.lxd.threadpool.impl.TaskThreadPool;
 
@@ -45,6 +48,15 @@ public class AdamClient {
     private static final int    PORT = 8463;
 
     public static void main(String[] args) {
+        ///< 开启界面
+        EventQueue.invokeLater(new Runnable() {
+            
+            @Override
+            public void run() {
+                UiSingleton.getSingleton().BamInit();
+            }
+        });
+        ///< 开启服务
         new AdamClient().initServer();
     }
 

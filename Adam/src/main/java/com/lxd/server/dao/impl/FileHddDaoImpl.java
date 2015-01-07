@@ -52,8 +52,10 @@ public class FileHddDaoImpl implements FileHddDao {
             Utils.closeConnection(raf);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            log.error("文件" + file_name + "文件无法找到:" + e.getMessage());
         } catch (IOException e) {
             e.printStackTrace();
+            log.error("文件" + file_name + "IO错误" + e.getMessage());
         }
     }
 
@@ -67,8 +69,10 @@ public class FileHddDaoImpl implements FileHddDao {
             log.info("文件光标" + seek + "写完, 所属文件" + file_name);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            log.error("文件" + file_name + "文件无法找到:" + e.getMessage());
         } catch (IOException e) {
             e.printStackTrace();
+            log.error("文件" + file_name + "IO错误" + e.getMessage());
         }        
     }
 

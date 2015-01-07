@@ -35,4 +35,10 @@ public class Define {
     public static final Integer CHUNK_SIZE = 512;
     ///< 客户端文件目录
     public static final String CLIENT="D:\\client";
+    ///< 修改文件等待时间
+    public static final long UPDATETIME = 3000;
+    ///< 不可读文件等待时间
+    public static final long ERRORTIME = 6000;
+    ///< 等待时间
+    public static final long SLEEPTIME = 300;
 }

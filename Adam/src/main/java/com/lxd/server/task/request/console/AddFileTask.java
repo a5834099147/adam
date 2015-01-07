@@ -27,6 +27,7 @@ import com.lxd.protobuf.msg.job.server.Server.Server_;
 import com.lxd.protobuf.msg.result.Result.Result_;
 import com.lxd.resource.Resource;
 import com.lxd.server.entity.File;
+import com.lxd.server.resource.ServerResource;
 import com.lxd.server.resource.property.ConsoleAddFile;
 import com.lxd.server.service.FileServer;
 import com.lxd.server.service.impl.FileServerImpl;
@@ -69,7 +70,7 @@ public class AddFileTask extends ConsoleTask {
     @Override
     public Msg_ taskExecute() {
         ///< 数据库查询是否有该文件 以下路径为没有的情况
-        if (fileServer.havaFile(md5, length)) {
+        if (!ServerResource.getSingleton().checkPath(Grnerate.getPath(md5, length)) || fileServer.havaFile(md5, length)) {
             File file = new File();
             file.setLength(length);
             file.setMd5(md5);
@@ -77,7 +78,7 @@ public class AddFileTask extends ConsoleTask {
             file.setUser_name(getUser_name());
             
             fileServer.addFile(file);
-            log.info("文件快传信息建立, 正在创建返回信息");
+            log.info("文件快传信息建立, 文件路径:" + path + ", 文件大小:" + length);
             
             ///< 返回结果信息
             Msg_.Builder msg = Msg_.newBuilder();
