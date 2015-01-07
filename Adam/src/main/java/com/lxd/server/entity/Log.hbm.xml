@@ -8,8 +8,10 @@
 
 <hibernate-mapping package="com.lxd.server.entity">
 	<class name="Log" table="t_log">
-		<id name="user_name" column="user_name">
+		<id name="id" column="id">
 		</id>
-		<property name="id"/>
+
+		<property name="user_name"/>	
+		<property name="state"/>
 	</class>
 </hibernate-mapping>

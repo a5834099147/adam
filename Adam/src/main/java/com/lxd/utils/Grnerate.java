@@ -30,9 +30,10 @@ public class Grnerate {
     
     static private Long task_id = 1L;
     
+    ///< 获取ID
     public static Long getTaskId() {
         synchronized (task_id) {
-            return task_id++;
+            return System.currentTimeMillis() + task_id++;
         }
     }
     

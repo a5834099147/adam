@@ -21,6 +21,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
 
 import com.lxd.client.dao.LogDao;
 import com.lxd.client.entity.Log;
@@ -42,13 +44,14 @@ public class LogDaoImpl implements LogDao {
         PreparedStatement  statement = null;
         try {
             ///< 创建 SQL
-            String sql = "insert into Log(user_name, id) values(?, ?)";
+            String sql = "insert into Log(id, state, user_name) values(?, ?, ?)";
             ///< 创建事务
             statement = connection.prepareStatement(sql);
             
             ///< 设置值
-           statement.setLong(2, log.getId());
-           statement.setString(1, log.getUser_name());
+           statement.setLong(1, log.getId());
+           statement.setBoolean(2, log.isState());
+           statement.setString(3, log.getUser_name());
             
             ///< 运行
             statement.executeUpdate();
@@ -77,8 +80,9 @@ public class LogDaoImpl implements LogDao {
             resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 log = new Log();
-                log.setId(resultSet.getLong(2));
-                log.setUser_name(resultSet.getString(1));
+                log.setId(resultSet.getLong(1));
+                log.setState(resultSet.getBoolean(2));
+                log.setUser_name(resultSet.getString(3));
             }
             ///< 提交
             connection.commit();            
@@ -93,10 +97,10 @@ public class LogDaoImpl implements LogDao {
     }
 
     @Override
-    public Log queryByName(String user_name, Connection connection) {
+    public List<Log> queryByName(String user_name, Connection connection) {
         PreparedStatement  statement = null;
         ResultSet resultSet = null;
-        Log log= null;
+        List<Log> logs = new LinkedList<>();
         try {
             ///< 创建 SQL
             String sql = "select * from Log where user_name = ?";
@@ -109,9 +113,11 @@ public class LogDaoImpl implements LogDao {
             ///< 运行
             resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                log = new Log();
-                log.setId(resultSet.getLong(2));
-                log.setUser_name(resultSet.getString(1));
+                Log log = new Log();
+                log.setId(resultSet.getLong(1));
+                log.setState(resultSet.getBoolean(2));
+                log.setUser_name(resultSet.getString(3));
+                logs.add(log);
             }    
         } catch (SQLException e) {
             e.printStackTrace();
@@ -119,7 +125,7 @@ public class LogDaoImpl implements LogDao {
             Util.closeConnection(statement);
             Util.closeConnection(resultSet);
         }        
-        return log;
+        return logs;
     }
 
 }

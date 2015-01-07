@@ -3,3 +3,5 @@ Adam/.settings/
 *.project
 *.classpath
 *.db
+/RemoteSystemsTempFiles
+/Adam/logs

@@ -19,6 +19,8 @@ package com.lxd.server.dao;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
@@ -61,19 +63,34 @@ public class LogDaoTest {
         session.beginTransaction();
         
         Long id = Grnerate.getTaskId();
+        Boolean state = true;
         String user_name = "li_xd";
         
         Log log = new Log();
         log.setId(id);
+        log.setState(state);
         log.setUser_name(user_name);
         
         logDao.addLog(log);
         
-        Log tmp = logDao.queryByName(user_name);
+        Log tmp = logDao.queryById(id);
         assertEquals(tmp.getId(), log.getId());
-        assertEquals(tmp.getUser_name(), log.getUser_name());        
+        assertEquals(tmp.getUser_name(), log.getUser_name());
+        assertEquals(tmp.isState(), log.isState());
+        
+        tmp = null;
+        List<Log> logs = logDao.queryByName(user_name);
+        for (Log logTemp : logs) {
+            if (logTemp.getId() == log.getId()) {
+                tmp = logTemp;
+            }
+        }
         
         session.getTransaction().rollback();
+        assertNotEquals(tmp, null);
+        assertEquals(tmp.getId(), log.getId());
+        assertEquals(tmp.getUser_name(), log.getUser_name());
+        assertEquals(tmp.isState(), log.isState());        
     }
 
 }

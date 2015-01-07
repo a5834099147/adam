@@ -18,6 +18,7 @@
 package com.lxd.client.dao;
 
 import java.sql.Connection;
+import java.util.List;
 
 import com.lxd.client.entity.Log;
 
@@ -38,5 +39,5 @@ public interface LogDao {
     Log queryById(Long id, Connection connection);
     
     ///< 查找日志根据用户名
-    Log queryByName(String user_name, Connection connection);
+    List<Log> queryByName(String user_name, Connection connection);
 }

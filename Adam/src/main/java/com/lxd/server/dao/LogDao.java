@@ -17,6 +17,8 @@
 
 package com.lxd.server.dao;
 
+import java.util.List;
+
 import com.lxd.server.entity.Log;
 
 
@@ -34,6 +36,9 @@ public interface LogDao {
     ///< 增加日志
     void addLog(Log log);
     
+    ///< 查找日志根据Id
+    Log queryById(Long id);
+    
     ///< 查找日志根据用户名
-    Log queryByName(String user_name);
+    List<Log> queryByName(String user_name);
 }
