@@ -9,4 +9,6 @@ message UpdateFile_{
 	required string md5 = 2;
 	///< 新文件长度
 	required int64 length = 3;
+	///< 新文件最后修改时间
+	required int64 last = 4;
 }

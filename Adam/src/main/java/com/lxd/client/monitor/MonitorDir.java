@@ -18,7 +18,6 @@
 package com.lxd.client.monitor;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.apache.commons.io.monitor.FileAlterationMonitor;
 import org.apache.commons.io.monitor.FileAlterationObserver;
@@ -161,13 +160,15 @@ public class MonitorDir extends Thread{
         try {
             ///< 计算文件的MD5值
             addFile.setMd5(MD5.getFileMD5String(file));
-        } catch (IOException e) {
+        } catch (Exception e) {
             ///< 写入值出错
             log.error(e.getMessage());
             return;
         }
         ///< 将新增文件长度加入到构建器中
         addFile.setLength(file.length());
+        ///< 将新增文件的最后修改时间将入到构建器中
+        addFile.setLast(file.lastModified());
         ///< 将新增文件相对路径加入到构建器中
         addFile.setPath(file.getAbsolutePath().substring(Define.CLIENT.length()));
         ///< 将新增文件信息设置到控制台请求信息构建器中
@@ -190,10 +191,12 @@ public class MonitorDir extends Thread{
         UpdateFile_.Builder updateFile = UpdateFile_.newBuilder();
         ///< 将修改文件的新长度加入到构建器中
         updateFile.setLength(file.length());
+        ///< 将修改文件的最后修改时间加入到构建器中
+        updateFile.setLast(file.lastModified());
         try {
             ///< 将修改文件的MD5值加入到构建器中
             updateFile.setMd5(MD5.getFileMD5String(file));
-        } catch (IOException e) {
+        } catch (Exception e) {
             ///< 写入值, 计算时出现IO错误
             log.error(e.getMessage());
             return;

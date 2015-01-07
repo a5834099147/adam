@@ -119,6 +119,7 @@ public class MsgInPre extends Thread  {
         if (msg.hasAddFile()) {
             ///< 如果是来自控制台的增加文件的请求消息
             com.lxd.server.task.request.console.AddFileTask task = new com.lxd.server.task.request.console.AddFileTask();
+            task.setLast(msg.getAddFile().getLast());
             task.setMd5(msg.getAddFile().getMd5());
             task.setLength(msg.getAddFile().getLength());
             task.setPath(msg.getAddFile().getPath());
@@ -133,6 +134,7 @@ public class MsgInPre extends Thread  {
         } else if (msg.hasUpdateFile()) {
             ///< 如果是来自控制台的更新文件的请求消息
             com.lxd.server.task.request.console.UpdateFileTask task = new com.lxd.server.task.request.console.UpdateFileTask();
+            task.setLast(msg.getUpdateFile().getLast());
             task.setPath(msg.getUpdateFile().getPath());
             task.setMd5(msg.getUpdateFile().getMd5());
             task.setLength(msg.getUpdateFile().getLength());            

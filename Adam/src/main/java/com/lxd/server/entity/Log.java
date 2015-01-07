@@ -31,8 +31,6 @@ public class Log {
     private long id;
     ///< 日志所属操作用户
     private String user_name;
-    ///< 本次操作结果
-    private boolean state;
     
     public long getId() {
         return id;
@@ -49,12 +47,4 @@ public class Log {
     public void setUser_name(String user_name) {
         this.user_name = user_name;
     }
-    
-    public boolean isState() {
-        return state;
-    }
-    
-    public void setState(boolean state) {
-        this.state = state;
-    }   
 }

@@ -29,8 +29,6 @@ package com.lxd.client.entity;
 public class Log {
     ///< 任务ID
     private Long id;
-    ///< 该次任务状态
-    private boolean state;
     ///< 用户名
     private String user_name;    
     
@@ -49,12 +47,4 @@ public class Log {
     public void setId(Long id) {
         this.id = id;
     }
-    
-    public boolean isState() {
-        return state;
-    }
-    
-    public void setState(boolean state) {
-        this.state = state;
-    }    
 }

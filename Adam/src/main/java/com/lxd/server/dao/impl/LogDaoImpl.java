@@ -17,11 +17,8 @@
 
 package com.lxd.server.dao.impl;
 
-import java.util.List;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.hibernate.Query;
 
 import com.lxd.server.dao.LogDao;
 import com.lxd.server.dao.util.HibernateUtil;
@@ -46,20 +43,10 @@ public class LogDaoImpl implements LogDao{
         
         HibernateUtil.getSessionFactory().getCurrentSession().save(log);
     }
-
+    
     @Override
-    public Log queryById(Long id) {
-        return (Log) HibernateUtil.getSessionFactory().getCurrentSession().get(Log.class, id);
-    }
-
-    @SuppressWarnings("unchecked")
-    @Override
-    public List<Log> queryByName(String user_name) {
-        String hsql = "from Log where user_name = :user_name";    
-        Query query  = HibernateUtil.getSessionFactory().getCurrentSession().createQuery(hsql);
-        query.setString("user_name", user_name);
-        
-        return query.list();
+    public Log queryByName(String user_name) {
+        return (Log) HibernateUtil.getSessionFactory().getCurrentSession().get(Log.class, user_name);
     }
 
 }

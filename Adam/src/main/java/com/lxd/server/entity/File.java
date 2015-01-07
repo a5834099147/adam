@@ -36,8 +36,19 @@ public class File {
     ///< 文件的大小
     private Long length;
     ///< 文件的相对路径
-    private String path;   
+    private String path;  
+    ///< 文件的最后修改时间
+    private Long last;
     
+    public Long getLast() {
+        return last;
+    }
+
+    
+    public void setLast(Long last) {
+        this.last = last;
+    }
+
     public Long getId() {
         return id;
     }

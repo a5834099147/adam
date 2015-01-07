@@ -90,6 +90,7 @@ public class AddFileTask extends JobTask {
                 file.setMd5(property.getMd5());
                 file.setPath(property.getPath());
                 file.setUser_name(property.getUser_name());
+                file.setLast(property.getLast());
                 
                 fileServer.addFile(file);
                 ServerResource.getSingleton().submitFile(new java.io.File(Grnerate.getPath(property.getMd5(), property.getLength())));

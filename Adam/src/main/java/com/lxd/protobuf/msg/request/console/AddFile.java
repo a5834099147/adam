@@ -82,6 +82,24 @@ public final class AddFile {
      */
     com.google.protobuf.ByteString
         getPathBytes();
+
+    // required int64 last = 4;
+    /**
+     * <code>required int64 last = 4;</code>
+     *
+     * <pre>
+     *&#47;&lt; 文件最后修改
+     * </pre>
+     */
+    boolean hasLast();
+    /**
+     * <code>required int64 last = 4;</code>
+     *
+     * <pre>
+     *&#47;&lt; 文件最后修改
+     * </pre>
+     */
+    long getLast();
   }
   /**
    * Protobuf type {@code msg.request.console.AddFile_}
@@ -147,6 +165,11 @@ public final class AddFile {
             case 26: {
               bitField0_ |= 0x00000004;
               path_ = input.readBytes();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              last_ = input.readInt64();
               break;
             }
           }
@@ -323,10 +346,35 @@ public final class AddFile {
       }
     }
 
+    // required int64 last = 4;
+    public static final int LAST_FIELD_NUMBER = 4;
+    private long last_;
+    /**
+     * <code>required int64 last = 4;</code>
+     *
+     * <pre>
+     *&#47;&lt; 文件最后修改
+     * </pre>
+     */
+    public boolean hasLast() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>required int64 last = 4;</code>
+     *
+     * <pre>
+     *&#47;&lt; 文件最后修改
+     * </pre>
+     */
+    public long getLast() {
+      return last_;
+    }
+
     private void initFields() {
       md5_ = "";
       length_ = 0L;
       path_ = "";
+      last_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -345,6 +393,10 @@ public final class AddFile {
         memoizedIsInitialized = 0;
         return false;
       }
+      if (!hasLast()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -360,6 +412,9 @@ public final class AddFile {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeBytes(3, getPathBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt64(4, last_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -381,6 +436,10 @@ public final class AddFile {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(3, getPathBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(4, last_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -504,6 +563,8 @@ public final class AddFile {
         bitField0_ = (bitField0_ & ~0x00000002);
         path_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
+        last_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -544,6 +605,10 @@ public final class AddFile {
           to_bitField0_ |= 0x00000004;
         }
         result.path_ = path_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.last_ = last_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -573,6 +638,9 @@ public final class AddFile {
           path_ = other.path_;
           onChanged();
         }
+        if (other.hasLast()) {
+          setLast(other.getLast());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -587,6 +655,10 @@ public final class AddFile {
           return false;
         }
         if (!hasPath()) {
+          
+          return false;
+        }
+        if (!hasLast()) {
           
           return false;
         }
@@ -857,6 +929,55 @@ public final class AddFile {
         return this;
       }
 
+      // required int64 last = 4;
+      private long last_ ;
+      /**
+       * <code>required int64 last = 4;</code>
+       *
+       * <pre>
+       *&#47;&lt; 文件最后修改
+       * </pre>
+       */
+      public boolean hasLast() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required int64 last = 4;</code>
+       *
+       * <pre>
+       *&#47;&lt; 文件最后修改
+       * </pre>
+       */
+      public long getLast() {
+        return last_;
+      }
+      /**
+       * <code>required int64 last = 4;</code>
+       *
+       * <pre>
+       *&#47;&lt; 文件最后修改
+       * </pre>
+       */
+      public Builder setLast(long value) {
+        bitField0_ |= 0x00000008;
+        last_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int64 last = 4;</code>
+       *
+       * <pre>
+       *&#47;&lt; 文件最后修改
+       * </pre>
+       */
+      public Builder clearLast() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        last_ = 0L;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:msg.request.console.AddFile_)
     }
 
@@ -883,9 +1004,9 @@ public final class AddFile {
   static {
     java.lang.String[] descriptorData = {
       "\n\021R_C_AddFile.proto\022\023msg.request.console" +
-      "\"5\n\010AddFile_\022\013\n\003md5\030\001 \002(\t\022\016\n\006length\030\002 \002(" +
-      "\003\022\014\n\004path\030\003 \002(\tB/\n$com.lxd.protobuf.msg." +
-      "request.consoleB\007AddFile"
+      "\"C\n\010AddFile_\022\013\n\003md5\030\001 \002(\t\022\016\n\006length\030\002 \002(" +
+      "\003\022\014\n\004path\030\003 \002(\t\022\014\n\004last\030\004 \002(\003B/\n$com.lxd" +
+      ".protobuf.msg.request.consoleB\007AddFile"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -897,7 +1018,7 @@ public final class AddFile {
           internal_static_msg_request_console_AddFile__fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_msg_request_console_AddFile__descriptor,
-              new java.lang.String[] { "Md5", "Length", "Path", });
+              new java.lang.String[] { "Md5", "Length", "Path", "Last", });
           return null;
         }
       };

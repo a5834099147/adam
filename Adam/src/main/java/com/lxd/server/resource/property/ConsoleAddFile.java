@@ -34,22 +34,33 @@ public class ConsoleAddFile {
     ///< 文件相对路径
     private String path;
     ///< 用户信息
-    private String user_name;   
+    private String user_name;  
+    ///< 文件最后修改时间
+    private Long last;   
     
+    public Long getLast() {
+        return last;
+    }
+    
+    public void setLast(Long last) {
+        this.last = last;
+    }
+
     public String getUser_name() {
         return user_name;
     }
     
     public void setUser_name(String user_name) {
         this.user_name = user_name;
-    }  
-
-    public ConsoleAddFile(String md5, Long length, String path, String user_name){
+    }     
+    
+    public ConsoleAddFile(String md5, Long length, String path, String user_name, Long last){
         super();
         this.md5 = md5;
         this.length = length;
         this.path = path;
         this.user_name = user_name;
+        this.last = last;
     }
 
     public String getMd5() {

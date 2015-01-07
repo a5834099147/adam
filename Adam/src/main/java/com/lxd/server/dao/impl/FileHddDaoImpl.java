@@ -44,7 +44,7 @@ public class FileHddDaoImpl implements FileHddDao {
         try {
             File file = new File(file_name);
             ///< 创建新的空白文件
-            file.createNewFile();
+            file.createNewFile();           
             RandomAccessFile raf = new RandomAccessFile(file_name, "rw");
             log.info("创建文件成功" + file_name);
             raf.setLength(length);

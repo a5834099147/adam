@@ -73,7 +73,7 @@ public class FileServerImpl implements FileServer {
     }
 
     @Override
-    public void updateFile(File file, String md5, Long length) {
+    public void updateFile(File file, String md5, Long length, Long last) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.getTransaction().begin();
         ///< 查找未更新前文件信息        
@@ -83,6 +83,7 @@ public class FileServerImpl implements FileServer {
         
         file.setMd5(md5);
         file.setLength(length);
+        file.setLast(last);
         fileDao.updateFile(file);
         ///< 查找是否存在被更新文件相同的文件
         boolean result = fileDao.queryByMd5AndLength(old_md5, old_length);        

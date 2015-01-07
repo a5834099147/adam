@@ -54,7 +54,13 @@ public class AddFileTask extends ConsoleTask {
     private long length;
     ///< 文件路径
     private String path;
+    ///< 文件最后修改时间
+    private Long last;   
     
+    public void setLast(Long last) {
+        this.last = last;
+    }
+
     public void setMd5(String md5) {
         this.md5 = md5;
     }
@@ -76,6 +82,7 @@ public class AddFileTask extends ConsoleTask {
             file.setMd5(md5);
             file.setPath(path);
             file.setUser_name(getUser_name());
+            file.setLast(last);
             
             fileServer.addFile(file);
             log.info("文件快传信息建立, 文件路径:" + path + ", 文件大小:" + length);
@@ -92,7 +99,7 @@ public class AddFileTask extends ConsoleTask {
         
         
         ///< 将文件信息录入到任务组中
-        Resource.getSingleton().getJobStatus().addJob(getJobId(), new ConsoleAddFile(md5, length, path, getUser_name()));
+        Resource.getSingleton().getJobStatus().addJob(getJobId(), new ConsoleAddFile(md5, length, path, getUser_name(), last));
         
         String file_path = Grnerate.getPath(md5, length);
         fileServer.addFile(file_path, length);

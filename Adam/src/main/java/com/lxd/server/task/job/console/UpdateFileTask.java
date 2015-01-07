@@ -101,7 +101,7 @@ public class UpdateFileTask extends JobTask {
                     ///< 完成
                     result.setSuccess(true);
                     log.info("任务编号" + getJobId() + " 修改文件任务完成");                
-                    server.updateFile(oldFile, pro.getMd5(), pro.getLength());
+                    server.updateFile(oldFile, pro.getMd5(), pro.getLength(), pro.getLast());
                     ServerResource.getSingleton().submitFile(new java.io.File(Grnerate.getPath(pro.getMd5(), pro.getLength())));
                 } else {
                     result.setSuccess(true);

@@ -9,4 +9,6 @@ message AddFile_{
 	required int64 length = 2;
 	///< 文件路径
 	required string path = 3;
+	///< 文件最后修改
+	required int64 last = 4;
 }

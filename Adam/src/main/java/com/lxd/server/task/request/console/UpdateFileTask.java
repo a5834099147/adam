@@ -51,6 +51,12 @@ public class UpdateFileTask extends ConsoleTask {
     private String md5;
     //< 文件length;
     private Long length;
+    ///< 文件最后修改文件
+    private Long last;
+    
+    public void setLast(Long last) {
+        this.last = last;
+    }
 
     public void setPath(String path) {
         this.path = path;
@@ -74,7 +80,7 @@ public class UpdateFileTask extends ConsoleTask {
         ///< 查找是否存在更新后的文件信息
         if (fileServer.havaFile(md5, length)) {
             ///< 更新表信息
-            fileServer.updateFile(oldFile, md5, length);
+            fileServer.updateFile(oldFile, md5, length, last);
             
             ///< 回复结果消息
             Msg_.Builder msg = Msg_.newBuilder();
@@ -82,12 +88,10 @@ public class UpdateFileTask extends ConsoleTask {
             Result_.Builder result = Result_.newBuilder();
             result.setSuccess(true);
             msg.setResult(result);
-            
-            //TODO 保存结果到数据库
             return msg.build();
         }      
        
-        Resource.getSingleton().getJobStatus().addJob(getJobId(), new ConsoleUpdataFile(md5, length, path, getUser_name()));
+        Resource.getSingleton().getJobStatus().addJob(getJobId(), new ConsoleUpdataFile(md5, length, path, getUser_name(), last));
         
         ///< 创建更新文件
         String file_path = Grnerate.getPath(md5, length);

@@ -23,7 +23,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -56,7 +55,7 @@ public class LogDaoTest {
             connection = DriverManager.getConnection("jdbc:sqlite:adam.db");
             Statement statement = connection.createStatement();
             statement.executeUpdate("drop table if exists Log");
-            statement.executeUpdate("create table log(id bigint primary key, state bit, user_name varchar(32))");
+            statement.executeUpdate("create table log(user_name varchar(32) primary key, id bigint)");
         } finally {
             if (connection != null) {
                 connection.close();
@@ -77,31 +76,22 @@ public class LogDaoTest {
     public void test() {
         Long id = 15L;
         String user_name = "li_xd";
-        Boolean state = true;
         
         
         Log log = new Log();
         log.setId(id);
         log.setUser_name(user_name);
-        log.setState(state);
         
         Connection connection = Util.getConnection();
         logDao.addLog(log, connection);
         
-        log = null;
-        List<Log> logs = logDao.queryByName(user_name, connection);
-        for (Log tmp : logs) {
-            if (tmp.getId().equals(id)) {
-                log = tmp;
-            }
-        }
+        log  = logDao.queryByName(user_name, connection);
         
         assertNotEquals(log, null);
         
         log = logDao.queryById(id, connection);
         assertEquals(log.getId(), id);
         assertEquals(log.getUser_name(), user_name);
-        assertEquals(log.isState(), state);
         
         try {
             connection.rollback();

@@ -35,6 +35,8 @@ public class ConsoleUpdataFile {
     private String patch;
     ///< 用户名
     private String user_name;    
+    ///< 用户最后修改时间
+    private Long last;
     
     public String getUser_name() {
         return user_name;
@@ -42,17 +44,25 @@ public class ConsoleUpdataFile {
     
     public void setUser_name(String user_name) {
         this.user_name = user_name;
-    }   
+    }      
     
-
-    public ConsoleUpdataFile(String md5, Long length, String patch, String user_name){
+    public ConsoleUpdataFile(String md5, Long length, String patch, String user_name, Long last){
         super();
         this.md5 = md5;
         this.length = length;
         this.patch = patch;
         this.user_name = user_name;
+        this.last = last;
     }
 
+    public Long getLast() {
+        return last;
+    }
+
+    
+    public void setLast(Long last) {
+        this.last = last;
+    }
 
     public String getMd5() {
         return md5;
