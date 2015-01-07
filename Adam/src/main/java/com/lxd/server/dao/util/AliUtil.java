@@ -15,32 +15,27 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.server.secondary;
+package com.lxd.server.dao.util;
 
-import java.io.File;
-
-import com.lxd.server.dao.WebFileDao;
-import com.lxd.server.dao.impl.ALiFileDao;
-import com.lxd.server.resource.ServerResource;
+import com.aliyun.oss.OSSClient;
 
 
 /**
- * 上传文件处理线程
+ * 阿里云工具
  * @author: a5834099147
  * @mailto: a5834099147@126.com
  * @date: 2015年1月7日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public class UploadFile extends Thread {
-    private WebFileDao fileDao = new ALiFileDao();
-    @Override
-    public void run() {
-        while (true) {
-            ///< 获取上传文件
-            File file = ServerResource.getSingleton().takeFile();
-            ///< 新增文件
-            fileDao.AddFile(file);
-        }
+public class AliUtil {
+    
+    private static final String AK = "D9gHitrk6g3QeHnU";
+    private static final String AS = "mGBWjSpBw4fKcnfTufs4505pWS88r5";
+    
+    public static OSSClient getClient() {
+        return new OSSClient(AK, AS);
     }
+    
+    public static final String BUCKK_STRING = "adam-ali";
 }

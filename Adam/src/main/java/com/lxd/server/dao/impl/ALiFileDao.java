@@ -15,32 +15,46 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.server.secondary;
+package com.lxd.server.dao.impl;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
+import com.aliyun.oss.OSSClient;
+import com.aliyun.oss.model.ObjectMetadata;
 import com.lxd.server.dao.WebFileDao;
-import com.lxd.server.dao.impl.ALiFileDao;
-import com.lxd.server.resource.ServerResource;
+import com.lxd.server.dao.util.AliUtil;
 
 
 /**
- * 上传文件处理线程
+ * 阿里云网络文件操作
  * @author: a5834099147
  * @mailto: a5834099147@126.com
  * @date: 2015年1月7日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public class UploadFile extends Thread {
-    private WebFileDao fileDao = new ALiFileDao();
+public class ALiFileDao implements WebFileDao {
+
     @Override
-    public void run() {
-        while (true) {
-            ///< 获取上传文件
-            File file = ServerResource.getSingleton().takeFile();
-            ///< 新增文件
-            fileDao.AddFile(file);
+    public void AddFile(File file) {
+        ///< 初始化 OSSClient
+        OSSClient client = AliUtil.getClient();
+        InputStream content = null;;
+        try {
+            content = new FileInputStream(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
+        ///< 上传Object 的 Metadata
+        ObjectMetadata meta = new ObjectMetadata();
+        ///< 设置上传文件快大小
+        meta.setContentLength(file.length());
+        
+        ///< 上传 Object
+        client.putObject(AliUtil.BUCKK_STRING, file.getName(), content, meta);
     }
+
 }
