@@ -46,20 +46,23 @@ public class LogServerImpl implements LogServer {
 
     @Override
     public void addLog(Log log) {
-        ///< 创建链接
-        Connection connection = Util.getConnection();
-        ///< 新增文件信息
-        logDao.addLog(log, connection);
-        try {
-            ///< 提交
-            connection.commit();
-            logger.debug("新增文件日志");
-        } catch (SQLException e) {
-            logger.error("新增文件日志时出错, 错误信息为:" + e.getMessage());
-            e.printStackTrace();
-        }
-        ///< 关闭连接
-        Util.closeConnection(connection);
+        ///< 上锁原因: Sqlite 多线程下访问解决不完美
+        synchronized (logDao) {
+          ///< 创建链接
+            Connection connection = Util.getConnection();
+            ///< 新增文件信息
+            logDao.addLog(log, connection);
+            try {
+                ///< 提交
+                connection.commit();
+                logger.debug("新增文件日志");
+            } catch (SQLException e) {
+                logger.error("新增文件日志时出错, 错误信息为:" + e.getMessage());
+                e.printStackTrace();
+            }
+            ///< 关闭连接
+            Util.closeConnection(connection);
+        }        
     }
 
 }

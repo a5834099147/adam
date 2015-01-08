@@ -1,0 +1,8 @@
+package msg.job.server;
+option java_package="com.lxd.protobuf.msg.job.server";
+option java_outer_classname="MotionSync";
+
+message MotionSync_{ 
+	///< 同步核对
+	required bool state = 1;
+}

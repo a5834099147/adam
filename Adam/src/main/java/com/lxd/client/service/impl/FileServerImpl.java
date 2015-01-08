@@ -45,56 +45,65 @@ public class FileServerImpl implements FileServer {
 
     @Override
     public void addFile(File file) {
-        ///< 创建链接
-        Connection connection = Util.getConnection();
-        ///< 新增文件信息
-        fileDao.addFile(file, connection);
-        try {
-            ///< 提交
-            connection.commit();
-            log.debug("新增文件记录");
-        } catch (SQLException e) {
-            log.error("新增文件记录时出错, 错误信息为:" + e.getMessage());
-            e.printStackTrace();
-        }
-        ///< 关闭连接
-        Util.closeConnection(connection);
+        ///< 上锁原因: sqlite多线程解决不完美
+        synchronized (fileDao) {
+            ///< 创建链接
+            Connection connection = Util.getConnection();
+            ///< 新增文件信息
+            fileDao.addFile(file, connection);
+            try {
+                ///< 提交
+                connection.commit();
+                log.debug("新增文件记录");
+            } catch (SQLException e) {
+                log.error("新增文件记录时出错, 错误信息为:" + e.getMessage());
+                e.printStackTrace();
+            }
+            ///< 关闭连接
+            Util.closeConnection(connection);
+        }       
     }
 
     @Override
     public void deleteFile(File file) {
-        ///< 创建链接
-        Connection connection = Util.getConnection();
-        ///< 新增文件信息
-        fileDao.deleteFile(file, connection);
-        try {
-            ///< 提交
-            connection.commit();
-            log.debug("删除一条文件记录");
-        } catch (SQLException e) {
-            log.error("删除文件记录时出错, 错误信息为:" + e.getMessage());
-            e.printStackTrace();
-        }
-        ///< 关闭连接
-        Util.closeConnection(connection);
+        ///< 上锁原因: sqlite多线程解决不完美
+        synchronized (fileDao) {
+            ///< 创建链接
+            Connection connection = Util.getConnection();
+            ///< 新增文件信息
+            fileDao.deleteFile(file, connection);
+            try {
+                ///< 提交
+                connection.commit();
+                log.debug("删除一条文件记录");
+            } catch (SQLException e) {
+                log.error("删除文件记录时出错, 错误信息为:" + e.getMessage());
+                e.printStackTrace();
+            }
+            ///< 关闭连接
+            Util.closeConnection(connection);
+        }       
     }
 
     @Override
     public void updateFile(File file) {
-        ///< 创建链接
-        Connection connection = Util.getConnection();
-        ///< 新增文件信息
-        fileDao.updateFile(file, connection);
-        try {
-            ///< 提交
-            connection.commit();
-            log.debug("更新一条文件记录");
-        } catch (SQLException e) {
-            log.error("更新文件记录时出错, 错误信息为:" + e.getMessage());
-            e.printStackTrace();
-        }
-        ///< 关闭连接
-        Util.closeConnection(connection);
+        ///< 上锁原因: sqlite多线程解决不完美
+        synchronized (fileDao) {
+          ///< 创建链接
+            Connection connection = Util.getConnection();
+            ///< 新增文件信息
+            fileDao.updateFile(file, connection);
+            try {
+                ///< 提交
+                connection.commit();
+                log.debug("更新一条文件记录");
+            } catch (SQLException e) {
+                log.error("更新文件记录时出错, 错误信息为:" + e.getMessage());
+                e.printStackTrace();
+            }
+            ///< 关闭连接
+            Util.closeConnection(connection);
+        }        
     }
     
 }

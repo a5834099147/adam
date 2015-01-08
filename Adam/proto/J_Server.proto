@@ -4,10 +4,16 @@ option java_outer_classname="Server";
 
 import "J_S_AddFile.proto";
 import "J_S_UpdateFile.proto";
+import "J_S_MotionSync.proto";
+import "J_S_DownloadFile.proto";
 
 message Server_{ 
 	///< 新增文件
 	optional AddFile_ addFile = 1;
 	///< 修改文件
 	optional UpdateFile_ updateFile = 2;
+	///< 同步请求核对
+	optional MotionSync_ motionSync = 3;
+	///< 下载文件
+	optional DownloadFile_ downloadFile = 4;
 }

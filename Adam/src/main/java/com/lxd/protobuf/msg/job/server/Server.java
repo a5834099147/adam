@@ -62,6 +62,58 @@ public final class Server {
      * </pre>
      */
     com.lxd.protobuf.msg.job.server.UpdateFile.UpdateFile_OrBuilder getUpdateFileOrBuilder();
+
+    // optional .msg.job.server.MotionSync_ motionSync = 3;
+    /**
+     * <code>optional .msg.job.server.MotionSync_ motionSync = 3;</code>
+     *
+     * <pre>
+     *&#47;&lt; 同步请求核对
+     * </pre>
+     */
+    boolean hasMotionSync();
+    /**
+     * <code>optional .msg.job.server.MotionSync_ motionSync = 3;</code>
+     *
+     * <pre>
+     *&#47;&lt; 同步请求核对
+     * </pre>
+     */
+    com.lxd.protobuf.msg.job.server.MotionSync.MotionSync_ getMotionSync();
+    /**
+     * <code>optional .msg.job.server.MotionSync_ motionSync = 3;</code>
+     *
+     * <pre>
+     *&#47;&lt; 同步请求核对
+     * </pre>
+     */
+    com.lxd.protobuf.msg.job.server.MotionSync.MotionSync_OrBuilder getMotionSyncOrBuilder();
+
+    // optional .msg.job.server.DownloadFile_ downloadFile = 4;
+    /**
+     * <code>optional .msg.job.server.DownloadFile_ downloadFile = 4;</code>
+     *
+     * <pre>
+     *&#47;&lt; 下载文件
+     * </pre>
+     */
+    boolean hasDownloadFile();
+    /**
+     * <code>optional .msg.job.server.DownloadFile_ downloadFile = 4;</code>
+     *
+     * <pre>
+     *&#47;&lt; 下载文件
+     * </pre>
+     */
+    com.lxd.protobuf.msg.job.server.DownloadFile.DownloadFile_ getDownloadFile();
+    /**
+     * <code>optional .msg.job.server.DownloadFile_ downloadFile = 4;</code>
+     *
+     * <pre>
+     *&#47;&lt; 下载文件
+     * </pre>
+     */
+    com.lxd.protobuf.msg.job.server.DownloadFile.DownloadFile_OrBuilder getDownloadFileOrBuilder();
   }
   /**
    * Protobuf type {@code msg.job.server.Server_}
@@ -138,6 +190,32 @@ public final class Server {
                 updateFile_ = subBuilder.buildPartial();
               }
               bitField0_ |= 0x00000002;
+              break;
+            }
+            case 26: {
+              com.lxd.protobuf.msg.job.server.MotionSync.MotionSync_.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000004) == 0x00000004)) {
+                subBuilder = motionSync_.toBuilder();
+              }
+              motionSync_ = input.readMessage(com.lxd.protobuf.msg.job.server.MotionSync.MotionSync_.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(motionSync_);
+                motionSync_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000004;
+              break;
+            }
+            case 34: {
+              com.lxd.protobuf.msg.job.server.DownloadFile.DownloadFile_.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000008) == 0x00000008)) {
+                subBuilder = downloadFile_.toBuilder();
+              }
+              downloadFile_ = input.readMessage(com.lxd.protobuf.msg.job.server.DownloadFile.DownloadFile_.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(downloadFile_);
+                downloadFile_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000008;
               break;
             }
           }
@@ -248,9 +326,79 @@ public final class Server {
       return updateFile_;
     }
 
+    // optional .msg.job.server.MotionSync_ motionSync = 3;
+    public static final int MOTIONSYNC_FIELD_NUMBER = 3;
+    private com.lxd.protobuf.msg.job.server.MotionSync.MotionSync_ motionSync_;
+    /**
+     * <code>optional .msg.job.server.MotionSync_ motionSync = 3;</code>
+     *
+     * <pre>
+     *&#47;&lt; 同步请求核对
+     * </pre>
+     */
+    public boolean hasMotionSync() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional .msg.job.server.MotionSync_ motionSync = 3;</code>
+     *
+     * <pre>
+     *&#47;&lt; 同步请求核对
+     * </pre>
+     */
+    public com.lxd.protobuf.msg.job.server.MotionSync.MotionSync_ getMotionSync() {
+      return motionSync_;
+    }
+    /**
+     * <code>optional .msg.job.server.MotionSync_ motionSync = 3;</code>
+     *
+     * <pre>
+     *&#47;&lt; 同步请求核对
+     * </pre>
+     */
+    public com.lxd.protobuf.msg.job.server.MotionSync.MotionSync_OrBuilder getMotionSyncOrBuilder() {
+      return motionSync_;
+    }
+
+    // optional .msg.job.server.DownloadFile_ downloadFile = 4;
+    public static final int DOWNLOADFILE_FIELD_NUMBER = 4;
+    private com.lxd.protobuf.msg.job.server.DownloadFile.DownloadFile_ downloadFile_;
+    /**
+     * <code>optional .msg.job.server.DownloadFile_ downloadFile = 4;</code>
+     *
+     * <pre>
+     *&#47;&lt; 下载文件
+     * </pre>
+     */
+    public boolean hasDownloadFile() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional .msg.job.server.DownloadFile_ downloadFile = 4;</code>
+     *
+     * <pre>
+     *&#47;&lt; 下载文件
+     * </pre>
+     */
+    public com.lxd.protobuf.msg.job.server.DownloadFile.DownloadFile_ getDownloadFile() {
+      return downloadFile_;
+    }
+    /**
+     * <code>optional .msg.job.server.DownloadFile_ downloadFile = 4;</code>
+     *
+     * <pre>
+     *&#47;&lt; 下载文件
+     * </pre>
+     */
+    public com.lxd.protobuf.msg.job.server.DownloadFile.DownloadFile_OrBuilder getDownloadFileOrBuilder() {
+      return downloadFile_;
+    }
+
     private void initFields() {
       addFile_ = com.lxd.protobuf.msg.job.server.AddFile.AddFile_.getDefaultInstance();
       updateFile_ = com.lxd.protobuf.msg.job.server.UpdateFile.UpdateFile_.getDefaultInstance();
+      motionSync_ = com.lxd.protobuf.msg.job.server.MotionSync.MotionSync_.getDefaultInstance();
+      downloadFile_ = com.lxd.protobuf.msg.job.server.DownloadFile.DownloadFile_.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -259,6 +407,18 @@ public final class Server {
 
       if (hasUpdateFile()) {
         if (!getUpdateFile().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasMotionSync()) {
+        if (!getMotionSync().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasDownloadFile()) {
+        if (!getDownloadFile().isInitialized()) {
           memoizedIsInitialized = 0;
           return false;
         }
@@ -276,6 +436,12 @@ public final class Server {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeMessage(2, updateFile_);
       }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeMessage(3, motionSync_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeMessage(4, downloadFile_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -292,6 +458,14 @@ public final class Server {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, updateFile_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, motionSync_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, downloadFile_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -403,6 +577,8 @@ public final class Server {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getAddFileFieldBuilder();
           getUpdateFileFieldBuilder();
+          getMotionSyncFieldBuilder();
+          getDownloadFileFieldBuilder();
         }
       }
       private static Builder create() {
@@ -423,6 +599,18 @@ public final class Server {
           updateFileBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000002);
+        if (motionSyncBuilder_ == null) {
+          motionSync_ = com.lxd.protobuf.msg.job.server.MotionSync.MotionSync_.getDefaultInstance();
+        } else {
+          motionSyncBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000004);
+        if (downloadFileBuilder_ == null) {
+          downloadFile_ = com.lxd.protobuf.msg.job.server.DownloadFile.DownloadFile_.getDefaultInstance();
+        } else {
+          downloadFileBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -467,6 +655,22 @@ public final class Server {
         } else {
           result.updateFile_ = updateFileBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        if (motionSyncBuilder_ == null) {
+          result.motionSync_ = motionSync_;
+        } else {
+          result.motionSync_ = motionSyncBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        if (downloadFileBuilder_ == null) {
+          result.downloadFile_ = downloadFile_;
+        } else {
+          result.downloadFile_ = downloadFileBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -489,6 +693,12 @@ public final class Server {
         if (other.hasUpdateFile()) {
           mergeUpdateFile(other.getUpdateFile());
         }
+        if (other.hasMotionSync()) {
+          mergeMotionSync(other.getMotionSync());
+        }
+        if (other.hasDownloadFile()) {
+          mergeDownloadFile(other.getDownloadFile());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -496,6 +706,18 @@ public final class Server {
       public final boolean isInitialized() {
         if (hasUpdateFile()) {
           if (!getUpdateFile().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasMotionSync()) {
+          if (!getMotionSync().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasDownloadFile()) {
+          if (!getDownloadFile().isInitialized()) {
             
             return false;
           }
@@ -828,6 +1050,312 @@ public final class Server {
         return updateFileBuilder_;
       }
 
+      // optional .msg.job.server.MotionSync_ motionSync = 3;
+      private com.lxd.protobuf.msg.job.server.MotionSync.MotionSync_ motionSync_ = com.lxd.protobuf.msg.job.server.MotionSync.MotionSync_.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lxd.protobuf.msg.job.server.MotionSync.MotionSync_, com.lxd.protobuf.msg.job.server.MotionSync.MotionSync_.Builder, com.lxd.protobuf.msg.job.server.MotionSync.MotionSync_OrBuilder> motionSyncBuilder_;
+      /**
+       * <code>optional .msg.job.server.MotionSync_ motionSync = 3;</code>
+       *
+       * <pre>
+       *&#47;&lt; 同步请求核对
+       * </pre>
+       */
+      public boolean hasMotionSync() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional .msg.job.server.MotionSync_ motionSync = 3;</code>
+       *
+       * <pre>
+       *&#47;&lt; 同步请求核对
+       * </pre>
+       */
+      public com.lxd.protobuf.msg.job.server.MotionSync.MotionSync_ getMotionSync() {
+        if (motionSyncBuilder_ == null) {
+          return motionSync_;
+        } else {
+          return motionSyncBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .msg.job.server.MotionSync_ motionSync = 3;</code>
+       *
+       * <pre>
+       *&#47;&lt; 同步请求核对
+       * </pre>
+       */
+      public Builder setMotionSync(com.lxd.protobuf.msg.job.server.MotionSync.MotionSync_ value) {
+        if (motionSyncBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          motionSync_ = value;
+          onChanged();
+        } else {
+          motionSyncBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>optional .msg.job.server.MotionSync_ motionSync = 3;</code>
+       *
+       * <pre>
+       *&#47;&lt; 同步请求核对
+       * </pre>
+       */
+      public Builder setMotionSync(
+          com.lxd.protobuf.msg.job.server.MotionSync.MotionSync_.Builder builderForValue) {
+        if (motionSyncBuilder_ == null) {
+          motionSync_ = builderForValue.build();
+          onChanged();
+        } else {
+          motionSyncBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>optional .msg.job.server.MotionSync_ motionSync = 3;</code>
+       *
+       * <pre>
+       *&#47;&lt; 同步请求核对
+       * </pre>
+       */
+      public Builder mergeMotionSync(com.lxd.protobuf.msg.job.server.MotionSync.MotionSync_ value) {
+        if (motionSyncBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004) &&
+              motionSync_ != com.lxd.protobuf.msg.job.server.MotionSync.MotionSync_.getDefaultInstance()) {
+            motionSync_ =
+              com.lxd.protobuf.msg.job.server.MotionSync.MotionSync_.newBuilder(motionSync_).mergeFrom(value).buildPartial();
+          } else {
+            motionSync_ = value;
+          }
+          onChanged();
+        } else {
+          motionSyncBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>optional .msg.job.server.MotionSync_ motionSync = 3;</code>
+       *
+       * <pre>
+       *&#47;&lt; 同步请求核对
+       * </pre>
+       */
+      public Builder clearMotionSync() {
+        if (motionSyncBuilder_ == null) {
+          motionSync_ = com.lxd.protobuf.msg.job.server.MotionSync.MotionSync_.getDefaultInstance();
+          onChanged();
+        } else {
+          motionSyncBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+      /**
+       * <code>optional .msg.job.server.MotionSync_ motionSync = 3;</code>
+       *
+       * <pre>
+       *&#47;&lt; 同步请求核对
+       * </pre>
+       */
+      public com.lxd.protobuf.msg.job.server.MotionSync.MotionSync_.Builder getMotionSyncBuilder() {
+        bitField0_ |= 0x00000004;
+        onChanged();
+        return getMotionSyncFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .msg.job.server.MotionSync_ motionSync = 3;</code>
+       *
+       * <pre>
+       *&#47;&lt; 同步请求核对
+       * </pre>
+       */
+      public com.lxd.protobuf.msg.job.server.MotionSync.MotionSync_OrBuilder getMotionSyncOrBuilder() {
+        if (motionSyncBuilder_ != null) {
+          return motionSyncBuilder_.getMessageOrBuilder();
+        } else {
+          return motionSync_;
+        }
+      }
+      /**
+       * <code>optional .msg.job.server.MotionSync_ motionSync = 3;</code>
+       *
+       * <pre>
+       *&#47;&lt; 同步请求核对
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lxd.protobuf.msg.job.server.MotionSync.MotionSync_, com.lxd.protobuf.msg.job.server.MotionSync.MotionSync_.Builder, com.lxd.protobuf.msg.job.server.MotionSync.MotionSync_OrBuilder> 
+          getMotionSyncFieldBuilder() {
+        if (motionSyncBuilder_ == null) {
+          motionSyncBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lxd.protobuf.msg.job.server.MotionSync.MotionSync_, com.lxd.protobuf.msg.job.server.MotionSync.MotionSync_.Builder, com.lxd.protobuf.msg.job.server.MotionSync.MotionSync_OrBuilder>(
+                  motionSync_,
+                  getParentForChildren(),
+                  isClean());
+          motionSync_ = null;
+        }
+        return motionSyncBuilder_;
+      }
+
+      // optional .msg.job.server.DownloadFile_ downloadFile = 4;
+      private com.lxd.protobuf.msg.job.server.DownloadFile.DownloadFile_ downloadFile_ = com.lxd.protobuf.msg.job.server.DownloadFile.DownloadFile_.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lxd.protobuf.msg.job.server.DownloadFile.DownloadFile_, com.lxd.protobuf.msg.job.server.DownloadFile.DownloadFile_.Builder, com.lxd.protobuf.msg.job.server.DownloadFile.DownloadFile_OrBuilder> downloadFileBuilder_;
+      /**
+       * <code>optional .msg.job.server.DownloadFile_ downloadFile = 4;</code>
+       *
+       * <pre>
+       *&#47;&lt; 下载文件
+       * </pre>
+       */
+      public boolean hasDownloadFile() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional .msg.job.server.DownloadFile_ downloadFile = 4;</code>
+       *
+       * <pre>
+       *&#47;&lt; 下载文件
+       * </pre>
+       */
+      public com.lxd.protobuf.msg.job.server.DownloadFile.DownloadFile_ getDownloadFile() {
+        if (downloadFileBuilder_ == null) {
+          return downloadFile_;
+        } else {
+          return downloadFileBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .msg.job.server.DownloadFile_ downloadFile = 4;</code>
+       *
+       * <pre>
+       *&#47;&lt; 下载文件
+       * </pre>
+       */
+      public Builder setDownloadFile(com.lxd.protobuf.msg.job.server.DownloadFile.DownloadFile_ value) {
+        if (downloadFileBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          downloadFile_ = value;
+          onChanged();
+        } else {
+          downloadFileBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .msg.job.server.DownloadFile_ downloadFile = 4;</code>
+       *
+       * <pre>
+       *&#47;&lt; 下载文件
+       * </pre>
+       */
+      public Builder setDownloadFile(
+          com.lxd.protobuf.msg.job.server.DownloadFile.DownloadFile_.Builder builderForValue) {
+        if (downloadFileBuilder_ == null) {
+          downloadFile_ = builderForValue.build();
+          onChanged();
+        } else {
+          downloadFileBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .msg.job.server.DownloadFile_ downloadFile = 4;</code>
+       *
+       * <pre>
+       *&#47;&lt; 下载文件
+       * </pre>
+       */
+      public Builder mergeDownloadFile(com.lxd.protobuf.msg.job.server.DownloadFile.DownloadFile_ value) {
+        if (downloadFileBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) == 0x00000008) &&
+              downloadFile_ != com.lxd.protobuf.msg.job.server.DownloadFile.DownloadFile_.getDefaultInstance()) {
+            downloadFile_ =
+              com.lxd.protobuf.msg.job.server.DownloadFile.DownloadFile_.newBuilder(downloadFile_).mergeFrom(value).buildPartial();
+          } else {
+            downloadFile_ = value;
+          }
+          onChanged();
+        } else {
+          downloadFileBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .msg.job.server.DownloadFile_ downloadFile = 4;</code>
+       *
+       * <pre>
+       *&#47;&lt; 下载文件
+       * </pre>
+       */
+      public Builder clearDownloadFile() {
+        if (downloadFileBuilder_ == null) {
+          downloadFile_ = com.lxd.protobuf.msg.job.server.DownloadFile.DownloadFile_.getDefaultInstance();
+          onChanged();
+        } else {
+          downloadFileBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+      /**
+       * <code>optional .msg.job.server.DownloadFile_ downloadFile = 4;</code>
+       *
+       * <pre>
+       *&#47;&lt; 下载文件
+       * </pre>
+       */
+      public com.lxd.protobuf.msg.job.server.DownloadFile.DownloadFile_.Builder getDownloadFileBuilder() {
+        bitField0_ |= 0x00000008;
+        onChanged();
+        return getDownloadFileFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .msg.job.server.DownloadFile_ downloadFile = 4;</code>
+       *
+       * <pre>
+       *&#47;&lt; 下载文件
+       * </pre>
+       */
+      public com.lxd.protobuf.msg.job.server.DownloadFile.DownloadFile_OrBuilder getDownloadFileOrBuilder() {
+        if (downloadFileBuilder_ != null) {
+          return downloadFileBuilder_.getMessageOrBuilder();
+        } else {
+          return downloadFile_;
+        }
+      }
+      /**
+       * <code>optional .msg.job.server.DownloadFile_ downloadFile = 4;</code>
+       *
+       * <pre>
+       *&#47;&lt; 下载文件
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lxd.protobuf.msg.job.server.DownloadFile.DownloadFile_, com.lxd.protobuf.msg.job.server.DownloadFile.DownloadFile_.Builder, com.lxd.protobuf.msg.job.server.DownloadFile.DownloadFile_OrBuilder> 
+          getDownloadFileFieldBuilder() {
+        if (downloadFileBuilder_ == null) {
+          downloadFileBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lxd.protobuf.msg.job.server.DownloadFile.DownloadFile_, com.lxd.protobuf.msg.job.server.DownloadFile.DownloadFile_.Builder, com.lxd.protobuf.msg.job.server.DownloadFile.DownloadFile_OrBuilder>(
+                  downloadFile_,
+                  getParentForChildren(),
+                  isClean());
+          downloadFile_ = null;
+        }
+        return downloadFileBuilder_;
+      }
+
       // @@protoc_insertion_point(builder_scope:msg.job.server.Server_)
     }
 
@@ -854,11 +1382,15 @@ public final class Server {
   static {
     java.lang.String[] descriptorData = {
       "\n\016J_Server.proto\022\016msg.job.server\032\021J_S_Ad" +
-      "dFile.proto\032\024J_S_UpdateFile.proto\"e\n\007Ser" +
-      "ver_\022)\n\007addFile\030\001 \001(\0132\030.msg.job.server.A" +
-      "ddFile_\022/\n\nupdateFile\030\002 \001(\0132\033.msg.job.se" +
-      "rver.UpdateFile_B)\n\037com.lxd.protobuf.msg" +
-      ".job.serverB\006Server"
+      "dFile.proto\032\024J_S_UpdateFile.proto\032\024J_S_M" +
+      "otionSync.proto\032\026J_S_DownloadFile.proto\"" +
+      "\313\001\n\007Server_\022)\n\007addFile\030\001 \001(\0132\030.msg.job.s" +
+      "erver.AddFile_\022/\n\nupdateFile\030\002 \001(\0132\033.msg" +
+      ".job.server.UpdateFile_\022/\n\nmotionSync\030\003 " +
+      "\001(\0132\033.msg.job.server.MotionSync_\0223\n\014down" +
+      "loadFile\030\004 \001(\0132\035.msg.job.server.Download" +
+      "File_B)\n\037com.lxd.protobuf.msg.job.server" +
+      "B\006Server"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -870,7 +1402,7 @@ public final class Server {
           internal_static_msg_job_server_Server__fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_msg_job_server_Server__descriptor,
-              new java.lang.String[] { "AddFile", "UpdateFile", });
+              new java.lang.String[] { "AddFile", "UpdateFile", "MotionSync", "DownloadFile", });
           return null;
         }
       };
@@ -879,6 +1411,8 @@ public final class Server {
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lxd.protobuf.msg.job.server.AddFile.getDescriptor(),
           com.lxd.protobuf.msg.job.server.UpdateFile.getDescriptor(),
+          com.lxd.protobuf.msg.job.server.MotionSync.getDescriptor(),
+          com.lxd.protobuf.msg.job.server.DownloadFile.getDescriptor(),
         }, assigner);
   }
 

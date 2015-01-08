@@ -1,0 +1,8 @@
+package msg.job.console;
+option java_package="com.lxd.protobuf.msg.job.console";
+option java_outer_classname="DownloadFile";
+
+message DownloadFile_{
+	///< 文件是否下载成功
+	required bool state = 1;
+}

@@ -89,9 +89,87 @@ public final class Console {
      */
     com.lxd.protobuf.msg.request.console.DeleteFile.DeleteFile_OrBuilder getDeleteFileOrBuilder();
 
-    // required string user_name = 4;
+    // optional .msg.request.console.MotionSync_ motionSync = 4;
     /**
-     * <code>required string user_name = 4;</code>
+     * <code>optional .msg.request.console.MotionSync_ motionSync = 4;</code>
+     *
+     * <pre>
+     *&#47;&lt; 同步内容获取
+     * </pre>
+     */
+    boolean hasMotionSync();
+    /**
+     * <code>optional .msg.request.console.MotionSync_ motionSync = 4;</code>
+     *
+     * <pre>
+     *&#47;&lt; 同步内容获取
+     * </pre>
+     */
+    com.lxd.protobuf.msg.request.console.MotionSync.MotionSync_ getMotionSync();
+    /**
+     * <code>optional .msg.request.console.MotionSync_ motionSync = 4;</code>
+     *
+     * <pre>
+     *&#47;&lt; 同步内容获取
+     * </pre>
+     */
+    com.lxd.protobuf.msg.request.console.MotionSync.MotionSync_OrBuilder getMotionSyncOrBuilder();
+
+    // optional .msg.request.console.Sync_ sync = 5;
+    /**
+     * <code>optional .msg.request.console.Sync_ sync = 5;</code>
+     *
+     * <pre>
+     *&#47;&lt; 同步请求
+     * </pre>
+     */
+    boolean hasSync();
+    /**
+     * <code>optional .msg.request.console.Sync_ sync = 5;</code>
+     *
+     * <pre>
+     *&#47;&lt; 同步请求
+     * </pre>
+     */
+    com.lxd.protobuf.msg.request.console.Sycn.Sync_ getSync();
+    /**
+     * <code>optional .msg.request.console.Sync_ sync = 5;</code>
+     *
+     * <pre>
+     *&#47;&lt; 同步请求
+     * </pre>
+     */
+    com.lxd.protobuf.msg.request.console.Sycn.Sync_OrBuilder getSyncOrBuilder();
+
+    // optional .msg.request.console.DownloadFile_ downloadFile = 6;
+    /**
+     * <code>optional .msg.request.console.DownloadFile_ downloadFile = 6;</code>
+     *
+     * <pre>
+     *&#47;&lt; 下载文件
+     * </pre>
+     */
+    boolean hasDownloadFile();
+    /**
+     * <code>optional .msg.request.console.DownloadFile_ downloadFile = 6;</code>
+     *
+     * <pre>
+     *&#47;&lt; 下载文件
+     * </pre>
+     */
+    com.lxd.protobuf.msg.request.console.DownloadFile.DownloadFile_ getDownloadFile();
+    /**
+     * <code>optional .msg.request.console.DownloadFile_ downloadFile = 6;</code>
+     *
+     * <pre>
+     *&#47;&lt; 下载文件
+     * </pre>
+     */
+    com.lxd.protobuf.msg.request.console.DownloadFile.DownloadFile_OrBuilder getDownloadFileOrBuilder();
+
+    // required string user_name = 7;
+    /**
+     * <code>required string user_name = 7;</code>
      *
      * <pre>
      *&#47;&lt; 用户编号
@@ -99,7 +177,7 @@ public final class Console {
      */
     boolean hasUserName();
     /**
-     * <code>required string user_name = 4;</code>
+     * <code>required string user_name = 7;</code>
      *
      * <pre>
      *&#47;&lt; 用户编号
@@ -107,7 +185,7 @@ public final class Console {
      */
     java.lang.String getUserName();
     /**
-     * <code>required string user_name = 4;</code>
+     * <code>required string user_name = 7;</code>
      *
      * <pre>
      *&#47;&lt; 用户编号
@@ -207,7 +285,46 @@ public final class Console {
               break;
             }
             case 34: {
+              com.lxd.protobuf.msg.request.console.MotionSync.MotionSync_.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000008) == 0x00000008)) {
+                subBuilder = motionSync_.toBuilder();
+              }
+              motionSync_ = input.readMessage(com.lxd.protobuf.msg.request.console.MotionSync.MotionSync_.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(motionSync_);
+                motionSync_ = subBuilder.buildPartial();
+              }
               bitField0_ |= 0x00000008;
+              break;
+            }
+            case 42: {
+              com.lxd.protobuf.msg.request.console.Sycn.Sync_.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000010) == 0x00000010)) {
+                subBuilder = sync_.toBuilder();
+              }
+              sync_ = input.readMessage(com.lxd.protobuf.msg.request.console.Sycn.Sync_.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(sync_);
+                sync_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000010;
+              break;
+            }
+            case 50: {
+              com.lxd.protobuf.msg.request.console.DownloadFile.DownloadFile_.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000020) == 0x00000020)) {
+                subBuilder = downloadFile_.toBuilder();
+              }
+              downloadFile_ = input.readMessage(com.lxd.protobuf.msg.request.console.DownloadFile.DownloadFile_.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(downloadFile_);
+                downloadFile_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000020;
+              break;
+            }
+            case 58: {
+              bitField0_ |= 0x00000040;
               userName_ = input.readBytes();
               break;
             }
@@ -353,21 +470,123 @@ public final class Console {
       return deleteFile_;
     }
 
-    // required string user_name = 4;
-    public static final int USER_NAME_FIELD_NUMBER = 4;
+    // optional .msg.request.console.MotionSync_ motionSync = 4;
+    public static final int MOTIONSYNC_FIELD_NUMBER = 4;
+    private com.lxd.protobuf.msg.request.console.MotionSync.MotionSync_ motionSync_;
+    /**
+     * <code>optional .msg.request.console.MotionSync_ motionSync = 4;</code>
+     *
+     * <pre>
+     *&#47;&lt; 同步内容获取
+     * </pre>
+     */
+    public boolean hasMotionSync() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional .msg.request.console.MotionSync_ motionSync = 4;</code>
+     *
+     * <pre>
+     *&#47;&lt; 同步内容获取
+     * </pre>
+     */
+    public com.lxd.protobuf.msg.request.console.MotionSync.MotionSync_ getMotionSync() {
+      return motionSync_;
+    }
+    /**
+     * <code>optional .msg.request.console.MotionSync_ motionSync = 4;</code>
+     *
+     * <pre>
+     *&#47;&lt; 同步内容获取
+     * </pre>
+     */
+    public com.lxd.protobuf.msg.request.console.MotionSync.MotionSync_OrBuilder getMotionSyncOrBuilder() {
+      return motionSync_;
+    }
+
+    // optional .msg.request.console.Sync_ sync = 5;
+    public static final int SYNC_FIELD_NUMBER = 5;
+    private com.lxd.protobuf.msg.request.console.Sycn.Sync_ sync_;
+    /**
+     * <code>optional .msg.request.console.Sync_ sync = 5;</code>
+     *
+     * <pre>
+     *&#47;&lt; 同步请求
+     * </pre>
+     */
+    public boolean hasSync() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional .msg.request.console.Sync_ sync = 5;</code>
+     *
+     * <pre>
+     *&#47;&lt; 同步请求
+     * </pre>
+     */
+    public com.lxd.protobuf.msg.request.console.Sycn.Sync_ getSync() {
+      return sync_;
+    }
+    /**
+     * <code>optional .msg.request.console.Sync_ sync = 5;</code>
+     *
+     * <pre>
+     *&#47;&lt; 同步请求
+     * </pre>
+     */
+    public com.lxd.protobuf.msg.request.console.Sycn.Sync_OrBuilder getSyncOrBuilder() {
+      return sync_;
+    }
+
+    // optional .msg.request.console.DownloadFile_ downloadFile = 6;
+    public static final int DOWNLOADFILE_FIELD_NUMBER = 6;
+    private com.lxd.protobuf.msg.request.console.DownloadFile.DownloadFile_ downloadFile_;
+    /**
+     * <code>optional .msg.request.console.DownloadFile_ downloadFile = 6;</code>
+     *
+     * <pre>
+     *&#47;&lt; 下载文件
+     * </pre>
+     */
+    public boolean hasDownloadFile() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional .msg.request.console.DownloadFile_ downloadFile = 6;</code>
+     *
+     * <pre>
+     *&#47;&lt; 下载文件
+     * </pre>
+     */
+    public com.lxd.protobuf.msg.request.console.DownloadFile.DownloadFile_ getDownloadFile() {
+      return downloadFile_;
+    }
+    /**
+     * <code>optional .msg.request.console.DownloadFile_ downloadFile = 6;</code>
+     *
+     * <pre>
+     *&#47;&lt; 下载文件
+     * </pre>
+     */
+    public com.lxd.protobuf.msg.request.console.DownloadFile.DownloadFile_OrBuilder getDownloadFileOrBuilder() {
+      return downloadFile_;
+    }
+
+    // required string user_name = 7;
+    public static final int USER_NAME_FIELD_NUMBER = 7;
     private java.lang.Object userName_;
     /**
-     * <code>required string user_name = 4;</code>
+     * <code>required string user_name = 7;</code>
      *
      * <pre>
      *&#47;&lt; 用户编号
      * </pre>
      */
     public boolean hasUserName() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     /**
-     * <code>required string user_name = 4;</code>
+     * <code>required string user_name = 7;</code>
      *
      * <pre>
      *&#47;&lt; 用户编号
@@ -388,7 +607,7 @@ public final class Console {
       }
     }
     /**
-     * <code>required string user_name = 4;</code>
+     * <code>required string user_name = 7;</code>
      *
      * <pre>
      *&#47;&lt; 用户编号
@@ -412,6 +631,9 @@ public final class Console {
       addFile_ = com.lxd.protobuf.msg.request.console.AddFile.AddFile_.getDefaultInstance();
       updateFile_ = com.lxd.protobuf.msg.request.console.UpdateFile.UpdateFile_.getDefaultInstance();
       deleteFile_ = com.lxd.protobuf.msg.request.console.DeleteFile.DeleteFile_.getDefaultInstance();
+      motionSync_ = com.lxd.protobuf.msg.request.console.MotionSync.MotionSync_.getDefaultInstance();
+      sync_ = com.lxd.protobuf.msg.request.console.Sycn.Sync_.getDefaultInstance();
+      downloadFile_ = com.lxd.protobuf.msg.request.console.DownloadFile.DownloadFile_.getDefaultInstance();
       userName_ = "";
     }
     private byte memoizedIsInitialized = -1;
@@ -441,6 +663,24 @@ public final class Console {
           return false;
         }
       }
+      if (hasMotionSync()) {
+        if (!getMotionSync().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasSync()) {
+        if (!getSync().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasDownloadFile()) {
+        if (!getDownloadFile().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -458,7 +698,16 @@ public final class Console {
         output.writeMessage(3, deleteFile_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeBytes(4, getUserNameBytes());
+        output.writeMessage(4, motionSync_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeMessage(5, sync_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeMessage(6, downloadFile_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeBytes(7, getUserNameBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -483,7 +732,19 @@ public final class Console {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(4, getUserNameBytes());
+          .computeMessageSize(4, motionSync_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, sync_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(6, downloadFile_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(7, getUserNameBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -596,6 +857,9 @@ public final class Console {
           getAddFileFieldBuilder();
           getUpdateFileFieldBuilder();
           getDeleteFileFieldBuilder();
+          getMotionSyncFieldBuilder();
+          getSyncFieldBuilder();
+          getDownloadFileFieldBuilder();
         }
       }
       private static Builder create() {
@@ -622,8 +886,26 @@ public final class Console {
           deleteFileBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000004);
-        userName_ = "";
+        if (motionSyncBuilder_ == null) {
+          motionSync_ = com.lxd.protobuf.msg.request.console.MotionSync.MotionSync_.getDefaultInstance();
+        } else {
+          motionSyncBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000008);
+        if (syncBuilder_ == null) {
+          sync_ = com.lxd.protobuf.msg.request.console.Sycn.Sync_.getDefaultInstance();
+        } else {
+          syncBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000010);
+        if (downloadFileBuilder_ == null) {
+          downloadFile_ = com.lxd.protobuf.msg.request.console.DownloadFile.DownloadFile_.getDefaultInstance();
+        } else {
+          downloadFileBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000020);
+        userName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -679,6 +961,30 @@ public final class Console {
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
+        if (motionSyncBuilder_ == null) {
+          result.motionSync_ = motionSync_;
+        } else {
+          result.motionSync_ = motionSyncBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        if (syncBuilder_ == null) {
+          result.sync_ = sync_;
+        } else {
+          result.sync_ = syncBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        if (downloadFileBuilder_ == null) {
+          result.downloadFile_ = downloadFile_;
+        } else {
+          result.downloadFile_ = downloadFileBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
         result.userName_ = userName_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -705,8 +1011,17 @@ public final class Console {
         if (other.hasDeleteFile()) {
           mergeDeleteFile(other.getDeleteFile());
         }
+        if (other.hasMotionSync()) {
+          mergeMotionSync(other.getMotionSync());
+        }
+        if (other.hasSync()) {
+          mergeSync(other.getSync());
+        }
+        if (other.hasDownloadFile()) {
+          mergeDownloadFile(other.getDownloadFile());
+        }
         if (other.hasUserName()) {
-          bitField0_ |= 0x00000008;
+          bitField0_ |= 0x00000040;
           userName_ = other.userName_;
           onChanged();
         }
@@ -733,6 +1048,24 @@ public final class Console {
         }
         if (hasDeleteFile()) {
           if (!getDeleteFile().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasMotionSync()) {
+          if (!getMotionSync().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasSync()) {
+          if (!getSync().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasDownloadFile()) {
+          if (!getDownloadFile().isInitialized()) {
             
             return false;
           }
@@ -1218,20 +1551,479 @@ public final class Console {
         return deleteFileBuilder_;
       }
 
-      // required string user_name = 4;
+      // optional .msg.request.console.MotionSync_ motionSync = 4;
+      private com.lxd.protobuf.msg.request.console.MotionSync.MotionSync_ motionSync_ = com.lxd.protobuf.msg.request.console.MotionSync.MotionSync_.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lxd.protobuf.msg.request.console.MotionSync.MotionSync_, com.lxd.protobuf.msg.request.console.MotionSync.MotionSync_.Builder, com.lxd.protobuf.msg.request.console.MotionSync.MotionSync_OrBuilder> motionSyncBuilder_;
+      /**
+       * <code>optional .msg.request.console.MotionSync_ motionSync = 4;</code>
+       *
+       * <pre>
+       *&#47;&lt; 同步内容获取
+       * </pre>
+       */
+      public boolean hasMotionSync() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional .msg.request.console.MotionSync_ motionSync = 4;</code>
+       *
+       * <pre>
+       *&#47;&lt; 同步内容获取
+       * </pre>
+       */
+      public com.lxd.protobuf.msg.request.console.MotionSync.MotionSync_ getMotionSync() {
+        if (motionSyncBuilder_ == null) {
+          return motionSync_;
+        } else {
+          return motionSyncBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .msg.request.console.MotionSync_ motionSync = 4;</code>
+       *
+       * <pre>
+       *&#47;&lt; 同步内容获取
+       * </pre>
+       */
+      public Builder setMotionSync(com.lxd.protobuf.msg.request.console.MotionSync.MotionSync_ value) {
+        if (motionSyncBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          motionSync_ = value;
+          onChanged();
+        } else {
+          motionSyncBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .msg.request.console.MotionSync_ motionSync = 4;</code>
+       *
+       * <pre>
+       *&#47;&lt; 同步内容获取
+       * </pre>
+       */
+      public Builder setMotionSync(
+          com.lxd.protobuf.msg.request.console.MotionSync.MotionSync_.Builder builderForValue) {
+        if (motionSyncBuilder_ == null) {
+          motionSync_ = builderForValue.build();
+          onChanged();
+        } else {
+          motionSyncBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .msg.request.console.MotionSync_ motionSync = 4;</code>
+       *
+       * <pre>
+       *&#47;&lt; 同步内容获取
+       * </pre>
+       */
+      public Builder mergeMotionSync(com.lxd.protobuf.msg.request.console.MotionSync.MotionSync_ value) {
+        if (motionSyncBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) == 0x00000008) &&
+              motionSync_ != com.lxd.protobuf.msg.request.console.MotionSync.MotionSync_.getDefaultInstance()) {
+            motionSync_ =
+              com.lxd.protobuf.msg.request.console.MotionSync.MotionSync_.newBuilder(motionSync_).mergeFrom(value).buildPartial();
+          } else {
+            motionSync_ = value;
+          }
+          onChanged();
+        } else {
+          motionSyncBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .msg.request.console.MotionSync_ motionSync = 4;</code>
+       *
+       * <pre>
+       *&#47;&lt; 同步内容获取
+       * </pre>
+       */
+      public Builder clearMotionSync() {
+        if (motionSyncBuilder_ == null) {
+          motionSync_ = com.lxd.protobuf.msg.request.console.MotionSync.MotionSync_.getDefaultInstance();
+          onChanged();
+        } else {
+          motionSyncBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+      /**
+       * <code>optional .msg.request.console.MotionSync_ motionSync = 4;</code>
+       *
+       * <pre>
+       *&#47;&lt; 同步内容获取
+       * </pre>
+       */
+      public com.lxd.protobuf.msg.request.console.MotionSync.MotionSync_.Builder getMotionSyncBuilder() {
+        bitField0_ |= 0x00000008;
+        onChanged();
+        return getMotionSyncFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .msg.request.console.MotionSync_ motionSync = 4;</code>
+       *
+       * <pre>
+       *&#47;&lt; 同步内容获取
+       * </pre>
+       */
+      public com.lxd.protobuf.msg.request.console.MotionSync.MotionSync_OrBuilder getMotionSyncOrBuilder() {
+        if (motionSyncBuilder_ != null) {
+          return motionSyncBuilder_.getMessageOrBuilder();
+        } else {
+          return motionSync_;
+        }
+      }
+      /**
+       * <code>optional .msg.request.console.MotionSync_ motionSync = 4;</code>
+       *
+       * <pre>
+       *&#47;&lt; 同步内容获取
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lxd.protobuf.msg.request.console.MotionSync.MotionSync_, com.lxd.protobuf.msg.request.console.MotionSync.MotionSync_.Builder, com.lxd.protobuf.msg.request.console.MotionSync.MotionSync_OrBuilder> 
+          getMotionSyncFieldBuilder() {
+        if (motionSyncBuilder_ == null) {
+          motionSyncBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lxd.protobuf.msg.request.console.MotionSync.MotionSync_, com.lxd.protobuf.msg.request.console.MotionSync.MotionSync_.Builder, com.lxd.protobuf.msg.request.console.MotionSync.MotionSync_OrBuilder>(
+                  motionSync_,
+                  getParentForChildren(),
+                  isClean());
+          motionSync_ = null;
+        }
+        return motionSyncBuilder_;
+      }
+
+      // optional .msg.request.console.Sync_ sync = 5;
+      private com.lxd.protobuf.msg.request.console.Sycn.Sync_ sync_ = com.lxd.protobuf.msg.request.console.Sycn.Sync_.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lxd.protobuf.msg.request.console.Sycn.Sync_, com.lxd.protobuf.msg.request.console.Sycn.Sync_.Builder, com.lxd.protobuf.msg.request.console.Sycn.Sync_OrBuilder> syncBuilder_;
+      /**
+       * <code>optional .msg.request.console.Sync_ sync = 5;</code>
+       *
+       * <pre>
+       *&#47;&lt; 同步请求
+       * </pre>
+       */
+      public boolean hasSync() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional .msg.request.console.Sync_ sync = 5;</code>
+       *
+       * <pre>
+       *&#47;&lt; 同步请求
+       * </pre>
+       */
+      public com.lxd.protobuf.msg.request.console.Sycn.Sync_ getSync() {
+        if (syncBuilder_ == null) {
+          return sync_;
+        } else {
+          return syncBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .msg.request.console.Sync_ sync = 5;</code>
+       *
+       * <pre>
+       *&#47;&lt; 同步请求
+       * </pre>
+       */
+      public Builder setSync(com.lxd.protobuf.msg.request.console.Sycn.Sync_ value) {
+        if (syncBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          sync_ = value;
+          onChanged();
+        } else {
+          syncBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000010;
+        return this;
+      }
+      /**
+       * <code>optional .msg.request.console.Sync_ sync = 5;</code>
+       *
+       * <pre>
+       *&#47;&lt; 同步请求
+       * </pre>
+       */
+      public Builder setSync(
+          com.lxd.protobuf.msg.request.console.Sycn.Sync_.Builder builderForValue) {
+        if (syncBuilder_ == null) {
+          sync_ = builderForValue.build();
+          onChanged();
+        } else {
+          syncBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000010;
+        return this;
+      }
+      /**
+       * <code>optional .msg.request.console.Sync_ sync = 5;</code>
+       *
+       * <pre>
+       *&#47;&lt; 同步请求
+       * </pre>
+       */
+      public Builder mergeSync(com.lxd.protobuf.msg.request.console.Sycn.Sync_ value) {
+        if (syncBuilder_ == null) {
+          if (((bitField0_ & 0x00000010) == 0x00000010) &&
+              sync_ != com.lxd.protobuf.msg.request.console.Sycn.Sync_.getDefaultInstance()) {
+            sync_ =
+              com.lxd.protobuf.msg.request.console.Sycn.Sync_.newBuilder(sync_).mergeFrom(value).buildPartial();
+          } else {
+            sync_ = value;
+          }
+          onChanged();
+        } else {
+          syncBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000010;
+        return this;
+      }
+      /**
+       * <code>optional .msg.request.console.Sync_ sync = 5;</code>
+       *
+       * <pre>
+       *&#47;&lt; 同步请求
+       * </pre>
+       */
+      public Builder clearSync() {
+        if (syncBuilder_ == null) {
+          sync_ = com.lxd.protobuf.msg.request.console.Sycn.Sync_.getDefaultInstance();
+          onChanged();
+        } else {
+          syncBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000010);
+        return this;
+      }
+      /**
+       * <code>optional .msg.request.console.Sync_ sync = 5;</code>
+       *
+       * <pre>
+       *&#47;&lt; 同步请求
+       * </pre>
+       */
+      public com.lxd.protobuf.msg.request.console.Sycn.Sync_.Builder getSyncBuilder() {
+        bitField0_ |= 0x00000010;
+        onChanged();
+        return getSyncFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .msg.request.console.Sync_ sync = 5;</code>
+       *
+       * <pre>
+       *&#47;&lt; 同步请求
+       * </pre>
+       */
+      public com.lxd.protobuf.msg.request.console.Sycn.Sync_OrBuilder getSyncOrBuilder() {
+        if (syncBuilder_ != null) {
+          return syncBuilder_.getMessageOrBuilder();
+        } else {
+          return sync_;
+        }
+      }
+      /**
+       * <code>optional .msg.request.console.Sync_ sync = 5;</code>
+       *
+       * <pre>
+       *&#47;&lt; 同步请求
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lxd.protobuf.msg.request.console.Sycn.Sync_, com.lxd.protobuf.msg.request.console.Sycn.Sync_.Builder, com.lxd.protobuf.msg.request.console.Sycn.Sync_OrBuilder> 
+          getSyncFieldBuilder() {
+        if (syncBuilder_ == null) {
+          syncBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lxd.protobuf.msg.request.console.Sycn.Sync_, com.lxd.protobuf.msg.request.console.Sycn.Sync_.Builder, com.lxd.protobuf.msg.request.console.Sycn.Sync_OrBuilder>(
+                  sync_,
+                  getParentForChildren(),
+                  isClean());
+          sync_ = null;
+        }
+        return syncBuilder_;
+      }
+
+      // optional .msg.request.console.DownloadFile_ downloadFile = 6;
+      private com.lxd.protobuf.msg.request.console.DownloadFile.DownloadFile_ downloadFile_ = com.lxd.protobuf.msg.request.console.DownloadFile.DownloadFile_.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lxd.protobuf.msg.request.console.DownloadFile.DownloadFile_, com.lxd.protobuf.msg.request.console.DownloadFile.DownloadFile_.Builder, com.lxd.protobuf.msg.request.console.DownloadFile.DownloadFile_OrBuilder> downloadFileBuilder_;
+      /**
+       * <code>optional .msg.request.console.DownloadFile_ downloadFile = 6;</code>
+       *
+       * <pre>
+       *&#47;&lt; 下载文件
+       * </pre>
+       */
+      public boolean hasDownloadFile() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional .msg.request.console.DownloadFile_ downloadFile = 6;</code>
+       *
+       * <pre>
+       *&#47;&lt; 下载文件
+       * </pre>
+       */
+      public com.lxd.protobuf.msg.request.console.DownloadFile.DownloadFile_ getDownloadFile() {
+        if (downloadFileBuilder_ == null) {
+          return downloadFile_;
+        } else {
+          return downloadFileBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .msg.request.console.DownloadFile_ downloadFile = 6;</code>
+       *
+       * <pre>
+       *&#47;&lt; 下载文件
+       * </pre>
+       */
+      public Builder setDownloadFile(com.lxd.protobuf.msg.request.console.DownloadFile.DownloadFile_ value) {
+        if (downloadFileBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          downloadFile_ = value;
+          onChanged();
+        } else {
+          downloadFileBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000020;
+        return this;
+      }
+      /**
+       * <code>optional .msg.request.console.DownloadFile_ downloadFile = 6;</code>
+       *
+       * <pre>
+       *&#47;&lt; 下载文件
+       * </pre>
+       */
+      public Builder setDownloadFile(
+          com.lxd.protobuf.msg.request.console.DownloadFile.DownloadFile_.Builder builderForValue) {
+        if (downloadFileBuilder_ == null) {
+          downloadFile_ = builderForValue.build();
+          onChanged();
+        } else {
+          downloadFileBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000020;
+        return this;
+      }
+      /**
+       * <code>optional .msg.request.console.DownloadFile_ downloadFile = 6;</code>
+       *
+       * <pre>
+       *&#47;&lt; 下载文件
+       * </pre>
+       */
+      public Builder mergeDownloadFile(com.lxd.protobuf.msg.request.console.DownloadFile.DownloadFile_ value) {
+        if (downloadFileBuilder_ == null) {
+          if (((bitField0_ & 0x00000020) == 0x00000020) &&
+              downloadFile_ != com.lxd.protobuf.msg.request.console.DownloadFile.DownloadFile_.getDefaultInstance()) {
+            downloadFile_ =
+              com.lxd.protobuf.msg.request.console.DownloadFile.DownloadFile_.newBuilder(downloadFile_).mergeFrom(value).buildPartial();
+          } else {
+            downloadFile_ = value;
+          }
+          onChanged();
+        } else {
+          downloadFileBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000020;
+        return this;
+      }
+      /**
+       * <code>optional .msg.request.console.DownloadFile_ downloadFile = 6;</code>
+       *
+       * <pre>
+       *&#47;&lt; 下载文件
+       * </pre>
+       */
+      public Builder clearDownloadFile() {
+        if (downloadFileBuilder_ == null) {
+          downloadFile_ = com.lxd.protobuf.msg.request.console.DownloadFile.DownloadFile_.getDefaultInstance();
+          onChanged();
+        } else {
+          downloadFileBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000020);
+        return this;
+      }
+      /**
+       * <code>optional .msg.request.console.DownloadFile_ downloadFile = 6;</code>
+       *
+       * <pre>
+       *&#47;&lt; 下载文件
+       * </pre>
+       */
+      public com.lxd.protobuf.msg.request.console.DownloadFile.DownloadFile_.Builder getDownloadFileBuilder() {
+        bitField0_ |= 0x00000020;
+        onChanged();
+        return getDownloadFileFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .msg.request.console.DownloadFile_ downloadFile = 6;</code>
+       *
+       * <pre>
+       *&#47;&lt; 下载文件
+       * </pre>
+       */
+      public com.lxd.protobuf.msg.request.console.DownloadFile.DownloadFile_OrBuilder getDownloadFileOrBuilder() {
+        if (downloadFileBuilder_ != null) {
+          return downloadFileBuilder_.getMessageOrBuilder();
+        } else {
+          return downloadFile_;
+        }
+      }
+      /**
+       * <code>optional .msg.request.console.DownloadFile_ downloadFile = 6;</code>
+       *
+       * <pre>
+       *&#47;&lt; 下载文件
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lxd.protobuf.msg.request.console.DownloadFile.DownloadFile_, com.lxd.protobuf.msg.request.console.DownloadFile.DownloadFile_.Builder, com.lxd.protobuf.msg.request.console.DownloadFile.DownloadFile_OrBuilder> 
+          getDownloadFileFieldBuilder() {
+        if (downloadFileBuilder_ == null) {
+          downloadFileBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lxd.protobuf.msg.request.console.DownloadFile.DownloadFile_, com.lxd.protobuf.msg.request.console.DownloadFile.DownloadFile_.Builder, com.lxd.protobuf.msg.request.console.DownloadFile.DownloadFile_OrBuilder>(
+                  downloadFile_,
+                  getParentForChildren(),
+                  isClean());
+          downloadFile_ = null;
+        }
+        return downloadFileBuilder_;
+      }
+
+      // required string user_name = 7;
       private java.lang.Object userName_ = "";
       /**
-       * <code>required string user_name = 4;</code>
+       * <code>required string user_name = 7;</code>
        *
        * <pre>
        *&#47;&lt; 用户编号
        * </pre>
        */
       public boolean hasUserName() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
-       * <code>required string user_name = 4;</code>
+       * <code>required string user_name = 7;</code>
        *
        * <pre>
        *&#47;&lt; 用户编号
@@ -1249,7 +2041,7 @@ public final class Console {
         }
       }
       /**
-       * <code>required string user_name = 4;</code>
+       * <code>required string user_name = 7;</code>
        *
        * <pre>
        *&#47;&lt; 用户编号
@@ -1269,7 +2061,7 @@ public final class Console {
         }
       }
       /**
-       * <code>required string user_name = 4;</code>
+       * <code>required string user_name = 7;</code>
        *
        * <pre>
        *&#47;&lt; 用户编号
@@ -1280,26 +2072,26 @@ public final class Console {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000008;
+  bitField0_ |= 0x00000040;
         userName_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required string user_name = 4;</code>
+       * <code>required string user_name = 7;</code>
        *
        * <pre>
        *&#47;&lt; 用户编号
        * </pre>
        */
       public Builder clearUserName() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000040);
         userName_ = getDefaultInstance().getUserName();
         onChanged();
         return this;
       }
       /**
-       * <code>required string user_name = 4;</code>
+       * <code>required string user_name = 7;</code>
        *
        * <pre>
        *&#47;&lt; 用户编号
@@ -1310,7 +2102,7 @@ public final class Console {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000008;
+  bitField0_ |= 0x00000040;
         userName_ = value;
         onChanged();
         return this;
@@ -1343,13 +2135,18 @@ public final class Console {
     java.lang.String[] descriptorData = {
       "\n\017R_Console.proto\022\023msg.request.console\032\021" +
       "R_C_AddFile.proto\032\024R_C_UpdateFile.proto\032" +
-      "\024R_C_DeleteFile.proto\"\271\001\n\010Console_\022.\n\007ad" +
-      "dFile\030\001 \001(\0132\035.msg.request.console.AddFil" +
-      "e_\0224\n\nupdateFile\030\002 \001(\0132 .msg.request.con" +
-      "sole.UpdateFile_\0224\n\ndeleteFile\030\003 \001(\0132 .m" +
-      "sg.request.console.DeleteFile_\022\021\n\tuser_n" +
-      "ame\030\004 \002(\tB/\n$com.lxd.protobuf.msg.reques" +
-      "t.consoleB\007Console"
+      "\024R_C_DeleteFile.proto\032\024R_C_MotionSync.pr" +
+      "oto\032\016R_C_Sync.proto\032\026R_C_DownloadFile.pr" +
+      "oto\"\323\002\n\010Console_\022.\n\007addFile\030\001 \001(\0132\035.msg." +
+      "request.console.AddFile_\0224\n\nupdateFile\030\002" +
+      " \001(\0132 .msg.request.console.UpdateFile_\0224" +
+      "\n\ndeleteFile\030\003 \001(\0132 .msg.request.console" +
+      ".DeleteFile_\0224\n\nmotionSync\030\004 \001(\0132 .msg.r" +
+      "equest.console.MotionSync_\022(\n\004sync\030\005 \001(\013",
+      "2\032.msg.request.console.Sync_\0228\n\014download" +
+      "File\030\006 \001(\0132\".msg.request.console.Downloa" +
+      "dFile_\022\021\n\tuser_name\030\007 \002(\tB/\n$com.lxd.pro" +
+      "tobuf.msg.request.consoleB\007Console"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -1361,7 +2158,7 @@ public final class Console {
           internal_static_msg_request_console_Console__fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_msg_request_console_Console__descriptor,
-              new java.lang.String[] { "AddFile", "UpdateFile", "DeleteFile", "UserName", });
+              new java.lang.String[] { "AddFile", "UpdateFile", "DeleteFile", "MotionSync", "Sync", "DownloadFile", "UserName", });
           return null;
         }
       };
@@ -1371,6 +2168,9 @@ public final class Console {
           com.lxd.protobuf.msg.request.console.AddFile.getDescriptor(),
           com.lxd.protobuf.msg.request.console.UpdateFile.getDescriptor(),
           com.lxd.protobuf.msg.request.console.DeleteFile.getDescriptor(),
+          com.lxd.protobuf.msg.request.console.MotionSync.getDescriptor(),
+          com.lxd.protobuf.msg.request.console.Sycn.getDescriptor(),
+          com.lxd.protobuf.msg.request.console.DownloadFile.getDescriptor(),
         }, assigner);
   }
 
