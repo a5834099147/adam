@@ -20,10 +20,13 @@ package com.lxd.client.task.result;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.lxd.client.handle.HandleResource;
+import com.lxd.client.resource.property.ServerAddFile;
+import com.lxd.client.resource.property.ServerDeleteFile;
 import com.lxd.client.resource.property.ServerLanding;
 import com.lxd.client.resource.property.ServerRegiest;
+import com.lxd.client.resource.property.ServerUpdateFile;
 import com.lxd.client.task.ClientTask;
-import com.lxd.handle.HandleResource;
 import com.lxd.resource.Resource;
 
 
@@ -74,40 +77,104 @@ public class ResultTask extends ClientTask {
        Object object = Resource.getSingleton().getJobStatus().getProperty(getJobId());
        ///< 如果是注册消息
        if (object instanceof ServerRegiest) {
-           ///< 如果注册成功
-           if (success) {
-               HandleResource.getSingleton().getReg().regSuccess();
-           } else {
-               ///< 如果注册失败
-               HandleResource.getSingleton().getReg().regFail(error_msg);
-           }           
+           register();
        } else if (object instanceof ServerLanding) {
-           ///< 登陆的处理逻辑
-           if (success) {
-               ///< 从任务附加信息中获取用户名
-               ServerLanding msg = (ServerLanding) Resource.getSingleton().getJobStatus().getProperty(getJobId());
-               ///< 将用户名传递给登陆成功处理方法
-               HandleResource.getSingleton().getLogin().loginSuccess(msg.getUser_name());
-           } else {
-               HandleResource.getSingleton().getLogin().loginFail(error_msg);
-           }
-       } 
-       
-       if (success) {
-           if (block != -1) {
-               log.info("任务编号:" + getJobId() + " 块号:" + block + "正确完成");
-           } else {
-               Resource.getSingleton().getJobStatus().setDone(getJobId());
-               log.info("任务编号: " + getJobId() + "正确完成");
-           }           
-       } else {
-           if (block != -1) {
-               //TODO 重试块
-               log.error("任务编号:" + getJobId() + " 块号:" + block + "错误, 错误信息:" + error_msg);
-           } else {
-               //TODO 重试任务
-               log.info("任务编号: " + getJobId() + "错误, 错误信息:" + error_msg);
-           }      
+           landing();
+       } else if (object instanceof ServerAddFile) {
+           addFile();
+       } else if (object instanceof ServerDeleteFile) {
+           deleteFile();
+       } else if (object instanceof ServerUpdateFile) {
+          updateFile();
        }
+       
+       produce();
+    }   
+    
+    /*
+     *  注册
+     */
+    private void register() {
+      ///< 如果注册成功
+        if (success) {
+            HandleResource.getSingleton().getReg().regSuccess();
+        } else {
+            ///< 如果注册失败
+            HandleResource.getSingleton().getReg().regFail(error_msg);
+        }       
+    }
+    
+    /*
+     * 登陆
+     */
+    private void landing() {
+      ///< 登陆的处理逻辑
+        if (success) {
+            ///< 从任务附加信息中获取用户名
+            ServerLanding msg = (ServerLanding) Resource.getSingleton().getJobStatus().getProperty(getJobId());
+            ///< 将用户名传递给登陆成功处理方法
+            HandleResource.getSingleton().getLogin().loginSuccess(msg.getUser_name());
+        } else {
+            HandleResource.getSingleton().getLogin().loginFail(error_msg);
+        }
+    }
+    
+    /*
+     *  增加文件
+     */
+    private void addFile() {
+      ///< 新增文件处理逻辑
+        if (success) {
+            HandleResource.getSingleton().getAddFile().addFileSuccess(getJobId());
+        } else {
+            HandleResource.getSingleton().getAddFile().addFileError(getJobId());
+        }
+    }
+    
+    /*
+     *  删除文件
+     */
+    private void deleteFile() {
+      ///< 删除文件处理逻辑
+        if (success) {
+            HandleResource.getSingleton().getDeleteFile().deleteFileError(getJobId());
+        } else {
+            HandleResource.getSingleton().getDeleteFile().deleteFileError(getJobId());
+        }
+    }
+    
+    /*
+     *  修改文件
+     */
+    private void updateFile() {
+        ///< 修改文件处理逻辑
+        if (success) {
+            HandleResource.getSingleton().getUpdateFile().updateFileSuccess(getJobId());
+        } else {
+            HandleResource.getSingleton().getUpdateFile().updateFileError(getJobId());
+        }
+    }
+    
+    /*
+     *  结束生成
+     */
+    private void produce() {
+        if (success) {
+            if (block != -1) {
+                log.info("任务编号:" + getJobId() + " 块号:" + block + "正确完成");
+            } else {
+                Resource.getSingleton().getJobStatus().setDone(getJobId());
+                log.info("任务编号: " + getJobId() + "正确完成");
+            }           
+        } else {
+            if (block != -1) {
+                //TODO 重试块
+                log.error("任务编号:" + getJobId() + " 块号:" + block + "错误, 错误信息:" + error_msg);
+            } else {
+                //TODO 重试任务
+                log.info("任务编号: " + getJobId() + "错误, 错误信息:" + error_msg);
+            }      
+        }
     }    
+    
 }

@@ -15,39 +15,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.handle;
-
-import com.lxd.client.view.control.UiSingleton;
-import com.lxd.client.view.handle.LoginHandle;
-import com.lxd.client.view.handle.RegHandle;
+package com.lxd.client.handle;
 
 
 /**
- * 句柄处理单例
+ * 新增文件结果处理句柄
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2015年1月5日
+ * @date: 2015年1月8日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public class HandleResource {
-  ///< 单例变量
-    private static HandleResource singleton = new HandleResource();
-        
-    private HandleResource() {
-    }   
-    
-    public static HandleResource getSingleton() {
-        return singleton;
-    }       
-
-    ///< 获得登陆处理句柄
-    public LoginHandle getLogin() {
-        return UiSingleton.getSingleton().getLoginPanel();
-    }
-    
-    ///< 获得注册处理句柄
-    public RegHandle getReg() {
-        return UiSingleton.getSingleton().getRegPanel();
-    }
+public interface AddFileHandle {
+    ///< 新增文件成功
+    void addFileSuccess(Long id);
+    ///< 新增文件失败
+    void addFileError(Long id);
 }

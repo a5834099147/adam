@@ -27,10 +27,13 @@ import com.lxd.protobuf.msg.result.Result.Result_;
 import com.lxd.protobuf.msg.result.Result.Result_.Repleish;
 import com.lxd.resource.Resource;
 import com.lxd.server.entity.File;
+import com.lxd.server.entity.Log;
 import com.lxd.server.resource.ServerResource;
 import com.lxd.server.resource.property.ConsoleUpdataFile;
 import com.lxd.server.service.FileServer;
+import com.lxd.server.service.LogServer;
 import com.lxd.server.service.impl.FileServerImpl;
+import com.lxd.server.service.impl.LogServerImpl;
 import com.lxd.server.task.job.JobTask;
 import com.lxd.sync.RsyncUtil;
 import com.lxd.utils.Define;
@@ -54,6 +57,8 @@ public class UpdateFileTask extends JobTask {
     private List<Patch> patch;    
     ///< 文件服务实体
     private FileServer server = new FileServerImpl();
+    ///< 日志服务实体
+    private LogServer logServer = new LogServerImpl();
     
     private static final Logger log = LogManager.getLogger(UpdateFileTask.class);
     
@@ -102,6 +107,14 @@ public class UpdateFileTask extends JobTask {
                     result.setSuccess(true);
                     log.info("任务编号" + getJobId() + " 修改文件任务完成");                
                     server.updateFile(oldFile, pro.getMd5(), pro.getLength(), pro.getLast());
+                    
+                    ///< 保存业务日志
+                    Log log_ = new Log();
+                    log_.setId(getJobId());
+                    log_.setState(true);
+                    log_.setUser_name(pro.getUser_name());
+                    logServer.addLog(log_);
+                    ///< 向远端投递新修改文件
                     ServerResource.getSingleton().submitFile(new java.io.File(Grnerate.getPath(pro.getMd5(), pro.getLength())));
                 } else {
                     result.setSuccess(true);

@@ -15,33 +15,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.utils;
-
+package com.lxd.client.handle;
 
 /**
- * 生成类属工具
+ * 登陆处理逻辑
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2014年12月18日
+ * @date: 2015年1月3日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public class Grnerate {
-    
-    static private Long task_id = 1L;
-    
-    ///< 获取ID
-    public static Long getTaskId() {
-        synchronized (task_id) {
-            return System.currentTimeMillis() + task_id++;
-        }
-    }
-    
-    public static String getPath(String md5, Long length) {
-        return Define.REMOTE + md5 + "_" + length;
-    }
-    
-    public static String getClientPath(String path) {
-        return path.substring(Define.CLIENT.length());
-    }
+public interface LoginHandle {
+	void loginSuccess(String user);
+	void loginFail(String msg);
 }

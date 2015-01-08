@@ -24,10 +24,13 @@ import com.lxd.protobuf.msg.result.Result.Result_;
 import com.lxd.protobuf.msg.result.Result.Result_.Repleish;
 import com.lxd.resource.Resource;
 import com.lxd.server.entity.File;
+import com.lxd.server.entity.Log;
 import com.lxd.server.resource.ServerResource;
 import com.lxd.server.resource.property.ConsoleAddFile;
 import com.lxd.server.service.FileServer;
+import com.lxd.server.service.LogServer;
 import com.lxd.server.service.impl.FileServerImpl;
+import com.lxd.server.service.impl.LogServerImpl;
 import com.lxd.server.task.job.JobTask;
 import com.lxd.utils.Define;
 import com.lxd.utils.Grnerate;
@@ -52,6 +55,8 @@ public class AddFileTask extends JobTask {
     private byte[] datas;
     ///< 文件服务
     private FileServer fileServer = new FileServerImpl();
+    ///< 日志服务
+    private LogServer logServer = new LogServerImpl();
     
     public void setTotal_lump(int total_lump) {
         this.total_lump = total_lump;
@@ -85,6 +90,13 @@ public class AddFileTask extends JobTask {
                 result.setSuccess(true);
                 log.info("任务编号" + getJobId() + " 添加文件任务完成");
                 
+                ///< 保存业务日志
+                Log log_ = new Log();
+                log_.setId(getJobId());
+                log_.setState(true);
+                log_.setUser_name(property.getUser_name());
+                logServer.addLog(log_);
+                
                 File file = new File();
                 file.setLength(property.getLength());
                 file.setMd5(property.getMd5());
@@ -93,6 +105,7 @@ public class AddFileTask extends JobTask {
                 file.setLast(property.getLast());
                 
                 fileServer.addFile(file);
+                ///< 向远端服务器投递文件
                 ServerResource.getSingleton().submitFile(new java.io.File(Grnerate.getPath(property.getMd5(), property.getLength())));
             } else {
                 result.setSuccess(true);

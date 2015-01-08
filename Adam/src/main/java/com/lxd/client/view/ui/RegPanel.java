@@ -45,11 +45,13 @@ import javax.swing.border.LineBorder;
 
 
 
+
+
+import com.lxd.client.handle.RegHandle;
 import com.lxd.client.resource.ClientResource;
 import com.lxd.client.resource.RequestPackage;
 import com.lxd.client.resource.property.ServerRegiest;
 import com.lxd.client.view.control.UiSingleton;
-import com.lxd.client.view.handle.RegHandle;
 import com.lxd.protobuf.msg.Msg.Msg_;
 import com.lxd.protobuf.msg.request.Request.Request_;
 import com.lxd.protobuf.msg.request.user.Register.Register_;

@@ -47,12 +47,12 @@ import javax.swing.border.LineBorder;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
+import com.lxd.client.handle.LoginHandle;
 import com.lxd.client.monitor.MonitorDir;
 import com.lxd.client.resource.ClientResource;
 import com.lxd.client.resource.RequestPackage;
 import com.lxd.client.resource.property.ServerLanding;
 import com.lxd.client.view.control.UiSingleton;
-import com.lxd.client.view.handle.LoginHandle;
 import com.lxd.client.view.ui.util.ViewUtil;
 import com.lxd.protobuf.msg.Msg.Msg_;
 import com.lxd.protobuf.msg.request.Request.Request_;
@@ -446,6 +446,9 @@ public class LoginPanel extends JPanel implements LoginHandle {
 	public void loginSuccess(String user) {
 	    ///< 将用户名注册给界面
 	    UiSingleton.getSingleton().setUser(user);
+	    ///< 弹窗
+        JOptionPane.showMessageDialog(null, user + ", 欢迎您" , "登陆成功", JOptionPane.INFORMATION_MESSAGE);        
+	    
 	    ///< 开启监听服务
 	    new MonitorDir(Define.CLIENT).start();
 	    //TODO 跳转页面

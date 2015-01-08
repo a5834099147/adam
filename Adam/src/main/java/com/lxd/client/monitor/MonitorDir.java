@@ -157,9 +157,13 @@ public class MonitorDir extends Thread{
         console.setUserName(UiSingleton.getSingleton().getUser());
         ///< 控制台请求信息增加文件构造器
         AddFile_.Builder addFile = AddFile_.newBuilder();
+        
+        ///< 文件md5
+        String md5 = null;
         try {
             ///< 计算文件的MD5值
-            addFile.setMd5(MD5.getFileMD5String(file));
+            md5 = MD5.getFileMD5String(file);
+            addFile.setMd5(md5);
         } catch (Exception e) {
             ///< 写入值出错
             log.error(e.getMessage());
@@ -176,7 +180,7 @@ public class MonitorDir extends Thread{
         ///< 交给函数最终打包
         Msg_ msg_ = packing(console.build());
         
-        ClientResource.getSingleton().submitRequest(new RequestPackage(msg_, new ServerAddFile(file.getAbsolutePath())));
+        ClientResource.getSingleton().submitRequest(new RequestPackage(msg_, new ServerAddFile(file.getAbsolutePath(), md5, file.length(), file.lastModified())));
     }
     
     /*
@@ -193,9 +197,12 @@ public class MonitorDir extends Thread{
         updateFile.setLength(file.length());
         ///< 将修改文件的最后修改时间加入到构建器中
         updateFile.setLast(file.lastModified());
+        ///< 文件 md5
+        String md5 = null;
         try {
             ///< 将修改文件的MD5值加入到构建器中
-            updateFile.setMd5(MD5.getFileMD5String(file));
+            md5 = MD5.getFileMD5String(file);
+            updateFile.setMd5(md5);
         } catch (Exception e) {
             ///< 写入值, 计算时出现IO错误
             log.error(e.getMessage());
@@ -208,7 +215,7 @@ public class MonitorDir extends Thread{
         ///< 交给函数最终打包并返回
         Msg_ msg_ = packing(console.build());
         
-        ClientResource.getSingleton().submitRequest(new RequestPackage(msg_, new ServerUpdateFile(file.getAbsolutePath())));
+        ClientResource.getSingleton().submitRequest(new RequestPackage(msg_, new ServerUpdateFile(file.getAbsolutePath(), md5, file.length(), file.lastModified())));
     }
     
     /*

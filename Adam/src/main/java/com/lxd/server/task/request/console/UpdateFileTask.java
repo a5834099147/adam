@@ -27,9 +27,12 @@ import com.lxd.protobuf.msg.job.server.UpdateFile.UpdateFile_;
 import com.lxd.protobuf.msg.result.Result.Result_;
 import com.lxd.resource.Resource;
 import com.lxd.server.entity.File;
+import com.lxd.server.entity.Log;
 import com.lxd.server.resource.property.ConsoleUpdataFile;
 import com.lxd.server.service.FileServer;
+import com.lxd.server.service.LogServer;
 import com.lxd.server.service.impl.FileServerImpl;
+import com.lxd.server.service.impl.LogServerImpl;
 import com.lxd.sync.Chunk;
 import com.lxd.sync.RsyncUtil;
 import com.lxd.utils.Grnerate;
@@ -71,6 +74,7 @@ public class UpdateFileTask extends ConsoleTask {
     }
     
     private FileServer fileServer = new FileServerImpl();
+    private LogServer logServer = new LogServerImpl();
 
     @Override
     public Msg_ taskExecute() {
@@ -82,6 +86,12 @@ public class UpdateFileTask extends ConsoleTask {
             ///< 更新表信息
             fileServer.updateFile(oldFile, md5, length, last);
             
+            ///< 保存业务日志
+            Log log_ = new Log();
+            log_.setId(getJobId());
+            log_.setState(true);
+            log_.setUser_name(getUser_name());
+            logServer.addLog(log_);
             ///< 回复结果消息
             Msg_.Builder msg = Msg_.newBuilder();
             msg.setJobId(getJobId());

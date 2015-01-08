@@ -44,7 +44,7 @@ public class FileDaoImpl implements FileDao {
         PreparedStatement  statement = null;
         try {
             ///< 创建 SQL
-            String sql = "insert into File(user_name, md5, length, path) values(?, ?, ?, ?)";
+            String sql = "insert into File(user_name, md5, length, path, last) values(?, ?, ?, ?, ?)";
             ///< 创建事务
             statement = connection.prepareStatement(sql);
             
@@ -53,6 +53,7 @@ public class FileDaoImpl implements FileDao {
             statement.setString(2, file.getMd5());
             statement.setLong(3, file.getLength());
             statement.setString(4, file.getPath());
+            statement.setLong(5, file.getLast());
             
             ///< 运行
             statement.executeUpdate();
@@ -108,6 +109,7 @@ public class FileDaoImpl implements FileDao {
                 file.setMd5(resultSet.getString(3));
                 file.setLength(resultSet.getLong(4));
                 file.setPath(resultSet.getString(5));
+                file.setLast(resultSet.getLong(6));
                 files.add(file);
             }         
         } catch (SQLException e) {
@@ -124,15 +126,16 @@ public class FileDaoImpl implements FileDao {
         PreparedStatement  statement = null;
         try {
             ///< 创建 SQL
-            String sql = "update File set md5 = ?, length = ? where user_name = ? and path = ? ";
+            String sql = "update File set md5 = ?, length = ?, last = ? where user_name = ? and path = ? ";
             ///< 创建事务
             statement = connection.prepareStatement(sql);
             
             ///< 设置值
             statement.setString(1, file.getMd5());
             statement.setLong(2, file.getLength());
-            statement.setString(3, file.getUser_name());
-            statement.setString(4, file.getPath());
+            statement.setLong(3, file.getLast());
+            statement.setString(4, file.getUser_name());
+            statement.setString(5, file.getPath());
             
             ///< 运行
             statement.executeUpdate();
