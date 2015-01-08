@@ -11,50 +11,32 @@ public final class DownloadFile {
   public interface DownloadFile_OrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // required string md5 = 1;
+    // required string path = 1;
     /**
-     * <code>required string md5 = 1;</code>
+     * <code>required string path = 1;</code>
      *
      * <pre>
-     *&#47;&lt; 文件 md5
+     *&#47;&lt; 需要下载的文件路径
      * </pre>
      */
-    boolean hasMd5();
+    boolean hasPath();
     /**
-     * <code>required string md5 = 1;</code>
+     * <code>required string path = 1;</code>
      *
      * <pre>
-     *&#47;&lt; 文件 md5
+     *&#47;&lt; 需要下载的文件路径
      * </pre>
      */
-    java.lang.String getMd5();
+    java.lang.String getPath();
     /**
-     * <code>required string md5 = 1;</code>
+     * <code>required string path = 1;</code>
      *
      * <pre>
-     *&#47;&lt; 文件 md5
+     *&#47;&lt; 需要下载的文件路径
      * </pre>
      */
     com.google.protobuf.ByteString
-        getMd5Bytes();
-
-    // required int64 length = 2;
-    /**
-     * <code>required int64 length = 2;</code>
-     *
-     * <pre>
-     *&#47;&lt; 文件长度
-     * </pre>
-     */
-    boolean hasLength();
-    /**
-     * <code>required int64 length = 2;</code>
-     *
-     * <pre>
-     *&#47;&lt; 文件长度
-     * </pre>
-     */
-    long getLength();
+        getPathBytes();
   }
   /**
    * Protobuf type {@code msg.request.console.DownloadFile_}
@@ -109,12 +91,7 @@ public final class DownloadFile {
             }
             case 10: {
               bitField0_ |= 0x00000001;
-              md5_ = input.readBytes();
-              break;
-            }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              length_ = input.readInt64();
+              path_ = input.readBytes();
               break;
             }
           }
@@ -157,28 +134,28 @@ public final class DownloadFile {
     }
 
     private int bitField0_;
-    // required string md5 = 1;
-    public static final int MD5_FIELD_NUMBER = 1;
-    private java.lang.Object md5_;
+    // required string path = 1;
+    public static final int PATH_FIELD_NUMBER = 1;
+    private java.lang.Object path_;
     /**
-     * <code>required string md5 = 1;</code>
+     * <code>required string path = 1;</code>
      *
      * <pre>
-     *&#47;&lt; 文件 md5
+     *&#47;&lt; 需要下载的文件路径
      * </pre>
      */
-    public boolean hasMd5() {
+    public boolean hasPath() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required string md5 = 1;</code>
+     * <code>required string path = 1;</code>
      *
      * <pre>
-     *&#47;&lt; 文件 md5
+     *&#47;&lt; 需要下载的文件路径
      * </pre>
      */
-    public java.lang.String getMd5() {
-      java.lang.Object ref = md5_;
+    public java.lang.String getPath() {
+      java.lang.Object ref = path_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
@@ -186,70 +163,41 @@ public final class DownloadFile {
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
-          md5_ = s;
+          path_ = s;
         }
         return s;
       }
     }
     /**
-     * <code>required string md5 = 1;</code>
+     * <code>required string path = 1;</code>
      *
      * <pre>
-     *&#47;&lt; 文件 md5
+     *&#47;&lt; 需要下载的文件路径
      * </pre>
      */
     public com.google.protobuf.ByteString
-        getMd5Bytes() {
-      java.lang.Object ref = md5_;
+        getPathBytes() {
+      java.lang.Object ref = path_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        md5_ = b;
+        path_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
 
-    // required int64 length = 2;
-    public static final int LENGTH_FIELD_NUMBER = 2;
-    private long length_;
-    /**
-     * <code>required int64 length = 2;</code>
-     *
-     * <pre>
-     *&#47;&lt; 文件长度
-     * </pre>
-     */
-    public boolean hasLength() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>required int64 length = 2;</code>
-     *
-     * <pre>
-     *&#47;&lt; 文件长度
-     * </pre>
-     */
-    public long getLength() {
-      return length_;
-    }
-
     private void initFields() {
-      md5_ = "";
-      length_ = 0L;
+      path_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
 
-      if (!hasMd5()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasLength()) {
+      if (!hasPath()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -261,10 +209,7 @@ public final class DownloadFile {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, getMd5Bytes());
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt64(2, length_);
+        output.writeBytes(1, getPathBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -277,11 +222,7 @@ public final class DownloadFile {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, getMd5Bytes());
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(2, length_);
+          .computeBytesSize(1, getPathBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -399,10 +340,8 @@ public final class DownloadFile {
 
       public Builder clear() {
         super.clear();
-        md5_ = "";
+        path_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
-        length_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -434,11 +373,7 @@ public final class DownloadFile {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.md5_ = md5_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.length_ = length_;
+        result.path_ = path_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -455,24 +390,17 @@ public final class DownloadFile {
 
       public Builder mergeFrom(com.lxd.protobuf.msg.request.console.DownloadFile.DownloadFile_ other) {
         if (other == com.lxd.protobuf.msg.request.console.DownloadFile.DownloadFile_.getDefaultInstance()) return this;
-        if (other.hasMd5()) {
+        if (other.hasPath()) {
           bitField0_ |= 0x00000001;
-          md5_ = other.md5_;
+          path_ = other.path_;
           onChanged();
-        }
-        if (other.hasLength()) {
-          setLength(other.getLength());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
       public final boolean isInitialized() {
-        if (!hasMd5()) {
-          
-          return false;
-        }
-        if (!hasLength()) {
+        if (!hasPath()) {
           
           return false;
         }
@@ -498,149 +426,100 @@ public final class DownloadFile {
       }
       private int bitField0_;
 
-      // required string md5 = 1;
-      private java.lang.Object md5_ = "";
+      // required string path = 1;
+      private java.lang.Object path_ = "";
       /**
-       * <code>required string md5 = 1;</code>
+       * <code>required string path = 1;</code>
        *
        * <pre>
-       *&#47;&lt; 文件 md5
+       *&#47;&lt; 需要下载的文件路径
        * </pre>
        */
-      public boolean hasMd5() {
+      public boolean hasPath() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>required string md5 = 1;</code>
+       * <code>required string path = 1;</code>
        *
        * <pre>
-       *&#47;&lt; 文件 md5
+       *&#47;&lt; 需要下载的文件路径
        * </pre>
        */
-      public java.lang.String getMd5() {
-        java.lang.Object ref = md5_;
+      public java.lang.String getPath() {
+        java.lang.Object ref = path_;
         if (!(ref instanceof java.lang.String)) {
           java.lang.String s = ((com.google.protobuf.ByteString) ref)
               .toStringUtf8();
-          md5_ = s;
+          path_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>required string md5 = 1;</code>
+       * <code>required string path = 1;</code>
        *
        * <pre>
-       *&#47;&lt; 文件 md5
+       *&#47;&lt; 需要下载的文件路径
        * </pre>
        */
       public com.google.protobuf.ByteString
-          getMd5Bytes() {
-        java.lang.Object ref = md5_;
+          getPathBytes() {
+        java.lang.Object ref = path_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          md5_ = b;
+          path_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>required string md5 = 1;</code>
+       * <code>required string path = 1;</code>
        *
        * <pre>
-       *&#47;&lt; 文件 md5
+       *&#47;&lt; 需要下载的文件路径
        * </pre>
        */
-      public Builder setMd5(
+      public Builder setPath(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000001;
-        md5_ = value;
+        path_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required string md5 = 1;</code>
+       * <code>required string path = 1;</code>
        *
        * <pre>
-       *&#47;&lt; 文件 md5
+       *&#47;&lt; 需要下载的文件路径
        * </pre>
        */
-      public Builder clearMd5() {
+      public Builder clearPath() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        md5_ = getDefaultInstance().getMd5();
+        path_ = getDefaultInstance().getPath();
         onChanged();
         return this;
       }
       /**
-       * <code>required string md5 = 1;</code>
+       * <code>required string path = 1;</code>
        *
        * <pre>
-       *&#47;&lt; 文件 md5
+       *&#47;&lt; 需要下载的文件路径
        * </pre>
        */
-      public Builder setMd5Bytes(
+      public Builder setPathBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000001;
-        md5_ = value;
-        onChanged();
-        return this;
-      }
-
-      // required int64 length = 2;
-      private long length_ ;
-      /**
-       * <code>required int64 length = 2;</code>
-       *
-       * <pre>
-       *&#47;&lt; 文件长度
-       * </pre>
-       */
-      public boolean hasLength() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>required int64 length = 2;</code>
-       *
-       * <pre>
-       *&#47;&lt; 文件长度
-       * </pre>
-       */
-      public long getLength() {
-        return length_;
-      }
-      /**
-       * <code>required int64 length = 2;</code>
-       *
-       * <pre>
-       *&#47;&lt; 文件长度
-       * </pre>
-       */
-      public Builder setLength(long value) {
-        bitField0_ |= 0x00000002;
-        length_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required int64 length = 2;</code>
-       *
-       * <pre>
-       *&#47;&lt; 文件长度
-       * </pre>
-       */
-      public Builder clearLength() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        length_ = 0L;
+        path_ = value;
         onChanged();
         return this;
       }
@@ -671,9 +550,9 @@ public final class DownloadFile {
   static {
     java.lang.String[] descriptorData = {
       "\n\026R_C_DownloadFile.proto\022\023msg.request.co" +
-      "nsole\",\n\rDownloadFile_\022\013\n\003md5\030\001 \002(\t\022\016\n\006l" +
-      "ength\030\002 \002(\003B4\n$com.lxd.protobuf.msg.requ" +
-      "est.consoleB\014DownloadFile"
+      "nsole\"\035\n\rDownloadFile_\022\014\n\004path\030\001 \002(\tB4\n$" +
+      "com.lxd.protobuf.msg.request.consoleB\014Do" +
+      "wnloadFile"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -685,7 +564,7 @@ public final class DownloadFile {
           internal_static_msg_request_console_DownloadFile__fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_msg_request_console_DownloadFile__descriptor,
-              new java.lang.String[] { "Md5", "Length", });
+              new java.lang.String[] { "Path", });
           return null;
         }
       };

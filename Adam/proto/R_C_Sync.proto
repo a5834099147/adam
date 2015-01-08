@@ -1,9 +1,0 @@
-package msg.request.console;
-option java_package="com.lxd.protobuf.msg.request.console";
-option java_outer_classname="Sycn";
-
-///< 同步请求
-message Sync_{ 
-	///< 用户最后一条日志编号
-	required int64 id = 1;
-}

@@ -3,6 +3,6 @@ option java_package="com.lxd.protobuf.msg.job.server";
 option java_outer_classname="DownloadFile";
 
 message DownloadFile_{ 
-	///<文件内容网络地址
+	///<文件内容网络地址(初步方案)
 	required string httpPath = 1;
 }

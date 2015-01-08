@@ -2,9 +2,7 @@ package msg.request.console;
 option java_package="com.lxd.protobuf.msg.request.console";
 option java_outer_classname="DownloadFile";
 
-message DownloadFile_{ 
-	///< 文件 md5
-	required string md5 = 1;
-	///< 文件长度
-	required int64 length = 2;
+message DownloadFile_{
+	///< 需要下载的文件路径
+	required string path = 1;
 }

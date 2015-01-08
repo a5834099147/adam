@@ -16,7 +16,7 @@ public final class DownloadFile {
      * <code>required string httpPath = 1;</code>
      *
      * <pre>
-     *&#47;&lt;文件内容网络地址
+     *&#47;&lt;文件内容网络地址(初步方案)
      * </pre>
      */
     boolean hasHttpPath();
@@ -24,7 +24,7 @@ public final class DownloadFile {
      * <code>required string httpPath = 1;</code>
      *
      * <pre>
-     *&#47;&lt;文件内容网络地址
+     *&#47;&lt;文件内容网络地址(初步方案)
      * </pre>
      */
     java.lang.String getHttpPath();
@@ -32,7 +32,7 @@ public final class DownloadFile {
      * <code>required string httpPath = 1;</code>
      *
      * <pre>
-     *&#47;&lt;文件内容网络地址
+     *&#47;&lt;文件内容网络地址(初步方案)
      * </pre>
      */
     com.google.protobuf.ByteString
@@ -141,7 +141,7 @@ public final class DownloadFile {
      * <code>required string httpPath = 1;</code>
      *
      * <pre>
-     *&#47;&lt;文件内容网络地址
+     *&#47;&lt;文件内容网络地址(初步方案)
      * </pre>
      */
     public boolean hasHttpPath() {
@@ -151,7 +151,7 @@ public final class DownloadFile {
      * <code>required string httpPath = 1;</code>
      *
      * <pre>
-     *&#47;&lt;文件内容网络地址
+     *&#47;&lt;文件内容网络地址(初步方案)
      * </pre>
      */
     public java.lang.String getHttpPath() {
@@ -172,7 +172,7 @@ public final class DownloadFile {
      * <code>required string httpPath = 1;</code>
      *
      * <pre>
-     *&#47;&lt;文件内容网络地址
+     *&#47;&lt;文件内容网络地址(初步方案)
      * </pre>
      */
     public com.google.protobuf.ByteString
@@ -432,7 +432,7 @@ public final class DownloadFile {
        * <code>required string httpPath = 1;</code>
        *
        * <pre>
-       *&#47;&lt;文件内容网络地址
+       *&#47;&lt;文件内容网络地址(初步方案)
        * </pre>
        */
       public boolean hasHttpPath() {
@@ -442,7 +442,7 @@ public final class DownloadFile {
        * <code>required string httpPath = 1;</code>
        *
        * <pre>
-       *&#47;&lt;文件内容网络地址
+       *&#47;&lt;文件内容网络地址(初步方案)
        * </pre>
        */
       public java.lang.String getHttpPath() {
@@ -460,7 +460,7 @@ public final class DownloadFile {
        * <code>required string httpPath = 1;</code>
        *
        * <pre>
-       *&#47;&lt;文件内容网络地址
+       *&#47;&lt;文件内容网络地址(初步方案)
        * </pre>
        */
       public com.google.protobuf.ByteString
@@ -480,7 +480,7 @@ public final class DownloadFile {
        * <code>required string httpPath = 1;</code>
        *
        * <pre>
-       *&#47;&lt;文件内容网络地址
+       *&#47;&lt;文件内容网络地址(初步方案)
        * </pre>
        */
       public Builder setHttpPath(
@@ -497,7 +497,7 @@ public final class DownloadFile {
        * <code>required string httpPath = 1;</code>
        *
        * <pre>
-       *&#47;&lt;文件内容网络地址
+       *&#47;&lt;文件内容网络地址(初步方案)
        * </pre>
        */
       public Builder clearHttpPath() {
@@ -510,7 +510,7 @@ public final class DownloadFile {
        * <code>required string httpPath = 1;</code>
        *
        * <pre>
-       *&#47;&lt;文件内容网络地址
+       *&#47;&lt;文件内容网络地址(初步方案)
        * </pre>
        */
       public Builder setHttpPathBytes(

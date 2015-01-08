@@ -63,35 +63,9 @@ public final class Console {
      */
     com.lxd.protobuf.msg.job.console.UpdateFile.UpdateFile_OrBuilder getUpdateFileOrBuilder();
 
-    // optional .msg.job.console.MotionSync_ motionSync = 3;
+    // optional .msg.job.console.DownloadFile_ downloadFile = 3;
     /**
-     * <code>optional .msg.job.console.MotionSync_ motionSync = 3;</code>
-     *
-     * <pre>
-     *&#47;&lt; 同步申请
-     * </pre>
-     */
-    boolean hasMotionSync();
-    /**
-     * <code>optional .msg.job.console.MotionSync_ motionSync = 3;</code>
-     *
-     * <pre>
-     *&#47;&lt; 同步申请
-     * </pre>
-     */
-    com.lxd.protobuf.msg.job.console.MotionSync.MotionSync_ getMotionSync();
-    /**
-     * <code>optional .msg.job.console.MotionSync_ motionSync = 3;</code>
-     *
-     * <pre>
-     *&#47;&lt; 同步申请
-     * </pre>
-     */
-    com.lxd.protobuf.msg.job.console.MotionSync.MotionSync_OrBuilder getMotionSyncOrBuilder();
-
-    // optional .msg.job.console.DownloadFile_ downloadFile = 4;
-    /**
-     * <code>optional .msg.job.console.DownloadFile_ downloadFile = 4;</code>
+     * <code>optional .msg.job.console.DownloadFile_ downloadFile = 3;</code>
      *
      * <pre>
      *&#47;&lt; 下载文件
@@ -99,7 +73,7 @@ public final class Console {
      */
     boolean hasDownloadFile();
     /**
-     * <code>optional .msg.job.console.DownloadFile_ downloadFile = 4;</code>
+     * <code>optional .msg.job.console.DownloadFile_ downloadFile = 3;</code>
      *
      * <pre>
      *&#47;&lt; 下载文件
@@ -107,7 +81,7 @@ public final class Console {
      */
     com.lxd.protobuf.msg.job.console.DownloadFile.DownloadFile_ getDownloadFile();
     /**
-     * <code>optional .msg.job.console.DownloadFile_ downloadFile = 4;</code>
+     * <code>optional .msg.job.console.DownloadFile_ downloadFile = 3;</code>
      *
      * <pre>
      *&#47;&lt; 下载文件
@@ -193,21 +167,8 @@ public final class Console {
               break;
             }
             case 26: {
-              com.lxd.protobuf.msg.job.console.MotionSync.MotionSync_.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000004) == 0x00000004)) {
-                subBuilder = motionSync_.toBuilder();
-              }
-              motionSync_ = input.readMessage(com.lxd.protobuf.msg.job.console.MotionSync.MotionSync_.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(motionSync_);
-                motionSync_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000004;
-              break;
-            }
-            case 34: {
               com.lxd.protobuf.msg.job.console.DownloadFile.DownloadFile_.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000008) == 0x00000008)) {
+              if (((bitField0_ & 0x00000004) == 0x00000004)) {
                 subBuilder = downloadFile_.toBuilder();
               }
               downloadFile_ = input.readMessage(com.lxd.protobuf.msg.job.console.DownloadFile.DownloadFile_.PARSER, extensionRegistry);
@@ -215,7 +176,7 @@ public final class Console {
                 subBuilder.mergeFrom(downloadFile_);
                 downloadFile_ = subBuilder.buildPartial();
               }
-              bitField0_ |= 0x00000008;
+              bitField0_ |= 0x00000004;
               break;
             }
           }
@@ -326,55 +287,21 @@ public final class Console {
       return updateFile_;
     }
 
-    // optional .msg.job.console.MotionSync_ motionSync = 3;
-    public static final int MOTIONSYNC_FIELD_NUMBER = 3;
-    private com.lxd.protobuf.msg.job.console.MotionSync.MotionSync_ motionSync_;
-    /**
-     * <code>optional .msg.job.console.MotionSync_ motionSync = 3;</code>
-     *
-     * <pre>
-     *&#47;&lt; 同步申请
-     * </pre>
-     */
-    public boolean hasMotionSync() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>optional .msg.job.console.MotionSync_ motionSync = 3;</code>
-     *
-     * <pre>
-     *&#47;&lt; 同步申请
-     * </pre>
-     */
-    public com.lxd.protobuf.msg.job.console.MotionSync.MotionSync_ getMotionSync() {
-      return motionSync_;
-    }
-    /**
-     * <code>optional .msg.job.console.MotionSync_ motionSync = 3;</code>
-     *
-     * <pre>
-     *&#47;&lt; 同步申请
-     * </pre>
-     */
-    public com.lxd.protobuf.msg.job.console.MotionSync.MotionSync_OrBuilder getMotionSyncOrBuilder() {
-      return motionSync_;
-    }
-
-    // optional .msg.job.console.DownloadFile_ downloadFile = 4;
-    public static final int DOWNLOADFILE_FIELD_NUMBER = 4;
+    // optional .msg.job.console.DownloadFile_ downloadFile = 3;
+    public static final int DOWNLOADFILE_FIELD_NUMBER = 3;
     private com.lxd.protobuf.msg.job.console.DownloadFile.DownloadFile_ downloadFile_;
     /**
-     * <code>optional .msg.job.console.DownloadFile_ downloadFile = 4;</code>
+     * <code>optional .msg.job.console.DownloadFile_ downloadFile = 3;</code>
      *
      * <pre>
      *&#47;&lt; 下载文件
      * </pre>
      */
     public boolean hasDownloadFile() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional .msg.job.console.DownloadFile_ downloadFile = 4;</code>
+     * <code>optional .msg.job.console.DownloadFile_ downloadFile = 3;</code>
      *
      * <pre>
      *&#47;&lt; 下载文件
@@ -384,7 +311,7 @@ public final class Console {
       return downloadFile_;
     }
     /**
-     * <code>optional .msg.job.console.DownloadFile_ downloadFile = 4;</code>
+     * <code>optional .msg.job.console.DownloadFile_ downloadFile = 3;</code>
      *
      * <pre>
      *&#47;&lt; 下载文件
@@ -397,7 +324,6 @@ public final class Console {
     private void initFields() {
       addFile_ = com.lxd.protobuf.msg.job.console.AddFile.AddFile_.getDefaultInstance();
       updateFile_ = com.lxd.protobuf.msg.job.console.UpdateFile.UpdateFile_.getDefaultInstance();
-      motionSync_ = com.lxd.protobuf.msg.job.console.MotionSync.MotionSync_.getDefaultInstance();
       downloadFile_ = com.lxd.protobuf.msg.job.console.DownloadFile.DownloadFile_.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
@@ -413,12 +339,6 @@ public final class Console {
       }
       if (hasUpdateFile()) {
         if (!getUpdateFile().isInitialized()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-      }
-      if (hasMotionSync()) {
-        if (!getMotionSync().isInitialized()) {
           memoizedIsInitialized = 0;
           return false;
         }
@@ -443,10 +363,7 @@ public final class Console {
         output.writeMessage(2, updateFile_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeMessage(3, motionSync_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeMessage(4, downloadFile_);
+        output.writeMessage(3, downloadFile_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -467,11 +384,7 @@ public final class Console {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, motionSync_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, downloadFile_);
+          .computeMessageSize(3, downloadFile_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -583,7 +496,6 @@ public final class Console {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getAddFileFieldBuilder();
           getUpdateFileFieldBuilder();
-          getMotionSyncFieldBuilder();
           getDownloadFileFieldBuilder();
         }
       }
@@ -605,18 +517,12 @@ public final class Console {
           updateFileBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000002);
-        if (motionSyncBuilder_ == null) {
-          motionSync_ = com.lxd.protobuf.msg.job.console.MotionSync.MotionSync_.getDefaultInstance();
-        } else {
-          motionSyncBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000004);
         if (downloadFileBuilder_ == null) {
           downloadFile_ = com.lxd.protobuf.msg.job.console.DownloadFile.DownloadFile_.getDefaultInstance();
         } else {
           downloadFileBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -664,14 +570,6 @@ public final class Console {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        if (motionSyncBuilder_ == null) {
-          result.motionSync_ = motionSync_;
-        } else {
-          result.motionSync_ = motionSyncBuilder_.build();
-        }
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
-        }
         if (downloadFileBuilder_ == null) {
           result.downloadFile_ = downloadFile_;
         } else {
@@ -699,9 +597,6 @@ public final class Console {
         if (other.hasUpdateFile()) {
           mergeUpdateFile(other.getUpdateFile());
         }
-        if (other.hasMotionSync()) {
-          mergeMotionSync(other.getMotionSync());
-        }
         if (other.hasDownloadFile()) {
           mergeDownloadFile(other.getDownloadFile());
         }
@@ -718,12 +613,6 @@ public final class Console {
         }
         if (hasUpdateFile()) {
           if (!getUpdateFile().isInitialized()) {
-            
-            return false;
-          }
-        }
-        if (hasMotionSync()) {
-          if (!getMotionSync().isInitialized()) {
             
             return false;
           }
@@ -1062,175 +951,22 @@ public final class Console {
         return updateFileBuilder_;
       }
 
-      // optional .msg.job.console.MotionSync_ motionSync = 3;
-      private com.lxd.protobuf.msg.job.console.MotionSync.MotionSync_ motionSync_ = com.lxd.protobuf.msg.job.console.MotionSync.MotionSync_.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lxd.protobuf.msg.job.console.MotionSync.MotionSync_, com.lxd.protobuf.msg.job.console.MotionSync.MotionSync_.Builder, com.lxd.protobuf.msg.job.console.MotionSync.MotionSync_OrBuilder> motionSyncBuilder_;
-      /**
-       * <code>optional .msg.job.console.MotionSync_ motionSync = 3;</code>
-       *
-       * <pre>
-       *&#47;&lt; 同步申请
-       * </pre>
-       */
-      public boolean hasMotionSync() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>optional .msg.job.console.MotionSync_ motionSync = 3;</code>
-       *
-       * <pre>
-       *&#47;&lt; 同步申请
-       * </pre>
-       */
-      public com.lxd.protobuf.msg.job.console.MotionSync.MotionSync_ getMotionSync() {
-        if (motionSyncBuilder_ == null) {
-          return motionSync_;
-        } else {
-          return motionSyncBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>optional .msg.job.console.MotionSync_ motionSync = 3;</code>
-       *
-       * <pre>
-       *&#47;&lt; 同步申请
-       * </pre>
-       */
-      public Builder setMotionSync(com.lxd.protobuf.msg.job.console.MotionSync.MotionSync_ value) {
-        if (motionSyncBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          motionSync_ = value;
-          onChanged();
-        } else {
-          motionSyncBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000004;
-        return this;
-      }
-      /**
-       * <code>optional .msg.job.console.MotionSync_ motionSync = 3;</code>
-       *
-       * <pre>
-       *&#47;&lt; 同步申请
-       * </pre>
-       */
-      public Builder setMotionSync(
-          com.lxd.protobuf.msg.job.console.MotionSync.MotionSync_.Builder builderForValue) {
-        if (motionSyncBuilder_ == null) {
-          motionSync_ = builderForValue.build();
-          onChanged();
-        } else {
-          motionSyncBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000004;
-        return this;
-      }
-      /**
-       * <code>optional .msg.job.console.MotionSync_ motionSync = 3;</code>
-       *
-       * <pre>
-       *&#47;&lt; 同步申请
-       * </pre>
-       */
-      public Builder mergeMotionSync(com.lxd.protobuf.msg.job.console.MotionSync.MotionSync_ value) {
-        if (motionSyncBuilder_ == null) {
-          if (((bitField0_ & 0x00000004) == 0x00000004) &&
-              motionSync_ != com.lxd.protobuf.msg.job.console.MotionSync.MotionSync_.getDefaultInstance()) {
-            motionSync_ =
-              com.lxd.protobuf.msg.job.console.MotionSync.MotionSync_.newBuilder(motionSync_).mergeFrom(value).buildPartial();
-          } else {
-            motionSync_ = value;
-          }
-          onChanged();
-        } else {
-          motionSyncBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000004;
-        return this;
-      }
-      /**
-       * <code>optional .msg.job.console.MotionSync_ motionSync = 3;</code>
-       *
-       * <pre>
-       *&#47;&lt; 同步申请
-       * </pre>
-       */
-      public Builder clearMotionSync() {
-        if (motionSyncBuilder_ == null) {
-          motionSync_ = com.lxd.protobuf.msg.job.console.MotionSync.MotionSync_.getDefaultInstance();
-          onChanged();
-        } else {
-          motionSyncBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000004);
-        return this;
-      }
-      /**
-       * <code>optional .msg.job.console.MotionSync_ motionSync = 3;</code>
-       *
-       * <pre>
-       *&#47;&lt; 同步申请
-       * </pre>
-       */
-      public com.lxd.protobuf.msg.job.console.MotionSync.MotionSync_.Builder getMotionSyncBuilder() {
-        bitField0_ |= 0x00000004;
-        onChanged();
-        return getMotionSyncFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>optional .msg.job.console.MotionSync_ motionSync = 3;</code>
-       *
-       * <pre>
-       *&#47;&lt; 同步申请
-       * </pre>
-       */
-      public com.lxd.protobuf.msg.job.console.MotionSync.MotionSync_OrBuilder getMotionSyncOrBuilder() {
-        if (motionSyncBuilder_ != null) {
-          return motionSyncBuilder_.getMessageOrBuilder();
-        } else {
-          return motionSync_;
-        }
-      }
-      /**
-       * <code>optional .msg.job.console.MotionSync_ motionSync = 3;</code>
-       *
-       * <pre>
-       *&#47;&lt; 同步申请
-       * </pre>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lxd.protobuf.msg.job.console.MotionSync.MotionSync_, com.lxd.protobuf.msg.job.console.MotionSync.MotionSync_.Builder, com.lxd.protobuf.msg.job.console.MotionSync.MotionSync_OrBuilder> 
-          getMotionSyncFieldBuilder() {
-        if (motionSyncBuilder_ == null) {
-          motionSyncBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lxd.protobuf.msg.job.console.MotionSync.MotionSync_, com.lxd.protobuf.msg.job.console.MotionSync.MotionSync_.Builder, com.lxd.protobuf.msg.job.console.MotionSync.MotionSync_OrBuilder>(
-                  motionSync_,
-                  getParentForChildren(),
-                  isClean());
-          motionSync_ = null;
-        }
-        return motionSyncBuilder_;
-      }
-
-      // optional .msg.job.console.DownloadFile_ downloadFile = 4;
+      // optional .msg.job.console.DownloadFile_ downloadFile = 3;
       private com.lxd.protobuf.msg.job.console.DownloadFile.DownloadFile_ downloadFile_ = com.lxd.protobuf.msg.job.console.DownloadFile.DownloadFile_.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lxd.protobuf.msg.job.console.DownloadFile.DownloadFile_, com.lxd.protobuf.msg.job.console.DownloadFile.DownloadFile_.Builder, com.lxd.protobuf.msg.job.console.DownloadFile.DownloadFile_OrBuilder> downloadFileBuilder_;
       /**
-       * <code>optional .msg.job.console.DownloadFile_ downloadFile = 4;</code>
+       * <code>optional .msg.job.console.DownloadFile_ downloadFile = 3;</code>
        *
        * <pre>
        *&#47;&lt; 下载文件
        * </pre>
        */
       public boolean hasDownloadFile() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional .msg.job.console.DownloadFile_ downloadFile = 4;</code>
+       * <code>optional .msg.job.console.DownloadFile_ downloadFile = 3;</code>
        *
        * <pre>
        *&#47;&lt; 下载文件
@@ -1244,7 +980,7 @@ public final class Console {
         }
       }
       /**
-       * <code>optional .msg.job.console.DownloadFile_ downloadFile = 4;</code>
+       * <code>optional .msg.job.console.DownloadFile_ downloadFile = 3;</code>
        *
        * <pre>
        *&#47;&lt; 下载文件
@@ -1260,11 +996,11 @@ public final class Console {
         } else {
           downloadFileBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000004;
         return this;
       }
       /**
-       * <code>optional .msg.job.console.DownloadFile_ downloadFile = 4;</code>
+       * <code>optional .msg.job.console.DownloadFile_ downloadFile = 3;</code>
        *
        * <pre>
        *&#47;&lt; 下载文件
@@ -1278,11 +1014,11 @@ public final class Console {
         } else {
           downloadFileBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000004;
         return this;
       }
       /**
-       * <code>optional .msg.job.console.DownloadFile_ downloadFile = 4;</code>
+       * <code>optional .msg.job.console.DownloadFile_ downloadFile = 3;</code>
        *
        * <pre>
        *&#47;&lt; 下载文件
@@ -1290,7 +1026,7 @@ public final class Console {
        */
       public Builder mergeDownloadFile(com.lxd.protobuf.msg.job.console.DownloadFile.DownloadFile_ value) {
         if (downloadFileBuilder_ == null) {
-          if (((bitField0_ & 0x00000008) == 0x00000008) &&
+          if (((bitField0_ & 0x00000004) == 0x00000004) &&
               downloadFile_ != com.lxd.protobuf.msg.job.console.DownloadFile.DownloadFile_.getDefaultInstance()) {
             downloadFile_ =
               com.lxd.protobuf.msg.job.console.DownloadFile.DownloadFile_.newBuilder(downloadFile_).mergeFrom(value).buildPartial();
@@ -1301,11 +1037,11 @@ public final class Console {
         } else {
           downloadFileBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000004;
         return this;
       }
       /**
-       * <code>optional .msg.job.console.DownloadFile_ downloadFile = 4;</code>
+       * <code>optional .msg.job.console.DownloadFile_ downloadFile = 3;</code>
        *
        * <pre>
        *&#47;&lt; 下载文件
@@ -1318,23 +1054,23 @@ public final class Console {
         } else {
           downloadFileBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
       /**
-       * <code>optional .msg.job.console.DownloadFile_ downloadFile = 4;</code>
+       * <code>optional .msg.job.console.DownloadFile_ downloadFile = 3;</code>
        *
        * <pre>
        *&#47;&lt; 下载文件
        * </pre>
        */
       public com.lxd.protobuf.msg.job.console.DownloadFile.DownloadFile_.Builder getDownloadFileBuilder() {
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000004;
         onChanged();
         return getDownloadFileFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .msg.job.console.DownloadFile_ downloadFile = 4;</code>
+       * <code>optional .msg.job.console.DownloadFile_ downloadFile = 3;</code>
        *
        * <pre>
        *&#47;&lt; 下载文件
@@ -1348,7 +1084,7 @@ public final class Console {
         }
       }
       /**
-       * <code>optional .msg.job.console.DownloadFile_ downloadFile = 4;</code>
+       * <code>optional .msg.job.console.DownloadFile_ downloadFile = 3;</code>
        *
        * <pre>
        *&#47;&lt; 下载文件
@@ -1394,15 +1130,13 @@ public final class Console {
   static {
     java.lang.String[] descriptorData = {
       "\n\017J_Console.proto\022\017msg.job.console\032\021J_C_" +
-      "AddFile.proto\032\024J_C_UpdateFile.proto\032\024J_C" +
-      "_MotionSync.proto\032\026J_C_DownloadFile.prot" +
-      "o\"\320\001\n\010Console_\022*\n\007addFile\030\001 \001(\0132\031.msg.jo" +
-      "b.console.AddFile_\0220\n\nupdateFile\030\002 \001(\0132\034" +
-      ".msg.job.console.UpdateFile_\0220\n\nmotionSy" +
-      "nc\030\003 \001(\0132\034.msg.job.console.MotionSync_\0224" +
-      "\n\014downloadFile\030\004 \001(\0132\036.msg.job.console.D" +
-      "ownloadFile_B+\n com.lxd.protobuf.msg.job" +
-      ".consoleB\007Console"
+      "AddFile.proto\032\024J_C_UpdateFile.proto\032\026J_C" +
+      "_DownloadFile.proto\"\236\001\n\010Console_\022*\n\007addF" +
+      "ile\030\001 \001(\0132\031.msg.job.console.AddFile_\0220\n\n" +
+      "updateFile\030\002 \001(\0132\034.msg.job.console.Updat" +
+      "eFile_\0224\n\014downloadFile\030\003 \001(\0132\036.msg.job.c" +
+      "onsole.DownloadFile_B+\n com.lxd.protobuf" +
+      ".msg.job.consoleB\007Console"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -1414,7 +1148,7 @@ public final class Console {
           internal_static_msg_job_console_Console__fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_msg_job_console_Console__descriptor,
-              new java.lang.String[] { "AddFile", "UpdateFile", "MotionSync", "DownloadFile", });
+              new java.lang.String[] { "AddFile", "UpdateFile", "DownloadFile", });
           return null;
         }
       };
@@ -1423,7 +1157,6 @@ public final class Console {
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lxd.protobuf.msg.job.console.AddFile.getDescriptor(),
           com.lxd.protobuf.msg.job.console.UpdateFile.getDescriptor(),
-          com.lxd.protobuf.msg.job.console.MotionSync.getDescriptor(),
           com.lxd.protobuf.msg.job.console.DownloadFile.getDescriptor(),
         }, assigner);
   }

@@ -5,8 +5,6 @@ option java_outer_classname="Console";
 import "R_C_AddFile.proto";
 import "R_C_UpdateFile.proto";
 import "R_C_DeleteFile.proto";
-import "R_C_MotionSync.proto";
-import "R_C_Sync.proto";
 import "R_C_DownloadFile.proto";
 
 message Console_{ 
@@ -16,12 +14,8 @@ message Console_{
 	optional UpdateFile_ updateFile = 2;
 	///< 删除文件
 	optional DeleteFile_ deleteFile = 3;
-	///< 同步内容获取
-	optional MotionSync_ motionSync = 4;
-	///< 同步请求
-	optional Sync_ sync = 5;
 	///< 下载文件
-	optional DownloadFile_ downloadFile = 6;
+	optional DownloadFile_ downloadFile = 4;
 	///< 用户编号
-	required string user_name = 7;
+	required string user_name = 5;
 }

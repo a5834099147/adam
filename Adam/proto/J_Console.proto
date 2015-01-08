@@ -4,7 +4,6 @@ option java_outer_classname="Console";
 
 import "J_C_AddFile.proto";
 import "J_C_UpdateFile.proto";
-import "J_C_MotionSync.proto";
 import "J_C_DownloadFile.proto";
 
 message Console_{ 
@@ -12,8 +11,6 @@ message Console_{
 	optional AddFile_ addFile = 1;
 	///< 修改文件
 	optional UpdateFile_ updateFile = 2;
-	///< 同步申请
-	optional MotionSync_ motionSync = 3;
 	///< 下载文件
-	optional DownloadFile_ downloadFile = 4;
+	optional DownloadFile_ downloadFile = 3;
 }
