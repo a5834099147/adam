@@ -16,8 +16,8 @@
  */
 
 package com.lxd.server.task.request.user;
-
-import com.lxd.protobuf.msg.result.Result.Result_;
+import com.lxd.protobuf.msg.result.user.Register.Register_;
+import com.lxd.protobuf.msg.result.user.User.User_;
 import com.lxd.server.exception.LandingException;
 import com.lxd.server.service.UserServer;
 import com.lxd.server.service.impl.UserServerImpl;
@@ -50,18 +50,21 @@ public class LadingTask extends UserTask {
     }
 
     @Override
-    public Result_ userExecute() {
-        Result_.Builder result = Result_.newBuilder();
-        
+    public User_ userExecute() {
+        User_.Builder result = User_.newBuilder();
+        Register_.Builder register = Register_.newBuilder();
         try {
+            ///< 用户注册
             userServer.landing(user_name, user_pwd);
-            result.setSuccess(true);
+            register.setSuccess(true);
         } catch (LandingException e) {
-            result.setSuccess(false);
-            result.setErrorMessage(e.getMessage());
+            ///< 注册过程中出现异常, 说明注册失败
+            register.setSuccess(false);
+            register.setErrorMsg(e.getMessage());
             e.printStackTrace();
         }       
         
+        result.setRegister(register);
         return result.build();
     }
 

@@ -17,5 +17,6 @@
 		<property name="length"/>
 		<property name="path"/>
 		<property name="last"/>
+		<property name="edition"/>
 	</class>
 </hibernate-mapping>

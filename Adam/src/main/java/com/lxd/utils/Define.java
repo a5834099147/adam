@@ -41,4 +41,6 @@ public class Define {
     public static final long ERRORTIME = 6000;
     ///< 等待时间
     public static final long SLEEPTIME = 300;
+    ///< 初始化文件版本号
+    public static final Integer EDITION = 0;
 }

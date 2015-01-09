@@ -17,7 +17,8 @@
 
 package com.lxd.server.task.request.user;
 
-import com.lxd.protobuf.msg.result.Result.Result_;
+import com.lxd.protobuf.msg.result.user.Landing.Landing_;
+import com.lxd.protobuf.msg.result.user.User.User_;
 import com.lxd.server.exception.RegisterException;
 import com.lxd.server.service.UserServer;
 import com.lxd.server.service.impl.UserServerImpl;
@@ -48,17 +49,21 @@ public class RegisterTask extends UserTask {
     }
 
     @Override
-    public Result_ userExecute() {
-        Result_.Builder result = Result_.newBuilder();
+    public User_ userExecute() {
+        User_.Builder result = User_.newBuilder();
+        Landing_.Builder landing = Landing_.newBuilder();
         try {
+            ///< 用户登录
             userServer.register(user_name, user_pwd);
-            result.setSuccess(true);
+            landing.setSuccess(true);
         } catch (RegisterException e) {
-            result.setSuccess(false);
-            result.setErrorMessage(e.getMessage());
+            ///< 如果发生异常 RegisterException 说明登陆失败
+            landing.setSuccess(false);
+            ///< 将异常信息设置给消息返回给客户端
+            landing.setErrorMsg(e.getMessage());
             e.printStackTrace();
         }
-        
+        result.setLanding(landing);
         return result.build();
     }
 

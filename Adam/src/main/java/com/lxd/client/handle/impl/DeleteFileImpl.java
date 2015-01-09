@@ -18,13 +18,10 @@
 package com.lxd.client.handle.impl;
 
 import com.lxd.client.entity.File;
-import com.lxd.client.entity.Log;
-import com.lxd.client.handle.DeleteFileHandle;
+import com.lxd.client.handle.console.DeleteFileHandle;
 import com.lxd.client.resource.property.ServerDeleteFile;
 import com.lxd.client.service.FileServer;
-import com.lxd.client.service.LogServer;
 import com.lxd.client.service.impl.FileServerImpl;
-import com.lxd.client.service.impl.LogServerImpl;
 import com.lxd.client.view.control.UiSingleton;
 import com.lxd.resource.Resource;
 import com.lxd.utils.Grnerate;
@@ -38,22 +35,13 @@ import com.lxd.utils.Grnerate;
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public class DeleteFileImpl implements DeleteFileHandle {    
-    private LogServer logServer = new LogServerImpl();
+public class DeleteFileImpl implements DeleteFileHandle {  
     private FileServer fileServer = new FileServerImpl();
 
     @Override
     public void deleteFileSuccess(Long id) {
         ///< 得到任务信息
         ServerDeleteFile pro =  (ServerDeleteFile) Resource.getSingleton().getJobStatus().getProperty(id);
-        ///< 添加日志
-        Log log = new Log();
-        log.setId(id);
-        log.setState(true);
-        ///< 得到用户名
-        log.setUser_name(UiSingleton.getSingleton().getUser());
-        ///< 保存日志
-        logServer.addLog(log);
         
         ///< 添加文件
         File file = new File();
@@ -65,15 +53,7 @@ public class DeleteFileImpl implements DeleteFileHandle {
     }
 
     @Override
-    public void deleteFileError(Long id) {
-        ///< 添加日志
-        Log log = new Log();
-        log.setId(id);
-        log.setState(false);
-        ///< 得到用户名
-        log.setUser_name(UiSingleton.getSingleton().getUser());
-        ///< 保存日志
-        logServer.addLog(log);        
+    public void deleteFileError(Long id, String msg) {
     }
 
 }

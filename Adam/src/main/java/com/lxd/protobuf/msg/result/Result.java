@@ -11,76 +11,33 @@ public final class Result {
   public interface Result_OrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // required bool success = 1;
+    // optional .msg.result.user.User_ user = 1;
     /**
-     * <code>required bool success = 1;</code>
-     *
-     * <pre>
-     *&#47;&lt; 成功
-     * </pre>
+     * <code>optional .msg.result.user.User_ user = 1;</code>
      */
-    boolean hasSuccess();
+    boolean hasUser();
     /**
-     * <code>required bool success = 1;</code>
-     *
-     * <pre>
-     *&#47;&lt; 成功
-     * </pre>
+     * <code>optional .msg.result.user.User_ user = 1;</code>
      */
-    boolean getSuccess();
+    com.lxd.protobuf.msg.result.user.User.User_ getUser();
+    /**
+     * <code>optional .msg.result.user.User_ user = 1;</code>
+     */
+    com.lxd.protobuf.msg.result.user.User.User_OrBuilder getUserOrBuilder();
 
-    // optional string error_message = 2;
+    // optional .msg.result.console.Console_ console = 2;
     /**
-     * <code>optional string error_message = 2;</code>
-     *
-     * <pre>
-     *&#47;&lt; 错误信息
-     * </pre>
+     * <code>optional .msg.result.console.Console_ console = 2;</code>
      */
-    boolean hasErrorMessage();
+    boolean hasConsole();
     /**
-     * <code>optional string error_message = 2;</code>
-     *
-     * <pre>
-     *&#47;&lt; 错误信息
-     * </pre>
+     * <code>optional .msg.result.console.Console_ console = 2;</code>
      */
-    java.lang.String getErrorMessage();
+    com.lxd.protobuf.msg.result.console.Console.Console_ getConsole();
     /**
-     * <code>optional string error_message = 2;</code>
-     *
-     * <pre>
-     *&#47;&lt; 错误信息
-     * </pre>
+     * <code>optional .msg.result.console.Console_ console = 2;</code>
      */
-    com.google.protobuf.ByteString
-        getErrorMessageBytes();
-
-    // optional .msg.result.Result_.Repleish repleish = 3;
-    /**
-     * <code>optional .msg.result.Result_.Repleish repleish = 3;</code>
-     *
-     * <pre>
-     *&#47;&lt; 附属信息
-     * </pre>
-     */
-    boolean hasRepleish();
-    /**
-     * <code>optional .msg.result.Result_.Repleish repleish = 3;</code>
-     *
-     * <pre>
-     *&#47;&lt; 附属信息
-     * </pre>
-     */
-    com.lxd.protobuf.msg.result.Result.Result_.Repleish getRepleish();
-    /**
-     * <code>optional .msg.result.Result_.Repleish repleish = 3;</code>
-     *
-     * <pre>
-     *&#47;&lt; 附属信息
-     * </pre>
-     */
-    com.lxd.protobuf.msg.result.Result.Result_.RepleishOrBuilder getRepleishOrBuilder();
+    com.lxd.protobuf.msg.result.console.Console.Console_OrBuilder getConsoleOrBuilder();
   }
   /**
    * Protobuf type {@code msg.result.Result_}
@@ -133,27 +90,30 @@ public final class Result {
               }
               break;
             }
-            case 8: {
+            case 10: {
+              com.lxd.protobuf.msg.result.user.User.User_.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = user_.toBuilder();
+              }
+              user_ = input.readMessage(com.lxd.protobuf.msg.result.user.User.User_.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(user_);
+                user_ = subBuilder.buildPartial();
+              }
               bitField0_ |= 0x00000001;
-              success_ = input.readBool();
               break;
             }
             case 18: {
-              bitField0_ |= 0x00000002;
-              errorMessage_ = input.readBytes();
-              break;
-            }
-            case 26: {
-              com.lxd.protobuf.msg.result.Result.Result_.Repleish.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000004) == 0x00000004)) {
-                subBuilder = repleish_.toBuilder();
+              com.lxd.protobuf.msg.result.console.Console.Console_.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = console_.toBuilder();
               }
-              repleish_ = input.readMessage(com.lxd.protobuf.msg.result.Result.Result_.Repleish.PARSER, extensionRegistry);
+              console_ = input.readMessage(com.lxd.protobuf.msg.result.console.Console.Console_.PARSER, extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom(repleish_);
-                repleish_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom(console_);
+                console_ = subBuilder.buildPartial();
               }
-              bitField0_ |= 0x00000004;
+              bitField0_ |= 0x00000002;
               break;
             }
           }
@@ -195,580 +155,68 @@ public final class Result {
       return PARSER;
     }
 
-    public interface RepleishOrBuilder
-        extends com.google.protobuf.MessageOrBuilder {
-
-      // required int32 block = 1;
-      /**
-       * <code>required int32 block = 1;</code>
-       *
-       * <pre>
-       *&#47;&lt; 日志块号
-       * </pre>
-       */
-      boolean hasBlock();
-      /**
-       * <code>required int32 block = 1;</code>
-       *
-       * <pre>
-       *&#47;&lt; 日志块号
-       * </pre>
-       */
-      int getBlock();
-    }
-    /**
-     * Protobuf type {@code msg.result.Result_.Repleish}
-     *
-     * <pre>
-     *&#47;&lt; 附加信息
-     * </pre>
-     */
-    public static final class Repleish extends
-        com.google.protobuf.GeneratedMessage
-        implements RepleishOrBuilder {
-      // Use Repleish.newBuilder() to construct.
-      private Repleish(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-        super(builder);
-        this.unknownFields = builder.getUnknownFields();
-      }
-      private Repleish(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-      private static final Repleish defaultInstance;
-      public static Repleish getDefaultInstance() {
-        return defaultInstance;
-      }
-
-      public Repleish getDefaultInstanceForType() {
-        return defaultInstance;
-      }
-
-      private final com.google.protobuf.UnknownFieldSet unknownFields;
-      @java.lang.Override
-      public final com.google.protobuf.UnknownFieldSet
-          getUnknownFields() {
-        return this.unknownFields;
-      }
-      private Repleish(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        initFields();
-        int mutable_bitField0_ = 0;
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-            com.google.protobuf.UnknownFieldSet.newBuilder();
-        try {
-          boolean done = false;
-          while (!done) {
-            int tag = input.readTag();
-            switch (tag) {
-              case 0:
-                done = true;
-                break;
-              default: {
-                if (!parseUnknownField(input, unknownFields,
-                                       extensionRegistry, tag)) {
-                  done = true;
-                }
-                break;
-              }
-              case 8: {
-                bitField0_ |= 0x00000001;
-                block_ = input.readInt32();
-                break;
-              }
-            }
-          }
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.setUnfinishedMessage(this);
-        } catch (java.io.IOException e) {
-          throw new com.google.protobuf.InvalidProtocolBufferException(
-              e.getMessage()).setUnfinishedMessage(this);
-        } finally {
-          this.unknownFields = unknownFields.build();
-          makeExtensionsImmutable();
-        }
-      }
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.lxd.protobuf.msg.result.Result.internal_static_msg_result_Result__Repleish_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.lxd.protobuf.msg.result.Result.internal_static_msg_result_Result__Repleish_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.lxd.protobuf.msg.result.Result.Result_.Repleish.class, com.lxd.protobuf.msg.result.Result.Result_.Repleish.Builder.class);
-      }
-
-      public static com.google.protobuf.Parser<Repleish> PARSER =
-          new com.google.protobuf.AbstractParser<Repleish>() {
-        public Repleish parsePartialFrom(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Repleish(input, extensionRegistry);
-        }
-      };
-
-      @java.lang.Override
-      public com.google.protobuf.Parser<Repleish> getParserForType() {
-        return PARSER;
-      }
-
-      private int bitField0_;
-      // required int32 block = 1;
-      public static final int BLOCK_FIELD_NUMBER = 1;
-      private int block_;
-      /**
-       * <code>required int32 block = 1;</code>
-       *
-       * <pre>
-       *&#47;&lt; 日志块号
-       * </pre>
-       */
-      public boolean hasBlock() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>required int32 block = 1;</code>
-       *
-       * <pre>
-       *&#47;&lt; 日志块号
-       * </pre>
-       */
-      public int getBlock() {
-        return block_;
-      }
-
-      private void initFields() {
-        block_ = 0;
-      }
-      private byte memoizedIsInitialized = -1;
-      public final boolean isInitialized() {
-        byte isInitialized = memoizedIsInitialized;
-        if (isInitialized != -1) return isInitialized == 1;
-
-        if (!hasBlock()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-        memoizedIsInitialized = 1;
-        return true;
-      }
-
-      public void writeTo(com.google.protobuf.CodedOutputStream output)
-                          throws java.io.IOException {
-        getSerializedSize();
-        if (((bitField0_ & 0x00000001) == 0x00000001)) {
-          output.writeInt32(1, block_);
-        }
-        getUnknownFields().writeTo(output);
-      }
-
-      private int memoizedSerializedSize = -1;
-      public int getSerializedSize() {
-        int size = memoizedSerializedSize;
-        if (size != -1) return size;
-
-        size = 0;
-        if (((bitField0_ & 0x00000001) == 0x00000001)) {
-          size += com.google.protobuf.CodedOutputStream
-            .computeInt32Size(1, block_);
-        }
-        size += getUnknownFields().getSerializedSize();
-        memoizedSerializedSize = size;
-        return size;
-      }
-
-      private static final long serialVersionUID = 0L;
-      @java.lang.Override
-      protected java.lang.Object writeReplace()
-          throws java.io.ObjectStreamException {
-        return super.writeReplace();
-      }
-
-      public static com.lxd.protobuf.msg.result.Result.Result_.Repleish parseFrom(
-          com.google.protobuf.ByteString data)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return PARSER.parseFrom(data);
-      }
-      public static com.lxd.protobuf.msg.result.Result.Result_.Repleish parseFrom(
-          com.google.protobuf.ByteString data,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return PARSER.parseFrom(data, extensionRegistry);
-      }
-      public static com.lxd.protobuf.msg.result.Result.Result_.Repleish parseFrom(byte[] data)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return PARSER.parseFrom(data);
-      }
-      public static com.lxd.protobuf.msg.result.Result.Result_.Repleish parseFrom(
-          byte[] data,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return PARSER.parseFrom(data, extensionRegistry);
-      }
-      public static com.lxd.protobuf.msg.result.Result.Result_.Repleish parseFrom(java.io.InputStream input)
-          throws java.io.IOException {
-        return PARSER.parseFrom(input);
-      }
-      public static com.lxd.protobuf.msg.result.Result.Result_.Repleish parseFrom(
-          java.io.InputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        return PARSER.parseFrom(input, extensionRegistry);
-      }
-      public static com.lxd.protobuf.msg.result.Result.Result_.Repleish parseDelimitedFrom(java.io.InputStream input)
-          throws java.io.IOException {
-        return PARSER.parseDelimitedFrom(input);
-      }
-      public static com.lxd.protobuf.msg.result.Result.Result_.Repleish parseDelimitedFrom(
-          java.io.InputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        return PARSER.parseDelimitedFrom(input, extensionRegistry);
-      }
-      public static com.lxd.protobuf.msg.result.Result.Result_.Repleish parseFrom(
-          com.google.protobuf.CodedInputStream input)
-          throws java.io.IOException {
-        return PARSER.parseFrom(input);
-      }
-      public static com.lxd.protobuf.msg.result.Result.Result_.Repleish parseFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        return PARSER.parseFrom(input, extensionRegistry);
-      }
-
-      public static Builder newBuilder() { return Builder.create(); }
-      public Builder newBuilderForType() { return newBuilder(); }
-      public static Builder newBuilder(com.lxd.protobuf.msg.result.Result.Result_.Repleish prototype) {
-        return newBuilder().mergeFrom(prototype);
-      }
-      public Builder toBuilder() { return newBuilder(this); }
-
-      @java.lang.Override
-      protected Builder newBuilderForType(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        Builder builder = new Builder(parent);
-        return builder;
-      }
-      /**
-       * Protobuf type {@code msg.result.Result_.Repleish}
-       *
-       * <pre>
-       *&#47;&lt; 附加信息
-       * </pre>
-       */
-      public static final class Builder extends
-          com.google.protobuf.GeneratedMessage.Builder<Builder>
-         implements com.lxd.protobuf.msg.result.Result.Result_.RepleishOrBuilder {
-        public static final com.google.protobuf.Descriptors.Descriptor
-            getDescriptor() {
-          return com.lxd.protobuf.msg.result.Result.internal_static_msg_result_Result__Repleish_descriptor;
-        }
-
-        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-            internalGetFieldAccessorTable() {
-          return com.lxd.protobuf.msg.result.Result.internal_static_msg_result_Result__Repleish_fieldAccessorTable
-              .ensureFieldAccessorsInitialized(
-                  com.lxd.protobuf.msg.result.Result.Result_.Repleish.class, com.lxd.protobuf.msg.result.Result.Result_.Repleish.Builder.class);
-        }
-
-        // Construct using com.lxd.protobuf.msg.result.Result.Result_.Repleish.newBuilder()
-        private Builder() {
-          maybeForceBuilderInitialization();
-        }
-
-        private Builder(
-            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-          super(parent);
-          maybeForceBuilderInitialization();
-        }
-        private void maybeForceBuilderInitialization() {
-          if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          }
-        }
-        private static Builder create() {
-          return new Builder();
-        }
-
-        public Builder clear() {
-          super.clear();
-          block_ = 0;
-          bitField0_ = (bitField0_ & ~0x00000001);
-          return this;
-        }
-
-        public Builder clone() {
-          return create().mergeFrom(buildPartial());
-        }
-
-        public com.google.protobuf.Descriptors.Descriptor
-            getDescriptorForType() {
-          return com.lxd.protobuf.msg.result.Result.internal_static_msg_result_Result__Repleish_descriptor;
-        }
-
-        public com.lxd.protobuf.msg.result.Result.Result_.Repleish getDefaultInstanceForType() {
-          return com.lxd.protobuf.msg.result.Result.Result_.Repleish.getDefaultInstance();
-        }
-
-        public com.lxd.protobuf.msg.result.Result.Result_.Repleish build() {
-          com.lxd.protobuf.msg.result.Result.Result_.Repleish result = buildPartial();
-          if (!result.isInitialized()) {
-            throw newUninitializedMessageException(result);
-          }
-          return result;
-        }
-
-        public com.lxd.protobuf.msg.result.Result.Result_.Repleish buildPartial() {
-          com.lxd.protobuf.msg.result.Result.Result_.Repleish result = new com.lxd.protobuf.msg.result.Result.Result_.Repleish(this);
-          int from_bitField0_ = bitField0_;
-          int to_bitField0_ = 0;
-          if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-            to_bitField0_ |= 0x00000001;
-          }
-          result.block_ = block_;
-          result.bitField0_ = to_bitField0_;
-          onBuilt();
-          return result;
-        }
-
-        public Builder mergeFrom(com.google.protobuf.Message other) {
-          if (other instanceof com.lxd.protobuf.msg.result.Result.Result_.Repleish) {
-            return mergeFrom((com.lxd.protobuf.msg.result.Result.Result_.Repleish)other);
-          } else {
-            super.mergeFrom(other);
-            return this;
-          }
-        }
-
-        public Builder mergeFrom(com.lxd.protobuf.msg.result.Result.Result_.Repleish other) {
-          if (other == com.lxd.protobuf.msg.result.Result.Result_.Repleish.getDefaultInstance()) return this;
-          if (other.hasBlock()) {
-            setBlock(other.getBlock());
-          }
-          this.mergeUnknownFields(other.getUnknownFields());
-          return this;
-        }
-
-        public final boolean isInitialized() {
-          if (!hasBlock()) {
-            
-            return false;
-          }
-          return true;
-        }
-
-        public Builder mergeFrom(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws java.io.IOException {
-          com.lxd.protobuf.msg.result.Result.Result_.Repleish parsedMessage = null;
-          try {
-            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-            parsedMessage = (com.lxd.protobuf.msg.result.Result.Result_.Repleish) e.getUnfinishedMessage();
-            throw e;
-          } finally {
-            if (parsedMessage != null) {
-              mergeFrom(parsedMessage);
-            }
-          }
-          return this;
-        }
-        private int bitField0_;
-
-        // required int32 block = 1;
-        private int block_ ;
-        /**
-         * <code>required int32 block = 1;</code>
-         *
-         * <pre>
-         *&#47;&lt; 日志块号
-         * </pre>
-         */
-        public boolean hasBlock() {
-          return ((bitField0_ & 0x00000001) == 0x00000001);
-        }
-        /**
-         * <code>required int32 block = 1;</code>
-         *
-         * <pre>
-         *&#47;&lt; 日志块号
-         * </pre>
-         */
-        public int getBlock() {
-          return block_;
-        }
-        /**
-         * <code>required int32 block = 1;</code>
-         *
-         * <pre>
-         *&#47;&lt; 日志块号
-         * </pre>
-         */
-        public Builder setBlock(int value) {
-          bitField0_ |= 0x00000001;
-          block_ = value;
-          onChanged();
-          return this;
-        }
-        /**
-         * <code>required int32 block = 1;</code>
-         *
-         * <pre>
-         *&#47;&lt; 日志块号
-         * </pre>
-         */
-        public Builder clearBlock() {
-          bitField0_ = (bitField0_ & ~0x00000001);
-          block_ = 0;
-          onChanged();
-          return this;
-        }
-
-        // @@protoc_insertion_point(builder_scope:msg.result.Result_.Repleish)
-      }
-
-      static {
-        defaultInstance = new Repleish(true);
-        defaultInstance.initFields();
-      }
-
-      // @@protoc_insertion_point(class_scope:msg.result.Result_.Repleish)
-    }
-
     private int bitField0_;
-    // required bool success = 1;
-    public static final int SUCCESS_FIELD_NUMBER = 1;
-    private boolean success_;
+    // optional .msg.result.user.User_ user = 1;
+    public static final int USER_FIELD_NUMBER = 1;
+    private com.lxd.protobuf.msg.result.user.User.User_ user_;
     /**
-     * <code>required bool success = 1;</code>
-     *
-     * <pre>
-     *&#47;&lt; 成功
-     * </pre>
+     * <code>optional .msg.result.user.User_ user = 1;</code>
      */
-    public boolean hasSuccess() {
+    public boolean hasUser() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required bool success = 1;</code>
-     *
-     * <pre>
-     *&#47;&lt; 成功
-     * </pre>
+     * <code>optional .msg.result.user.User_ user = 1;</code>
      */
-    public boolean getSuccess() {
-      return success_;
+    public com.lxd.protobuf.msg.result.user.User.User_ getUser() {
+      return user_;
+    }
+    /**
+     * <code>optional .msg.result.user.User_ user = 1;</code>
+     */
+    public com.lxd.protobuf.msg.result.user.User.User_OrBuilder getUserOrBuilder() {
+      return user_;
     }
 
-    // optional string error_message = 2;
-    public static final int ERROR_MESSAGE_FIELD_NUMBER = 2;
-    private java.lang.Object errorMessage_;
+    // optional .msg.result.console.Console_ console = 2;
+    public static final int CONSOLE_FIELD_NUMBER = 2;
+    private com.lxd.protobuf.msg.result.console.Console.Console_ console_;
     /**
-     * <code>optional string error_message = 2;</code>
-     *
-     * <pre>
-     *&#47;&lt; 错误信息
-     * </pre>
+     * <code>optional .msg.result.console.Console_ console = 2;</code>
      */
-    public boolean hasErrorMessage() {
+    public boolean hasConsole() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional string error_message = 2;</code>
-     *
-     * <pre>
-     *&#47;&lt; 错误信息
-     * </pre>
+     * <code>optional .msg.result.console.Console_ console = 2;</code>
      */
-    public java.lang.String getErrorMessage() {
-      java.lang.Object ref = errorMessage_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          errorMessage_ = s;
-        }
-        return s;
-      }
+    public com.lxd.protobuf.msg.result.console.Console.Console_ getConsole() {
+      return console_;
     }
     /**
-     * <code>optional string error_message = 2;</code>
-     *
-     * <pre>
-     *&#47;&lt; 错误信息
-     * </pre>
+     * <code>optional .msg.result.console.Console_ console = 2;</code>
      */
-    public com.google.protobuf.ByteString
-        getErrorMessageBytes() {
-      java.lang.Object ref = errorMessage_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        errorMessage_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    // optional .msg.result.Result_.Repleish repleish = 3;
-    public static final int REPLEISH_FIELD_NUMBER = 3;
-    private com.lxd.protobuf.msg.result.Result.Result_.Repleish repleish_;
-    /**
-     * <code>optional .msg.result.Result_.Repleish repleish = 3;</code>
-     *
-     * <pre>
-     *&#47;&lt; 附属信息
-     * </pre>
-     */
-    public boolean hasRepleish() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>optional .msg.result.Result_.Repleish repleish = 3;</code>
-     *
-     * <pre>
-     *&#47;&lt; 附属信息
-     * </pre>
-     */
-    public com.lxd.protobuf.msg.result.Result.Result_.Repleish getRepleish() {
-      return repleish_;
-    }
-    /**
-     * <code>optional .msg.result.Result_.Repleish repleish = 3;</code>
-     *
-     * <pre>
-     *&#47;&lt; 附属信息
-     * </pre>
-     */
-    public com.lxd.protobuf.msg.result.Result.Result_.RepleishOrBuilder getRepleishOrBuilder() {
-      return repleish_;
+    public com.lxd.protobuf.msg.result.console.Console.Console_OrBuilder getConsoleOrBuilder() {
+      return console_;
     }
 
     private void initFields() {
-      success_ = false;
-      errorMessage_ = "";
-      repleish_ = com.lxd.protobuf.msg.result.Result.Result_.Repleish.getDefaultInstance();
+      user_ = com.lxd.protobuf.msg.result.user.User.User_.getDefaultInstance();
+      console_ = com.lxd.protobuf.msg.result.console.Console.Console_.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
 
-      if (!hasSuccess()) {
-        memoizedIsInitialized = 0;
-        return false;
+      if (hasUser()) {
+        if (!getUser().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
       }
-      if (hasRepleish()) {
-        if (!getRepleish().isInitialized()) {
+      if (hasConsole()) {
+        if (!getConsole().isInitialized()) {
           memoizedIsInitialized = 0;
           return false;
         }
@@ -781,13 +229,10 @@ public final class Result {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBool(1, success_);
+        output.writeMessage(1, user_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, getErrorMessageBytes());
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeMessage(3, repleish_);
+        output.writeMessage(2, console_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -800,15 +245,11 @@ public final class Result {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(1, success_);
+          .computeMessageSize(1, user_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, getErrorMessageBytes());
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, repleish_);
+          .computeMessageSize(2, console_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -918,7 +359,8 @@ public final class Result {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getRepleishFieldBuilder();
+          getUserFieldBuilder();
+          getConsoleFieldBuilder();
         }
       }
       private static Builder create() {
@@ -927,16 +369,18 @@ public final class Result {
 
       public Builder clear() {
         super.clear();
-        success_ = false;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        errorMessage_ = "";
-        bitField0_ = (bitField0_ & ~0x00000002);
-        if (repleishBuilder_ == null) {
-          repleish_ = com.lxd.protobuf.msg.result.Result.Result_.Repleish.getDefaultInstance();
+        if (userBuilder_ == null) {
+          user_ = com.lxd.protobuf.msg.result.user.User.User_.getDefaultInstance();
         } else {
-          repleishBuilder_.clear();
+          userBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (consoleBuilder_ == null) {
+          console_ = com.lxd.protobuf.msg.result.console.Console.Console_.getDefaultInstance();
+        } else {
+          consoleBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -968,18 +412,18 @@ public final class Result {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.success_ = success_;
+        if (userBuilder_ == null) {
+          result.user_ = user_;
+        } else {
+          result.user_ = userBuilder_.build();
+        }
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.errorMessage_ = errorMessage_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        if (repleishBuilder_ == null) {
-          result.repleish_ = repleish_;
+        if (consoleBuilder_ == null) {
+          result.console_ = console_;
         } else {
-          result.repleish_ = repleishBuilder_.build();
+          result.console_ = consoleBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -997,28 +441,25 @@ public final class Result {
 
       public Builder mergeFrom(com.lxd.protobuf.msg.result.Result.Result_ other) {
         if (other == com.lxd.protobuf.msg.result.Result.Result_.getDefaultInstance()) return this;
-        if (other.hasSuccess()) {
-          setSuccess(other.getSuccess());
+        if (other.hasUser()) {
+          mergeUser(other.getUser());
         }
-        if (other.hasErrorMessage()) {
-          bitField0_ |= 0x00000002;
-          errorMessage_ = other.errorMessage_;
-          onChanged();
-        }
-        if (other.hasRepleish()) {
-          mergeRepleish(other.getRepleish());
+        if (other.hasConsole()) {
+          mergeConsole(other.getConsole());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
       public final boolean isInitialized() {
-        if (!hasSuccess()) {
-          
-          return false;
+        if (hasUser()) {
+          if (!getUser().isInitialized()) {
+            
+            return false;
+          }
         }
-        if (hasRepleish()) {
-          if (!getRepleish().isInitialized()) {
+        if (hasConsole()) {
+          if (!getConsole().isInitialized()) {
             
             return false;
           }
@@ -1045,304 +486,238 @@ public final class Result {
       }
       private int bitField0_;
 
-      // required bool success = 1;
-      private boolean success_ ;
+      // optional .msg.result.user.User_ user = 1;
+      private com.lxd.protobuf.msg.result.user.User.User_ user_ = com.lxd.protobuf.msg.result.user.User.User_.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lxd.protobuf.msg.result.user.User.User_, com.lxd.protobuf.msg.result.user.User.User_.Builder, com.lxd.protobuf.msg.result.user.User.User_OrBuilder> userBuilder_;
       /**
-       * <code>required bool success = 1;</code>
-       *
-       * <pre>
-       *&#47;&lt; 成功
-       * </pre>
+       * <code>optional .msg.result.user.User_ user = 1;</code>
        */
-      public boolean hasSuccess() {
+      public boolean hasUser() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>required bool success = 1;</code>
-       *
-       * <pre>
-       *&#47;&lt; 成功
-       * </pre>
+       * <code>optional .msg.result.user.User_ user = 1;</code>
        */
-      public boolean getSuccess() {
-        return success_;
-      }
-      /**
-       * <code>required bool success = 1;</code>
-       *
-       * <pre>
-       *&#47;&lt; 成功
-       * </pre>
-       */
-      public Builder setSuccess(boolean value) {
-        bitField0_ |= 0x00000001;
-        success_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required bool success = 1;</code>
-       *
-       * <pre>
-       *&#47;&lt; 成功
-       * </pre>
-       */
-      public Builder clearSuccess() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        success_ = false;
-        onChanged();
-        return this;
-      }
-
-      // optional string error_message = 2;
-      private java.lang.Object errorMessage_ = "";
-      /**
-       * <code>optional string error_message = 2;</code>
-       *
-       * <pre>
-       *&#47;&lt; 错误信息
-       * </pre>
-       */
-      public boolean hasErrorMessage() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>optional string error_message = 2;</code>
-       *
-       * <pre>
-       *&#47;&lt; 错误信息
-       * </pre>
-       */
-      public java.lang.String getErrorMessage() {
-        java.lang.Object ref = errorMessage_;
-        if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          errorMessage_ = s;
-          return s;
+      public com.lxd.protobuf.msg.result.user.User.User_ getUser() {
+        if (userBuilder_ == null) {
+          return user_;
         } else {
-          return (java.lang.String) ref;
+          return userBuilder_.getMessage();
         }
       }
       /**
-       * <code>optional string error_message = 2;</code>
-       *
-       * <pre>
-       *&#47;&lt; 错误信息
-       * </pre>
+       * <code>optional .msg.result.user.User_ user = 1;</code>
        */
-      public com.google.protobuf.ByteString
-          getErrorMessageBytes() {
-        java.lang.Object ref = errorMessage_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          errorMessage_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string error_message = 2;</code>
-       *
-       * <pre>
-       *&#47;&lt; 错误信息
-       * </pre>
-       */
-      public Builder setErrorMessage(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        errorMessage_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string error_message = 2;</code>
-       *
-       * <pre>
-       *&#47;&lt; 错误信息
-       * </pre>
-       */
-      public Builder clearErrorMessage() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        errorMessage_ = getDefaultInstance().getErrorMessage();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string error_message = 2;</code>
-       *
-       * <pre>
-       *&#47;&lt; 错误信息
-       * </pre>
-       */
-      public Builder setErrorMessageBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        errorMessage_ = value;
-        onChanged();
-        return this;
-      }
-
-      // optional .msg.result.Result_.Repleish repleish = 3;
-      private com.lxd.protobuf.msg.result.Result.Result_.Repleish repleish_ = com.lxd.protobuf.msg.result.Result.Result_.Repleish.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lxd.protobuf.msg.result.Result.Result_.Repleish, com.lxd.protobuf.msg.result.Result.Result_.Repleish.Builder, com.lxd.protobuf.msg.result.Result.Result_.RepleishOrBuilder> repleishBuilder_;
-      /**
-       * <code>optional .msg.result.Result_.Repleish repleish = 3;</code>
-       *
-       * <pre>
-       *&#47;&lt; 附属信息
-       * </pre>
-       */
-      public boolean hasRepleish() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>optional .msg.result.Result_.Repleish repleish = 3;</code>
-       *
-       * <pre>
-       *&#47;&lt; 附属信息
-       * </pre>
-       */
-      public com.lxd.protobuf.msg.result.Result.Result_.Repleish getRepleish() {
-        if (repleishBuilder_ == null) {
-          return repleish_;
-        } else {
-          return repleishBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>optional .msg.result.Result_.Repleish repleish = 3;</code>
-       *
-       * <pre>
-       *&#47;&lt; 附属信息
-       * </pre>
-       */
-      public Builder setRepleish(com.lxd.protobuf.msg.result.Result.Result_.Repleish value) {
-        if (repleishBuilder_ == null) {
+      public Builder setUser(com.lxd.protobuf.msg.result.user.User.User_ value) {
+        if (userBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          repleish_ = value;
+          user_ = value;
           onChanged();
         } else {
-          repleishBuilder_.setMessage(value);
+          userBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000001;
         return this;
       }
       /**
-       * <code>optional .msg.result.Result_.Repleish repleish = 3;</code>
-       *
-       * <pre>
-       *&#47;&lt; 附属信息
-       * </pre>
+       * <code>optional .msg.result.user.User_ user = 1;</code>
        */
-      public Builder setRepleish(
-          com.lxd.protobuf.msg.result.Result.Result_.Repleish.Builder builderForValue) {
-        if (repleishBuilder_ == null) {
-          repleish_ = builderForValue.build();
+      public Builder setUser(
+          com.lxd.protobuf.msg.result.user.User.User_.Builder builderForValue) {
+        if (userBuilder_ == null) {
+          user_ = builderForValue.build();
           onChanged();
         } else {
-          repleishBuilder_.setMessage(builderForValue.build());
+          userBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000001;
         return this;
       }
       /**
-       * <code>optional .msg.result.Result_.Repleish repleish = 3;</code>
-       *
-       * <pre>
-       *&#47;&lt; 附属信息
-       * </pre>
+       * <code>optional .msg.result.user.User_ user = 1;</code>
        */
-      public Builder mergeRepleish(com.lxd.protobuf.msg.result.Result.Result_.Repleish value) {
-        if (repleishBuilder_ == null) {
-          if (((bitField0_ & 0x00000004) == 0x00000004) &&
-              repleish_ != com.lxd.protobuf.msg.result.Result.Result_.Repleish.getDefaultInstance()) {
-            repleish_ =
-              com.lxd.protobuf.msg.result.Result.Result_.Repleish.newBuilder(repleish_).mergeFrom(value).buildPartial();
+      public Builder mergeUser(com.lxd.protobuf.msg.result.user.User.User_ value) {
+        if (userBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              user_ != com.lxd.protobuf.msg.result.user.User.User_.getDefaultInstance()) {
+            user_ =
+              com.lxd.protobuf.msg.result.user.User.User_.newBuilder(user_).mergeFrom(value).buildPartial();
           } else {
-            repleish_ = value;
+            user_ = value;
           }
           onChanged();
         } else {
-          repleishBuilder_.mergeFrom(value);
+          userBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000001;
         return this;
       }
       /**
-       * <code>optional .msg.result.Result_.Repleish repleish = 3;</code>
-       *
-       * <pre>
-       *&#47;&lt; 附属信息
-       * </pre>
+       * <code>optional .msg.result.user.User_ user = 1;</code>
        */
-      public Builder clearRepleish() {
-        if (repleishBuilder_ == null) {
-          repleish_ = com.lxd.protobuf.msg.result.Result.Result_.Repleish.getDefaultInstance();
+      public Builder clearUser() {
+        if (userBuilder_ == null) {
+          user_ = com.lxd.protobuf.msg.result.user.User.User_.getDefaultInstance();
           onChanged();
         } else {
-          repleishBuilder_.clear();
+          userBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
       /**
-       * <code>optional .msg.result.Result_.Repleish repleish = 3;</code>
-       *
-       * <pre>
-       *&#47;&lt; 附属信息
-       * </pre>
+       * <code>optional .msg.result.user.User_ user = 1;</code>
        */
-      public com.lxd.protobuf.msg.result.Result.Result_.Repleish.Builder getRepleishBuilder() {
-        bitField0_ |= 0x00000004;
+      public com.lxd.protobuf.msg.result.user.User.User_.Builder getUserBuilder() {
+        bitField0_ |= 0x00000001;
         onChanged();
-        return getRepleishFieldBuilder().getBuilder();
+        return getUserFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .msg.result.Result_.Repleish repleish = 3;</code>
-       *
-       * <pre>
-       *&#47;&lt; 附属信息
-       * </pre>
+       * <code>optional .msg.result.user.User_ user = 1;</code>
        */
-      public com.lxd.protobuf.msg.result.Result.Result_.RepleishOrBuilder getRepleishOrBuilder() {
-        if (repleishBuilder_ != null) {
-          return repleishBuilder_.getMessageOrBuilder();
+      public com.lxd.protobuf.msg.result.user.User.User_OrBuilder getUserOrBuilder() {
+        if (userBuilder_ != null) {
+          return userBuilder_.getMessageOrBuilder();
         } else {
-          return repleish_;
+          return user_;
         }
       }
       /**
-       * <code>optional .msg.result.Result_.Repleish repleish = 3;</code>
-       *
-       * <pre>
-       *&#47;&lt; 附属信息
-       * </pre>
+       * <code>optional .msg.result.user.User_ user = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.lxd.protobuf.msg.result.Result.Result_.Repleish, com.lxd.protobuf.msg.result.Result.Result_.Repleish.Builder, com.lxd.protobuf.msg.result.Result.Result_.RepleishOrBuilder> 
-          getRepleishFieldBuilder() {
-        if (repleishBuilder_ == null) {
-          repleishBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lxd.protobuf.msg.result.Result.Result_.Repleish, com.lxd.protobuf.msg.result.Result.Result_.Repleish.Builder, com.lxd.protobuf.msg.result.Result.Result_.RepleishOrBuilder>(
-                  repleish_,
+          com.lxd.protobuf.msg.result.user.User.User_, com.lxd.protobuf.msg.result.user.User.User_.Builder, com.lxd.protobuf.msg.result.user.User.User_OrBuilder> 
+          getUserFieldBuilder() {
+        if (userBuilder_ == null) {
+          userBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lxd.protobuf.msg.result.user.User.User_, com.lxd.protobuf.msg.result.user.User.User_.Builder, com.lxd.protobuf.msg.result.user.User.User_OrBuilder>(
+                  user_,
                   getParentForChildren(),
                   isClean());
-          repleish_ = null;
+          user_ = null;
         }
-        return repleishBuilder_;
+        return userBuilder_;
+      }
+
+      // optional .msg.result.console.Console_ console = 2;
+      private com.lxd.protobuf.msg.result.console.Console.Console_ console_ = com.lxd.protobuf.msg.result.console.Console.Console_.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lxd.protobuf.msg.result.console.Console.Console_, com.lxd.protobuf.msg.result.console.Console.Console_.Builder, com.lxd.protobuf.msg.result.console.Console.Console_OrBuilder> consoleBuilder_;
+      /**
+       * <code>optional .msg.result.console.Console_ console = 2;</code>
+       */
+      public boolean hasConsole() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional .msg.result.console.Console_ console = 2;</code>
+       */
+      public com.lxd.protobuf.msg.result.console.Console.Console_ getConsole() {
+        if (consoleBuilder_ == null) {
+          return console_;
+        } else {
+          return consoleBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .msg.result.console.Console_ console = 2;</code>
+       */
+      public Builder setConsole(com.lxd.protobuf.msg.result.console.Console.Console_ value) {
+        if (consoleBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          console_ = value;
+          onChanged();
+        } else {
+          consoleBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .msg.result.console.Console_ console = 2;</code>
+       */
+      public Builder setConsole(
+          com.lxd.protobuf.msg.result.console.Console.Console_.Builder builderForValue) {
+        if (consoleBuilder_ == null) {
+          console_ = builderForValue.build();
+          onChanged();
+        } else {
+          consoleBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .msg.result.console.Console_ console = 2;</code>
+       */
+      public Builder mergeConsole(com.lxd.protobuf.msg.result.console.Console.Console_ value) {
+        if (consoleBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+              console_ != com.lxd.protobuf.msg.result.console.Console.Console_.getDefaultInstance()) {
+            console_ =
+              com.lxd.protobuf.msg.result.console.Console.Console_.newBuilder(console_).mergeFrom(value).buildPartial();
+          } else {
+            console_ = value;
+          }
+          onChanged();
+        } else {
+          consoleBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .msg.result.console.Console_ console = 2;</code>
+       */
+      public Builder clearConsole() {
+        if (consoleBuilder_ == null) {
+          console_ = com.lxd.protobuf.msg.result.console.Console.Console_.getDefaultInstance();
+          onChanged();
+        } else {
+          consoleBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      /**
+       * <code>optional .msg.result.console.Console_ console = 2;</code>
+       */
+      public com.lxd.protobuf.msg.result.console.Console.Console_.Builder getConsoleBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getConsoleFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .msg.result.console.Console_ console = 2;</code>
+       */
+      public com.lxd.protobuf.msg.result.console.Console.Console_OrBuilder getConsoleOrBuilder() {
+        if (consoleBuilder_ != null) {
+          return consoleBuilder_.getMessageOrBuilder();
+        } else {
+          return console_;
+        }
+      }
+      /**
+       * <code>optional .msg.result.console.Console_ console = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lxd.protobuf.msg.result.console.Console.Console_, com.lxd.protobuf.msg.result.console.Console.Console_.Builder, com.lxd.protobuf.msg.result.console.Console.Console_OrBuilder> 
+          getConsoleFieldBuilder() {
+        if (consoleBuilder_ == null) {
+          consoleBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lxd.protobuf.msg.result.console.Console.Console_, com.lxd.protobuf.msg.result.console.Console.Console_.Builder, com.lxd.protobuf.msg.result.console.Console.Console_OrBuilder>(
+                  console_,
+                  getParentForChildren(),
+                  isClean());
+          console_ = null;
+        }
+        return consoleBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:msg.result.Result_)
@@ -1361,11 +736,6 @@ public final class Result {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_msg_result_Result__fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_msg_result_Result__Repleish_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_msg_result_Result__Repleish_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -1375,11 +745,11 @@ public final class Result {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\014Result.proto\022\nmsg.result\"|\n\007Result_\022\017\n" +
-      "\007success\030\001 \002(\010\022\025\n\rerror_message\030\002 \001(\t\022.\n" +
-      "\010repleish\030\003 \001(\0132\034.msg.result.Result_.Rep" +
-      "leish\032\031\n\010Repleish\022\r\n\005block\030\001 \002(\005B%\n\033com." +
-      "lxd.protobuf.msg.resultB\006Result"
+      "\n\014Result.proto\022\nmsg.result\032\016Res_User.pro" +
+      "to\032\021Res_Console.proto\"^\n\007Result_\022$\n\004user" +
+      "\030\001 \001(\0132\026.msg.result.user.User_\022-\n\007consol" +
+      "e\030\002 \001(\0132\034.msg.result.console.Console_B%\n" +
+      "\033com.lxd.protobuf.msg.resultB\006Result"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -1391,19 +761,15 @@ public final class Result {
           internal_static_msg_result_Result__fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_msg_result_Result__descriptor,
-              new java.lang.String[] { "Success", "ErrorMessage", "Repleish", });
-          internal_static_msg_result_Result__Repleish_descriptor =
-            internal_static_msg_result_Result__descriptor.getNestedTypes().get(0);
-          internal_static_msg_result_Result__Repleish_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_msg_result_Result__Repleish_descriptor,
-              new java.lang.String[] { "Block", });
+              new java.lang.String[] { "User", "Console", });
           return null;
         }
       };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          com.lxd.protobuf.msg.result.user.User.getDescriptor(),
+          com.lxd.protobuf.msg.result.console.Console.getDescriptor(),
         }, assigner);
   }
 

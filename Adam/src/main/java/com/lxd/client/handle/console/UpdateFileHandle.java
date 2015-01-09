@@ -15,46 +15,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.server.entity;
+package com.lxd.client.handle.console;
 
 
 /**
- * 日志表实体
+ * 更新文件句柄
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2014年12月22日
+ * @date: 2015年1月8日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public class Log {
-    ///< 日志编号
-    private long id;
-    ///< 日志所属操作用户
-    private String user_name;
-    ///< 本次操作结果
-    private boolean state;
-    
-    public long getId() {
-        return id;
-    }
-    
-    public void setId(long id) {
-        this.id = id;
-    }
-    
-    public String getUser_name() {
-        return user_name;
-    }
-    
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
-    }
-    
-    public boolean isState() {
-        return state;
-    }
-    
-    public void setState(boolean state) {
-        this.state = state;
-    }   
+public interface UpdateFileHandle {
+    ///< 修改文件成功
+    void updateFileSuccess(Long id);
+    ///< 修改文件失败
+    void updateFileError(Long id, String msg);
 }

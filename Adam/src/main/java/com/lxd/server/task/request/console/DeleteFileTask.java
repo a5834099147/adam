@@ -19,6 +19,8 @@ package com.lxd.server.task.request.console;
 
 import com.lxd.protobuf.msg.Msg.Msg_;
 import com.lxd.protobuf.msg.result.Result.Result_;
+import com.lxd.protobuf.msg.result.console.Console.Console_;
+import com.lxd.protobuf.msg.result.console.DeleteFile.DeleteFile_;
 import com.lxd.server.entity.File;
 import com.lxd.server.service.FileServer;
 import com.lxd.server.service.impl.FileServerImpl;
@@ -50,10 +52,19 @@ public class DeleteFileTask extends ConsoleTask {
         
         ///< 创建结果消息
         Result_.Builder result = Result_.newBuilder();
-        result.setSuccess(true);
-        
-        //TODO 数据库存储
+        //<创建控制台结果消息
+        Console_.Builder console = Console_.newBuilder();
+        ///< 创建删除文件结果消息
+        DeleteFile_.Builder deleteFile = DeleteFile_.newBuilder();     
+        ///< 设置成功标志
+        deleteFile.setSuccess(true);
+        ///< 在控制台结果中加入删除文件结果消息
+        console.setDeleteFile(deleteFile);
+        ///< 在结果消息中加入控制台结果消息
+        result.setConsole(console);
+        ///<创建消息
         Msg_.Builder msg = Msg_.newBuilder();
+        ///< 在消息中加入结果消息
         msg.setResult(result);
         msg.setJobId(getJobId());
         

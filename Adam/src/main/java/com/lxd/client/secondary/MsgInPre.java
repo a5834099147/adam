@@ -24,11 +24,19 @@ import com.lxd.client.task.ClientTask;
 import com.lxd.client.task.IdTask;
 import com.lxd.client.task.job.server.AddFileTask;
 import com.lxd.client.task.job.server.UpdateFileTask;
-import com.lxd.client.task.result.ResultTask;
+import com.lxd.client.task.result.console.AddFileResultPartTask;
+import com.lxd.client.task.result.console.AddFileResultTask;
+import com.lxd.client.task.result.console.DeleteFileResultTask;
+import com.lxd.client.task.result.console.UpdateFileResultPartTask;
+import com.lxd.client.task.result.console.UpdateFileResultTask;
+import com.lxd.client.task.result.user.LandingResultTask;
+import com.lxd.client.task.result.user.RegisterResultTask;
 import com.lxd.protobuf.msg.Msg.Msg_;
 import com.lxd.protobuf.msg.job.Job.Job_;
 import com.lxd.protobuf.msg.job.server.Server.Server_;
 import com.lxd.protobuf.msg.result.Result.Result_;
+import com.lxd.protobuf.msg.result.console.Console.Console_;
+import com.lxd.protobuf.msg.result.user.User.User_;
 import com.lxd.resource.DataPackage;
 import com.lxd.resource.Resource;
 
@@ -84,19 +92,89 @@ public class MsgInPre extends Thread {
     }
 
     // /< 解析结果消息
-    private ResultTask parseResult(Result_ msg) {
-        // /< 结果任务
-        ResultTask task = new ResultTask();
-        task.setSuccess(msg.getSuccess());
-        task.setError_msg(msg.getErrorMessage());
-        ///< 如果结果中存在块信息
-        if (msg.hasRepleish()) {
-            task.setBlock(msg.getRepleish().getBlock());
+    private ClientTask parseResult(Result_ msg) {
+       ///< 返回的任务
+        ClientTask result = null;
+        
+        if (msg.hasConsole()) {
+            ///< 如果是发往控制台的结果消息
+            result = parseRConsole(msg.getConsole());
+        } else if (msg.hasUser()) {
+            ///< 如果是发给用户的结果消息
+            result = parseRUser(msg.getUser());
         } else {
-            ///< 如果结果中不存在块信息
-            task.setBlock(-1);
+            ///< 如果无法解析消息
+            log.error("无法解析结果消息");
         }
-        return task;
+        
+        return result;
+    }
+
+    private ClientTask parseRUser(User_ msg) {
+        ///< 返回得消息
+        ClientTask result = null;
+        
+        if (msg.hasLanding()) {
+            ///< 新建登陆结果任务
+            LandingResultTask landing = new LandingResultTask();
+            landing.setError_msg(msg.getLanding().getErrorMsg());
+            landing.setSuccess(msg.getLanding().getSuccess());
+            result = landing;
+        } else if (msg.hasRegister()) {
+            ///< 注册结果任务
+            RegisterResultTask register = new RegisterResultTask();
+            register.setError_msg(msg.getRegister().getErrorMsg());
+            register.setSuccess(msg.getRegister().getSuccess());
+            result = register;
+        } else {
+            log.error("无法解析的用户结果消息");
+        }
+        return result;
+    }
+
+    private ClientTask parseRConsole(Console_ msg) {
+        ///< 返回的消息
+        ClientTask result = null;
+        
+        if (msg.hasAddFile()) {
+            ///< 新建文件消息
+            AddFileResultTask addFile = new AddFileResultTask();
+            addFile.setSuccess(msg.getAddFile().getSuccess());            
+            addFile.setEdition(msg.getAddFile().getEdition());
+            addFile.setError_msg(msg.getAddFile().getErrorMsg());
+            result = addFile;            
+        } else if (msg.hasAddFilePart()) {
+            ///< 新建文件片段结果消息
+            AddFileResultPartTask addFilePart = new AddFileResultPartTask();
+            addFilePart.setSuccess(msg.getAddFilePart().getSuccess());
+            addFilePart.setCurrent(msg.getAddFilePart().getNumber());
+            addFilePart.setError_msg(msg.getAddFilePart().getErrorMsg());
+            result = addFilePart;
+        } else if (msg.hasDeleteFile()) {
+            ///< 删除文件结果消息
+            DeleteFileResultTask deleteFile = new DeleteFileResultTask();
+            deleteFile.setSuccess(msg.getDeleteFile().getSuccess());
+            deleteFile.setError_msg(msg.getDeleteFile().getErrorMsg());
+            result = deleteFile;
+        } else if (msg.hasUpdateFile()) {
+            ///< 更新文件结果消息
+            UpdateFileResultTask updateFile = new UpdateFileResultTask();
+            updateFile.setEdition(msg.getUpdateFile().getEdition());
+            updateFile.setError_msg(msg.getUpdateFile().getErrorMsg());
+            updateFile.setSuccess(msg.getUpdateFile().getSuccess());
+            result = updateFile;
+        } else if (msg.hasUpdateFilePart()) {
+            ///< 更新文件片段结果消息
+            UpdateFileResultPartTask updateFilePart = new UpdateFileResultPartTask();
+            updateFilePart.setCurrent(msg.getUpdateFilePart().getNumber());
+            updateFilePart.setError_msg(msg.getUpdateFilePart().getErrorMsg());
+            updateFilePart.setSuccess(msg.getUpdateFilePart().getSuccess());
+            result = updateFilePart;
+        } else {
+            log.error("无法处理的控制台结果消息");
+        }
+        
+        return result;       
     }
 
     // /< 解析任务消息

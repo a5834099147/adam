@@ -15,20 +15,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.client.service;
-
-import com.lxd.client.entity.Log;
-
+package com.lxd.client.handle.user;
 
 /**
- * 日志服务接口
+ * 登陆处理逻辑
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2015年1月8日
+ * @date: 2015年1月3日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public interface LogServer {
-    ///< 新增日志
-    void addLog(Log log);
+public interface LoginHandle {
+	void loginSuccess(String user);
+	void loginFail(String msg);
 }

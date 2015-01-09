@@ -1,0 +1,11 @@
+package msg.result.console;
+option java_package="com.lxd.protobuf.msg.result.console";
+option java_outer_classname="DeleteFile";
+
+///< 删除文件结果
+message DeleteFile_{	
+	///< 结果
+	required bool success = 1;
+	///< 失败信息
+	optional string error_msg = 2;
+}

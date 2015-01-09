@@ -19,6 +19,7 @@ package com.lxd.server.task.request.user;
 
 import com.lxd.protobuf.msg.Msg.Msg_;
 import com.lxd.protobuf.msg.result.Result.Result_;
+import com.lxd.protobuf.msg.result.user.User.User_;
 import com.lxd.server.task.ServerTask;
 
 
@@ -34,14 +35,21 @@ public abstract class UserTask extends ServerTask {
 
     @Override
     public Msg_ taskExecute() {
-        Result_ result_ = userExecute();
-        
+        ///<  结果构建器
+        Result_.Builder result_ = Result_.newBuilder();
+        ///< 由具体流程得到User消息
+        User_ user_ = userExecute();
+        ///< 将user消息设置给结果
+        result_.setUser(user_);
+        ///< 消息构建器
         Msg_.Builder msg = Msg_.newBuilder();
+        ///< 设置结果
         msg.setResult(result_);
+        ///< 设置任务编号
         msg.setJobId(getJobId());
         return msg.build();
     }
     
     ///< UserTask 具体实现流程
-    public abstract Result_ userExecute();
+    public abstract User_ userExecute();
 }

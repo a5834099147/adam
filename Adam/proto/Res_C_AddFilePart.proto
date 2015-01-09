@@ -1,0 +1,13 @@
+package msg.result.console;
+option java_package="com.lxd.protobuf.msg.result.console";
+option java_outer_classname="AddFilePart";
+
+///< 新增文件模块结果
+message AddFilePart_{
+	///< 模块编号
+	required int32 number = 1;	
+	///< 新增结果
+	required bool success = 2;
+	///< 失败信息
+	optional string error_msg = 3;
+}

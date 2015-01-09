@@ -25,14 +25,12 @@ import com.lxd.protobuf.msg.job.server.Server.Server_;
 import com.lxd.protobuf.msg.job.server.UpdateFile.Information;
 import com.lxd.protobuf.msg.job.server.UpdateFile.UpdateFile_;
 import com.lxd.protobuf.msg.result.Result.Result_;
+import com.lxd.protobuf.msg.result.console.Console.Console_;
 import com.lxd.resource.Resource;
 import com.lxd.server.entity.File;
-import com.lxd.server.entity.Log;
 import com.lxd.server.resource.property.ConsoleUpdataFile;
 import com.lxd.server.service.FileServer;
-import com.lxd.server.service.LogServer;
 import com.lxd.server.service.impl.FileServerImpl;
-import com.lxd.server.service.impl.LogServerImpl;
 import com.lxd.sync.Chunk;
 import com.lxd.sync.RsyncUtil;
 import com.lxd.utils.Grnerate;
@@ -74,7 +72,6 @@ public class UpdateFileTask extends ConsoleTask {
     }
     
     private FileServer fileServer = new FileServerImpl();
-    private LogServer logServer = new LogServerImpl();
 
     @Override
     public Msg_ taskExecute() {
@@ -84,20 +81,26 @@ public class UpdateFileTask extends ConsoleTask {
         ///< 查找是否存在更新后的文件信息
         if (fileServer.havaFile(md5, length)) {
             ///< 更新表信息
-            fileServer.updateFile(oldFile, md5, length, last);
-            
-            ///< 保存业务日志
-            Log log_ = new Log();
-            log_.setId(getJobId());
-            log_.setState(true);
-            log_.setUser_name(getUser_name());
-            logServer.addLog(log_);
+            Integer edition = fileServer.updateFile(oldFile, md5, length, last);
             ///< 回复结果消息
             Msg_.Builder msg = Msg_.newBuilder();
             msg.setJobId(getJobId());
             Result_.Builder result = Result_.newBuilder();
-            result.setSuccess(true);
+            ///< 控制台结果消息创建
+            Console_.Builder console = Console_.newBuilder();
+            ///< 更新文件结果消息创建
+            com.lxd.protobuf.msg.result.console.UpdateFile.UpdateFile_.Builder updateFile = com.lxd.protobuf.msg.result.console.UpdateFile.UpdateFile_.newBuilder();
+            ///< 设置成功标志位
+            updateFile.setSuccess(true);
+            ///< 设置文件版本号
+            updateFile.setEdition(edition);
+            ///< 向控台台结果追加更新文件结果
+            console.setUpdateFile(updateFile);
+            ///< 向结果消息追加控制台结果消息
+            result.setConsole(console);      
+            ///< 向消息中追加结果消息
             msg.setResult(result);
+            
             return msg.build();
         }      
        
@@ -123,13 +126,17 @@ public class UpdateFileTask extends ConsoleTask {
         for (Chunk chunk : chunks) {
           ///< 文件信息存储模块
             Information.Builder info = Information.newBuilder();
+            ///< 向文件信息块中增加弱校验和
             info.setAdler32(chunk.getAdler32());
+            ///< 向文件信息块中追加强校验和
             info.setMd5(chunk.getMd5());
+            ///< 向文件信息块中追加块编号
             info.setInfoId(chunk.getIndex());
+            ///< 向文件信息块中追加块大小
             info.setLength(chunk.getLength());
+            ///< 将文件块信息加入到文件快信息列表中
             updateFile.addInformations(info);
         }
-        //TODO 增加文件块信息
         server.setUpdateFile(updateFile);
         job.setServer(server);
         msg.setJob(job);

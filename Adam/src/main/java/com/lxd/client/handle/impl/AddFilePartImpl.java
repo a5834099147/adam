@@ -15,19 +15,31 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.server.service;
+package com.lxd.client.handle.impl;
 
-import com.lxd.server.entity.Log;
+import com.lxd.client.handle.console.AddFilePartHandle;
+import com.lxd.resource.Resource;
 
 
 /**
- * 日志业务接口
+ * 增加文件片段实现
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2015年1月7日
+ * @date: 2015年1月9日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public interface LogServer {
-    void addLog(Log log);
+public class AddFilePartImpl implements AddFilePartHandle {
+
+    @Override
+    public void addFilePartSuccess(Long id, int current) {
+        Resource.getSingleton().getJobStatus().setDoing(id, current);
+    }
+
+    @Override
+    public void addFilePartError(Long id, int current, String msg) {
+        Resource.getSingleton().getJobStatus().setError(id, current);
+        ///< TODO 是否重试
+    }
+
 }

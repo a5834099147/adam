@@ -1,0 +1,13 @@
+package msg.result.console;
+option java_package="com.lxd.protobuf.msg.result.console";
+option java_outer_classname="AddFile";
+
+///< 新增文件结果
+message AddFile_{	
+	///< 新增结果
+	required bool success = 1;
+	///< 失败信息
+	optional string error_msg = 2;
+	///< 分配文件版本号
+	optional int32 edition = 3;
+}

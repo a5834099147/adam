@@ -1,0 +1,11 @@
+package msg.result.user;
+option java_package="com.lxd.protobuf.msg.result.user";
+option java_outer_classname="Register";
+
+///< 注册消息
+message Register_{
+	///< 注册结果
+	required bool success = 1;
+	///< 注册错误消息
+	optional string error_msg = 2;
+}

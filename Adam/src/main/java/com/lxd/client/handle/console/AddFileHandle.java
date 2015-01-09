@@ -15,29 +15,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.client.dao;
-
-import java.sql.Connection;
-import java.util.List;
-
-import com.lxd.client.entity.Log;
+package com.lxd.client.handle.console;
 
 
 /**
- * 控制台日志数据操作接口
+ * 新增文件结果处理句柄
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2014年12月23日
+ * @date: 2015年1月8日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public interface LogDao {
-    ///< 增加日志
-    void addLog(Log log, Connection connection);
-    
-    ///< 查找日志根据Id
-    Log queryById(Long id, Connection connection);
-    
-    ///< 查找日志根据用户名
-    List<Log> queryByName(String user_name, Connection connection);
+public interface AddFileHandle {
+    ///< 新增文件成功
+    void addFileSuccess(Long id);
+    ///< 新增文件失败
+    void addFileError(Long id, String msg);
 }

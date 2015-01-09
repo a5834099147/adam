@@ -36,6 +36,17 @@ public class ServerUpdateFile extends Property {
     private Long   length;
     // /< 最后修改时间
     private Long   last;
+    ///< 文件的版本号
+    private Integer edition;
+    
+    public Integer getEdition() {
+        return edition;
+    }
+
+    
+    public void setEdition(Integer edition) {
+        this.edition = edition;
+    }
 
     public String getPath() {
         return path;

@@ -17,9 +17,18 @@
 
 package com.lxd.client.handle;
 
+import com.lxd.client.handle.console.AddFileHandle;
+import com.lxd.client.handle.console.AddFilePartHandle;
+import com.lxd.client.handle.console.DeleteFileHandle;
+import com.lxd.client.handle.console.UpdateFileHandle;
+import com.lxd.client.handle.console.UpdateFilePartHandle;
 import com.lxd.client.handle.impl.AddFileImpl;
+import com.lxd.client.handle.impl.AddFilePartImpl;
 import com.lxd.client.handle.impl.DeleteFileImpl;
 import com.lxd.client.handle.impl.UpdateFileImpl;
+import com.lxd.client.handle.impl.UpdateFilePartImpl;
+import com.lxd.client.handle.user.LoginHandle;
+import com.lxd.client.handle.user.RegHandle;
 import com.lxd.client.view.control.UiSingleton;
 
 
@@ -48,6 +57,10 @@ public class HandleResource {
     private UpdateFileHandle updateFile = new UpdateFileImpl();
     ///< 删除文件处理句柄
     private DeleteFileHandle deleteFile = new DeleteFileImpl();
+    ///< 新增文件片段处理句柄
+    private AddFilePartHandle addFilePart = new AddFilePartImpl();
+    ///< 修改文件片段处理句柄
+    private UpdateFilePartHandle updateFilePart = new UpdateFilePartImpl();
 
     ///< 获得登陆处理句柄
     public LoginHandle getLogin() {
@@ -72,5 +85,15 @@ public class HandleResource {
     ///< 获取删除文件处理句柄
     public DeleteFileHandle getDeleteFile() {
         return deleteFile;
+    }
+    
+    ///< 获取新增文件片段句柄
+    public AddFilePartHandle getAddFilePart() {
+        return addFilePart;
+    }
+    
+    ///< 获取修改文件片段句柄
+    public UpdateFilePartHandle getUpdateFilePart() {
+        return updateFilePart;
     }
 }

@@ -47,7 +47,8 @@ import javax.swing.border.LineBorder;
 
 
 
-import com.lxd.client.handle.RegHandle;
+
+import com.lxd.client.handle.user.RegHandle;
 import com.lxd.client.resource.ClientResource;
 import com.lxd.client.resource.RequestPackage;
 import com.lxd.client.resource.property.ServerRegiest;

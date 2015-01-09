@@ -25,15 +25,14 @@ import com.lxd.protobuf.msg.job.Job.Job_;
 import com.lxd.protobuf.msg.job.server.AddFile.AddFile_;
 import com.lxd.protobuf.msg.job.server.Server.Server_;
 import com.lxd.protobuf.msg.result.Result.Result_;
+import com.lxd.protobuf.msg.result.console.Console.Console_;
 import com.lxd.resource.Resource;
 import com.lxd.server.entity.File;
-import com.lxd.server.entity.Log;
 import com.lxd.server.resource.ServerResource;
 import com.lxd.server.resource.property.ConsoleAddFile;
 import com.lxd.server.service.FileServer;
-import com.lxd.server.service.LogServer;
 import com.lxd.server.service.impl.FileServerImpl;
-import com.lxd.server.service.impl.LogServerImpl;
+import com.lxd.utils.Define;
 import com.lxd.utils.Grnerate;
 
 
@@ -50,8 +49,6 @@ public class AddFileTask extends ConsoleTask {
     
     ///< 文件业务
     private FileServer fileServer = new FileServerImpl();
-    ///< 日志业务
-    private LogServer logServer = new LogServerImpl();
     
     ///< 文件MD5值
     private String md5;
@@ -88,20 +85,26 @@ public class AddFileTask extends ConsoleTask {
             file.setPath(path);
             file.setUser_name(getUser_name());
             file.setLast(last);
+            file.setEdition(Define.EDITION);
             
             ///< 保存业务日志
             fileServer.addFile(file);
-            Log log_ = new Log();
-            log_.setId(getJobId());
-            log_.setState(true);
-            log_.setUser_name(getUser_name());
-            logServer.addLog(log_);
             log.info("文件快传信息建立, 文件路径:" + path + ", 文件大小:" + length);
             
             ///< 返回结果信息
             Msg_.Builder msg = Msg_.newBuilder();
             Result_.Builder result = Result_.newBuilder();
-            result.setSuccess(true);           
+            Console_.Builder console = Console_.newBuilder();
+            com.lxd.protobuf.msg.result.console.AddFile.AddFile_.Builder addFile_ = com.lxd.protobuf.msg.result.console.AddFile.AddFile_.newBuilder();
+            ///< 设置完成标志
+            addFile_.setSuccess(true);
+            ///< 设置文件版本
+            addFile_.setEdition(file.getEdition());
+            ///< 追加文件结果
+            console.setAddFile(addFile_);
+            ///< 追加控制台结果
+            result.setConsole(console);
+            ///< 追加结果
             msg.setResult(result);
             msg.setJobId(getJobId());
             return msg.build();

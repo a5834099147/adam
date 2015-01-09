@@ -1,0 +1,11 @@
+package msg.result.user;
+option java_package="com.lxd.protobuf.msg.result.user";
+option java_outer_classname="Landing";
+
+///< 登陆返回消息
+message Landing_{
+	///< 登陆结果
+	required bool success = 1;
+	///< 失败信息
+	optional string error_msg = 2;
+}

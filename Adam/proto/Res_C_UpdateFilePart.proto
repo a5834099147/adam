@@ -1,0 +1,13 @@
+package msg.result.console;
+option java_package="com.lxd.protobuf.msg.result.console";
+option java_outer_classname="UpdateFilePart";
+
+///< 更新文件模块结果
+message UpdateFilePart_{
+	///< 模块编号
+	required int32 number = 1;	
+	///< 更新文件结果
+	required bool success = 2;
+	///< 失败信息
+	optional string error_msg = 3;
+}

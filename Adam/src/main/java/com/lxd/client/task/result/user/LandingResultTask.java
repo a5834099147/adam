@@ -15,44 +15,49 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.client.task;
-import com.lxd.task.Task;
+package com.lxd.client.task.result.user;
 
-import io.netty.channel.Channel;
+import com.lxd.client.handle.HandleResource;
+import com.lxd.client.task.ClientTask;
+import com.lxd.client.view.control.UiSingleton;
 
 /**
- * 客户端任务的基类
+ * 登陆结果处理
  * 
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2014年12月17日
+ * @date: 2015年1月9日
  * @blog : http://a5834099147.github.io/
  * @review
  */
-public abstract class ClientTask implements Task {
+public class LandingResultTask extends ClientTask {
 
-    // /< 任务的发送通道
-    private Channel channel;
-    // /< 任务的编号
-    private long    jobId = 0;
+    private boolean success;
+    private String  error_msg;
 
-    public long getJobId() {
-        return jobId;
+    public boolean isSuccess() {
+        return success;
     }
 
-    public void setChannel(Channel channel) {
-        this.channel = channel;
+    public void setSuccess(boolean success) {
+        this.success = success;
     }
 
-    public void setJobId(long jobId) {
-        this.jobId = jobId;
+    public String getError_msg() {
+        return error_msg;
     }
 
-    public Channel getChannel() {
-        return channel;
+    public void setError_msg(String error_msg) {
+        this.error_msg = error_msg;
     }
 
-    // /< 任务的具体流程
     @Override
-    public abstract void execute();
+    public void execute() {
+        if (success) {
+           HandleResource.getSingleton().getLogin().loginSuccess(UiSingleton.getSingleton().getUser());
+        } else {
+            HandleResource.getSingleton().getLogin().loginFail(error_msg);
+        }
+    }
+
 }

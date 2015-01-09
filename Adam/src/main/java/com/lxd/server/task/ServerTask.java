@@ -47,8 +47,12 @@ public abstract class ServerTask implements Task {
     
     public void setChannel(Channel channel) {
         this.channel = channel;
-    }
+    }    
     
+    public Channel getChannel() {
+        return channel;
+    }
+
     public void setJobId(long jobId) {
         this.jobId = jobId;
     }  

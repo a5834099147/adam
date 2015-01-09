@@ -15,20 +15,40 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.client.handle;
+package com.lxd.client.task.result.console;
+
+import com.lxd.client.handle.HandleResource;
+import com.lxd.client.task.ClientTask;
 
 
 /**
- * 新增文件结果处理句柄
+ * 删除文件结果
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2015年1月8日
+ * @date: 2015年1月9日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public interface AddFileHandle {
-    ///< 新增文件成功
-    void addFileSuccess(Long id);
-    ///< 新增文件失败
-    void addFileError(Long id);
+public class DeleteFileResultTask extends ClientTask {
+    // /< 结果
+    private boolean success;
+    // /< 错误消息
+    private String  error_msg;
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public void setError_msg(String error_msg) {
+        this.error_msg = error_msg;
+    }
+
+    @Override
+    public void execute() {
+        if (success) {            
+            HandleResource.getSingleton().getDeleteFile().deleteFileSuccess(getJobId());     
+        } else {
+            HandleResource.getSingleton().getDeleteFile().deleteFileError(getJobId(), error_msg);
+        }
+    }
 }

@@ -19,13 +19,10 @@ package com.lxd.client.handle.impl;
 
 
 import com.lxd.client.entity.File;
-import com.lxd.client.entity.Log;
-import com.lxd.client.handle.AddFileHandle;
+import com.lxd.client.handle.console.AddFileHandle;
 import com.lxd.client.resource.property.ServerAddFile;
 import com.lxd.client.service.FileServer;
-import com.lxd.client.service.LogServer;
 import com.lxd.client.service.impl.FileServerImpl;
-import com.lxd.client.service.impl.LogServerImpl;
 import com.lxd.client.view.control.UiSingleton;
 import com.lxd.resource.Resource;
 import com.lxd.utils.Grnerate;
@@ -40,22 +37,12 @@ import com.lxd.utils.Grnerate;
  * @review 
  */
 public class AddFileImpl implements AddFileHandle {
-    
-    private LogServer logServer = new LogServerImpl();
     private FileServer fileServer = new FileServerImpl();
 
     @Override
     public void addFileSuccess(Long id) {
         ///< 得到任务信息
         ServerAddFile pro =  (ServerAddFile) Resource.getSingleton().getJobStatus().getProperty(id);
-        ///< 添加日志
-        Log log = new Log();
-        log.setId(id);
-        log.setState(true);
-        ///< 得到用户名
-        log.setUser_name(UiSingleton.getSingleton().getUser());
-        ///< 保存日志
-        logServer.addLog(log);
         
         ///< 添加文件
         File file = new File();
@@ -70,15 +57,7 @@ public class AddFileImpl implements AddFileHandle {
     }
 
     @Override
-    public void addFileError(Long id) {
-        ///< 添加日志
-        Log log = new Log();
-        log.setId(id);
-        log.setState(false);
-        ///< 得到用户名
-        log.setUser_name(UiSingleton.getSingleton().getUser());
-        ///< 保存日志
-        logServer.addLog(log);
+    public void addFileError(Long id, String msg) {
     }
 
 }

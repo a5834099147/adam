@@ -15,17 +15,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.client.handle;
+package com.lxd.client.handle.console;
+
 
 /**
- * 登陆逻辑处理
+ * 更新文件片段
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2012年1月3日
+ * @date: 2015年1月9日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public interface RegHandle {
-	void regSuccess();
-	void regFail(String msg);
+public interface UpdateFilePartHandle {
+    ///< 更新文件片段成功
+    void updateFilePartSuccess(Long id, int current);
+    ///< 更新文件片段失败
+    void updateFilePartFaile(Long id, int current, String msg);
 }

@@ -37,8 +37,8 @@ public interface FileServer {
     ///< 用户添加文件信息
     void addFile(File file);
     
-    ///< 用户修改文件信息
-    void updateFile(File file, String md5, Long length, Long last);
+    ///< 用户修改文件信息, 返回结果为版本号
+    Integer updateFile(File file, String md5, Long length, Long last);
     
     ///< 用户删除文件信息
     void deleteFile(File file);

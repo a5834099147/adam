@@ -47,7 +47,7 @@ import javax.swing.border.LineBorder;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
-import com.lxd.client.handle.LoginHandle;
+import com.lxd.client.handle.user.LoginHandle;
 import com.lxd.client.monitor.MonitorDir;
 import com.lxd.client.resource.ClientResource;
 import com.lxd.client.resource.RequestPackage;

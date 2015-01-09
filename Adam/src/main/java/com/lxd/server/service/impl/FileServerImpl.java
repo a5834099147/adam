@@ -19,6 +19,7 @@ package com.lxd.server.service.impl;
 
 import org.hibernate.Session;
 
+
 import com.lxd.server.dao.FileDao;
 import com.lxd.server.dao.FileHddDao;
 import com.lxd.server.dao.impl.FileDaoImpl;
@@ -73,7 +74,7 @@ public class FileServerImpl implements FileServer {
     }
 
     @Override
-    public void updateFile(File file, String md5, Long length, Long last) {
+    public Integer updateFile(File file, String md5, Long length, Long last) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.getTransaction().begin();
         ///< 查找未更新前文件信息        
@@ -84,7 +85,10 @@ public class FileServerImpl implements FileServer {
         file.setMd5(md5);
         file.setLength(length);
         file.setLast(last);
+        file.setEdition(file.getEdition() + 1);
         fileDao.updateFile(file);
+        ////< 得到当前版本号
+        Integer edition = file.getEdition();
         ///< 查找是否存在被更新文件相同的文件
         boolean result = fileDao.queryByMd5AndLength(old_md5, old_length);        
         session.getTransaction().commit();         
@@ -93,6 +97,7 @@ public class FileServerImpl implements FileServer {
             ///< 如果不存在则删除原来的文件
             hddDao.deleteFile(Grnerate.getPath(old_md5, old_length));
         }
+        return edition;
     }
 
     @Override
