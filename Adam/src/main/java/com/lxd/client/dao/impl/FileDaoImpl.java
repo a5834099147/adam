@@ -44,7 +44,7 @@ public class FileDaoImpl implements FileDao {
         PreparedStatement  statement = null;
         try {
             ///< 创建 SQL
-            String sql = "insert into File(user_name, md5, length, path, last) values(?, ?, ?, ?, ?)";
+            String sql = "insert into File(user_name, md5, length, path, last, edition) values(?, ?, ?, ?, ?, ?)";
             ///< 创建事务
             statement = connection.prepareStatement(sql);
             
@@ -54,6 +54,7 @@ public class FileDaoImpl implements FileDao {
             statement.setLong(3, file.getLength());
             statement.setString(4, file.getPath());
             statement.setLong(5, file.getLast());
+            statement.setInt(6, file.getEdition());
             
             ///< 运行
             statement.executeUpdate();
@@ -110,6 +111,7 @@ public class FileDaoImpl implements FileDao {
                 file.setLength(resultSet.getLong(4));
                 file.setPath(resultSet.getString(5));
                 file.setLast(resultSet.getLong(6));
+                file.setEdition(resultSet.getInt(7));
                 files.add(file);
             }         
         } catch (SQLException e) {
@@ -126,16 +128,17 @@ public class FileDaoImpl implements FileDao {
         PreparedStatement  statement = null;
         try {
             ///< 创建 SQL
-            String sql = "update File set md5 = ?, length = ?, last = ? where user_name = ? and path = ? ";
+            String sql = "update File set md5 = ?, length = ?, edition = ?, last = ? where user_name = ? and path = ? ";
             ///< 创建事务
             statement = connection.prepareStatement(sql);
             
             ///< 设置值
             statement.setString(1, file.getMd5());
             statement.setLong(2, file.getLength());
-            statement.setLong(3, file.getLast());
-            statement.setString(4, file.getUser_name());
-            statement.setString(5, file.getPath());
+            statement.setInt(3, file.getEdition());
+            statement.setLong(4, file.getLast());
+            statement.setString(5, file.getUser_name());
+            statement.setString(6, file.getPath());
             
             ///< 运行
             statement.executeUpdate();

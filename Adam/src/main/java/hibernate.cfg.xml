@@ -27,7 +27,6 @@
 		<property name="show_sql">true</property>
 
 		<mapping resource="com/lxd/server/entity/File.hbm.xml" />
-		<mapping resource="com/lxd/server/entity/Log.hbm.xml" />
 		<mapping resource="com/lxd/server/entity/User.hbm.xml" />
 	</session-factory>
 

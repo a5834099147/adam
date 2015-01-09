@@ -55,6 +55,33 @@ public final class Landing {
      */
     com.google.protobuf.ByteString
         getErrorMsgBytes();
+
+    // optional string user = 3;
+    /**
+     * <code>optional string user = 3;</code>
+     *
+     * <pre>
+     *&#47;&lt; 登陆用户名
+     * </pre>
+     */
+    boolean hasUser();
+    /**
+     * <code>optional string user = 3;</code>
+     *
+     * <pre>
+     *&#47;&lt; 登陆用户名
+     * </pre>
+     */
+    java.lang.String getUser();
+    /**
+     * <code>optional string user = 3;</code>
+     *
+     * <pre>
+     *&#47;&lt; 登陆用户名
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getUserBytes();
   }
   /**
    * Protobuf type {@code msg.result.user.Landing_}
@@ -119,6 +146,11 @@ public final class Landing {
             case 18: {
               bitField0_ |= 0x00000002;
               errorMsg_ = input.readBytes();
+              break;
+            }
+            case 26: {
+              bitField0_ |= 0x00000004;
+              user_ = input.readBytes();
               break;
             }
           }
@@ -240,9 +272,65 @@ public final class Landing {
       }
     }
 
+    // optional string user = 3;
+    public static final int USER_FIELD_NUMBER = 3;
+    private java.lang.Object user_;
+    /**
+     * <code>optional string user = 3;</code>
+     *
+     * <pre>
+     *&#47;&lt; 登陆用户名
+     * </pre>
+     */
+    public boolean hasUser() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional string user = 3;</code>
+     *
+     * <pre>
+     *&#47;&lt; 登陆用户名
+     * </pre>
+     */
+    public java.lang.String getUser() {
+      java.lang.Object ref = user_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          user_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string user = 3;</code>
+     *
+     * <pre>
+     *&#47;&lt; 登陆用户名
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getUserBytes() {
+      java.lang.Object ref = user_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        user_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private void initFields() {
       success_ = false;
       errorMsg_ = "";
+      user_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -266,6 +354,9 @@ public final class Landing {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeBytes(2, getErrorMsgBytes());
       }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getUserBytes());
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -282,6 +373,10 @@ public final class Landing {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(2, getErrorMsgBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, getUserBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -407,6 +502,8 @@ public final class Landing {
         bitField0_ = (bitField0_ & ~0x00000001);
         errorMsg_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
+        user_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -443,6 +540,10 @@ public final class Landing {
           to_bitField0_ |= 0x00000002;
         }
         result.errorMsg_ = errorMsg_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.user_ = user_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -465,6 +566,11 @@ public final class Landing {
         if (other.hasErrorMsg()) {
           bitField0_ |= 0x00000002;
           errorMsg_ = other.errorMsg_;
+          onChanged();
+        }
+        if (other.hasUser()) {
+          bitField0_ |= 0x00000004;
+          user_ = other.user_;
           onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
@@ -645,6 +751,104 @@ public final class Landing {
         return this;
       }
 
+      // optional string user = 3;
+      private java.lang.Object user_ = "";
+      /**
+       * <code>optional string user = 3;</code>
+       *
+       * <pre>
+       *&#47;&lt; 登陆用户名
+       * </pre>
+       */
+      public boolean hasUser() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional string user = 3;</code>
+       *
+       * <pre>
+       *&#47;&lt; 登陆用户名
+       * </pre>
+       */
+      public java.lang.String getUser() {
+        java.lang.Object ref = user_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          user_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string user = 3;</code>
+       *
+       * <pre>
+       *&#47;&lt; 登陆用户名
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getUserBytes() {
+        java.lang.Object ref = user_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          user_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string user = 3;</code>
+       *
+       * <pre>
+       *&#47;&lt; 登陆用户名
+       * </pre>
+       */
+      public Builder setUser(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        user_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string user = 3;</code>
+       *
+       * <pre>
+       *&#47;&lt; 登陆用户名
+       * </pre>
+       */
+      public Builder clearUser() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        user_ = getDefaultInstance().getUser();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string user = 3;</code>
+       *
+       * <pre>
+       *&#47;&lt; 登陆用户名
+       * </pre>
+       */
+      public Builder setUserBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        user_ = value;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:msg.result.user.Landing_)
     }
 
@@ -670,10 +874,10 @@ public final class Landing {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\022Res_U_Lading.proto\022\017msg.result.user\".\n" +
+      "\n\022Res_U_Lading.proto\022\017msg.result.user\"<\n" +
       "\010Landing_\022\017\n\007success\030\001 \002(\010\022\021\n\terror_msg\030" +
-      "\002 \001(\tB+\n com.lxd.protobuf.msg.result.use" +
-      "rB\007Landing"
+      "\002 \001(\t\022\014\n\004user\030\003 \001(\tB+\n com.lxd.protobuf." +
+      "msg.result.userB\007Landing"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -685,7 +889,7 @@ public final class Landing {
           internal_static_msg_result_user_Landing__fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_msg_result_user_Landing__descriptor,
-              new java.lang.String[] { "Success", "ErrorMsg", });
+              new java.lang.String[] { "Success", "ErrorMsg", "User", });
           return null;
         }
       };

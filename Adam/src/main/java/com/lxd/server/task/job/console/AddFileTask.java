@@ -95,6 +95,7 @@ public class AddFileTask extends JobTask {
                 console.setAddFile(addFile);
                 result.setConsole(console);
                 msg.setResult(result);
+                msg.setJobId(getJobId());
                 // /< 发送完成结果
                 Resource.getSingleton().getMsgQueue().submitMsgOutQueue(new DataPackage(msg.build(), getChannel()));
 

@@ -119,6 +119,7 @@ public class MsgInPre extends Thread {
             LandingResultTask landing = new LandingResultTask();
             landing.setError_msg(msg.getLanding().getErrorMsg());
             landing.setSuccess(msg.getLanding().getSuccess());
+            landing.setUser_name(msg.getLanding().getUser());
             result = landing;
         } else if (msg.hasRegister()) {
             ///< 注册结果任务

@@ -19,8 +19,6 @@ package com.lxd.client.task.result.user;
 
 import com.lxd.client.handle.HandleResource;
 import com.lxd.client.task.ClientTask;
-import com.lxd.client.view.control.UiSingleton;
-
 /**
  * 登陆结果处理
  * 
@@ -34,6 +32,15 @@ public class LandingResultTask extends ClientTask {
 
     private boolean success;
     private String  error_msg;
+    private String  user_name;
+
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }
 
     public boolean isSuccess() {
         return success;
@@ -54,7 +61,7 @@ public class LandingResultTask extends ClientTask {
     @Override
     public void execute() {
         if (success) {
-           HandleResource.getSingleton().getLogin().loginSuccess(UiSingleton.getSingleton().getUser());
+            HandleResource.getSingleton().getLogin().loginSuccess(user_name);
         } else {
             HandleResource.getSingleton().getLogin().loginFail(error_msg);
         }
