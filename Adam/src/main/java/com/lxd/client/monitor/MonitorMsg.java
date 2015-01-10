@@ -36,11 +36,27 @@ public class MonitorMsg {
         UPDATE
     };
     
+    ///< 新增文件逻辑类型
+    public enum State {
+        BEGIN, ///< 开始
+        ACCESS///< 可以被访问        
+    };
+    
     ///< 文件全路径
     private File file;
     ///< 操作类型
     private Type type;
+    ///< 文件状态
+    private State state = State.BEGIN;   
     
+    public State getState() {
+        return state;
+    }
+    
+    public void setState(State state) {
+        this.state = state;
+    }
+
     ///< 任务开启时间(默认为0, 表示当前时间)
     private Long start = 0L;   
     

@@ -117,8 +117,10 @@ public class ClientResource {
         // /< 查找需要删除的项目
         if (msg.getType() != Type.UPDATE) {
             for (MonitorMsg tmp : monitorMsg) {
-                if (tmp.getFile().equals(msg.getFile()) && tmp.getType() == Type.UPDATE) {
-                    msgs.add(tmp);
+                if (tmp.getFile().equals(msg.getFile())) {
+                    if (tmp.getType() ==Type.UPDATE || tmp.getType() == msg.getType()) {
+                        msgs.add(tmp);
+                    }                    
                 }
             }
             // /< 删除元素            
@@ -130,12 +132,24 @@ public class ClientResource {
                 if (tmp.getFile().equals(msg.getFile())) {
                     msgs.add(tmp);
                 }
+            }  
+            
+            // /< 需要删除的元素链表
+            List<MonitorMsg> tmps = new LinkedList<>();
+            for (MonitorMsg tmp : monitorMsg) {
+                if (tmp.getType() == Type.UPDATE) {
+                    tmps.add(tmp);
+                }
             }
-
+            msgs.removeAll(tmps);
+            monitorMsg.removeAll(tmps);
+            
             for (MonitorMsg tmp : msgs) {
                 log.info("删除修改文件信息 1 条, 由于与新增或删除文件冲突" + msg.getFile());
                 monitorMsg.remove(tmp);
                 if (tmp.getType() != Type.UPDATE) {
+                    log.info("删除一条文件修改信息, 由于与删除或新增文件消息冲突");
+                    monitorMsg.remove(msg);
                     return tmp;
                 }
             }

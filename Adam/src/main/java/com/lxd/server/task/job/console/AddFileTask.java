@@ -117,6 +117,7 @@ public class AddFileTask extends JobTask {
             AddFilePart_.Builder addFilePart = AddFilePart_.newBuilder();
             addFilePart.setSuccess(true);
             addFilePart.setNumber(current_lump);
+            console.setAddFilePart(addFilePart);
             resultPart.setConsole(console);
             log.info("任务编号" + getJobId() + " 模块" + current_lump + "添加文件任务完成");
         }

@@ -18,13 +18,8 @@ package com.lxd.algorithm;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.lang.reflect.Method;
-import java.nio.MappedByteBuffer;
-import java.nio.channels.FileChannel;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
-import sun.nio.ch.FileChannelImpl;
 
 /**
  * 强校验和计算算法类
@@ -58,16 +53,14 @@ public class MD5 {
 
     public static String getFileMD5String(File file) throws Exception {
         FileInputStream in = new FileInputStream(file);
-        FileChannel ch = in.getChannel();
-        MappedByteBuffer byteBuffer = ch.map(FileChannel.MapMode.READ_ONLY, 0, file.length());
-        md.update(byteBuffer);
+        ///< 数据缓存 buffer
+        byte[] buffer = new byte[8192];
         
-        ///< 手动删除 unmap
-        Method method = FileChannelImpl.class.getDeclaredMethod("unmap", MappedByteBuffer.class);
-        method.setAccessible(true);
-        method.invoke(FileChannelImpl.class, byteBuffer);
-        ///< 关闭通道
-        ch.close();
+        int length;
+        while ((length = in.read(buffer)) != -1) {
+            md.update(buffer, 0, length);
+        }
+        
         ///< 关闭流
         in.close();
         return bufferToHex(md.digest());

@@ -38,9 +38,13 @@ public class Define {
     ///< 修改文件等待时间
     public static final long UPDATETIME = 3000;
     ///< 不可读文件等待时间
-    public static final long ERRORTIME = 6000;
+    public static final long ERRORTIME = 120000;
     ///< 等待时间
     public static final long SLEEPTIME = 300;
     ///< 初始化文件版本号
     public static final Integer EDITION = 0;
+    ///< 客户端扫描时间
+    public static final Integer SCANNING = 60000;
+    ///< 客户端文件新增文件
+    public static final Integer CREATEFILETIME = 61000;
 }

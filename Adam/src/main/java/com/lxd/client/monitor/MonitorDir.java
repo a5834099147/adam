@@ -65,7 +65,7 @@ public class MonitorDir extends Thread{
     
     private void fileWatch() {
         //文件变更器  
-        FileAlterationMonitor  monitor = new FileAlterationMonitor(60000); //一分钟扫描一次
+        FileAlterationMonitor  monitor = new FileAlterationMonitor(Define.SCANNING); //一分钟扫描一次
         //目录观察者  
         FileAlterationObserver observer = new FileAlterationObserver(new File(filePath));
         
@@ -92,6 +92,12 @@ public class MonitorDir extends Thread{
                     ///< 判断文件是否可写
                     if (msg.getType() == Type.DELETE || fileCanRead(msg.getFile())) {
                         ///< 删除多余修改文件
+                        if (msg.getType() == Type.ADD && msg.getState().equals(com.lxd.client.monitor.MonitorMsg.State.BEGIN)) {
+                            msg.setStart(System.currentTimeMillis() + Define.CREATEFILETIME);
+                            msg.setState(com.lxd.client.monitor.MonitorMsg.State.ACCESS);
+                            ClientResource.getSingleton().submitMonitorMsg(msg);
+                            continue;
+                        }
                         msg = ClientResource.getSingleton().reviseMsg(msg);
                         msgPacking(msg);                        
                     } else {
@@ -102,8 +108,8 @@ public class MonitorDir extends Thread{
                     }
                 }
             }
-            else {
-                ///< 将消息重新放入到队列中
+            else {                
+              ///< 将消息重新放入到队列中
                 ClientResource.getSingleton().submitMonitorMsg(msg);
                 try {
                     ///< 不在运行时间, 则等待, 并将信息返回到队列中
