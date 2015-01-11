@@ -48,6 +48,8 @@ public class IdTask extends ClientTask {
         log.info("分配的ID为 " + msg.getJobId());
         ///< 设置任务参数
         Resource.getSingleton().getJobStatus().addJob(getJobId(), reqPack.getProperty());
+        ///< 初始化任务
+        Resource.getSingleton().getJobStatus().init(getJobId(), reqPack.getProperty().getTotal());
         ///< 发送新的请求
         Resource.getSingleton().getMsgQueue().submitMsgOutQueue(new DataPackage(msg.build(), getChannel()));
     }

@@ -80,8 +80,8 @@ public class ServerAddFile extends Property {
         this.path = path;
     }
 
-    public ServerAddFile(String path, String md5, Long length, Long last){
-        super();
+    public ServerAddFile(String path, String md5, Long length, Long last, Integer total){
+        super(total);
         this.path = path;
         this.md5 = md5;
         this.length = length;

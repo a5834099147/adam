@@ -18,6 +18,8 @@
 package com.lxd.client.handle.impl;
 
 import com.lxd.client.handle.console.UpdateFilePartHandle;
+import com.lxd.client.resource.ClientResource;
+import com.lxd.client.task.job.server.UpdateFileTask;
 import com.lxd.resource.Resource;
 
 
@@ -32,8 +34,14 @@ import com.lxd.resource.Resource;
 public class UpdateFilePartImpl implements UpdateFilePartHandle {
 
     @Override
-    public void updateFilePartSuccess(Long id, int current) {
-        Resource.getSingleton().getJobStatus().setDoing(id, current);        
+    public void updateFilePartSuccess(Long id, int current) { 
+        Resource.getSingleton().getJobStatus().setDone(id, current);
+        if (!Resource.getSingleton().getJobStatus().checkFinished(id)) {
+            UpdateFileTask updateTask = new UpdateFileTask();
+            updateTask.setJobId(id);
+            updateTask.setChannel(ClientResource.getSingleton().getChannel());
+            Resource.getSingleton().getTaskQueue().submitTaskQueue(updateTask);
+        }        
     }
 
     @Override

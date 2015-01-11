@@ -21,6 +21,9 @@ import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 
 /**
  * 任务状态检测
@@ -31,11 +34,15 @@ import java.util.List;
  * @review 
  */
 public class JobStatus {
+    private static final Logger log = LogManager.getLogger(JobStatus.class);
+    
     private Hashtable< Long, Status> status = new Hashtable<>();
+    
     
     ///< 增加任务
     public void addJob(Long jobId, Object property) {
         status.put(jobId, new Status().setProperty(property));
+        log.debug("新建一个任务, 任务编号为:" + jobId);
     }
     
     ///< 得到任务的附加属性
@@ -46,6 +53,14 @@ public class JobStatus {
     ///< 检测是否完成
     public boolean checkFinished(Long jobId) {
         return status.get(jobId).isFinished();
+    }    
+ 
+    /*
+     *  设置任务总块数
+     */
+    public void init (Long jobid, int totoal) {
+        status.get(jobid).setTotal(totoal);
+        log.debug("初始化任务" + jobid + "的任务个数为" + totoal);
     }
     
     ///< 判断块是否需要进行
@@ -61,21 +76,25 @@ public class JobStatus {
     ///< 设置当前块正在进行
     public void setDoing(Long jobId, int current) {
         status.get(jobId).setDoingState(current);
+        log.debug("设置任务编号为" + jobId + "的任务块" + current + "正在进行中");
     }
     
     ///< 设置当前块完成
     public void setDone(Long jobId, int current) {
         status.get(jobId).setDoneState(current);
+        log.debug("设置任务编号为" + jobId + "的任务块" + current + "已经完成");
     }
     
     ///< 设置完成, 删除任务信息
     public void setDone(Long jobId) {
         status.remove(jobId);
+        log.debug("设置任务编号为" + jobId + "的任务已经完成");
     }
     
     ///< 设置当前块失败
     public void setError(Long jobId, int current) {
         status.get(jobId).setErrorState(current);
+        log.debug("设置任务编号为" + jobId + "的任务块" + current + "发生错误");
     }
     
     ///< 获取未完成的块好

@@ -100,6 +100,24 @@ public final class AddFile {
      * </pre>
      */
     long getLast();
+
+    // required int32 total = 5;
+    /**
+     * <code>required int32 total = 5;</code>
+     *
+     * <pre>
+     *&#47;&lt; 任务块数
+     * </pre>
+     */
+    boolean hasTotal();
+    /**
+     * <code>required int32 total = 5;</code>
+     *
+     * <pre>
+     *&#47;&lt; 任务块数
+     * </pre>
+     */
+    int getTotal();
   }
   /**
    * Protobuf type {@code msg.request.console.AddFile_}
@@ -170,6 +188,11 @@ public final class AddFile {
             case 32: {
               bitField0_ |= 0x00000008;
               last_ = input.readInt64();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              total_ = input.readInt32();
               break;
             }
           }
@@ -370,11 +393,36 @@ public final class AddFile {
       return last_;
     }
 
+    // required int32 total = 5;
+    public static final int TOTAL_FIELD_NUMBER = 5;
+    private int total_;
+    /**
+     * <code>required int32 total = 5;</code>
+     *
+     * <pre>
+     *&#47;&lt; 任务块数
+     * </pre>
+     */
+    public boolean hasTotal() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>required int32 total = 5;</code>
+     *
+     * <pre>
+     *&#47;&lt; 任务块数
+     * </pre>
+     */
+    public int getTotal() {
+      return total_;
+    }
+
     private void initFields() {
       md5_ = "";
       length_ = 0L;
       path_ = "";
       last_ = 0L;
+      total_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -397,6 +445,10 @@ public final class AddFile {
         memoizedIsInitialized = 0;
         return false;
       }
+      if (!hasTotal()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -415,6 +467,9 @@ public final class AddFile {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeInt64(4, last_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(5, total_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -440,6 +495,10 @@ public final class AddFile {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(4, last_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, total_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -565,6 +624,8 @@ public final class AddFile {
         bitField0_ = (bitField0_ & ~0x00000004);
         last_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000008);
+        total_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -609,6 +670,10 @@ public final class AddFile {
           to_bitField0_ |= 0x00000008;
         }
         result.last_ = last_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.total_ = total_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -641,6 +706,9 @@ public final class AddFile {
         if (other.hasLast()) {
           setLast(other.getLast());
         }
+        if (other.hasTotal()) {
+          setTotal(other.getTotal());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -659,6 +727,10 @@ public final class AddFile {
           return false;
         }
         if (!hasLast()) {
+          
+          return false;
+        }
+        if (!hasTotal()) {
           
           return false;
         }
@@ -978,6 +1050,55 @@ public final class AddFile {
         return this;
       }
 
+      // required int32 total = 5;
+      private int total_ ;
+      /**
+       * <code>required int32 total = 5;</code>
+       *
+       * <pre>
+       *&#47;&lt; 任务块数
+       * </pre>
+       */
+      public boolean hasTotal() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>required int32 total = 5;</code>
+       *
+       * <pre>
+       *&#47;&lt; 任务块数
+       * </pre>
+       */
+      public int getTotal() {
+        return total_;
+      }
+      /**
+       * <code>required int32 total = 5;</code>
+       *
+       * <pre>
+       *&#47;&lt; 任务块数
+       * </pre>
+       */
+      public Builder setTotal(int value) {
+        bitField0_ |= 0x00000010;
+        total_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 total = 5;</code>
+       *
+       * <pre>
+       *&#47;&lt; 任务块数
+       * </pre>
+       */
+      public Builder clearTotal() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        total_ = 0;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:msg.request.console.AddFile_)
     }
 
@@ -1004,9 +1125,10 @@ public final class AddFile {
   static {
     java.lang.String[] descriptorData = {
       "\n\021R_C_AddFile.proto\022\023msg.request.console" +
-      "\"C\n\010AddFile_\022\013\n\003md5\030\001 \002(\t\022\016\n\006length\030\002 \002(" +
-      "\003\022\014\n\004path\030\003 \002(\t\022\014\n\004last\030\004 \002(\003B/\n$com.lxd" +
-      ".protobuf.msg.request.consoleB\007AddFile"
+      "\"R\n\010AddFile_\022\013\n\003md5\030\001 \002(\t\022\016\n\006length\030\002 \002(" +
+      "\003\022\014\n\004path\030\003 \002(\t\022\014\n\004last\030\004 \002(\003\022\r\n\005total\030\005" +
+      " \002(\005B/\n$com.lxd.protobuf.msg.request.con" +
+      "soleB\007AddFile"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -1018,7 +1140,7 @@ public final class AddFile {
           internal_static_msg_request_console_AddFile__fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_msg_request_console_AddFile__descriptor,
-              new java.lang.String[] { "Md5", "Length", "Path", "Last", });
+              new java.lang.String[] { "Md5", "Length", "Path", "Last", "Total", });
           return null;
         }
       };

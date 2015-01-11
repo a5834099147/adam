@@ -17,6 +17,11 @@
 
 package com.lxd.client.resource.property;
 
+import java.util.List;
+import java.util.Map;
+
+import com.lxd.sync.Chunk;
+
 /**
  * 服务器任务更新文件附加属性
  * 
@@ -38,7 +43,18 @@ public class ServerUpdateFile extends Property {
     private Long   last;
     ///< 文件的版本号
     private Integer edition;
+    ///< 补丁数据结构
+    private Map<Integer, List<Chunk>> infoMap;    
     
+    public Map<Integer, List<Chunk>> getInfoMap() {
+        return infoMap;
+    }
+    
+    public void setInfoMap(Map<Integer, List<Chunk>> infoMap) {
+        this.infoMap = infoMap;
+    }
+
+
     public Integer getEdition() {
         return edition;
     }
@@ -56,8 +72,8 @@ public class ServerUpdateFile extends Property {
         this.path = path;
     }
 
-    public ServerUpdateFile(String path, String md5, Long length, Long last){
-        super();
+    public ServerUpdateFile(String path, String md5, Long length, Long last, Integer total){
+        super(total);
         this.path = path;
         this.md5 = md5;
         this.length = length;

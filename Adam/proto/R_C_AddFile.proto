@@ -11,4 +11,6 @@ message AddFile_{
 	required string path = 3;
 	///< 文件最后修改
 	required int64 last = 4;
+	///< 任务块数
+	required int32 total = 5;
 }

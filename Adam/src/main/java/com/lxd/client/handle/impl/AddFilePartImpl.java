@@ -16,8 +16,9 @@
  */
 
 package com.lxd.client.handle.impl;
-
 import com.lxd.client.handle.console.AddFilePartHandle;
+import com.lxd.client.resource.ClientResource;
+import com.lxd.client.task.job.server.AddFileTask;
 import com.lxd.resource.Resource;
 
 
@@ -33,7 +34,13 @@ public class AddFilePartImpl implements AddFilePartHandle {
 
     @Override
     public void addFilePartSuccess(Long id, int current) {
-        Resource.getSingleton().getJobStatus().setDoing(id, current);
+        Resource.getSingleton().getJobStatus().setDone(id, current);
+        if (!Resource.getSingleton().getJobStatus().checkFinished(id)) {
+            AddFileTask addFileTask = new AddFileTask();
+            addFileTask.setJobId(id);
+            addFileTask.setChannel(ClientResource.getSingleton().getChannel());
+            Resource.getSingleton().getTaskQueue().submitTaskQueue(addFileTask);
+        }        
     }
 
     @Override

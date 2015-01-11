@@ -123,6 +123,7 @@ public class MsgInPre extends Thread  {
             task.setMd5(msg.getAddFile().getMd5());
             task.setLength(msg.getAddFile().getLength());
             task.setPath(msg.getAddFile().getPath());
+            task.setTotal(msg.getAddFile().getTotal());
             result = task;
             
         } else if (msg.hasDeleteFile()) {
@@ -137,7 +138,8 @@ public class MsgInPre extends Thread  {
             task.setLast(msg.getUpdateFile().getLast());
             task.setPath(msg.getUpdateFile().getPath());
             task.setMd5(msg.getUpdateFile().getMd5());
-            task.setLength(msg.getUpdateFile().getLength());            
+            task.setLength(msg.getUpdateFile().getLength());     
+            task.setTotal(msg.getUpdateFile().getTotal());
             result = task;
             
         } else {

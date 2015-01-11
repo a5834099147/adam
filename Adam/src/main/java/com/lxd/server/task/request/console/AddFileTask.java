@@ -58,6 +58,8 @@ public class AddFileTask extends ConsoleTask {
     private String path;
     ///< 文件最后修改时间
     private Long last;   
+    ///< 任务总个数
+    private Integer total;
     
     public void setLast(Long last) {
         this.last = last;
@@ -73,6 +75,10 @@ public class AddFileTask extends ConsoleTask {
     
     public void setPath(String path) {
         this.path = path;
+    }
+    
+    public void setTotal(Integer total) {
+        this.total = total;
     }
 
     @Override
@@ -114,6 +120,8 @@ public class AddFileTask extends ConsoleTask {
         
         ///< 将文件信息录入到任务组中
         Resource.getSingleton().getJobStatus().addJob(getJobId(), new ConsoleAddFile(md5, length, path, getUser_name(), last));
+        ///< 初始化任务
+        Resource.getSingleton().getJobStatus().init(getJobId(), total);
         
         String file_path = Grnerate.getPath(md5, length);
         fileServer.addFile(file_path, length);

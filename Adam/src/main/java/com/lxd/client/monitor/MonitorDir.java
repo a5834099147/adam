@@ -26,6 +26,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.lxd.algorithm.MD5;
 import com.lxd.client.monitor.MonitorMsg.Type;
+import com.lxd.client.monitor.util.FileUtil;
 import com.lxd.client.resource.ClientResource;
 import com.lxd.client.resource.RequestPackage;
 import com.lxd.client.resource.property.ServerAddFile;
@@ -181,12 +182,14 @@ public class MonitorDir extends Thread{
         addFile.setLast(file.lastModified());
         ///< 将新增文件相对路径加入到构建器中
         addFile.setPath(file.getAbsolutePath().substring(Define.CLIENT.length()));
+        ///< 将文件的块数增加到构建器中
+        addFile.setTotal(FileUtil.getTotal(file));
         ///< 将新增文件信息设置到控制台请求信息构建器中
         console.setAddFile(addFile);     
         ///< 交给函数最终打包
         Msg_ msg_ = packing(console.build());
         
-        ClientResource.getSingleton().submitRequest(new RequestPackage(msg_, new ServerAddFile(file.getAbsolutePath(), md5, file.length(), file.lastModified())));
+        ClientResource.getSingleton().submitRequest(new RequestPackage(msg_, new ServerAddFile(file.getAbsolutePath(), md5, file.length(), file.lastModified(), FileUtil.getTotal(file))));
     }
     
     /*
@@ -216,12 +219,14 @@ public class MonitorDir extends Thread{
         }
         ///< 将修改文件的相对路径加入到修改文件信息中
         updateFile.setPath(file.getAbsolutePath().substring(Define.CLIENT.length()));
+        ///< 将修改文件对应的块数增加到构建器中
+        updateFile.setTotal(FileUtil.getTotal(file));
         ///< 将修改文件信息加入到控制台请求信息构建器中
         console.setUpdateFile(updateFile);
         ///< 交给函数最终打包并返回
         Msg_ msg_ = packing(console.build());
         
-        ClientResource.getSingleton().submitRequest(new RequestPackage(msg_, new ServerUpdateFile(file.getAbsolutePath(), md5, file.length(), file.lastModified())));
+        ClientResource.getSingleton().submitRequest(new RequestPackage(msg_, new ServerUpdateFile(file.getAbsolutePath(), md5, file.length(), file.lastModified(), FileUtil.getTotal(file))));
     }
     
     /*

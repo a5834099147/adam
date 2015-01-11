@@ -11,4 +11,6 @@ message UpdateFile_{
 	required int64 length = 3;
 	///< 新文件最后修改时间
 	required int64 last = 4;
+	///< 任务块号
+	required int32 total = 5;
 }

@@ -15,31 +15,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.client.resource.property;
+package com.lxd.client.monitor.util;
+
+import java.io.File;
+
+import com.lxd.utils.Define;
 
 
 /**
- * 附属信息基类
+ * 文件工具
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2015年1月5日
+ * @date: 2015年1月11日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public abstract class Property {
-    ///< 任务总数(暂时这样设计)
-    private int total;
-    
-    public int getTotal() {
-        return total;
-    }
-
-    public Property(int total){
-        super();
-        this.total = total;
-    }
-    
-    public Property() {
-        
-    }
+public class FileUtil {
+    ///< 返回文件的长度
+   public static  int getTotal(File file) {
+       return (int) (file.length() / Define.BLOCK_SIZE + 1);
+   }
 }

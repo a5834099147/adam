@@ -54,7 +54,13 @@ public class UpdateFileTask extends ConsoleTask {
     private Long length;
     ///< 文件最后修改文件
     private Long last;
+    ///< 任务个数
+    private Integer total;    
     
+    public void setTotal(Integer total) {
+        this.total = total;
+    }
+
     public void setLast(Long last) {
         this.last = last;
     }
@@ -105,6 +111,8 @@ public class UpdateFileTask extends ConsoleTask {
         }      
        
         Resource.getSingleton().getJobStatus().addJob(getJobId(), new ConsoleUpdataFile(md5, length, path, getUser_name(), last));
+        ///< 初始化
+        Resource.getSingleton().getJobStatus().init(getJobId(), total);
         
         ///< 创建更新文件
         String file_path = Grnerate.getPath(md5, length);
