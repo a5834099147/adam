@@ -15,21 +15,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.server.dao;
+package com.lxd.server.service;
 
-import java.io.File;
+import com.lxd.server.exception.LandingException;
+import com.lxd.server.exception.RegisterException;
+
 
 /**
- * 网络文件管理实现
+ * 用户服务接口
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2015年1月7日
+ * @date: 2015年1月5日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public interface WebFileDao {
-    ///< 增加文件
-    void addFile(File file);
-    ///< 下载文件
-    String downloadFile(String path) throws Exception;
+public interface UserSservice {
+    void landing(String user_name, String user_pwd) throws LandingException;
+    void register(String user_name, String user_pwd) throws RegisterException;
+    
 }

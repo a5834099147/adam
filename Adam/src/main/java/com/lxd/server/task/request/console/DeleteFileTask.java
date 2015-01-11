@@ -22,8 +22,8 @@ import com.lxd.protobuf.msg.result.Result.Result_;
 import com.lxd.protobuf.msg.result.console.Console.Console_;
 import com.lxd.protobuf.msg.result.console.DeleteFile.DeleteFile_;
 import com.lxd.server.entity.File;
-import com.lxd.server.service.FileServer;
-import com.lxd.server.service.impl.FileServerImpl;
+import com.lxd.server.service.FileService;
+import com.lxd.server.service.impl.FileServiceImpl;
 
 
 /**
@@ -39,7 +39,7 @@ public class DeleteFileTask extends ConsoleTask {
     private String path;    
     
     ///< 文件服务
-    private FileServer fileServer = new FileServerImpl();
+    private FileService fileService = new FileServiceImpl();
     
     public void setPath(String path) {
         this.path = path;
@@ -47,8 +47,8 @@ public class DeleteFileTask extends ConsoleTask {
 
     @Override
     public Msg_ taskExecute() {
-        File file = fileServer.searchFile(getUser_name(), path);
-        fileServer.deleteFile(file);
+        File file = fileService.searchFile(getUser_name(), path);
+        fileService.deleteFile(file);
         
         ///< 创建结果消息
         Result_.Builder result = Result_.newBuilder();

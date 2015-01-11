@@ -19,11 +19,13 @@ package com.lxd.server.dao.impl;
 
 import java.io.File;
 
+import org.apache.commons.codec.EncoderException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.lxd.server.dao.WebFileDao;
 import com.lxd.server.dao.util.QiNiuUtil;
+import com.qiniu.api.auth.AuthException;
 import com.qiniu.api.io.IoApi;
 import com.qiniu.api.io.PutExtra;
 
@@ -40,7 +42,7 @@ public class QiNiuFileDao implements WebFileDao {
     private static final Logger log = LogManager.getLogger(QiNiuFileDao.class);
 
     @Override
-    public void AddFile(File file) {
+    public void addFile(File file) {
         try {
             String uptoken = QiNiuUtil.getPutString();
             PutExtra extra = new PutExtra();
@@ -50,6 +52,11 @@ public class QiNiuFileDao implements WebFileDao {
             e.printStackTrace();
             log.info("上传文件" + file.getAbsolutePath() + "到七牛服务器失败, 原因是:" + e.getMessage());
         } 
+    }
+
+    @Override
+    public String downloadFile(String path) throws EncoderException, AuthException {        
+       return QiNiuUtil.getDownloadPath(path);
     }
 
 }

@@ -15,21 +15,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.server.dao;
+package com.lxd.server.service;
 
 import java.io.File;
 
+
 /**
- * 网络文件管理实现
+ * 网盘服务
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2015年1月7日
+ * @date: 2015年1月11日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public interface WebFileDao {
-    ///< 增加文件
+public interface RayFileService {
+    ///< 上传文件到网盘服务器
     void addFile(File file);
-    ///< 下载文件
-    String downloadFile(String path) throws Exception;
+    ///< 下载文件从网盘服务器
+    String downloadFile(String path);
 }

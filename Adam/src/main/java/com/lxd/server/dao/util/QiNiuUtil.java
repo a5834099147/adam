@@ -17,12 +17,15 @@
 
 package com.lxd.server.dao.util;
 
+import org.apache.commons.codec.EncoderException;
 import org.json.JSONException;
 
 import com.qiniu.api.auth.AuthException;
 import com.qiniu.api.auth.digest.Mac;
 import com.qiniu.api.config.Config;
+import com.qiniu.api.rs.GetPolicy;
 import com.qiniu.api.rs.PutPolicy;
+import com.qiniu.api.rs.URLUtils;
 
 
 /**
@@ -36,7 +39,8 @@ import com.qiniu.api.rs.PutPolicy;
 public class QiNiuUtil {
     private static final String AK = "5umMfoEUmaYbKIThcIqG4kZvGcbOUcnRNesSqWh-";
     private static final String SK = "GDTwCMTRICa-Un1AoGfg-Ic1lZkz2NReNGcWwP_t";
-    private static final String BUCKET = "adam";
+    private static final String BUCKET = "adam";   
+    private static final String DOMAIN = "7u2i8y.com1.z0.glb.clouddn.com";
     
     ///< 得到上传标识
     public static String getPutString() throws AuthException, JSONException {
@@ -51,5 +55,19 @@ public class QiNiuUtil {
         return putPolicy.token(mac);       
     }
     
-    
+    ///< 得到下载凭证
+    public static String getDownloadPath(String key) throws EncoderException, AuthException {
+        ///< 配置 access_key
+        Config.ACCESS_KEY = AK;
+        ///< 配置 secret_key
+        Config.SECRET_KEY = SK;
+        ///< 得到授信操作
+        Mac mac = new Mac(Config.ACCESS_KEY, Config.SECRET_KEY);
+        ///< 算出下载初始地址
+        String baseUrl = URLUtils.makeBaseUrl(DOMAIN, key);
+        ///< 加载操作域
+        GetPolicy getPolicy = new GetPolicy();
+        return getPolicy.makeRequest(baseUrl, mac);
+    }    
+   
 }

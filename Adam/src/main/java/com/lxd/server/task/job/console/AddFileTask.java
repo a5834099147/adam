@@ -30,8 +30,8 @@ import com.lxd.resource.Resource;
 import com.lxd.server.entity.File;
 import com.lxd.server.resource.ServerResource;
 import com.lxd.server.resource.property.ConsoleAddFile;
-import com.lxd.server.service.FileServer;
-import com.lxd.server.service.impl.FileServerImpl;
+import com.lxd.server.service.FileService;
+import com.lxd.server.service.impl.FileServiceImpl;
 import com.lxd.server.task.job.JobTask;
 import com.lxd.utils.Define;
 import com.lxd.utils.Grnerate;
@@ -55,7 +55,7 @@ public class AddFileTask extends JobTask {
     // /< 块信息
     private byte[]              datas;
     // /< 文件服务
-    private FileServer          fileServer = new FileServerImpl();
+    private FileService          fileService = new FileServiceImpl();
 
     public void setTotal_lump(int total_lump) {
         this.total_lump = total_lump;
@@ -81,7 +81,7 @@ public class AddFileTask extends JobTask {
             // /< 得到任务附加属性
             ConsoleAddFile property = (ConsoleAddFile) Resource.getSingleton().getJobStatus().getProperty(getJobId());
             String file_path = Grnerate.getPath(property.getMd5(), property.getLength());
-            fileServer.editFile(file_path, current_lump * Define.BLOCK_SIZE, datas);
+            fileService.editFile(file_path, current_lump * Define.BLOCK_SIZE, datas);
 
             Resource.getSingleton().getJobStatus().setDone(getJobId(), current_lump);
             if (Resource.getSingleton().getJobStatus().checkFinished(getJobId())) {
@@ -107,7 +107,7 @@ public class AddFileTask extends JobTask {
                 file.setLast(property.getLast());
                 file.setEdition(Define.EDITION);
 
-                fileServer.addFile(file);
+                fileService.addFile(file);
                 // /< 向远端服务器投递文件
                 ServerResource.getSingleton().submitFile(new java.io.File(Grnerate.getPath(property.getMd5(),
                                                                                            property.getLength())));

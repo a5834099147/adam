@@ -20,11 +20,13 @@ package com.lxd.client.handle;
 import com.lxd.client.handle.console.AddFileHandle;
 import com.lxd.client.handle.console.AddFilePartHandle;
 import com.lxd.client.handle.console.DeleteFileHandle;
+import com.lxd.client.handle.console.DownloadFileHandle;
 import com.lxd.client.handle.console.UpdateFileHandle;
 import com.lxd.client.handle.console.UpdateFilePartHandle;
 import com.lxd.client.handle.impl.AddFileImpl;
 import com.lxd.client.handle.impl.AddFilePartImpl;
 import com.lxd.client.handle.impl.DeleteFileImpl;
+import com.lxd.client.handle.impl.DownloadFileImpl;
 import com.lxd.client.handle.impl.UpdateFileImpl;
 import com.lxd.client.handle.impl.UpdateFilePartImpl;
 import com.lxd.client.handle.user.LoginHandle;
@@ -61,6 +63,13 @@ public class HandleResource {
     private AddFilePartHandle addFilePart = new AddFilePartImpl();
     ///< 修改文件片段处理句柄
     private UpdateFilePartHandle updateFilePart = new UpdateFilePartImpl();
+    ///< 下载文件处理句柄
+    private DownloadFileHandle downloadFile = new DownloadFileImpl();   
+
+    ///< 获得下载处理句柄
+    public DownloadFileHandle getDownloadFile() {
+        return downloadFile;
+    }
 
     ///< 获得登陆处理句柄
     public LoginHandle getLogin() {

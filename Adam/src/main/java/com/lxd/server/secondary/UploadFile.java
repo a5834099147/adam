@@ -18,10 +18,9 @@
 package com.lxd.server.secondary;
 
 import java.io.File;
-
-import com.lxd.server.dao.WebFileDao;
-import com.lxd.server.dao.impl.ALiFileDao;
 import com.lxd.server.resource.ServerResource;
+import com.lxd.server.service.RayFileService;
+import com.lxd.server.service.impl.RayFileServiceImpl;
 
 
 /**
@@ -33,14 +32,14 @@ import com.lxd.server.resource.ServerResource;
  * @review 
  */
 public class UploadFile extends Thread {
-    private WebFileDao fileDao = new ALiFileDao();
+    private RayFileService rayFile = new RayFileServiceImpl();
     @Override
     public void run() {
         while (true) {
             ///< 获取上传文件
             File file = ServerResource.getSingleton().takeFile();
             ///< 新增文件
-            fileDao.AddFile(file);
+            rayFile.addFile(file);
         }
     }
 }

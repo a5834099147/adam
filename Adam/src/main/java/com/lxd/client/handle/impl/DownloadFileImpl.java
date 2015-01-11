@@ -18,8 +18,8 @@
 package com.lxd.client.handle.impl;
 
 import com.lxd.client.entity.File;
-import com.lxd.client.handle.console.DeleteFileHandle;
-import com.lxd.client.resource.property.ServerDeleteFile;
+import com.lxd.client.handle.console.DownloadFileHandle;
+import com.lxd.client.resource.property.ServerDownloadFile;
 import com.lxd.client.service.FileServer;
 import com.lxd.client.service.impl.FileServerImpl;
 import com.lxd.client.view.control.UiSingleton;
@@ -28,32 +28,38 @@ import com.lxd.utils.Grnerate;
 
 
 /**
- * 删除文件结果处理
+ * 描述功能
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2015年1月8日
+ * @date: 2015年1月11日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public class DeleteFileImpl implements DeleteFileHandle {  
+public class DownloadFileImpl implements DownloadFileHandle {
     private FileServer fileServer = new FileServerImpl();
-
+    
     @Override
-    public void deleteFileSuccess(Long id) {
-        ///< 得到任务信息
-        ServerDeleteFile pro =  (ServerDeleteFile) Resource.getSingleton().getJobStatus().getProperty(id);
+    public void downloadSuccess(Long jobid) {
+      ///< 得到任务信息
+        ServerDownloadFile pro =  (ServerDownloadFile) Resource.getSingleton().getJobStatus().getProperty(jobid);
         
-        ///< 添加文件
+      //< 添加文件
         File file = new File();
+        file.setLast(pro.getLast());
+        file.setLength(pro.getLength());
+        file.setMd5(pro.getMd5());
         file.setUser_name(UiSingleton.getSingleton().getUser());
         file.setPath(Grnerate.getClientRelativePath(pro.getPath()));
+        file.setEdition(pro.getEdition());
         
         ///< 保存新增文件记录
-        fileServer.deleteFile(file);
+        fileServer.addFile(file);   
     }
 
     @Override
-    public void deleteFileError(Long id, String msg) {
+    public void downloadFail(Long jobid, String msg) {
+        // TODO Auto-generated method stub
+        
     }
 
 }

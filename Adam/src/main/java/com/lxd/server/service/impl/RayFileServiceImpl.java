@@ -15,22 +15,41 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.server.service;
+package com.lxd.server.service.impl;
 
-import com.lxd.server.exception.LandingException;
-import com.lxd.server.exception.RegisterException;
+import java.io.File;
+
+import com.lxd.server.dao.WebFileDao;
+import com.lxd.server.dao.impl.QiNiuFileDao;
+import com.lxd.server.service.RayFileService;
 
 
 /**
- * 用户服务接口
+ * 网盘服务
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2015年1月5日
+ * @date: 2015年1月11日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public interface UserServer {
-    void landing(String user_name, String user_pwd) throws LandingException;
-    void register(String user_name, String user_pwd) throws RegisterException;
+public class RayFileServiceImpl implements RayFileService {
+
+    ///< 网盘控制层
+    private static WebFileDao webDao = new QiNiuFileDao();
     
+    @Override
+    public void addFile(File file) {
+        webDao.addFile(file);        
+    }
+
+    @Override
+    public String downloadFile(String path) {
+        try {
+            return webDao.downloadFile(path);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }  
+        return null;     
+    }
+
 }

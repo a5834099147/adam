@@ -45,7 +45,7 @@ public class UiSingleton {
 	
 	private ClientFrame clientFrame = null;	
 	///< 用户名
-	private String user = "test";
+	private String user = "li_xd";
 	
     public String getUser() {
         return user;

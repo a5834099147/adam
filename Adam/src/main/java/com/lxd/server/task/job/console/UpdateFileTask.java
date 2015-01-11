@@ -33,8 +33,8 @@ import com.lxd.resource.Resource;
 import com.lxd.server.entity.File;
 import com.lxd.server.resource.ServerResource;
 import com.lxd.server.resource.property.ConsoleUpdataFile;
-import com.lxd.server.service.FileServer;
-import com.lxd.server.service.impl.FileServerImpl;
+import com.lxd.server.service.FileService;
+import com.lxd.server.service.impl.FileServiceImpl;
 import com.lxd.server.task.job.JobTask;
 import com.lxd.sync.RsyncUtil;
 import com.lxd.utils.Define;
@@ -58,7 +58,7 @@ public class UpdateFileTask extends JobTask {
     // /< 块信息
     private List<Patch>         patch;
     // /< 文件服务实体
-    private FileServer          server = new FileServerImpl();
+    private FileService          server = new FileServiceImpl();
 
     private static final Logger log    = LogManager.getLogger(UpdateFileTask.class);
 

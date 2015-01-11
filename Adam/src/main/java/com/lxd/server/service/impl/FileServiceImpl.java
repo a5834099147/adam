@@ -26,7 +26,7 @@ import com.lxd.server.dao.impl.FileDaoImpl;
 import com.lxd.server.dao.impl.FileHddDaoImpl;
 import com.lxd.server.dao.util.HibernateUtil;
 import com.lxd.server.entity.File;
-import com.lxd.server.service.FileServer;
+import com.lxd.server.service.FileService;
 import com.lxd.utils.Grnerate;
 
 
@@ -38,7 +38,7 @@ import com.lxd.utils.Grnerate;
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public class FileServerImpl implements FileServer {
+public class FileServiceImpl implements FileService {
     private static FileDao fileDao = new FileDaoImpl();
     private static FileHddDao hddDao = new FileHddDaoImpl();
 

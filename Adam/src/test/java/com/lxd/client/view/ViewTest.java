@@ -17,34 +17,73 @@
 
 package com.lxd.client.view;
 
-import java.awt.EventQueue;
-
 import org.junit.Test;
 
 import com.lxd.client.AdamClient;
+import com.lxd.client.resource.ClientResource;
+import com.lxd.client.resource.RequestPackage;
+import com.lxd.client.resource.property.ServerDownloadFile;
 import com.lxd.client.view.control.UiSingleton;
-
+import com.lxd.protobuf.msg.Msg.Msg_;
+import com.lxd.protobuf.msg.request.Request.Request_;
+import com.lxd.protobuf.msg.request.console.Console.Console_;
+import com.lxd.protobuf.msg.request.console.DownloadFile.DownloadFile_;
+import com.lxd.utils.Grnerate;
 
 /**
  * 描述功能
+ * 
  * @author: a5834099147
  * @mailto: a5834099147@126.com
  * @date: 2015年1月4日
  * @blog : http://a5834099147.github.io/
- * @review 
+ * @review
  */
 public class ViewTest {
 
     @Test
     public void test() {
-        EventQueue.invokeLater(new Runnable() {
-            
+        // EventQueue.invokeLater(new Runnable() {
+        //
+        // // @Override
+        // // public void run() {
+        // // UiSingleton.getSingleton().BamInit();
+        // // }
+        // });
+
+        new Thread() {
             @Override
             public void run() {
-                UiSingleton.getSingleton().BamInit();
+                try {
+                    Thread.sleep(5000);
+                    Msg_.Builder msg_ = Msg_.newBuilder();
+                    Request_.Builder request = Request_.newBuilder();
+                    // /< 控制台请求信息构建器
+                    Console_.Builder console = Console_.newBuilder();
+                    // /< 添加用户信息
+                    console.setUserName(UiSingleton.getSingleton().getUser());
+                    // /< 控制台请求信息文件下载构造器
+                    DownloadFile_.Builder download = DownloadFile_.newBuilder();
+
+                    download.setPath("\\03 - Addiction.mp3");
+                    // /< 将新增文件信息设置到控制台请求信息构建器中
+                    console.setDownloadFile(download);
+                    request.setConsole(console);
+                    msg_.setRequest(request);
+                    msg_.setJobId(-1);
+
+                    ClientResource.getSingleton().submitRequest(new RequestPackage(
+                                                                                   msg_.build(),
+                                                                                   new ServerDownloadFile(
+                                                                                                          1355898124952L,
+                                                                                                          Grnerate.getClientAbsPath("\\03 - Addiction.mp3"),
+                                                                                                          "6bbb83df986893e32937f7edb413a32c",
+                                                                                                          8815585L)));
+                } catch (InterruptedException e) {
+                }
             }
-        });
-        
+        }.start();
+
         new AdamClient().initServer();
     }
 

@@ -30,8 +30,8 @@ import com.lxd.resource.Resource;
 import com.lxd.server.entity.File;
 import com.lxd.server.resource.ServerResource;
 import com.lxd.server.resource.property.ConsoleAddFile;
-import com.lxd.server.service.FileServer;
-import com.lxd.server.service.impl.FileServerImpl;
+import com.lxd.server.service.FileService;
+import com.lxd.server.service.impl.FileServiceImpl;
 import com.lxd.utils.Define;
 import com.lxd.utils.Grnerate;
 
@@ -48,7 +48,7 @@ public class AddFileTask extends ConsoleTask {
     private static final Logger log = LogManager.getLogger(AddFileTask.class);
     
     ///< 文件业务
-    private FileServer fileServer = new FileServerImpl();
+    private FileService fileService = new FileServiceImpl();
     
     ///< 文件MD5值
     private String md5;
@@ -84,7 +84,7 @@ public class AddFileTask extends ConsoleTask {
     @Override
     public Msg_ taskExecute() {
         ///< 数据库查询是否有该文件 以下路径为没有的情况
-        if (!ServerResource.getSingleton().checkPath(Grnerate.getPath(md5, length)) || fileServer.havaFile(md5, length)) {
+        if (!ServerResource.getSingleton().checkPath(Grnerate.getPath(md5, length)) || fileService.havaFile(md5, length)) {
             File file = new File();
             file.setLength(length);
             file.setMd5(md5);
@@ -94,7 +94,7 @@ public class AddFileTask extends ConsoleTask {
             file.setEdition(Define.EDITION);
             
             ///< 保存业务日志
-            fileServer.addFile(file);
+            fileService.addFile(file);
             log.info("文件快传信息建立, 文件路径:" + path + ", 文件大小:" + length);
             
             ///< 返回结果信息
@@ -124,7 +124,7 @@ public class AddFileTask extends ConsoleTask {
         Resource.getSingleton().getJobStatus().init(getJobId(), total);
         
         String file_path = Grnerate.getPath(md5, length);
-        fileServer.addFile(file_path, length);
+        fileService.addFile(file_path, length);
         
         ///< 创建返回消息
         Msg_.Builder msg = Msg_.newBuilder();

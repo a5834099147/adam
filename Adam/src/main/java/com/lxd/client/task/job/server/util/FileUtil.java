@@ -17,13 +17,16 @@
 
 package com.lxd.client.task.job.server.util;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import com.lxd.utils.Define;
 
 
@@ -57,5 +60,26 @@ public class FileUtil {
             log.error("文件" + file.getAbsolutePath() + "IO错误" + e.getMessage());
         }
         return buffer;
+    }
+    
+    public static void write(BufferedInputStream bis, String path) throws IOException {
+        File file = new File(path);
+        if (!file.exists()) {
+            file.getParentFile().mkdirs();
+            file.createNewFile();
+        }
+        ///< 保存文件的输入流
+        FileOutputStream fos = new FileOutputStream(file);
+        ///< 创建存储数组
+        byte[] buffer = new byte[Define.CHUNK_SIZE];
+        ///< 读取到数组的大小
+        int size = 0;
+       
+       while ((size = bis.read(buffer)) != -1) {
+           fos.write(buffer, 0, size);
+       }
+       
+       fos.close();
+       bis.close();
     }
 }

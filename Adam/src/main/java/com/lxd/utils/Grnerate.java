@@ -37,11 +37,19 @@ public class Grnerate {
         }
     }
     
+    public static String getRemotePath(String md5, Long length) {
+        return md5 + "_" + length;
+    }
+    
     public static String getPath(String md5, Long length) {
         return Define.REMOTE + md5 + "_" + length;
     }
     
-    public static String getClientPath(String path) {
+    public static String getClientRelativePath(String path) {
         return path.substring(Define.CLIENT.length());
+    }
+    
+    public static String getClientAbsPath(String path) {
+        return Define.CLIENT + path;
     }
 }

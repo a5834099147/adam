@@ -23,10 +23,12 @@ import org.apache.logging.log4j.Logger;
 import com.lxd.client.task.ClientTask;
 import com.lxd.client.task.IdTask;
 import com.lxd.client.task.job.server.AddFileTask;
+import com.lxd.client.task.job.server.DownloadFileTask;
 import com.lxd.client.task.job.server.UpdateFileTask;
 import com.lxd.client.task.result.console.AddFileResultPartTask;
 import com.lxd.client.task.result.console.AddFileResultTask;
 import com.lxd.client.task.result.console.DeleteFileResultTask;
+import com.lxd.client.task.result.console.DownloadFileResultTask;
 import com.lxd.client.task.result.console.UpdateFileResultPartTask;
 import com.lxd.client.task.result.console.UpdateFileResultTask;
 import com.lxd.client.task.result.user.LandingResultTask;
@@ -171,6 +173,13 @@ public class MsgInPre extends Thread {
             updateFilePart.setError_msg(msg.getUpdateFilePart().getErrorMsg());
             updateFilePart.setSuccess(msg.getUpdateFilePart().getSuccess());
             result = updateFilePart;
+        } else if (msg.hasDownloadFile()) {
+            ///< 下载文件结果消息
+            DownloadFileResultTask task = new DownloadFileResultTask();
+            task.setSuccess(msg.getDownloadFile().getSuccess());
+            task.setError_msg(msg.getDownloadFile().getErrorMsg());
+            task.setEdition(msg.getDownloadFile().getEdition());
+            result = task;
         } else {
             log.error("无法处理的控制台结果消息");
         }
@@ -205,6 +214,11 @@ public class MsgInPre extends Thread {
             // /< 如果是修改文件
             UpdateFileTask task = new UpdateFileTask();
             task.setInfos(msg.getUpdateFile().getInformationsList());
+            result = task;
+        } else if (msg.hasDownloadFile()) {
+            ///< 如果是删除文件
+            DownloadFileTask task = new DownloadFileTask();
+            task.setDownloadUrl(msg.getDownloadFile().getHttpPath());
             result = task;
         } else {
             // /< 如果无法解析消息

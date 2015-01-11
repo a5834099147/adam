@@ -27,7 +27,7 @@ import com.lxd.server.dao.util.HibernateUtil;
 import com.lxd.server.entity.User;
 import com.lxd.server.exception.LandingException;
 import com.lxd.server.exception.RegisterException;
-import com.lxd.server.service.UserServer;
+import com.lxd.server.service.UserSservice;
 
 
 /**
@@ -38,9 +38,9 @@ import com.lxd.server.service.UserServer;
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public class UserServerImpl implements UserServer {
+public class UserServiceImpl implements UserSservice {
     ///< 日志
-    private static Logger log = LogManager.getLogger(UserServerImpl.class);
+    private static Logger log = LogManager.getLogger(UserServiceImpl.class);
     ///< 用户数据访问层
     private static UserDao userDao = new UserDaoImpl();
 

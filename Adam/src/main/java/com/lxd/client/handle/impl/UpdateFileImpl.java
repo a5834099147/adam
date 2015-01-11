@@ -50,7 +50,7 @@ public class UpdateFileImpl implements UpdateFileHandle {
         file.setLength(pro.getLength());
         file.setMd5(pro.getMd5());
         file.setUser_name(UiSingleton.getSingleton().getUser());
-        file.setPath(Grnerate.getClientPath(pro.getPath()));
+        file.setPath(Grnerate.getClientRelativePath(pro.getPath()));
         file.setEdition(pro.getEdition());
         
         ///< 保存新增文件记录

@@ -29,8 +29,8 @@ import com.lxd.protobuf.msg.result.console.Console.Console_;
 import com.lxd.resource.Resource;
 import com.lxd.server.entity.File;
 import com.lxd.server.resource.property.ConsoleUpdataFile;
-import com.lxd.server.service.FileServer;
-import com.lxd.server.service.impl.FileServerImpl;
+import com.lxd.server.service.FileService;
+import com.lxd.server.service.impl.FileServiceImpl;
 import com.lxd.sync.Chunk;
 import com.lxd.sync.RsyncUtil;
 import com.lxd.utils.Grnerate;
@@ -77,17 +77,17 @@ public class UpdateFileTask extends ConsoleTask {
         this.length = length;
     }
     
-    private FileServer fileServer = new FileServerImpl();
+    private FileService fileService = new FileServiceImpl();
 
     @Override
     public Msg_ taskExecute() {
         ///< 查找到修改前的文件信息
-        File oldFile = fileServer.searchFile(getUser_name(), path);
+        File oldFile = fileService.searchFile(getUser_name(), path);
         
         ///< 查找是否存在更新后的文件信息
-        if (fileServer.havaFile(md5, length)) {
+        if (fileService.havaFile(md5, length)) {
             ///< 更新表信息
-            Integer edition = fileServer.updateFile(oldFile, md5, length, last);
+            Integer edition = fileService.updateFile(oldFile, md5, length, last);
             ///< 回复结果消息
             Msg_.Builder msg = Msg_.newBuilder();
             msg.setJobId(getJobId());
@@ -116,7 +116,7 @@ public class UpdateFileTask extends ConsoleTask {
         
         ///< 创建更新文件
         String file_path = Grnerate.getPath(md5, length);
-        fileServer.addFile(file_path, length);
+        fileService.addFile(file_path, length);
 
         // /< 创建返回消息
         Msg_.Builder msg = Msg_.newBuilder();

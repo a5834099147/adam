@@ -39,7 +39,7 @@ import com.lxd.server.dao.util.AliUtil;
 public class ALiFileDao implements WebFileDao {
 
     @Override
-    public void AddFile(File file) {
+    public void addFile(File file) {
         ///< 初始化 OSSClient
         OSSClient client = AliUtil.getClient();
         InputStream content = null;;
@@ -55,6 +55,12 @@ public class ALiFileDao implements WebFileDao {
         
         ///< 上传 Object
         client.putObject(AliUtil.BUCKK_STRING, file.getName(), content, meta);
+    }
+
+    @Override
+    public String downloadFile(String path) {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

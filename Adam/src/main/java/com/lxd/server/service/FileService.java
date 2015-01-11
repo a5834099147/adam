@@ -15,21 +15,37 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.server.dao;
+package com.lxd.server.service;
+import com.lxd.server.entity.File;
 
-import java.io.File;
 
 /**
- * 网络文件管理实现
+ * 文件业务
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2015年1月7日
+ * @date: 2014年12月25日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public interface WebFileDao {
-    ///< 增加文件
+public interface FileService {
+    ///< 查询文件是否存在
+    boolean havaFile(String md5, Long length);
+    
+    ///< 用户通过路径查询文件
+    File searchFile(String user_name, String path);
+    
+    ///< 用户添加文件信息
     void addFile(File file);
-    ///< 下载文件
-    String downloadFile(String path) throws Exception;
+    
+    ///< 用户修改文件信息, 返回结果为版本号
+    Integer updateFile(File file, String md5, Long length, Long last);
+    
+    ///< 用户删除文件信息
+    void deleteFile(File file);
+    
+    ///< 添加文件
+    void addFile(String file_name, Long length);
+    
+    ///< 写入文件信息
+    void editFile(String file_name, Long seek, byte[] datas);
 }

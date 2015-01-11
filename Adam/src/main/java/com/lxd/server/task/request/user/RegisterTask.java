@@ -20,8 +20,8 @@ package com.lxd.server.task.request.user;
 import com.lxd.protobuf.msg.result.user.Landing.Landing_;
 import com.lxd.protobuf.msg.result.user.User.User_;
 import com.lxd.server.exception.RegisterException;
-import com.lxd.server.service.UserServer;
-import com.lxd.server.service.impl.UserServerImpl;
+import com.lxd.server.service.UserSservice;
+import com.lxd.server.service.impl.UserServiceImpl;
 
 
 /**
@@ -38,7 +38,7 @@ public class RegisterTask extends UserTask {
     ///< 用户密码
     private String user_pwd;   
     ///< 用户业务层
-    private static UserServer userServer = new UserServerImpl();
+    private static UserSservice userSservice = new UserServiceImpl();
     
     public void setUser_name(String user_name) {
         this.user_name = user_name;
@@ -54,7 +54,7 @@ public class RegisterTask extends UserTask {
         Landing_.Builder landing = Landing_.newBuilder();
         try {
             ///< 用户登录
-            userServer.register(user_name, user_pwd);
+            userSservice.register(user_name, user_pwd);
             landing.setSuccess(true);
         } catch (RegisterException e) {
             ///< 如果发生异常 RegisterException 说明登陆失败

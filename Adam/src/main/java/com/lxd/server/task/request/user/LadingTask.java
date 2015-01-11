@@ -19,8 +19,8 @@ package com.lxd.server.task.request.user;
 import com.lxd.protobuf.msg.result.user.Landing.Landing_;
 import com.lxd.protobuf.msg.result.user.User.User_;
 import com.lxd.server.exception.LandingException;
-import com.lxd.server.service.UserServer;
-import com.lxd.server.service.impl.UserServerImpl;
+import com.lxd.server.service.UserSservice;
+import com.lxd.server.service.impl.UserServiceImpl;
 
 
 /**
@@ -38,7 +38,7 @@ public class LadingTask extends UserTask {
     private String user_pwd;
     
     ///< 用户业务层
-    private static UserServer userServer = new UserServerImpl();
+    private static UserSservice userSservice = new UserServiceImpl();
     
     
     public void setUser_name(String user_name) {
@@ -55,7 +55,7 @@ public class LadingTask extends UserTask {
         Landing_.Builder landing = Landing_.newBuilder();
         try {
             ///< 用户注册
-            userServer.landing(user_name, user_pwd);
+            userSservice.landing(user_name, user_pwd);
             landing.setSuccess(true);
             landing.setUser(user_name);
         } catch (LandingException e) {

@@ -31,6 +31,7 @@ import com.lxd.server.task.IdTask;
 import com.lxd.server.task.ServerTask;
 import com.lxd.server.task.job.JobTask;
 import com.lxd.server.task.job.console.AddFileTask;
+import com.lxd.server.task.job.console.DownloadFileTask;
 import com.lxd.server.task.job.console.UpdateFileTask;
 import com.lxd.server.task.request.console.ConsoleTask;
 import com.lxd.server.task.request.console.DeleteFileTask;
@@ -141,7 +142,11 @@ public class MsgInPre extends Thread  {
             task.setLength(msg.getUpdateFile().getLength());     
             task.setTotal(msg.getUpdateFile().getTotal());
             result = task;
-            
+        } else if (msg.hasDownloadFile()) {
+            ///< 如果来自控制台的下载文件的请求消息
+            com.lxd.server.task.request.console.DownloadFileTask task = new com.lxd.server.task.request.console.DownloadFileTask();
+            task.setPath(msg.getDownloadFile().getPath());
+            result = task;
         } else {
             ///< 如果无法解析的消息
             log.error("无法解析该来自控制台的请求消息");
@@ -217,7 +222,12 @@ public class MsgInPre extends Thread  {
             task.setCurrent_lump(msg.getUpdateFile().getCurrentLump());
             task.setPatch(msg.getUpdateFile().getPatchList());
             result = task;
-            
+        
+        } else if (msg.hasDownloadFile()) {
+            ///< 入股来自控制台的下载文件任务
+            DownloadFileTask task = new DownloadFileTask();
+            task.setMd5(msg.getDownloadFile().getMd5());
+            result = task;
         } else {
             ///< 如果无法解析消息
             log.error("无法解析该来自控制台的任务消息 ");
