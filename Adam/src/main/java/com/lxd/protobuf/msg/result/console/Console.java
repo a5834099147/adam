@@ -94,6 +94,20 @@ public final class Console {
      * <code>optional .msg.result.console.UpdateFilePart_ updateFilePart = 6;</code>
      */
     com.lxd.protobuf.msg.result.console.UpdateFilePart.UpdateFilePart_OrBuilder getUpdateFilePartOrBuilder();
+
+    // optional .msg.result.console.SyncFile_ sycnFile = 7;
+    /**
+     * <code>optional .msg.result.console.SyncFile_ sycnFile = 7;</code>
+     */
+    boolean hasSycnFile();
+    /**
+     * <code>optional .msg.result.console.SyncFile_ sycnFile = 7;</code>
+     */
+    com.lxd.protobuf.msg.result.console.SyncFile.SyncFile_ getSycnFile();
+    /**
+     * <code>optional .msg.result.console.SyncFile_ sycnFile = 7;</code>
+     */
+    com.lxd.protobuf.msg.result.console.SyncFile.SyncFile_OrBuilder getSycnFileOrBuilder();
   }
   /**
    * Protobuf type {@code msg.result.console.Console_}
@@ -222,6 +236,19 @@ public final class Console {
                 updateFilePart_ = subBuilder.buildPartial();
               }
               bitField0_ |= 0x00000020;
+              break;
+            }
+            case 58: {
+              com.lxd.protobuf.msg.result.console.SyncFile.SyncFile_.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000040) == 0x00000040)) {
+                subBuilder = sycnFile_.toBuilder();
+              }
+              sycnFile_ = input.readMessage(com.lxd.protobuf.msg.result.console.SyncFile.SyncFile_.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(sycnFile_);
+                sycnFile_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000040;
               break;
             }
           }
@@ -396,6 +423,28 @@ public final class Console {
       return updateFilePart_;
     }
 
+    // optional .msg.result.console.SyncFile_ sycnFile = 7;
+    public static final int SYCNFILE_FIELD_NUMBER = 7;
+    private com.lxd.protobuf.msg.result.console.SyncFile.SyncFile_ sycnFile_;
+    /**
+     * <code>optional .msg.result.console.SyncFile_ sycnFile = 7;</code>
+     */
+    public boolean hasSycnFile() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional .msg.result.console.SyncFile_ sycnFile = 7;</code>
+     */
+    public com.lxd.protobuf.msg.result.console.SyncFile.SyncFile_ getSycnFile() {
+      return sycnFile_;
+    }
+    /**
+     * <code>optional .msg.result.console.SyncFile_ sycnFile = 7;</code>
+     */
+    public com.lxd.protobuf.msg.result.console.SyncFile.SyncFile_OrBuilder getSycnFileOrBuilder() {
+      return sycnFile_;
+    }
+
     private void initFields() {
       addFile_ = com.lxd.protobuf.msg.result.console.AddFile.AddFile_.getDefaultInstance();
       addFilePart_ = com.lxd.protobuf.msg.result.console.AddFilePart.AddFilePart_.getDefaultInstance();
@@ -403,6 +452,7 @@ public final class Console {
       downloadFile_ = com.lxd.protobuf.msg.result.console.DownloadFile.DownloadFile_.getDefaultInstance();
       updateFile_ = com.lxd.protobuf.msg.result.console.UpdateFile.UpdateFile_.getDefaultInstance();
       updateFilePart_ = com.lxd.protobuf.msg.result.console.UpdateFilePart.UpdateFilePart_.getDefaultInstance();
+      sycnFile_ = com.lxd.protobuf.msg.result.console.SyncFile.SyncFile_.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -445,6 +495,12 @@ public final class Console {
           return false;
         }
       }
+      if (hasSycnFile()) {
+        if (!getSycnFile().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -469,6 +525,9 @@ public final class Console {
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeMessage(6, updateFilePart_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeMessage(7, sycnFile_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -502,6 +561,10 @@ public final class Console {
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(6, updateFilePart_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(7, sycnFile_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -617,6 +680,7 @@ public final class Console {
           getDownloadFileFieldBuilder();
           getUpdateFileFieldBuilder();
           getUpdateFilePartFieldBuilder();
+          getSycnFileFieldBuilder();
         }
       }
       private static Builder create() {
@@ -661,6 +725,12 @@ public final class Console {
           updateFilePartBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000020);
+        if (sycnFileBuilder_ == null) {
+          sycnFile_ = com.lxd.protobuf.msg.result.console.SyncFile.SyncFile_.getDefaultInstance();
+        } else {
+          sycnFileBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -737,6 +807,14 @@ public final class Console {
         } else {
           result.updateFilePart_ = updateFilePartBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        if (sycnFileBuilder_ == null) {
+          result.sycnFile_ = sycnFile_;
+        } else {
+          result.sycnFile_ = sycnFileBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -770,6 +848,9 @@ public final class Console {
         }
         if (other.hasUpdateFilePart()) {
           mergeUpdateFilePart(other.getUpdateFilePart());
+        }
+        if (other.hasSycnFile()) {
+          mergeSycnFile(other.getSycnFile());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -808,6 +889,12 @@ public final class Console {
         }
         if (hasUpdateFilePart()) {
           if (!getUpdateFilePart().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasSycnFile()) {
+          if (!getSycnFile().isInitialized()) {
             
             return false;
           }
@@ -1536,6 +1623,123 @@ public final class Console {
         return updateFilePartBuilder_;
       }
 
+      // optional .msg.result.console.SyncFile_ sycnFile = 7;
+      private com.lxd.protobuf.msg.result.console.SyncFile.SyncFile_ sycnFile_ = com.lxd.protobuf.msg.result.console.SyncFile.SyncFile_.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lxd.protobuf.msg.result.console.SyncFile.SyncFile_, com.lxd.protobuf.msg.result.console.SyncFile.SyncFile_.Builder, com.lxd.protobuf.msg.result.console.SyncFile.SyncFile_OrBuilder> sycnFileBuilder_;
+      /**
+       * <code>optional .msg.result.console.SyncFile_ sycnFile = 7;</code>
+       */
+      public boolean hasSycnFile() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional .msg.result.console.SyncFile_ sycnFile = 7;</code>
+       */
+      public com.lxd.protobuf.msg.result.console.SyncFile.SyncFile_ getSycnFile() {
+        if (sycnFileBuilder_ == null) {
+          return sycnFile_;
+        } else {
+          return sycnFileBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .msg.result.console.SyncFile_ sycnFile = 7;</code>
+       */
+      public Builder setSycnFile(com.lxd.protobuf.msg.result.console.SyncFile.SyncFile_ value) {
+        if (sycnFileBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          sycnFile_ = value;
+          onChanged();
+        } else {
+          sycnFileBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000040;
+        return this;
+      }
+      /**
+       * <code>optional .msg.result.console.SyncFile_ sycnFile = 7;</code>
+       */
+      public Builder setSycnFile(
+          com.lxd.protobuf.msg.result.console.SyncFile.SyncFile_.Builder builderForValue) {
+        if (sycnFileBuilder_ == null) {
+          sycnFile_ = builderForValue.build();
+          onChanged();
+        } else {
+          sycnFileBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000040;
+        return this;
+      }
+      /**
+       * <code>optional .msg.result.console.SyncFile_ sycnFile = 7;</code>
+       */
+      public Builder mergeSycnFile(com.lxd.protobuf.msg.result.console.SyncFile.SyncFile_ value) {
+        if (sycnFileBuilder_ == null) {
+          if (((bitField0_ & 0x00000040) == 0x00000040) &&
+              sycnFile_ != com.lxd.protobuf.msg.result.console.SyncFile.SyncFile_.getDefaultInstance()) {
+            sycnFile_ =
+              com.lxd.protobuf.msg.result.console.SyncFile.SyncFile_.newBuilder(sycnFile_).mergeFrom(value).buildPartial();
+          } else {
+            sycnFile_ = value;
+          }
+          onChanged();
+        } else {
+          sycnFileBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000040;
+        return this;
+      }
+      /**
+       * <code>optional .msg.result.console.SyncFile_ sycnFile = 7;</code>
+       */
+      public Builder clearSycnFile() {
+        if (sycnFileBuilder_ == null) {
+          sycnFile_ = com.lxd.protobuf.msg.result.console.SyncFile.SyncFile_.getDefaultInstance();
+          onChanged();
+        } else {
+          sycnFileBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000040);
+        return this;
+      }
+      /**
+       * <code>optional .msg.result.console.SyncFile_ sycnFile = 7;</code>
+       */
+      public com.lxd.protobuf.msg.result.console.SyncFile.SyncFile_.Builder getSycnFileBuilder() {
+        bitField0_ |= 0x00000040;
+        onChanged();
+        return getSycnFileFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .msg.result.console.SyncFile_ sycnFile = 7;</code>
+       */
+      public com.lxd.protobuf.msg.result.console.SyncFile.SyncFile_OrBuilder getSycnFileOrBuilder() {
+        if (sycnFileBuilder_ != null) {
+          return sycnFileBuilder_.getMessageOrBuilder();
+        } else {
+          return sycnFile_;
+        }
+      }
+      /**
+       * <code>optional .msg.result.console.SyncFile_ sycnFile = 7;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lxd.protobuf.msg.result.console.SyncFile.SyncFile_, com.lxd.protobuf.msg.result.console.SyncFile.SyncFile_.Builder, com.lxd.protobuf.msg.result.console.SyncFile.SyncFile_OrBuilder> 
+          getSycnFileFieldBuilder() {
+        if (sycnFileBuilder_ == null) {
+          sycnFileBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lxd.protobuf.msg.result.console.SyncFile.SyncFile_, com.lxd.protobuf.msg.result.console.SyncFile.SyncFile_.Builder, com.lxd.protobuf.msg.result.console.SyncFile.SyncFile_OrBuilder>(
+                  sycnFile_,
+                  getParentForChildren(),
+                  isClean());
+          sycnFile_ = null;
+        }
+        return sycnFileBuilder_;
+      }
+
       // @@protoc_insertion_point(builder_scope:msg.result.console.Console_)
     }
 
@@ -1565,17 +1769,19 @@ public final class Console {
       "\023Res_C_AddFile.proto\032\027Res_C_AddFilePart." +
       "proto\032\026Res_C_DeleteFile.proto\032\030Res_C_Dow" +
       "nloadFile.proto\032\026Res_C_UpdateFile.proto\032" +
-      "\032Res_C_UpdateFilePart.proto\"\320\002\n\010Console_" +
-      "\022-\n\007addFile\030\001 \001(\0132\034.msg.result.console.A" +
-      "ddFile_\0225\n\013addFilePart\030\002 \001(\0132 .msg.resul" +
-      "t.console.AddFilePart_\0223\n\ndeleteFile\030\003 \001" +
-      "(\0132\037.msg.result.console.DeleteFile_\0227\n\014d" +
-      "ownloadFile\030\004 \001(\0132!.msg.result.console.D",
-      "ownloadFile_\0223\n\nupdateFile\030\005 \001(\0132\037.msg.r" +
-      "esult.console.UpdateFile_\022;\n\016updateFileP" +
-      "art\030\006 \001(\0132#.msg.result.console.UpdateFil" +
-      "ePart_B.\n#com.lxd.protobuf.msg.result.co" +
-      "nsoleB\007Console"
+      "\032Res_C_UpdateFilePart.proto\032\024Res_C_SyncF" +
+      "ile.proto\"\201\003\n\010Console_\022-\n\007addFile\030\001 \001(\0132" +
+      "\034.msg.result.console.AddFile_\0225\n\013addFile" +
+      "Part\030\002 \001(\0132 .msg.result.console.AddFileP" +
+      "art_\0223\n\ndeleteFile\030\003 \001(\0132\037.msg.result.co" +
+      "nsole.DeleteFile_\0227\n\014downloadFile\030\004 \001(\0132",
+      "!.msg.result.console.DownloadFile_\0223\n\nup" +
+      "dateFile\030\005 \001(\0132\037.msg.result.console.Upda" +
+      "teFile_\022;\n\016updateFilePart\030\006 \001(\0132#.msg.re" +
+      "sult.console.UpdateFilePart_\022/\n\010sycnFile" +
+      "\030\007 \001(\0132\035.msg.result.console.SyncFile_B.\n" +
+      "#com.lxd.protobuf.msg.result.consoleB\007Co" +
+      "nsole"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -1587,7 +1793,7 @@ public final class Console {
           internal_static_msg_result_console_Console__fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_msg_result_console_Console__descriptor,
-              new java.lang.String[] { "AddFile", "AddFilePart", "DeleteFile", "DownloadFile", "UpdateFile", "UpdateFilePart", });
+              new java.lang.String[] { "AddFile", "AddFilePart", "DeleteFile", "DownloadFile", "UpdateFile", "UpdateFilePart", "SycnFile", });
           return null;
         }
       };
@@ -1600,6 +1806,7 @@ public final class Console {
           com.lxd.protobuf.msg.result.console.DownloadFile.getDescriptor(),
           com.lxd.protobuf.msg.result.console.UpdateFile.getDescriptor(),
           com.lxd.protobuf.msg.result.console.UpdateFilePart.getDescriptor(),
+          com.lxd.protobuf.msg.result.console.SyncFile.getDescriptor(),
         }, assigner);
   }
 

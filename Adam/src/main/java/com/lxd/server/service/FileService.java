@@ -16,6 +16,9 @@
  */
 
 package com.lxd.server.service;
+
+import java.util.List;
+
 import com.lxd.server.entity.File;
 
 
@@ -48,4 +51,7 @@ public interface FileService {
     
     ///< 写入文件信息
     void editFile(String file_name, Long seek, byte[] datas);
+    
+    ///< 查询用户当前所有文件
+    List<File> searchFile(String user_name);
 }

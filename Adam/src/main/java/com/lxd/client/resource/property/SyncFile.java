@@ -15,32 +15,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lxd.client.service;
-
-import java.util.List;
-
-import com.lxd.client.entity.File;
+package com.lxd.client.resource.property;
 
 
 /**
- * 文件业务接口
+ * 同步文件请求信息
  * @author: a5834099147
  * @mailto: a5834099147@126.com
- * @date: 2015年1月8日
+ * @date: 2015年1月19日
  * @blog : http://a5834099147.github.io/
  * @review 
  */
-public interface FileServer {
-    ///< 新增文件
-    void addFile(File file);
-    ///< 删除文件
-    void deleteFile(File file);
-    ///< 修改文件
-    void updateFile(File file);
-    ///< 查找文件
-    List<File> searchFile(String user_name);
-    ///< 删除硬盘文件
-    void deleteHDDFile(String path);
-    ///< 更名硬盘文件
-    java.io.File renameHddFile(String path);
+public class SyncFile extends Property {
+
 }

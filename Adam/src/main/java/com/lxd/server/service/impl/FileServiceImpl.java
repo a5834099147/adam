@@ -17,8 +17,9 @@
 
 package com.lxd.server.service.impl;
 
-import org.hibernate.Session;
+import java.util.List;
 
+import org.hibernate.Session;
 
 import com.lxd.server.dao.FileDao;
 import com.lxd.server.dao.FileHddDao;
@@ -118,11 +119,22 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public void addFile(String file_name, Long length) {
+        ///< 向文件系统中新增文件
         hddDao.addFile(file_name, length);        
     }
 
     @Override
     public void editFile(String file_name, Long seek, byte[] datas) {
+        ///< 向文件系统中写入文件内容
         hddDao.editFile(file_name, seek, datas);        
+    }
+
+    @Override
+    public List<File> searchFile(String user_name) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.getTransaction().begin();
+        List<File> result = fileDao.queryByUser(user_name); 
+        session.getTransaction().commit();
+        return result;
     }   
 }

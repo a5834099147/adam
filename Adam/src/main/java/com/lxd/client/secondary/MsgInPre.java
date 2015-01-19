@@ -29,6 +29,7 @@ import com.lxd.client.task.result.console.AddFileResultPartTask;
 import com.lxd.client.task.result.console.AddFileResultTask;
 import com.lxd.client.task.result.console.DeleteFileResultTask;
 import com.lxd.client.task.result.console.DownloadFileResultTask;
+import com.lxd.client.task.result.console.SyncFileResultTask;
 import com.lxd.client.task.result.console.UpdateFileResultPartTask;
 import com.lxd.client.task.result.console.UpdateFileResultTask;
 import com.lxd.client.task.result.user.LandingResultTask;
@@ -180,7 +181,15 @@ public class MsgInPre extends Thread {
             task.setError_msg(msg.getDownloadFile().getErrorMsg());
             task.setEdition(msg.getDownloadFile().getEdition());
             result = task;
-        } else {
+        } else if (msg.hasSycnFile()) {
+            ///< 请求服务器同步信息结果消息
+            SyncFileResultTask syncFile = new SyncFileResultTask();
+            syncFile.setSuccess(msg.getSycnFile().getSuccess());
+            syncFile.setError_msg(msg.getSycnFile().getErrorMsg());
+            syncFile.setInfos(msg.getSycnFile().getInfosList());
+            result = syncFile;
+        }
+        else {
             log.error("无法处理的控制台结果消息");
         }
         

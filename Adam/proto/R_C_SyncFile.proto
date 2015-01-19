@@ -1,0 +1,6 @@
+package msg.request.console;
+option java_package="com.lxd.protobuf.msg.request.console";
+option java_outer_classname="SyncFile";
+
+message SyncFile_{ 
+}

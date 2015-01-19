@@ -6,6 +6,7 @@ import "R_C_AddFile.proto";
 import "R_C_UpdateFile.proto";
 import "R_C_DeleteFile.proto";
 import "R_C_DownloadFile.proto";
+import "R_C_SyncFile.proto";
 
 message Console_{ 
 	///< 新增文件
@@ -16,6 +17,8 @@ message Console_{
 	optional DeleteFile_ deleteFile = 3;
 	///< 下载文件
 	optional DownloadFile_ downloadFile = 4;
+	///< 同步文件信息
+	optional SyncFile_ syncFile = 5;
 	///< 用户编号
-	required string user_name = 5;
+	required string user_name = 6;
 }

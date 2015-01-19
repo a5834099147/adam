@@ -51,7 +51,7 @@ public class DownloadFileTask extends JobTask {
         Result_.Builder result = Result_.newBuilder();
         Console_.Builder console = Console_.newBuilder();
         DownloadFile_.Builder downloadFile = DownloadFile_.newBuilder();
-        if (download.getMd5() != md5) {
+        if (!download.getMd5().equals(md5)) {
             downloadFile.setSuccess(false);
             downloadFile.setErrorMsg("下载后的文件校验和与服务器上不同");
         } else {

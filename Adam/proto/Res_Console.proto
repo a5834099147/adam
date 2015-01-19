@@ -8,6 +8,7 @@ import "Res_C_DeleteFile.proto";
 import "Res_C_DownloadFile.proto";
 import "Res_C_UpdateFile.proto";
 import "Res_C_UpdateFilePart.proto";
+import "Res_C_SyncFile.proto";
 
 message Console_{
 	optional AddFile_ addFile = 1;
@@ -16,4 +17,5 @@ message Console_{
 	optional DownloadFile_ downloadFile = 4;
 	optional UpdateFile_ updateFile = 5;
 	optional UpdateFilePart_ updateFilePart = 6;
+	optional SyncFile_ sycnFile = 7;
 }

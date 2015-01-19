@@ -35,6 +35,7 @@ import com.lxd.server.task.job.console.DownloadFileTask;
 import com.lxd.server.task.job.console.UpdateFileTask;
 import com.lxd.server.task.request.console.ConsoleTask;
 import com.lxd.server.task.request.console.DeleteFileTask;
+import com.lxd.server.task.request.console.SyncFileTask;
 import com.lxd.server.task.request.user.LadingTask;
 import com.lxd.server.task.request.user.RegisterTask;
 import com.lxd.server.task.request.user.UserTask;
@@ -147,7 +148,10 @@ public class MsgInPre extends Thread  {
             com.lxd.server.task.request.console.DownloadFileTask task = new com.lxd.server.task.request.console.DownloadFileTask();
             task.setPath(msg.getDownloadFile().getPath());
             result = task;
-        } else {
+        } else if (msg.hasSyncFile()) {
+            ///< 来自控制台的同步信息请求消息
+            result = new SyncFileTask();            
+        }  else {
             ///< 如果无法解析的消息
             log.error("无法解析该来自控制台的请求消息");
         }

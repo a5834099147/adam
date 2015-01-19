@@ -79,10 +79,7 @@ public class ServerDownloadFile extends Property {
         this.path = path;
     }
 
-    public ServerDownloadFile(Long last, String path, String md5, Long length){
-        this.last = last;
+    public ServerDownloadFile(String path){
         this.path = path;
-        this.md5 = md5;
-        this.length = length;
     }
 }

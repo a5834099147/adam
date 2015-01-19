@@ -71,7 +71,7 @@ public class DownloadFileTask extends ClientTask {
             // /< 写入文件信息
             FileUtil.write(new BufferedInputStream(httpURL.getInputStream()), downloadFile.getPath());
             // /< 关闭连接
-            httpURL.disconnect();
+            httpURL.disconnect();            
 
             Msg_.Builder msg = Msg_.newBuilder();
             msg.setJobId(getJobId());
@@ -82,18 +82,26 @@ public class DownloadFileTask extends ClientTask {
             // /< 设置来自控制台的下载文件任务消息
             DownloadFile_.Builder downloadFileBuilder = DownloadFile_.newBuilder();
             // /< 设置下载后文件的MD5
-            downloadFileBuilder.setMd5(MD5.getFileMD5String(new File(downloadFile.getPath())));
+            String md5 = MD5.getFileMD5String(new File(downloadFile.getPath()));
+            downloadFileBuilder.setMd5(md5);
 
             console.setDownloadFile(downloadFileBuilder);
             job.setConsole(console);
             msg.setJob(job);
+            msg.setJobId(getJobId());
+            
+            ///< 设置文件的附加属性
+            File file = new File(downloadFile.getPath());
+            downloadFile.setLast(file.lastModified());
+            downloadFile.setLength(file.length());
+            downloadFile.setMd5(md5);
 
             // /< 将消息放入到发送队列中
             Resource.getSingleton().getMsgQueue().submitMsgOutQueue(new DataPackage(msg.build(), getChannel()));
 
         } catch (Exception e) {
             // /< 下载文件错误
-            log.error("下载文件" + downloadFile.getPath() + "时出错");
+            log.error("下载文件" + downloadFile.getPath() + "时出错, 出错原因:" + e.getMessage());
             e.printStackTrace();
         }
     }

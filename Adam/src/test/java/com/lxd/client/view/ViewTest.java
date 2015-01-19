@@ -75,10 +75,7 @@ public class ViewTest {
                     ClientResource.getSingleton().submitRequest(new RequestPackage(
                                                                                    msg_.build(),
                                                                                    new ServerDownloadFile(
-                                                                                                          1355898124952L,
-                                                                                                          Grnerate.getClientAbsPath("\\03 - Addiction.mp3"),
-                                                                                                          "6bbb83df986893e32937f7edb413a32c",
-                                                                                                          8815585L)));
+                                                                                                          Grnerate.getClientAbsPath("\\03 - Addiction.mp3"))));
                 } catch (InterruptedException e) {
                 }
             }

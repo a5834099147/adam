@@ -115,9 +115,35 @@ public final class Console {
      */
     com.lxd.protobuf.msg.request.console.DownloadFile.DownloadFile_OrBuilder getDownloadFileOrBuilder();
 
-    // required string user_name = 5;
+    // optional .msg.request.console.SyncFile_ syncFile = 5;
     /**
-     * <code>required string user_name = 5;</code>
+     * <code>optional .msg.request.console.SyncFile_ syncFile = 5;</code>
+     *
+     * <pre>
+     *&#47;&lt; 同步文件信息
+     * </pre>
+     */
+    boolean hasSyncFile();
+    /**
+     * <code>optional .msg.request.console.SyncFile_ syncFile = 5;</code>
+     *
+     * <pre>
+     *&#47;&lt; 同步文件信息
+     * </pre>
+     */
+    com.lxd.protobuf.msg.request.console.SyncFile.SyncFile_ getSyncFile();
+    /**
+     * <code>optional .msg.request.console.SyncFile_ syncFile = 5;</code>
+     *
+     * <pre>
+     *&#47;&lt; 同步文件信息
+     * </pre>
+     */
+    com.lxd.protobuf.msg.request.console.SyncFile.SyncFile_OrBuilder getSyncFileOrBuilder();
+
+    // required string user_name = 6;
+    /**
+     * <code>required string user_name = 6;</code>
      *
      * <pre>
      *&#47;&lt; 用户编号
@@ -125,7 +151,7 @@ public final class Console {
      */
     boolean hasUserName();
     /**
-     * <code>required string user_name = 5;</code>
+     * <code>required string user_name = 6;</code>
      *
      * <pre>
      *&#47;&lt; 用户编号
@@ -133,7 +159,7 @@ public final class Console {
      */
     java.lang.String getUserName();
     /**
-     * <code>required string user_name = 5;</code>
+     * <code>required string user_name = 6;</code>
      *
      * <pre>
      *&#47;&lt; 用户编号
@@ -246,7 +272,20 @@ public final class Console {
               break;
             }
             case 42: {
+              com.lxd.protobuf.msg.request.console.SyncFile.SyncFile_.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000010) == 0x00000010)) {
+                subBuilder = syncFile_.toBuilder();
+              }
+              syncFile_ = input.readMessage(com.lxd.protobuf.msg.request.console.SyncFile.SyncFile_.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(syncFile_);
+                syncFile_ = subBuilder.buildPartial();
+              }
               bitField0_ |= 0x00000010;
+              break;
+            }
+            case 50: {
+              bitField0_ |= 0x00000020;
               userName_ = input.readBytes();
               break;
             }
@@ -426,21 +465,55 @@ public final class Console {
       return downloadFile_;
     }
 
-    // required string user_name = 5;
-    public static final int USER_NAME_FIELD_NUMBER = 5;
+    // optional .msg.request.console.SyncFile_ syncFile = 5;
+    public static final int SYNCFILE_FIELD_NUMBER = 5;
+    private com.lxd.protobuf.msg.request.console.SyncFile.SyncFile_ syncFile_;
+    /**
+     * <code>optional .msg.request.console.SyncFile_ syncFile = 5;</code>
+     *
+     * <pre>
+     *&#47;&lt; 同步文件信息
+     * </pre>
+     */
+    public boolean hasSyncFile() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional .msg.request.console.SyncFile_ syncFile = 5;</code>
+     *
+     * <pre>
+     *&#47;&lt; 同步文件信息
+     * </pre>
+     */
+    public com.lxd.protobuf.msg.request.console.SyncFile.SyncFile_ getSyncFile() {
+      return syncFile_;
+    }
+    /**
+     * <code>optional .msg.request.console.SyncFile_ syncFile = 5;</code>
+     *
+     * <pre>
+     *&#47;&lt; 同步文件信息
+     * </pre>
+     */
+    public com.lxd.protobuf.msg.request.console.SyncFile.SyncFile_OrBuilder getSyncFileOrBuilder() {
+      return syncFile_;
+    }
+
+    // required string user_name = 6;
+    public static final int USER_NAME_FIELD_NUMBER = 6;
     private java.lang.Object userName_;
     /**
-     * <code>required string user_name = 5;</code>
+     * <code>required string user_name = 6;</code>
      *
      * <pre>
      *&#47;&lt; 用户编号
      * </pre>
      */
     public boolean hasUserName() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
-     * <code>required string user_name = 5;</code>
+     * <code>required string user_name = 6;</code>
      *
      * <pre>
      *&#47;&lt; 用户编号
@@ -461,7 +534,7 @@ public final class Console {
       }
     }
     /**
-     * <code>required string user_name = 5;</code>
+     * <code>required string user_name = 6;</code>
      *
      * <pre>
      *&#47;&lt; 用户编号
@@ -486,6 +559,7 @@ public final class Console {
       updateFile_ = com.lxd.protobuf.msg.request.console.UpdateFile.UpdateFile_.getDefaultInstance();
       deleteFile_ = com.lxd.protobuf.msg.request.console.DeleteFile.DeleteFile_.getDefaultInstance();
       downloadFile_ = com.lxd.protobuf.msg.request.console.DownloadFile.DownloadFile_.getDefaultInstance();
+      syncFile_ = com.lxd.protobuf.msg.request.console.SyncFile.SyncFile_.getDefaultInstance();
       userName_ = "";
     }
     private byte memoizedIsInitialized = -1;
@@ -541,7 +615,10 @@ public final class Console {
         output.writeMessage(4, downloadFile_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeBytes(5, getUserNameBytes());
+        output.writeMessage(5, syncFile_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBytes(6, getUserNameBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -570,7 +647,11 @@ public final class Console {
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(5, getUserNameBytes());
+          .computeMessageSize(5, syncFile_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(6, getUserNameBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -684,6 +765,7 @@ public final class Console {
           getUpdateFileFieldBuilder();
           getDeleteFileFieldBuilder();
           getDownloadFileFieldBuilder();
+          getSyncFileFieldBuilder();
         }
       }
       private static Builder create() {
@@ -716,8 +798,14 @@ public final class Console {
           downloadFileBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000008);
-        userName_ = "";
+        if (syncFileBuilder_ == null) {
+          syncFile_ = com.lxd.protobuf.msg.request.console.SyncFile.SyncFile_.getDefaultInstance();
+        } else {
+          syncFileBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000010);
+        userName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
 
@@ -781,6 +869,14 @@ public final class Console {
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
+        if (syncFileBuilder_ == null) {
+          result.syncFile_ = syncFile_;
+        } else {
+          result.syncFile_ = syncFileBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
         result.userName_ = userName_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -810,8 +906,11 @@ public final class Console {
         if (other.hasDownloadFile()) {
           mergeDownloadFile(other.getDownloadFile());
         }
+        if (other.hasSyncFile()) {
+          mergeSyncFile(other.getSyncFile());
+        }
         if (other.hasUserName()) {
-          bitField0_ |= 0x00000010;
+          bitField0_ |= 0x00000020;
           userName_ = other.userName_;
           onChanged();
         }
@@ -1482,20 +1581,173 @@ public final class Console {
         return downloadFileBuilder_;
       }
 
-      // required string user_name = 5;
+      // optional .msg.request.console.SyncFile_ syncFile = 5;
+      private com.lxd.protobuf.msg.request.console.SyncFile.SyncFile_ syncFile_ = com.lxd.protobuf.msg.request.console.SyncFile.SyncFile_.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lxd.protobuf.msg.request.console.SyncFile.SyncFile_, com.lxd.protobuf.msg.request.console.SyncFile.SyncFile_.Builder, com.lxd.protobuf.msg.request.console.SyncFile.SyncFile_OrBuilder> syncFileBuilder_;
+      /**
+       * <code>optional .msg.request.console.SyncFile_ syncFile = 5;</code>
+       *
+       * <pre>
+       *&#47;&lt; 同步文件信息
+       * </pre>
+       */
+      public boolean hasSyncFile() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional .msg.request.console.SyncFile_ syncFile = 5;</code>
+       *
+       * <pre>
+       *&#47;&lt; 同步文件信息
+       * </pre>
+       */
+      public com.lxd.protobuf.msg.request.console.SyncFile.SyncFile_ getSyncFile() {
+        if (syncFileBuilder_ == null) {
+          return syncFile_;
+        } else {
+          return syncFileBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .msg.request.console.SyncFile_ syncFile = 5;</code>
+       *
+       * <pre>
+       *&#47;&lt; 同步文件信息
+       * </pre>
+       */
+      public Builder setSyncFile(com.lxd.protobuf.msg.request.console.SyncFile.SyncFile_ value) {
+        if (syncFileBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          syncFile_ = value;
+          onChanged();
+        } else {
+          syncFileBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000010;
+        return this;
+      }
+      /**
+       * <code>optional .msg.request.console.SyncFile_ syncFile = 5;</code>
+       *
+       * <pre>
+       *&#47;&lt; 同步文件信息
+       * </pre>
+       */
+      public Builder setSyncFile(
+          com.lxd.protobuf.msg.request.console.SyncFile.SyncFile_.Builder builderForValue) {
+        if (syncFileBuilder_ == null) {
+          syncFile_ = builderForValue.build();
+          onChanged();
+        } else {
+          syncFileBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000010;
+        return this;
+      }
+      /**
+       * <code>optional .msg.request.console.SyncFile_ syncFile = 5;</code>
+       *
+       * <pre>
+       *&#47;&lt; 同步文件信息
+       * </pre>
+       */
+      public Builder mergeSyncFile(com.lxd.protobuf.msg.request.console.SyncFile.SyncFile_ value) {
+        if (syncFileBuilder_ == null) {
+          if (((bitField0_ & 0x00000010) == 0x00000010) &&
+              syncFile_ != com.lxd.protobuf.msg.request.console.SyncFile.SyncFile_.getDefaultInstance()) {
+            syncFile_ =
+              com.lxd.protobuf.msg.request.console.SyncFile.SyncFile_.newBuilder(syncFile_).mergeFrom(value).buildPartial();
+          } else {
+            syncFile_ = value;
+          }
+          onChanged();
+        } else {
+          syncFileBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000010;
+        return this;
+      }
+      /**
+       * <code>optional .msg.request.console.SyncFile_ syncFile = 5;</code>
+       *
+       * <pre>
+       *&#47;&lt; 同步文件信息
+       * </pre>
+       */
+      public Builder clearSyncFile() {
+        if (syncFileBuilder_ == null) {
+          syncFile_ = com.lxd.protobuf.msg.request.console.SyncFile.SyncFile_.getDefaultInstance();
+          onChanged();
+        } else {
+          syncFileBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000010);
+        return this;
+      }
+      /**
+       * <code>optional .msg.request.console.SyncFile_ syncFile = 5;</code>
+       *
+       * <pre>
+       *&#47;&lt; 同步文件信息
+       * </pre>
+       */
+      public com.lxd.protobuf.msg.request.console.SyncFile.SyncFile_.Builder getSyncFileBuilder() {
+        bitField0_ |= 0x00000010;
+        onChanged();
+        return getSyncFileFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .msg.request.console.SyncFile_ syncFile = 5;</code>
+       *
+       * <pre>
+       *&#47;&lt; 同步文件信息
+       * </pre>
+       */
+      public com.lxd.protobuf.msg.request.console.SyncFile.SyncFile_OrBuilder getSyncFileOrBuilder() {
+        if (syncFileBuilder_ != null) {
+          return syncFileBuilder_.getMessageOrBuilder();
+        } else {
+          return syncFile_;
+        }
+      }
+      /**
+       * <code>optional .msg.request.console.SyncFile_ syncFile = 5;</code>
+       *
+       * <pre>
+       *&#47;&lt; 同步文件信息
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lxd.protobuf.msg.request.console.SyncFile.SyncFile_, com.lxd.protobuf.msg.request.console.SyncFile.SyncFile_.Builder, com.lxd.protobuf.msg.request.console.SyncFile.SyncFile_OrBuilder> 
+          getSyncFileFieldBuilder() {
+        if (syncFileBuilder_ == null) {
+          syncFileBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lxd.protobuf.msg.request.console.SyncFile.SyncFile_, com.lxd.protobuf.msg.request.console.SyncFile.SyncFile_.Builder, com.lxd.protobuf.msg.request.console.SyncFile.SyncFile_OrBuilder>(
+                  syncFile_,
+                  getParentForChildren(),
+                  isClean());
+          syncFile_ = null;
+        }
+        return syncFileBuilder_;
+      }
+
+      // required string user_name = 6;
       private java.lang.Object userName_ = "";
       /**
-       * <code>required string user_name = 5;</code>
+       * <code>required string user_name = 6;</code>
        *
        * <pre>
        *&#47;&lt; 用户编号
        * </pre>
        */
       public boolean hasUserName() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
-       * <code>required string user_name = 5;</code>
+       * <code>required string user_name = 6;</code>
        *
        * <pre>
        *&#47;&lt; 用户编号
@@ -1513,7 +1765,7 @@ public final class Console {
         }
       }
       /**
-       * <code>required string user_name = 5;</code>
+       * <code>required string user_name = 6;</code>
        *
        * <pre>
        *&#47;&lt; 用户编号
@@ -1533,7 +1785,7 @@ public final class Console {
         }
       }
       /**
-       * <code>required string user_name = 5;</code>
+       * <code>required string user_name = 6;</code>
        *
        * <pre>
        *&#47;&lt; 用户编号
@@ -1544,26 +1796,26 @@ public final class Console {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000010;
+  bitField0_ |= 0x00000020;
         userName_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required string user_name = 5;</code>
+       * <code>required string user_name = 6;</code>
        *
        * <pre>
        *&#47;&lt; 用户编号
        * </pre>
        */
       public Builder clearUserName() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000020);
         userName_ = getDefaultInstance().getUserName();
         onChanged();
         return this;
       }
       /**
-       * <code>required string user_name = 5;</code>
+       * <code>required string user_name = 6;</code>
        *
        * <pre>
        *&#47;&lt; 用户编号
@@ -1574,7 +1826,7 @@ public final class Console {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000010;
+  bitField0_ |= 0x00000020;
         userName_ = value;
         onChanged();
         return this;
@@ -1608,14 +1860,16 @@ public final class Console {
       "\n\017R_Console.proto\022\023msg.request.console\032\021" +
       "R_C_AddFile.proto\032\024R_C_UpdateFile.proto\032" +
       "\024R_C_DeleteFile.proto\032\026R_C_DownloadFile." +
-      "proto\"\363\001\n\010Console_\022.\n\007addFile\030\001 \001(\0132\035.ms" +
-      "g.request.console.AddFile_\0224\n\nupdateFile" +
-      "\030\002 \001(\0132 .msg.request.console.UpdateFile_" +
-      "\0224\n\ndeleteFile\030\003 \001(\0132 .msg.request.conso" +
-      "le.DeleteFile_\0228\n\014downloadFile\030\004 \001(\0132\".m" +
-      "sg.request.console.DownloadFile_\022\021\n\tuser" +
-      "_name\030\005 \002(\tB/\n$com.lxd.protobuf.msg.requ",
-      "est.consoleB\007Console"
+      "proto\032\022R_C_SyncFile.proto\"\245\002\n\010Console_\022." +
+      "\n\007addFile\030\001 \001(\0132\035.msg.request.console.Ad" +
+      "dFile_\0224\n\nupdateFile\030\002 \001(\0132 .msg.request" +
+      ".console.UpdateFile_\0224\n\ndeleteFile\030\003 \001(\013" +
+      "2 .msg.request.console.DeleteFile_\0228\n\014do" +
+      "wnloadFile\030\004 \001(\0132\".msg.request.console.D" +
+      "ownloadFile_\0220\n\010syncFile\030\005 \001(\0132\036.msg.req",
+      "uest.console.SyncFile_\022\021\n\tuser_name\030\006 \002(" +
+      "\tB/\n$com.lxd.protobuf.msg.request.consol" +
+      "eB\007Console"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -1627,7 +1881,7 @@ public final class Console {
           internal_static_msg_request_console_Console__fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_msg_request_console_Console__descriptor,
-              new java.lang.String[] { "AddFile", "UpdateFile", "DeleteFile", "DownloadFile", "UserName", });
+              new java.lang.String[] { "AddFile", "UpdateFile", "DeleteFile", "DownloadFile", "SyncFile", "UserName", });
           return null;
         }
       };
@@ -1638,6 +1892,7 @@ public final class Console {
           com.lxd.protobuf.msg.request.console.UpdateFile.getDescriptor(),
           com.lxd.protobuf.msg.request.console.DeleteFile.getDescriptor(),
           com.lxd.protobuf.msg.request.console.DownloadFile.getDescriptor(),
+          com.lxd.protobuf.msg.request.console.SyncFile.getDescriptor(),
         }, assigner);
   }
 

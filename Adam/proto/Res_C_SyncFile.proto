@@ -1,0 +1,20 @@
+package msg.result.console;
+option java_package="com.lxd.protobuf.msg.result.console";
+option java_outer_classname="SyncFile";
+
+///< 文件同步结果
+message SyncFile_{
+	///< 修改结果
+	required bool success = 1;
+	///< 失败信息
+	optional string error_msg = 2;
+	///< 同步信息
+	repeated Info infos = 3;
+}
+
+message Info{ 
+	///< 文件路径
+	required string path = 1;
+	///< 文件版本号
+	required int32 edition = 2;
+}

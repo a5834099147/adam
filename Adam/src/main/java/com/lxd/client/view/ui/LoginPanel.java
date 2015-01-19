@@ -48,17 +48,18 @@ import javax.swing.border.LineBorder;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
 import com.lxd.client.handle.user.LoginHandle;
-import com.lxd.client.monitor.MonitorDir;
 import com.lxd.client.resource.ClientResource;
 import com.lxd.client.resource.RequestPackage;
 import com.lxd.client.resource.property.ServerLanding;
+import com.lxd.client.resource.property.SyncFile;
 import com.lxd.client.view.control.UiSingleton;
 import com.lxd.client.view.ui.util.ViewUtil;
 import com.lxd.protobuf.msg.Msg.Msg_;
 import com.lxd.protobuf.msg.request.Request.Request_;
+import com.lxd.protobuf.msg.request.console.Console.Console_;
+import com.lxd.protobuf.msg.request.console.SyncFile.SyncFile_;
 import com.lxd.protobuf.msg.request.user.Landing.Landing_;
 import com.lxd.protobuf.msg.request.user.User.User_;
-import com.lxd.utils.Define;
 
 /**
  * 登陆界面
@@ -449,9 +450,24 @@ public class LoginPanel extends JPanel implements LoginHandle {
 	    ///< 弹窗
         JOptionPane.showMessageDialog(null, user + ", 欢迎您" , "登陆成功", JOptionPane.INFORMATION_MESSAGE);        
 	    
-	    ///< 开启监听服务
-	    new MonitorDir(Define.CLIENT).start();
-	    //TODO 跳转页面
+//	    ///< 开启监听服务
+//	    new MonitorDir(Define.CLIENT).start();
+        
+        Msg_.Builder msg_ = Msg_.newBuilder();
+        Request_.Builder request = Request_.newBuilder();
+        // /< 控制台请求信息构建器
+        Console_.Builder console = Console_.newBuilder();
+        // /< 添加用户信息
+        console.setUserName(UiSingleton.getSingleton().getUser());
+        // /< 控制台请求信息文件下载构造器
+       SyncFile_.Builder syncFile = SyncFile_.newBuilder();
+       console.setSyncFile(syncFile);
+        request.setConsole(console);
+        msg_.setRequest(request);
+        msg_.setJobId(-1);
+
+        ClientResource.getSingleton().submitRequest(new RequestPackage(
+                                                                       msg_.build(), new SyncFile()));        
 	}
 
 	@Override
