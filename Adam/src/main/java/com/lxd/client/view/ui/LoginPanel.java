@@ -450,9 +450,7 @@ public class LoginPanel extends JPanel implements LoginHandle {
 	    ///< 弹窗
         JOptionPane.showMessageDialog(null, user + ", 欢迎您" , "登陆成功", JOptionPane.INFORMATION_MESSAGE);        
 	    
-//	    ///< 开启监听服务
-//	    new MonitorDir(Define.CLIENT).start();
-        
+       
         Msg_.Builder msg_ = Msg_.newBuilder();
         Request_.Builder request = Request_.newBuilder();
         // /< 控制台请求信息构建器

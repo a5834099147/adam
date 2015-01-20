@@ -23,6 +23,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.lxd.client.monitor.MonitorDir;
 import com.lxd.client.monitor.MonitorMsg;
 import com.lxd.client.monitor.MonitorMsg.Type;
 import com.lxd.client.resource.ClientResource;
@@ -134,6 +135,9 @@ public class SyncFileResultTask extends ClientTask {
         } else {
             log.error("请求同步消息出错, 错误信息为:" + error_msg);
         }
+        
+        ///< 开启监听服务
+        new MonitorDir(Define.CLIENT).start();
     }
     
     private void deleteEntity(String path) {

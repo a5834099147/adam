@@ -75,7 +75,14 @@ public class FileDaoImpl implements FileDao {
         query.setString("user_name", user_name);
         query.setString("path", path);
         
-        return (File) query.list().get(0);
+        @SuppressWarnings("unchecked")
+        List<File> lists = query.list();
+        
+        if (lists.isEmpty()) {
+            return null;
+        } else {
+            return lists.get(0);
+        }
     }
 
     @Override

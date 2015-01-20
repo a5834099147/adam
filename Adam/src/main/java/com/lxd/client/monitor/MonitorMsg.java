@@ -73,7 +73,7 @@ public class MonitorMsg {
         this.file = file;
         this.type = type;
     }
-    
+
     public File getFile() {
         return file;
     }

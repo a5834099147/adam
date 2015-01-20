@@ -70,7 +70,10 @@ public class FileServiceImpl implements FileService {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.getTransaction().begin();
         ///< 增加文件信息
-        fileDao.addFile(file);
+        if (fileDao.queryByUserAndPath(file.getUser_name(), file.getPath()) == null) {
+            fileDao.addFile(file);
+        } 
+        
         session.getTransaction().commit();        
     }
 
